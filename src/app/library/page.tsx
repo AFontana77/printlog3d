@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "PrintLog3D Library — 43 filaments",
+  title: "PrintLog3D Library — 1,260 Filaments",
   description: "Filaments from leading brands — print temp, bed temp, cooling, retraction, and known issues. Browse the PrintLog3D reference database — available in the free app.",
 };
 
@@ -32,7 +32,7 @@ export default function LibraryPage() {
               PrintLog3D Library
             </h1>
             <p className="text-gray-600 text-lg max-w-xl mx-auto leading-relaxed">
-              43 filaments from Filamentpedia + manufacturer datasheets. Filaments from leading brands — print temp, bed temp, cooling, retraction, and known issues.
+              1,260 filaments from 30 brands across 21 material types. Filaments from leading brands — print temp, bed temp, cooling, retraction, and known issues.
             </p>
             <div className="mt-6 inline-flex items-center gap-2 text-sm text-violet-800 bg-violet-50 px-4 py-2 rounded-full">
               <Search size={14} /> Full search available in the free app
@@ -64,7 +64,7 @@ export default function LibraryPage() {
               Search the full database in the app.
             </h2>
             <p className="text-gray-600 mb-6">
-              The PrintLog3D app has the complete 43 filaments with full-text search, filters, and your personal log — all free.
+              The PrintLog3D app has the complete 1,260 filaments with full-text search, filters, and your personal log — all free.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer"
