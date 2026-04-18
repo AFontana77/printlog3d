@@ -19,6 +19,25 @@ const FEATURES = [
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "PrintLog3D",
+            "applicationCategory": "LifestyleApplication",
+            "operatingSystem": "iOS, Android",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            },
+            "description": "Search 1,260+ 3D printing filaments with specs and settings. Log your prints, track results by filament, and build a reference library for your printer.",
+            "url": "https://www.printlog3d.com"
+          })
+        }}
+      />
       <SiteNav />
       <main id="main-content" className="pt-20">
 
