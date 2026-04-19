@@ -31,5 +31,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...filamentUrls,
     { url: `${BASE}/free-download`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${BASE}/support`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ];
 }
