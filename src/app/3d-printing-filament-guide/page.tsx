@@ -115,8 +115,9 @@ export default function FilamentGuidePage() {
               3D Printing Filament Guide
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
-              PrintLog3D's database covers 7 filament types. This guide explains what each one does,
-              when to use it, and what settings to start with. Pick your material and skip the guesswork.
+              The wrong material choice wastes a spool and fails the part. The right one prints first try and
+              holds up for years. Seven filament types cover every FDM use case. This page tells you which one
+              to reach for and what settings to start with.
             </p>
           </div>
         </section>
@@ -124,7 +125,7 @@ export default function FilamentGuidePage() {
         {/* Settings reference table */}
         <section aria-label="Filament settings reference table" className="py-14 px-4 bg-white">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Settings at a Glance</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Every Material at a Glance — Find Yours in Seconds</h2>
             <div className="overflow-x-auto rounded-xl border border-gray-200">
               <table className="w-full text-sm text-left">
                 <thead>
@@ -165,7 +166,7 @@ export default function FilamentGuidePage() {
         {/* PLA */}
         <section aria-label="PLA filament overview" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">PLA</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Start Here: PLA for Learning, PETG for Real Parts</h2>
             <p className="text-gray-600 leading-relaxed mb-3">
               PLA is the most beginner-friendly filament. It prints at low temps, produces no harsh fumes,
               and warps very little. It's made from corn starch, so it's biodegradable.
@@ -182,7 +183,7 @@ export default function FilamentGuidePage() {
         {/* PETG */}
         <section aria-label="PETG filament overview" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">PETG</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Move to PETG When the Part Needs to Hold Up</h2>
             <p className="text-gray-600 leading-relaxed mb-3">
               PETG is the natural step up from PLA. It's stronger, handles more heat (up to ~80°C), and
               some brands are food-safe certified. The trade-off: it strings more than PLA, and it
@@ -197,7 +198,7 @@ export default function FilamentGuidePage() {
         {/* ABS */}
         <section aria-label="ABS filament overview" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">ABS</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">ABS: High Heat and Acetone Finishing — With Real Trade-Offs</h2>
             <p className="text-gray-600 leading-relaxed mb-3">
               ABS is the classic workhorse — the same plastic used in LEGO bricks. It holds up to ~100°C
               and can be smoothed with acetone vapor for a near-injection-mold finish. The downside:
@@ -214,7 +215,7 @@ export default function FilamentGuidePage() {
         {/* ASA */}
         <section aria-label="ASA filament overview" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">ASA</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Use ASA for Anything That Lives Outdoors</h2>
             <p className="text-gray-600 leading-relaxed">
               ASA is ABS modified for UV resistance. It doesn't yellow in sunlight and handles the same
               temperature range as ABS (~100°C). For almost every outdoor application, ASA is the better
@@ -227,7 +228,7 @@ export default function FilamentGuidePage() {
         {/* Nylon */}
         <section aria-label="Nylon filament overview" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Nylon</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">When You Need More Than Hobby Filaments: Nylon</h2>
             <p className="text-gray-600 leading-relaxed mb-3">
               Nylon has the highest strength of any common FDM filament. It's also self-lubricating,
               which makes it ideal for gears, bearings, and moving parts. The major catch: Nylon is
@@ -243,7 +244,7 @@ export default function FilamentGuidePage() {
         {/* TPU */}
         <section aria-label="TPU filament overview" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">TPU</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">TPU: The Only Filament That Bends Without Breaking</h2>
             <p className="text-gray-600 leading-relaxed">
               TPU is flexible and rubber-like. Shore hardness varies by brand — 95A is common and feels
               similar to a shoe sole. Print slow (30-40 mm/s) and use a direct drive extruder if possible.
@@ -256,7 +257,7 @@ export default function FilamentGuidePage() {
         {/* Resin */}
         <section aria-label="Resin overview" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Resin (SLA/DLP)</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Resin: When Detail Matters More Than Anything Else</h2>
             <p className="text-gray-600 leading-relaxed">
               Resin printing is a completely different process from FDM. SLA and DLP printers use
               UV light to cure liquid photopolymer resin layer by layer. The result: far more detailed
@@ -270,7 +271,7 @@ export default function FilamentGuidePage() {
         {/* Decision flowchart */}
         <section aria-label="How to choose your filament" className="py-14 px-4 bg-violet-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">How to Choose</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Which Filament Should You Use? Answer in 30 Seconds</h2>
             <div className="space-y-3">
               {[
                 { q: 'Decorative or prototype?', a: 'PLA' },
@@ -299,10 +300,13 @@ export default function FilamentGuidePage() {
         <section aria-label="Download the app" className="py-16 px-4 bg-white">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              PrintLog3D has settings profiles for all 7 materials.
+              Log Every Material You Try. Never Start From Zero Again.
             </h2>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Log your prints and find what works for your specific brand and printer. Free.
+              Every material you try has its own quirks — and so does every brand within that material.
+              Log your print temp, bed temp, retraction, and notes per spool in PrintLog3D.
+              When you revisit that material six months later, you have a starting point that actually worked.
+              No guessing. No wasted first prints.
             </p>
             <Link
               href="/free-download"

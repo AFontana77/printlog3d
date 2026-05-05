@@ -56,8 +56,9 @@ export default function AbsVsPetgPage() {
               ABS vs PETG: Which Is Better for Functional Parts?
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
-              ABS used to be the default strong filament before PETG existed. Today, PETG does almost
-              everything ABS does with fewer headaches. Here is when ABS is still worth it — and when to skip it.
+              ABS used to be the go-to for strong parts. PETG changed that.
+              For most functional prints, PETG is easier, safer, and stronger where it counts.
+              This page shows you the four situations where ABS still wins — and when PETG is the smarter call.
             </p>
           </div>
         </section>
@@ -65,7 +66,7 @@ export default function AbsVsPetgPage() {
         {/* Comparison table */}
         <section aria-label="ABS vs PETG comparison table" className="py-14 px-4 bg-white">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Side-by-Side Comparison</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">See the Key Differences Before You Load the Spool</h2>
             <div className="overflow-x-auto rounded-xl border border-gray-200">
               <table className="w-full text-sm text-left">
                 <thead>
@@ -102,7 +103,7 @@ export default function AbsVsPetgPage() {
         {/* When ABS wins */}
         <section aria-label="When ABS is the better choice" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">4 Situations Where ABS Wins</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">The 4 Situations Where ABS Is the Right Call</h2>
             <div className="space-y-5">
               <div className="bg-white rounded-xl p-5 border border-gray-200">
                 <h3 className="font-bold text-gray-900 mb-2">1. Parts that need to survive above 80°C</h3>
@@ -140,7 +141,7 @@ export default function AbsVsPetgPage() {
         {/* When PETG wins */}
         <section aria-label="When PETG is the better choice" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Why PETG Wins Most of the Time</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Use PETG and Skip the Enclosure, Fumes, and Warping</h2>
             <div className="space-y-5">
               <div className="bg-gray-50 rounded-xl p-5 border border-gray-100">
                 <h3 className="font-bold text-gray-900 mb-2">No enclosure required</h3>
@@ -177,7 +178,7 @@ export default function AbsVsPetgPage() {
         {/* ASA alternative */}
         <section aria-label="ASA as an alternative to ABS" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Thinking About ABS for Outdoor Use? Use ASA Instead.</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Outdoor Part? Skip ABS. Use ASA Instead.</h2>
             <p className="text-gray-600 leading-relaxed">
               If you're considering ABS because you need UV resistance outdoors — don't.
               Use ASA. ASA is ABS modified specifically for UV resistance. It doesn't yellow in sunlight,
@@ -191,7 +192,7 @@ export default function AbsVsPetgPage() {
         {/* Verdict */}
         <section aria-label="Final verdict" className="py-14 px-4 bg-violet-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Verdict</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">The One-Sentence Verdict</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
               Use PETG for 90% of functional parts. It's easier to print, safer to breathe, doesn't need
               an enclosure, and bonds layers better than ABS.
@@ -216,11 +217,13 @@ export default function AbsVsPetgPage() {
         <section aria-label="Download the app" className="py-16 px-4 bg-white">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Track your ABS and PETG settings in PrintLog3D.
+              Know Your Baseline Before You Load the Next Spool.
             </h2>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Log enclosure temp, print speed, and retraction distance per material.
-              Find your baseline fast. Free download.
+              ABS needs enclosure temps logged. PETG needs retraction dialed per brand.
+              Log your enclosure temp, print speed, and bed temp per spool in PrintLog3D.
+              Next time you pull out that same material, you start from your last successful print.
+              No reprints. No lost settings.
             </p>
             <Link
               href="/free-download"

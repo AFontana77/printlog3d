@@ -56,8 +56,8 @@ export default function PlaVsPetgPage() {
               PLA vs PETG: Which Should You Use?
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
-              Most people start with PLA. At some point they wonder: should I switch to PETG?
-              The honest answer depends on what you print. Here is when to use each.
+              Pick the wrong filament and the part fails. Pick the right one and it works for years.
+              PLA and PETG cover most of what hobbyists print. This page shows you which to use for every situation.
             </p>
           </div>
         </section>
@@ -65,7 +65,7 @@ export default function PlaVsPetgPage() {
         {/* Comparison table */}
         <section aria-label="Side-by-side comparison table" className="py-14 px-4 bg-white">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Comparison</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Pick the Right Material in Under a Minute</h2>
             <div className="overflow-x-auto rounded-xl border border-gray-200">
               <table className="w-full text-sm text-left">
                 <thead>
@@ -103,7 +103,7 @@ export default function PlaVsPetgPage() {
         {/* When to use PLA */}
         <section aria-label="When to use PLA" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">When PLA Is the Right Call</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Use PLA When Heat and Strength Don't Matter</h2>
             <p className="text-gray-600 mb-4 leading-relaxed">
               PLA works well for anything that stays indoors and stays cool. It prints at the lowest temps, requires no heated bed, and forgives almost every tuning mistake. That makes it ideal for learning a new printer.
             </p>
@@ -119,7 +119,7 @@ export default function PlaVsPetgPage() {
         {/* When to use PETG */}
         <section aria-label="When to use PETG" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">When PETG Makes More Sense</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Switch to PETG When the Part Has a Job to Do</h2>
             <p className="text-gray-600 mb-4 leading-relaxed">
               PETG is the step-up material for parts that actually need to hold up. It handles more stress, more heat, and more flex than PLA — without needing an enclosure.
             </p>
@@ -135,7 +135,7 @@ export default function PlaVsPetgPage() {
         {/* PETG problems */}
         <section aria-label="Common PETG problems and fixes" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Common PETG Problems and Fixes</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Fix These Three PETG Issues Before You Waste a Spool</h2>
             <div className="space-y-6">
               <div className="bg-white rounded-xl p-6 border border-gray-200">
                 <h3 className="font-bold text-gray-900 mb-2">1. Sticking too hard to the glass bed</h3>
@@ -165,7 +165,7 @@ export default function PlaVsPetgPage() {
         {/* What PETG is NOT for */}
         <section aria-label="PETG limitations" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">What PETG Is Not Good For</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Where PETG Falls Short</h2>
             <ul className="space-y-3 text-gray-700">
               <li className="flex gap-2"><span className="text-red-500 font-bold mt-0.5">-</span><span>High heat above 80°C. Use ASA or ABS for those applications.</span></li>
               <li className="flex gap-2"><span className="text-red-500 font-bold mt-0.5">-</span><span>Ultra-fine detail. PLA resolves sharper edges at the same layer height.</span></li>
@@ -177,7 +177,7 @@ export default function PlaVsPetgPage() {
         {/* Quick verdict */}
         <section aria-label="Quick verdict by use case" className="py-14 px-4 bg-violet-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Verdict by Use Case</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Ten-Second Decision Guide</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
                 { label: 'Decorative model', answer: 'PLA', color: 'bg-blue-50 border-blue-200' },
@@ -206,10 +206,13 @@ export default function PlaVsPetgPage() {
         <section aria-label="Download the app" className="py-16 px-4 bg-white">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Track your PLA and PETG settings in PrintLog3D.
+              Stop Reprinting Calibration Squares. Build a Settings Library.
             </h2>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Log what worked for each filament brand and color. Find your settings baseline fast. Free download.
+              PETG from one brand and PETG from another need different retraction settings.
+              Log your print temp, bed temp, and retraction distance per spool in PrintLog3D.
+              Next time you open that same brand, you know the settings that worked.
+              No calibration cube. No wasted filament.
             </p>
             <Link
               href="/free-download"

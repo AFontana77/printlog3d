@@ -56,9 +56,8 @@ export default function StringingPage() {
               3D Print Stringing: Causes and Fixes
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
-              Thin plastic threads between separate parts of your print are called stringing. It's the
-              most common print quality problem beyond PLA. Here's what causes it and how to fix it —
-              one setting at a time.
+              Stringing means the settings are off. Not slightly off — wrong in a specific, fixable way.
+              Five adjustments cover 90% of stringing problems. Work through them in order and the threads disappear.
             </p>
           </div>
         </section>
@@ -66,7 +65,7 @@ export default function StringingPage() {
         {/* What stringing is */}
         <section aria-label="What causes stringing" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">What Causes Stringing</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Your Print Strings (The Real Reasons)</h2>
             <p className="text-gray-600 leading-relaxed mb-4">
               When the nozzle moves between two printed areas without extruding, molten plastic can
               leak out and leave a thin thread. The technical term for that movement is a travel move.
@@ -84,7 +83,7 @@ export default function StringingPage() {
         {/* Fix checklist */}
         <section aria-label="Stringing fix checklist in order of impact" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">The Fix Checklist (In Order of Impact)</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">The Five-Step Fix That Stops 90% of Stringing</h2>
 
             <div className="space-y-6">
               {/* Fix 1 */}
@@ -191,7 +190,7 @@ export default function StringingPage() {
         {/* Material-specific notes */}
         <section aria-label="Stringing notes by filament material" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Notes by Material</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Why PETG Always Strings More Than PLA (And What to Do About It)</h2>
             <div className="space-y-4">
               {[
                 {
@@ -223,7 +222,7 @@ export default function StringingPage() {
         {/* How to test */}
         <section aria-label="How to test your stringing fixes" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">How to Test Your Settings</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Test Your Fix in 20 Minutes, Not Two Hours</h2>
             <p className="text-gray-600 leading-relaxed mb-4">
               Print a stringing torture test. The classic "spiked sphere" or Cthulhu model from Printables
               or Thingiverse works well. It has many tall spikes and open space between them — exactly the
@@ -244,7 +243,7 @@ export default function StringingPage() {
         {/* Related guides */}
         <section aria-label="Related guides" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-5">Related Guides</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-5">Fix the Next Problem: Related Guides</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
                 { href: '/how-to-dry-filament', title: 'How to Dry Filament', desc: 'Signs of wet filament and all 3 drying methods.' },
@@ -265,10 +264,13 @@ export default function StringingPage() {
         <section aria-label="Download the app" className="py-16 px-4 bg-violet-50">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Log your retraction and temp settings per material in PrintLog3D.
+              Log the Retraction Settings That Fixed It. Never Tune the Same Spool Twice.
             </h2>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Find your baseline that works. Know exactly what to go back to when you switch filament brands. Free.
+              You found the retraction distance that killed the stringing. Write it down somewhere you'll
+              actually find it. Log retraction distance, print temp, and travel speed per spool in PrintLog3D.
+              Next time you load that brand, you open the app and start from what worked.
+              No torture test. No wasted filament. Just print.
             </p>
             <Link
               href="/free-download"

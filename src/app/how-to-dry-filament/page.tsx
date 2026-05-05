@@ -56,9 +56,9 @@ export default function HowToDryFilamentPage() {
               How to Dry Filament
             </h1>
             <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
-              Bad prints often aren't a slicer problem. They're a moisture problem. Filament absorbs
-              water from the air. When it prints, that water turns to steam and ruins the surface.
-              Here's how to spot it — and how to fix it.
+              Bad prints often have nothing to do with your slicer settings. The filament is wet.
+              Moisture turns to steam in the nozzle and ruins the surface, the layer bonds, and the stringing.
+              Dry the filament and those problems disappear. Here is how to tell if yours is wet and how to fix it.
             </p>
           </div>
         </section>
@@ -66,7 +66,7 @@ export default function HowToDryFilamentPage() {
         {/* Signs of wet filament */}
         <section aria-label="Signs that your filament is wet" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">5 Signs Your Filament Is Wet</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Filament Is Wet. Here Is How to Tell.</h2>
             <div className="space-y-4">
               {[
                 {
@@ -110,7 +110,7 @@ export default function HowToDryFilamentPage() {
         {/* Which filaments absorb moisture fastest */}
         <section aria-label="Moisture absorption by filament type" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Which Filaments Absorb Moisture Fastest</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Know Which Filaments Go Bad Fastest So You Dry the Right Ones</h2>
             <p className="text-gray-600 mb-6">Fastest to slowest — listed from most to least moisture-sensitive:</p>
             <div className="space-y-3">
               {[
@@ -136,7 +136,7 @@ export default function HowToDryFilamentPage() {
         {/* 3 drying methods */}
         <section aria-label="Three methods for drying filament" className="py-14 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">3 Ways to Dry Filament</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">The Three Ways to Dry Filament (Ranked by Safety)</h2>
 
             {/* Method 1 */}
             <div className="mb-8 bg-violet-50 rounded-2xl p-6 border border-violet-100">
@@ -201,7 +201,7 @@ export default function HowToDryFilamentPage() {
         {/* Storage after drying */}
         <section aria-label="How to store filament after drying" className="py-14 px-4 bg-gray-50">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Storage After Drying</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Keep It Dry Between Prints</h2>
             <p className="text-gray-600 leading-relaxed mb-4">
               Drying fixes the problem — but only until the spool absorbs moisture again. Proper storage
               keeps filament dry between uses.
@@ -235,10 +235,13 @@ export default function HowToDryFilamentPage() {
         <section aria-label="Download the app" className="py-16 px-4 bg-violet-50">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Track open dates and dry dates per spool in PrintLog3D.
+              Log Open Dates and Dry Dates. Never Print Wet Filament by Accident.
             </h2>
             <p className="text-gray-600 mb-6 leading-relaxed">
-              Know which spools need drying before you start the next print. Free download.
+              You opened a PETG spool two weeks ago. Is it still dry? You won't know unless you logged the date.
+              Log your open date and last dry date per spool in PrintLog3D.
+              Before your next print session, check the app. If it's been more than a week in humid air, dry it first.
+              Clean prints start before you hit print.
             </p>
             <Link
               href="/free-download"
