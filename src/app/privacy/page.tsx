@@ -54,16 +54,15 @@ export default function PrivacyPage() {
             </p>
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">2. Information We Collect</h2>
-            <ul style={bodyStyle} className="list-disc pl-6 mb-4 space-y-1">
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Account email address</strong> — optional, for cross-device sync only.</li>
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Print logs you create</strong> — stored locally on your device and, if you have an account, in our secure cloud database (Supabase).</li>
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Purchase confirmation</strong> — via RevenueCat when you unlock premium features. We do not receive your payment details.</li>
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Device identifiers</strong> — used by RevenueCat to associate your purchase with your device.</li>
+            <p style={bodyStyle} className="mb-3">We collect the minimum data needed to operate the app:</p>
+            <ul style={bodyStyle} className="list-disc pl-6 mb-4 space-y-2">
+              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>3D print logs you create.</strong> Stored locally on your device only. This data is never uploaded to any server.</li>
+              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Purchase data.</strong> When you unlock the full app, RevenueCat receives a transaction ID and device identifier to verify and restore your purchase. We do not receive your payment details.</li>
             </ul>
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">3. How We Use Your Information</h2>
             <ul style={bodyStyle} className="list-disc pl-6 mb-4 space-y-1">
-              <li>To operate the app and sync your data across devices (if you have an account)</li>
+              <li>To operate the app and display your logged prints</li>
               <li>To restore your purchase on new devices</li>
               <li>To respond to support requests</li>
             </ul>
@@ -71,15 +70,14 @@ export default function PrivacyPage() {
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">4. Third-Party Services</h2>
             <ul style={bodyStyle} className="list-disc pl-6 mb-4 space-y-1">
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Supabase</strong> — secure cloud database for optional account sync. Hosted on AWS US-East.</li>
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>RevenueCat</strong> — in-app purchase management and subscription tracking.</li>
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Apple App Store / Google Play</strong> — app distribution and payment processing.</li>
+              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>RevenueCat.</strong> In-app purchase management. They receive device identifiers and transaction data to process and restore purchases.</li>
+              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Apple App Store / Google Play.</strong> App distribution and payment processing.</li>
             </ul>
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">5. Data Deletion</h2>
             <p style={bodyStyle} className="leading-relaxed mb-4">
-              You may delete your account and all associated cloud data at any time from the app settings.
-              We will delete your data within 30 days of the request. Local device data is deleted when you uninstall the app.
+              Your data is stored only on your device. It is permanently deleted when you uninstall the app.
+              We do not store any of your logged data on our servers.
             </p>
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">6. Children</h2>
