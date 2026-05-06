@@ -1,8 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Chakra_Petch, Fira_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
+const chakraPetch = Chakra_Petch({
+  variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const firaSans = Fira_Sans({
+  variable: "--font-body",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600"],
+});
 
 const SITE_URL = "https://www.printlog3d.com";
 
@@ -48,7 +60,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${chakraPetch.variable} ${firaSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
