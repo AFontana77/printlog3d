@@ -1,0 +1,9 @@
+{
+  "_meta": {
+    "purpose": "Centralized affiliate link registry for printlog3d.com. Same shape as 10+ other portfolio sites. Currently Amazon-only; brand enrollments will populate programs as they land.",
+    "format_note": "Each program: { brand, base_url, tracking_param, tracking_value, status, network, commission, cookie, notes }. status = pending | queued_signup | enrolled | declined.",
+    "last_updated": "2026-05-19",
+    "session": "Sites resolver-rollout-2026-05-19"
+  },
+  "programs": {}
+}
