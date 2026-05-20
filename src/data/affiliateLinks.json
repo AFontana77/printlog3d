@@ -3,7 +3,19 @@
     "purpose": "Centralized affiliate link registry for printlog3d.com. Same shape as 10+ other portfolio sites. Currently Amazon-only; brand enrollments will populate programs as they land.",
     "format_note": "Each program: { brand, base_url, tracking_param, tracking_value, status, network, commission, cookie, notes }. status = pending | queued_signup | enrolled | declined.",
     "last_updated": "2026-05-19",
-    "session": "Sites resolver-rollout-2026-05-19"
+    "session": "Sites-S22-resolver-rollout"
   },
-  "programs": {}
+  "programs": {
+    "amazon": {
+      "brand": "Amazon",
+      "base_url": "https://www.amazon.com",
+      "status": "pending",
+      "network": "amazon",
+      "tracking_param": "tag",
+      "commission": "3-4%",
+      "cookie": "24h",
+      "notes": "3D printing supplies + KDP book back-matter. Enroll at https://affiliate-program.amazon.com/ after domain goes live. Replace PENDING_TRACKING_ID with actual associate tag.",
+      "tracking_value": "PENDING_TRACKING_ID"
+    }
+  }
 }
