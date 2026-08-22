@@ -15,7 +15,7 @@ export function GET() {
       apps: [],
       details: [
         {
-          appID: 'APPLE_TEAM_ID.com.printlog3d.app',
+          appID: 'APPLE_TEAM_ID.com.anvilroad.printlog3d',
           paths: ['*'],
         },
       ],

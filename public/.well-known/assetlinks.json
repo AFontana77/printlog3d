@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.printlog3d.app",
+      "package_name": "com.anvilroad.printlog3d",
       "sha256_cert_fingerprints": [
         "PASTE_SHA256_FINGERPRINT_FROM_EAS_CREDENTIALS"
       ]
