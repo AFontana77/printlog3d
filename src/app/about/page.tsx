@@ -4,8 +4,8 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About PrintLog3D',
-  description: 'The story behind PrintLog3D. Search 1,260 filaments with tested print settings. Log your prints. Dial in your profiles.',
+  title: 'About',
+  description: 'The story behind PrintLog3D, a 17-material filament reference with a print log app in development. Dial in your print settings.',
 };
 
 export default function AboutPage() {
@@ -47,7 +47,7 @@ export default function AboutPage() {
               }}
               className="text-base mb-6"
             >
-              PrintLog3D was built for 3D printing enthusiasts who have wasted spools learning the hard way. Every printer is different. Every brand of PLA prints differently. The settings that work for Hatchbox PLA on a Bambu P1S are not the same as eSUN PLA on an Ender 3. PrintLog3D pairs a curated filament database with a personal print log so you search before you slice and record what worked before you forget. The app for iPhone and Android adds a slicer profile assistant and print time tracker. Stop printing from memory. Start printing from data.
+              PrintLog3D was built for 3D printing enthusiasts who have wasted spools learning the hard way. Every printer is different. Every brand of PLA prints differently. The settings that work for Hatchbox PLA on a Bambu P1S are not the same as eSUN PLA on an Ender 3. PrintLog3D pairs a filament material reference with a personal print log, so you can search before you slice and record what worked before you forget. The print log lives in a companion app for iPhone and Android, in development now. Stop printing from memory. Start printing from data.
             </p>
             <p
               style={{
@@ -58,7 +58,7 @@ export default function AboutPage() {
               }}
               className="text-base mb-8"
             >
-              PrintLog3D is published by Anvil Road LLC, a small product studio building practical apps and reference tools for hobbyists, professionals, and makers. Every product in the portfolio follows the same principle: a curated, searchable database paired with a personal log. Search what the experts know. Record what you discover.
+              PrintLog3D is published by Anvil Road LLC, a small product studio building practical apps and reference tools for hobbyists, professionals, and makers. Every product in the portfolio follows the same principle: a searchable reference paired with a personal log. Search what the datasheets say. Record what you discover.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -72,7 +72,7 @@ export default function AboutPage() {
                 }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold uppercase min-h-[48px] transition-colors press-feedback"
               >
-                Browse the Library &rarr;
+                Browse the Materials &rarr;
               </Link>
               <Link
                 href="/free-download"
@@ -127,7 +127,7 @@ export default function AboutPage() {
               }}
               className="text-base"
             >
-              Anvil Road is an independent publisher and app studio based in New Jersey. We build reference databases, log apps, KDP books, and companion print products across a range of hobby and professional categories. PrintLog3D is one of 20+ apps in the Anvil Road portfolio. All apps are free to start, with one-time unlocks for unlimited features. No subscriptions.
+              Anvil Road is an independent publisher and app studio based in New Jersey. We build reference tools, log apps, KDP books, and companion print products across a range of hobby and professional categories. PrintLog3D is one of 20+ products in the Anvil Road portfolio. The PrintLog3D app is in development and will follow the same model as our other apps: free to start, with a one-time unlock for unlimited features, no subscriptions.
             </p>
           </div>
         </section>

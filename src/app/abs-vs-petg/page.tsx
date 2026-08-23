@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'ABS vs PETG — Which Is Better for Functional Parts? | PrintLog3D',
+  title: 'ABS vs PETG: Which Is Better for Functional Parts?',
   description: "ABS vs PETG compared: heat resistance, warp risk, fumes, ease of print, and why PETG wins for most functional parts unless you specifically need ABS's higher temperature tolerance.",
 };
 
@@ -13,7 +13,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: 'ABS vs PETG — Which Is Better for Functional Parts?',
+      headline: 'ABS vs PETG: Which Is Better for Functional Parts?',
       description: "ABS vs PETG compared: heat resistance, warp risk, fumes, ease of print, and why PETG wins for most functional parts unless you specifically need ABS's higher temperature tolerance.",
       url: 'https://www.printlog3d.com/abs-vs-petg',
       publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },
@@ -205,7 +205,7 @@ export default function AbsVsPetgPage() {
             <div className="flex flex-wrap gap-x-6 gap-y-2">
               <Link href="/pla-vs-petg" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">PLA vs PETG</Link>
               <Link href="/pla-vs-abs" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">PLA vs ABS</Link>
-              <Link href="/3d-printing-filament-guide" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">All 7 materials</Link>
+              <Link href="/library" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">All 17 materials</Link>
               <Link href="/how-to-dry-filament" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">Dry your filament</Link>
             </div>
           </div>

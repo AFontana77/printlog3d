@@ -3,34 +3,34 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Support — PrintLog3D',
-  description: 'Get help with the PrintLog3D app. Contact support or browse common questions.',
+  title: 'Support',
+  description: 'Get help with the PrintLog3D website. Contact support or browse common questions.',
 };
 
 const FAQS = [
   {
-    q: 'How do I get the app?',
-    a: 'Search "PrintLog3D" in the App Store or Google Play. The app is free to download. The $6.99 one-time unlock removes entry limits and adds premium features.',
+    q: 'Is there a PrintLog3D app?',
+    a: 'Not yet. The PrintLog3D app is in development. This website is live now with a filament material reference and a free printable settings sheet. We will announce the app here when it ships.',
   },
   {
-    q: 'What does the $6.99 unlock include?',
-    a: 'Unlimited print logs, settings history per filament, failure notes, and PDF export. One-time payment, no subscription, no expiration.',
+    q: 'Do I need to pay for anything?',
+    a: 'No. The website and the settings sheet are both free. There is no purchase or subscription on printlog3d.com today.',
   },
   {
-    q: 'How do I restore my purchase?',
-    a: 'Open the app, go to Settings, and tap "Restore Purchases." Make sure you are signed in to the same Apple ID or Google account you used to purchase.',
+    q: 'Do I need an account?',
+    a: 'No. You can browse the material reference and download the settings sheet without creating an account.',
   },
   {
-    q: 'Does the app require an account?',
-    a: 'No account is required for offline use. An optional free account lets you sync your print logs across devices.',
+    q: 'Where does the filament data come from?',
+    a: 'From manufacturer datasheets. The figures are typical ranges for each material class, not results from our own testing. Always check your specific spool and your printer before you print.',
   },
   {
-    q: 'Is there a subscription?',
-    a: 'No. PrintLog3D is free to download with entry limits, and $6.99 one-time to unlock everything. No monthly fees, ever.',
+    q: 'How do I stop receiving emails?',
+    a: 'Every email we send has an unsubscribe link. Click it and we remove you from the list right away.',
   },
   {
-    q: 'How do I delete my account and data?',
-    a: 'Go to Settings in the app and tap "Delete Account." This removes all cloud data within 30 days. Local data is removed when you uninstall the app.',
+    q: 'How do I delete my data?',
+    a: 'Email support@printlog3d.com and ask us to remove your email address from our list. We do not store any other personal data on this website.',
   },
 ];
 
@@ -61,7 +61,7 @@ export default function SupportPage() {
               }}
               className="text-4xl sm:text-5xl font-bold mb-4"
             >
-              App Support
+              Support
             </h1>
             <p
               style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}

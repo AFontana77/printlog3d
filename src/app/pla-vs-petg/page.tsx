@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PLA vs PETG — Which Filament Should You Use? | PrintLog3D',
+  title: 'PLA vs PETG: Which Filament Should You Use?',
   description: 'PLA vs PETG compared side by side: print temperature, heat resistance, flexibility, bed adhesion, and which to use for functional parts, outdoor prints, and food-contact items.',
 };
 
@@ -13,7 +13,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: 'PLA vs PETG — Which Filament Should You Use?',
+      headline: 'PLA vs PETG: Which Filament Should You Use?',
       description: 'PLA vs PETG compared side by side: print temperature, heat resistance, flexibility, bed adhesion, and which to use for functional parts, outdoor prints, and food-contact items.',
       url: 'https://www.printlog3d.com/pla-vs-petg',
       publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },

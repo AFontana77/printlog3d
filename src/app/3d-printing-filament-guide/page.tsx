@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '3D Printing Filament Guide — PLA, PETG, ABS, ASA, Nylon, TPU, Resin | PrintLog3D',
+  title: '3D Printing Filament Guide: PLA, PETG, ABS, ASA, Nylon, TPU, Resin',
   description: 'The complete 3D printing filament guide: every material type explained with print settings, strengths, weaknesses, and which to use for your project. From PLA for beginners to Nylon for engineering parts.',
 };
 
@@ -13,7 +13,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: '3D Printing Filament Guide — PLA, PETG, ABS, ASA, Nylon, TPU, Resin',
+      headline: '3D Printing Filament Guide: PLA, PETG, ABS, ASA, Nylon, TPU, Resin',
       description: 'The complete 3D printing filament guide: every material type explained with print settings, strengths, weaknesses, and which to use for your project.',
       url: 'https://www.printlog3d.com/3d-printing-filament-guide',
       publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },

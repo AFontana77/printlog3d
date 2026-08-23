@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'How to Dry Filament — Signs of Wet Filament & 3 Drying Methods | PrintLog3D',
+  title: 'How to Dry Filament: Signs of Wet Filament & 3 Drying Methods',
   description: 'Learn to spot wet filament (popping sounds, rough surface, stringing) and how to dry it with a filament dryer, food dehydrator, or oven. Includes drying temps and times for PLA, PETG, Nylon, and TPU.',
 };
 
@@ -13,7 +13,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: 'How to Dry Filament — Signs of Wet Filament and 3 Drying Methods',
+      headline: 'How to Dry Filament: Signs of Wet Filament and 3 Drying Methods',
       description: 'Spot wet filament and dry it correctly with a filament dryer, food dehydrator, or oven. Includes drying temps and times for PLA, PETG, Nylon, and TPU.',
       url: 'https://www.printlog3d.com/how-to-dry-filament',
       publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },

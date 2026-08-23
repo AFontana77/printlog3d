@@ -23,11 +23,11 @@ const SITE_URL = "https://www.printlog3d.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "PrintLog3D — Search 1,260+ filaments with tested print settings",
+    default: "PrintLog3D: filament print settings by material",
     template: "%s | PrintLog3D",
   },
-  description: "PrintLog3D has 1,260+ filaments from Filamentpedia and manufacturer datasheets with print temperatures, bed adhesion, and tested settings. Log your prints and dial in your profiles.",
-  keywords: ["3d printing log app", "filament tracker", "print settings log", "3d printer journal", "filament database app"],
+  description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
+  keywords: ["filament print settings", "pla print temperature", "petg print temperature", "abs enclosure", "filament drying temperature"],
   authors: [{ name: "Anvil Road LLC" }],
   creator: "Anvil Road LLC",
   publisher: "Anvil Road LLC",
@@ -37,20 +37,19 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "PrintLog3D",
-    title: "PrintLog3D — Search 1,260+ filaments with tested print settings",
-    description: "PrintLog3D has 1,260+ filaments from Filamentpedia and manufacturer datasheets with print temperatures, bed adhesion, and tested settings. Log your prints and dial in your profiles.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "PrintLog3D" }],
+    title: "PrintLog3D: filament print settings by material",
+    description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PrintLog3D — Search 1,260+ filaments with tested print settings",
-    description: "PrintLog3D has 1,260+ filaments from Filamentpedia and manufacturer datasheets with print temperatures, bed adhesion, and tested settings. Log your prints and dial in your profiles.",
-    images: ["/og-image.png"],
+    title: "PrintLog3D: filament print settings by material",
+    description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
   },
   alternates: { canonical: SITE_URL },
+  // No apple-touch-icon is declared: public/icons/icon-192.png does not
+  // exist, and pointing at a missing file is worse than omitting it.
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-    apple: "/icons/icon-192.png",
   },
 };
 

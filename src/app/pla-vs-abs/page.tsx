@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'PLA vs ABS — When to Upgrade and When to Stick with PLA | PrintLog3D',
+  title: 'PLA vs ABS: When to Upgrade and When to Stick with PLA',
   description: "PLA vs ABS compared: why most beginners don't need ABS, when ABS's heat resistance and machinability are worth the hassle, and the better upgrade path (PLA to PETG to ASA).",
 };
 
@@ -13,7 +13,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: 'PLA vs ABS — When to Upgrade and When to Stick with PLA',
+      headline: 'PLA vs ABS: When to Upgrade and When to Stick with PLA',
       description: "PLA vs ABS compared: why most beginners don't need ABS, when ABS's heat resistance and machinability are worth the hassle, and the better upgrade path.",
       url: 'https://www.printlog3d.com/pla-vs-abs',
       publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },
@@ -76,7 +76,7 @@ const PLA_STRENGTHS = [
 const RELATED = [
   { href: '/pla-vs-petg', title: 'PLA vs PETG', desc: 'The most common comparison. When to step up.' },
   { href: '/abs-vs-petg', title: 'ABS vs PETG', desc: 'Which is better for functional parts?' },
-  { href: '/3d-printing-filament-guide', title: 'All 7 Materials', desc: 'Full guide to every filament type.' },
+  { href: '/library', title: 'All 17 Materials', desc: 'Print settings, enclosure and drying for every material.' },
   { href: '/3d-print-stringing', title: 'Fix Stringing', desc: 'Retraction, temp, and combing explained.' },
 ];
 

@@ -4,15 +4,32 @@ const ANON_KEY =
 
 const SKIN_ID = '3dprint';
 
+/**
+ * Shape of the `data` blob as it actually exists in the `items` table for
+ * skin_id=3dprint. The previous declaration named five fields that the table
+ * has never had (print_temp_c_range, speed_mm_s, cost_per_kg_usd,
+ * colors_available, notes), so every consumer silently read `undefined` and
+ * fell back to hardcoded defaults. Print temperature - the single most useful
+ * number here - was in the row and never rendered.
+ *
+ * price_usd is deliberately NOT surfaced as a product price. See
+ * MATERIAL_PROFILES for why: the stored figures are not sourced and are wrong
+ * by more than an order of magnitude on the engineering materials.
+ */
 export type FilamentData = {
   brand?: string;
+  grade?: string;
+  diameter?: string;
   material?: string;
-  bed_temp_c?: number;
-  speed_mm_s?: number;
-  cost_per_kg_usd?: number;
-  colors_available?: string[];
-  print_temp_c_range?: string;
-  notes?: string;
+  price_usd?: string;
+  bed_temp_c?: string | number;
+  retraction?: string;
+  cooling_fan?: string;
+  print_temp_c?: string;
+  material_full?: string;
+  spool_weight_kg?: string | number;
+  country_of_origin?: string;
+  enclosure_required?: string;
 };
 
 export type FilamentItem = {

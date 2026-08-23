@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '3D Print Stringing — Causes, Fixes & Settings by Material | PrintLog3D',
+  title: '3D Print Stringing: Causes, Fixes & Settings by Material',
   description: 'Fix 3D print stringing with this step-by-step guide: retraction distance by extruder type, temperature reduction, combing, travel speed, and why PETG strings more than PLA (and what to do about it).',
 };
 
@@ -13,7 +13,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: '3D Print Stringing — Causes, Fixes and Settings by Material',
+      headline: '3D Print Stringing: Causes, Fixes and Settings by Material',
       description: 'Fix 3D print stringing: retraction distance by extruder type, temperature reduction, combing, travel speed, and material-specific notes for PLA, PETG, TPU, and Nylon.',
       url: 'https://www.printlog3d.com/3d-print-stringing',
       publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },
@@ -91,7 +91,7 @@ const RELATED = [
   { href: '/how-to-dry-filament', title: 'How to Dry Filament', desc: 'Signs of wet filament and all 3 drying methods.' },
   { href: '/pla-vs-petg', title: 'PLA vs PETG', desc: 'Why PETG strings more and when to use each.' },
   { href: '/abs-vs-petg', title: 'ABS vs PETG', desc: 'Which is better for functional parts?' },
-  { href: '/3d-printing-filament-guide', title: 'All 7 Filament Types', desc: 'Complete settings reference for every material.' },
+  { href: '/library', title: 'All 17 Materials', desc: 'Print settings, enclosure and drying for every material.' },
 ];
 
 export default function StringingPage() {

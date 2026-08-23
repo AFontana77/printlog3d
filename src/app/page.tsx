@@ -2,55 +2,37 @@ import Link from 'next/link';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import type { Metadata } from 'next';
+import { MATERIAL_PROFILES } from '@/lib/materials';
 
 export const metadata: Metadata = {
-  title: "PrintLog3D — Search 1,260 filaments with tested print settings",
-  description: "PrintLog3D has 1,260 filaments from Filamentpedia and manufacturer datasheets with print temperatures, bed adhesion, and tested settings. Log your prints and build a settings reference for every material you run.",
+  title: "Filament Materials and Print Settings",
+  description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
 };
 
-const SPEC_ROWS = [
-  { mat: "PLA", nozzle: "200°C", bed: "60°C" },
-  { mat: "PETG", nozzle: "230°C", bed: "80°C" },
-  { mat: "TPU 95A", nozzle: "220°C", bed: "40°C" },
-  { mat: "ABS", nozzle: "240°C", bed: "100°C" },
-  { mat: "ASA", nozzle: "245°C", bed: "90°C" },
-];
+// Derived, so the preview can never disagree with the page it links to.
+const PREVIEW_SLUGS = ["pla", "petg", "abs", "asa", "peek"];
+const SPEC_ROWS = PREVIEW_SLUGS.map((slug) => {
+  const m = MATERIAL_PROFILES.find((x) => x.slug === slug);
+  if (!m) throw new Error(`Homepage preview references unknown material: ${slug}`);
+  return { mat: m.category, nozzle: `${m.printTempC}°C`, bed: `${m.bedTempC}°C` };
+});
 
 const FEATURE_ROWS = [
-  { feature: "Filament database", desc: "1,260 filaments with print temp, bed temp, and known issue notes." },
+  { feature: "Material reference", desc: "17 materials with typical print temp, bed temp, and known issue notes." },
   { feature: "Print log", desc: "Log slicer settings, filament batch, nozzle temp, and result for every print." },
   { feature: "Settings history", desc: "See what actually worked for a given material. Your settings, not YouTube." },
   { feature: "Failure notes", desc: "Log warping, stringing, or layer adhesion issues. Know what to avoid next time." },
 ];
 
 const STATS = [
-  { num: "1,260", label: "filaments in database", sub: "PLA · PETG · TPU · ABS · ASA · more" },
-  { num: "40+", label: "brands tracked", sub: "Prusament · Bambu · Hatchbox · eSUN · more" },
-  { num: "$0", label: "to start", sub: "Free app, free settings sheet" },
+  { num: `${MATERIAL_PROFILES.length}`, label: "materials covered", sub: "PLA · PETG · ABS · ASA · nylon · PEEK · more" },
+  { num: "6", label: "in-depth guides", sub: "PLA vs PETG · drying · stringing · more" },
+  { num: "$0", label: "to browse", sub: "Free site, free settings sheet" },
 ];
 
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "PrintLog3D",
-            "applicationCategory": "LifestyleApplication",
-            "operatingSystem": "iOS, Android",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            },
-            "description": "Search 1,260+ 3D printing filaments with specs and settings. Log your prints, track results by filament, and build a reference library for your printer.",
-            "url": "https://www.printlog3d.com"
-          })
-        }}
-      />
       <SiteNav />
       <main id="main-content" className="pt-20">
 
@@ -70,7 +52,7 @@ export default function HomePage() {
                 className="uppercase font-semibold mb-8 flex items-center gap-3"
               >
                 <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
-                PrintLog3D · Filament database + print log
+                PrintLog3D · Filament materials + print log
               </div>
 
               <h1
@@ -81,8 +63,8 @@ export default function HomePage() {
                 }}
                 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6"
               >
-                1,260 filaments.<br />
-                <span style={{ color: 'oklch(0.43 0.22 295)' }}>Every setting logged.</span>
+                17 materials.<br />
+                <span style={{ color: 'oklch(0.43 0.22 295)' }}>One settings reference.</span>
               </h1>
 
               <p
@@ -94,8 +76,8 @@ export default function HomePage() {
                 }}
                 className="text-base mb-8"
               >
-                Search PLA, PETG, TPU, ABS, ASA, and specialty materials by brand, temp range, and print
-                characteristics. Log your actual settings for every print. Stop printing from memory.
+                Look up PLA, PETG, ABS, ASA, nylon, polycarbonate and PEEK by temperature and print
+                characteristics. Skip the guesswork. Stop printing from memory.
               </p>
 
               <div className="flex flex-wrap gap-3">
@@ -110,7 +92,7 @@ export default function HomePage() {
                   }}
                   className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold uppercase min-h-[48px] transition-colors press-feedback"
                 >
-                  Browse the Database &rarr;
+                  Browse the Materials &rarr;
                 </Link>
                 <Link
                   href="/free-download"
@@ -132,7 +114,7 @@ export default function HomePage() {
                 style={{ color: 'oklch(0.55 0.015 295)', fontVariantNumeric: 'tabular-nums' }}
                 className="mt-4 text-sm"
               >
-                Free app. iOS + Android. 1,260 filaments from Filamentpedia + datasheets.
+                The PrintLog3D app is in development. The site covers 17 materials, using the typical published range for each one.
               </p>
             </div>
 
@@ -231,7 +213,7 @@ export default function HomePage() {
                   }}
                   className="uppercase font-semibold"
                 >
-                  View all 1,260 filaments &rarr;
+                  View all 17 materials &rarr;
                 </Link>
               </div>
             </div>
@@ -289,9 +271,9 @@ export default function HomePage() {
               }}
               className="text-base mb-14"
             >
-              PrintLog3D gives you 1,260 filaments from Filamentpedia and manufacturer datasheets. Searchable.
-              Organized. Log your own settings on top. Know what worked for every material, every brand,
-              every printer.
+              PrintLog3D covers 17 filament materials, using the typical published range for each one. Searchable and organized.
+              The print log and settings history features below are part of the companion app,
+              in development now.
             </p>
 
             {/* Spec-table feature rows */}
@@ -410,7 +392,8 @@ export default function HomePage() {
               className="text-lg mb-8"
             >
               Download the printable filament reference sheet. Use it at your desk today, no app needed.
-              When you want the full database and print log, download the app free.
+              A companion app with the full material reference and print log is in development. We will
+              share it here when it ships.
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -439,7 +422,7 @@ export default function HomePage() {
                 }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold uppercase min-h-[48px] transition-colors"
               >
-                Browse the Database
+                Browse the Materials
               </Link>
             </div>
           </div>

@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  { href: '/library', label: 'Library' },
+  { href: '/library', label: 'Materials' },
+  { href: '/3d-printing-filament-guide', label: 'Guides' },
   { href: '/free-download', label: 'Free Download' },
   { href: '/about', label: 'About' },
 ];

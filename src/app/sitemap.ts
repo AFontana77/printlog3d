@@ -1,44 +1,58 @@
 import type { MetadataRoute } from 'next';
-import { getAllFilaments, getCategories, toSlug } from '@/lib/items';
+import { MATERIAL_PROFILES } from '@/lib/materials';
+
+/**
+ * Sitemap.
+ *
+ * Two rules, both learned the hard way on sibling properties:
+ *
+ * 1. DERIVE, NEVER DUPLICATE. Material URLs come from MATERIAL_PROFILES, the
+ *    same module the pages render from, so a new material appears here without
+ *    anyone remembering to add it. Only the hand-authored static routes are
+ *    listed literally, because each one is a file someone created on purpose.
+ *
+ * 2. A SITEMAP LISTS WHAT WE WANT INDEXED. The 1,000 /library/{cat}/{slug}
+ *    catalogue entries are served with robots: noindex, so they are absent
+ *    here on purpose. Submitting a noindexed URL asks Google to crawl a page
+ *    only to be told to drop it. Their absence is not an oversight, and a
+ *    completeness audit comparing the prerender manifest against this file
+ *    should expect exactly that gap and no other.
+ */
 
 const BASE = 'https://www.printlog3d.com';
-const now = new Date();
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [categories, filaments] = await Promise.all([
-    getCategories(),
-    getAllFilaments(),
-  ]);
+/** Every indexable hand-authored route. One entry per file under src/app. */
+const STATIC_ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
+  { path: '', priority: 1, changeFrequency: 'weekly' },
+  { path: '/library', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/3d-printing-filament-guide', priority: 0.85, changeFrequency: 'monthly' },
+  { path: '/pla-vs-petg', priority: 0.85, changeFrequency: 'monthly' },
+  { path: '/abs-vs-petg', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/pla-vs-abs', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/how-to-dry-filament', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/3d-print-stringing', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/free-download', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/about', priority: 0.5, changeFrequency: 'yearly' },
+  { path: '/support', priority: 0.4, changeFrequency: 'yearly' },
+  { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' },
+  { path: '/terms', priority: 0.3, changeFrequency: 'yearly' },
+];
 
-  const categoryUrls: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${BASE}/library/${toSlug(cat.category)}`,
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: 0.8,
-  }));
-
-  const filamentUrls: MetadataRoute.Sitemap = filaments.map((f) => ({
-    url: `${BASE}/library/${toSlug(f.category)}/${toSlug(f.name)}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }));
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
 
   return [
-    { url: BASE, lastModified: now, changeFrequency: 'weekly', priority: 1 },
-    { url: `${BASE}/library`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-    ...categoryUrls,
-    ...filamentUrls,
-    { url: `${BASE}/pla-vs-petg`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/3d-printing-filament-guide`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${BASE}/abs-vs-petg`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/pla-vs-abs`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/how-to-dry-filament`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/3d-print-stringing`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/free-download`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${BASE}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${BASE}/support`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    ...STATIC_ROUTES.map(({ path, priority, changeFrequency }) => ({
+      url: `${BASE}${path}`,
+      lastModified: now,
+      changeFrequency,
+      priority,
+    })),
+    ...MATERIAL_PROFILES.map((m) => ({
+      url: `${BASE}/library/${m.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    })),
   ];
 }

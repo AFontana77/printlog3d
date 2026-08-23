@@ -1,9 +1,10 @@
 {
   "_meta": {
-    "purpose": "Centralized affiliate link registry for printlog3d.com. Same shape as 10+ other portfolio sites. Currently Amazon-only; brand enrollments will populate programs as they land.",
+    "purpose": "Affiliate program registry for printlog3d.com. Same shape as the other portfolio sites.",
     "format_note": "Each program: { brand, base_url, tracking_param, tracking_value, status, network, commission, cookie, notes }. status = pending | queued_signup | enrolled | declined.",
-    "last_updated": "2026-05-19",
-    "session": "Sites-S22-resolver-rollout"
+    "activation": "Nothing on this site renders an Amazon link while status is 'pending'. Set status to 'enrolled' and put the real tracking ID in tracking_value, and GearAdvice starts rendering tagged, tracked links on every material page. That is the only change required.",
+    "last_updated": "2026-08-23",
+    "session": "WEBMON-PRINT property maturation"
   },
   "programs": {
     "amazon": {
@@ -14,8 +15,8 @@
       "tracking_param": "tag",
       "commission": "3-4%",
       "cookie": "24h",
-      "notes": "3D printing supplies + KDP book back-matter. Enroll at https://affiliate-program.amazon.com/ after domain goes live. Replace PENDING_TRACKING_ID with actual associate tag.",
-      "tracking_value": "PENDING_TRACKING_ID"
+      "notes": "printlog3d.com has NO Amazon Associates tracking ID. Every other monetised property in the portfolio has its own (homesteadgr-20, digpicframe-20, bpmonitorlab-20 and so on) and a site must never borrow another site's tag. Suggested ID following the existing convention: printlog3d-20. Until it exists, isEnrolled('amazon') returns false and GearAdvice renders specification guidance with no outbound link, which is deliberate: the previous library template shipped 1,000 pages of untagged amazon.com/s?k= search links that earned nothing, alongside a printed claim that the site participates in the Associates program. Both are removed.",
+      "tracking_value": ""
     }
   }
 }

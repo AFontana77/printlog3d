@@ -1,19 +1,41 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { EmailCaptureForm } from '@/components/EmailCaptureForm';
+import { MATERIAL_PROFILES } from '@/lib/materials';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 
+/**
+ * The settings sheet.
+ *
+ * This page previously promised a PDF that did not exist. The button said
+ * "Send Me the Free PDF", the copy said "Enter your email. We send the PDF."
+ * and /api/subscribe only ever stored the address and emailed a notification
+ * to the site owner. No file was ever built and none was ever sent, while the
+ * meta description simultaneously claimed "no signup required".
+ *
+ * Both halves are fixed here. The PDF is real and generated from
+ * MATERIAL_PROFILES by scripts/build_cheatsheet.py, and it downloads directly
+ * with no email required, which is what the page always claimed. The list
+ * signup stays, honestly described as a list rather than as the way to get the
+ * file.
+ */
+
+const PDF = '/printlog3d-filament-settings-cheat-sheet.pdf';
+const BASE = 'https://www.printlog3d.com';
+
 export const metadata: Metadata = {
-  title: 'Free 3D Print Settings Cheat Sheet',
-  description: 'One-page quick reference — temperature ranges, bed adhesion tips, and speed settings for 8 common materials. Free printable from PrintLog3D — no signup required.',
+  title: 'Free filament settings cheat sheet (PDF)',
+  description: `A one-page printable reference with nozzle and bed temperatures, enclosure and drying requirements for ${MATERIAL_PROFILES.length} filament materials. Direct download, no signup required.`,
+  alternates: { canonical: `${BASE}/free-download` },
 };
 
 const CONTENTS = [
-  'PLA, PETG, TPU, ABS, ASA, Nylon, PC, and CF blend settings',
-  'Print temp and bed temp ranges',
-  'Cooling fan recommendations',
-  'Enclosure required: yes/no per material',
-  'Printable — hang it next to your printer',
+  `All ${MATERIAL_PROFILES.length} materials on one table, from PLA to PEEK`,
+  'Nozzle and bed temperature ranges',
+  'Enclosure needed: yes or no, per material',
+  'Part cooling and the drying temperature each material wants',
+  'A second page listing the fault each material actually fails with',
 ];
 
 export default function FreeDownloadPage() {
@@ -21,7 +43,6 @@ export default function FreeDownloadPage() {
     <>
       <SiteNav />
       <main id="main-content" className="pt-20">
-        {/* Hero */}
         <section className="pt-20 pb-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
           <div className="max-w-5xl mx-auto">
             <div
@@ -33,8 +54,17 @@ export default function FreeDownloadPage() {
               }}
               className="uppercase font-semibold mb-8 flex items-center gap-3"
             >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
-              FREE DOWNLOAD · PDF REFERENCE SHEET
+              <span
+                aria-hidden="true"
+                style={{
+                  display: 'inline-block',
+                  width: '24px',
+                  height: '1px',
+                  background: 'oklch(0.43 0.22 295)',
+                  flexShrink: 0,
+                }}
+              />
+              FREE DOWNLOAD &middot; PDF REFERENCE SHEET
             </div>
             <h1
               style={{
@@ -44,7 +74,8 @@ export default function FreeDownloadPage() {
               }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
             >
-              Free 3D print <span style={{ color: 'oklch(0.43 0.22 295)' }}>settings cheat sheet.</span>
+              Free 3D print{' '}
+              <span style={{ color: 'oklch(0.43 0.22 295)' }}>settings cheat sheet.</span>
             </h1>
             <p
               style={{
@@ -53,68 +84,74 @@ export default function FreeDownloadPage() {
                 maxWidth: '52ch',
                 lineHeight: 1.6,
               }}
-              className="text-base mb-12"
+              className="text-base mb-8"
             >
-              One-page quick reference — temperature ranges, bed adhesion tips, and speed settings for 8 common materials. Print it. Hang it next to your machine. Stop second-guessing.
+              Two pages. Nozzle and bed temperatures, enclosure and drying needs for{' '}
+              {MATERIAL_PROFILES.length} materials, plus the fault each one actually fails with. Print it and
+              hang it next to your machine.
             </p>
 
-            <div className="grid lg:grid-cols-2 gap-8">
-              {/* Contents panel */}
-              <div
-                style={{
-                  background: 'oklch(0.99 0.004 295)',
-                  border: '1px solid oklch(0.84 0.015 295)',
-                  borderRadius: '0.25rem',
-                  overflow: 'hidden',
-                }}
-              >
-                <div style={{ background: 'oklch(0.92 0.012 295)', padding: '0.625rem 1.25rem' }}>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      color: 'oklch(0.48 0.015 295)',
-                      letterSpacing: '0.1em',
-                      fontSize: '0.65rem',
-                    }}
-                    className="uppercase font-semibold"
-                  >
-                    What is inside
-                  </span>
-                </div>
-                {CONTENTS.map((item, i) => (
-                  <div
-                    key={item}
-                    style={{
-                      padding: '0.75rem 1.25rem',
-                      borderTop: '1px solid oklch(0.84 0.015 295)',
-                      background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '0.75rem',
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        color: 'oklch(0.43 0.22 295)',
-                        minWidth: '24px',
-                        fontSize: '0.75rem',
-                        marginTop: '2px',
-                      }}
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <p
-                      style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
-                      className="text-sm leading-relaxed"
-                    >
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            <a
+              href={PDF}
+              download
+              style={{
+                background: 'oklch(0.43 0.22 295)',
+                color: 'oklch(0.99 0 0)',
+                fontFamily: 'var(--font-display)',
+                letterSpacing: '0.08em',
+                borderRadius: '0.25rem',
+                textTransform: 'uppercase',
+              }}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold min-h-[48px] transition-colors press-feedback"
+            >
+              Download the PDF &darr;
+            </a>
+            <p
+              style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }}
+              className="text-xs mt-3"
+            >
+              Direct download. No email needed.
+            </p>
+          </div>
+        </section>
 
-              {/* Capture panel */}
+        <section className="py-16 px-6 bg-white">
+          <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12">
+            <div>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  color: 'oklch(0.15 0.02 295)',
+                  lineHeight: 1.15,
+                }}
+                className="text-2xl font-bold mb-5"
+              >
+                What is on it
+              </h2>
+              <ul className="space-y-3">
+                {CONTENTS.map((c) => (
+                  <li
+                    key={c}
+                    style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
+                    className="text-sm leading-relaxed flex gap-3"
+                  >
+                    <span aria-hidden="true" style={{ color: 'oklch(0.43 0.22 295)' }}>
+                      &bull;
+                    </span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+              <p
+                style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }}
+                className="text-xs mt-6 leading-relaxed"
+              >
+                Every figure is a typical manufacturer-published range for that material class. They are not
+                measurements we took. Where your filament maker publishes different numbers, use theirs.
+              </p>
+            </div>
+
+            <div>
               <div
                 style={{
                   background: 'oklch(0.99 0.004 295)',
@@ -132,7 +169,7 @@ export default function FreeDownloadPage() {
                   }}
                   className="uppercase font-semibold mb-3"
                 >
-                  Get your free copy
+                  Optional
                 </div>
                 <h2
                   style={{
@@ -142,15 +179,16 @@ export default function FreeDownloadPage() {
                   }}
                   className="text-xl font-bold mb-3"
                 >
-                  Enter your email. We send the PDF.
+                  Hear when we add a material
                 </h2>
                 <p
                   style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
                   className="text-sm mb-6"
                 >
-                  Straight to your inbox. No spam.
+                  You already have the sheet. This is just the list we use when a new material guide goes up
+                  or the sheet gets revised.
                 </p>
-                <EmailCaptureForm buttonLabel="Send Me the Free PDF" />
+                <EmailCaptureForm buttonLabel="Join the list" />
                 <p
                   style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }}
                   className="text-xs mt-4"
@@ -162,7 +200,6 @@ export default function FreeDownloadPage() {
           </div>
         </section>
 
-        {/* App CTA */}
         <section
           className="py-20 px-6"
           style={{
@@ -180,8 +217,17 @@ export default function FreeDownloadPage() {
               }}
               className="uppercase font-semibold mb-4 flex items-center gap-3"
             >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
-              FULL DATABASE
+              <span
+                aria-hidden="true"
+                style={{
+                  display: 'inline-block',
+                  width: '24px',
+                  height: '1px',
+                  background: 'oklch(0.43 0.22 295)',
+                  flexShrink: 0,
+                }}
+              />
+              GO DEEPER
             </div>
             <h2
               style={{
@@ -191,7 +237,7 @@ export default function FreeDownloadPage() {
               }}
               className="text-3xl sm:text-4xl font-bold mb-4"
             >
-              Want the searchable database?
+              The sheet is the short version
             </h2>
             <p
               style={{
@@ -201,13 +247,12 @@ export default function FreeDownloadPage() {
               }}
               className="text-base mb-8"
             >
-              The free PDF covers the basics. The PrintLog3D app gives you the full searchable library plus your personal log — free on iPhone and Android.
+              Each material has a full page here covering what it is good for, what to avoid it for, how to
+              dry it, and the fault people hit most often.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="https://apps.apple.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/library"
                 style={{
                   background: 'oklch(0.43 0.22 295)',
                   color: 'oklch(0.99 0 0)',
@@ -218,12 +263,10 @@ export default function FreeDownloadPage() {
                 }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold min-h-[48px] transition-colors press-feedback"
               >
-                Get on App Store &rarr;
-              </a>
-              <a
-                href="https://play.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
+                All {MATERIAL_PROFILES.length} materials &rarr;
+              </Link>
+              <Link
+                href="/how-to-dry-filament"
                 style={{
                   border: '1px solid oklch(0.84 0.015 295)',
                   color: 'oklch(0.43 0.22 295)',
@@ -235,8 +278,8 @@ export default function FreeDownloadPage() {
                 }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold min-h-[48px] transition-colors"
               >
-                Get on Google Play
-              </a>
+                How to dry filament
+              </Link>
             </div>
           </div>
         </section>
