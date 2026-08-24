@@ -57,6 +57,49 @@ def is_negated(html: str, at: int) -> bool:
     return any(n in window for n in NEGATIONS)
 
 
+# --------------------------------------------------------------------------
+# Amazon commerce checks
+# --------------------------------------------------------------------------
+# This property's own tracking ID. A site must never carry a sibling's tag:
+# every monetised property in the portfolio has its own, and a borrowed tag
+# sends the commission and the attribution to the wrong place.
+OWN_TAG = "printlog3d-20"
+
+# Sibling tags, checked explicitly so a copy-paste from another repo is caught
+# rather than merely "not our tag". Not exhaustive, and does not need to be:
+# ANY tag that is not OWN_TAG fails the check below regardless.
+SIBLING_TAGS = (
+    "digpicframe-20", "homesteadgr-20", "ageinplace0d-20", "cleanairhome-20",
+    "bpmonitorlab-20", "pfasfilter-20", "petcoolprod-20", "solargenpros-20",
+    "lvl2chargr-20", "smartrngcmp-20", "hearingaidotc-20", "compostlab-20",
+    "veteranswater-20", "sleepgearpros-20", "freezedryguide-20",
+    "steellitterbox-20", "chunkyknit-20", "portabledish-20", "wlshotguide-20",
+)
+
+AMAZON_LINK_RE = re.compile(r'href="(https://(?:www\.)?amazon\.com/[^"]*)"')
+TAG_RE = re.compile(r"[?&]tag=([A-Za-z0-9_-]+)")
+
+
+def check_amazon(html, label, failures):
+    """Returns the number of Amazon links found, and appends any failures."""
+    links = AMAZON_LINK_RE.findall(html)
+    for url in links:
+        tags = TAG_RE.findall(url)
+        if not tags:
+            failures.append("%s -> Amazon link with NO tag: %s" % (label, url[:90]))
+            continue
+        for t in tags:
+            if t == OWN_TAG:
+                continue
+            why = "sibling property's tag" if t in SIBLING_TAGS else "unknown tag"
+            failures.append("%s -> Amazon link carries %s (%s): %s" % (label, t, why, url[:70]))
+    # The click tracker keys off the anchor, so an untracked Amazon exit earns
+    # money we cannot attribute to a page.
+    if links and 'rel="nofollow noopener noreferrer sponsored"' not in html:
+        failures.append("%s -> Amazon link present without sponsored rel attributes" % label)
+    return len(links)
+
+
 STATIC_PAGES = [
     "", "/library", "/free-download", "/about", "/support", "/privacy", "/terms",
     "/pla-vs-petg", "/pla-vs-abs", "/abs-vs-petg",
@@ -128,6 +171,7 @@ def main() -> int:
 
     failures: list[str] = []
     checked = 0
+    amazon_links_total = [0]
 
     paths = STATIC_PAGES + ["/library/" + m for m in MATERIALS] + SAMPLE_ENTRIES
 
@@ -149,6 +193,8 @@ def main() -> int:
             ]
             if hits:
                 failures.append("%s -> %s x%d" % (label, name, len(hits)))
+
+        amazon_links_total[0] += check_amazon(html, label, failures)
 
         # Exactly one h1 per page.
         h1 = len(re.findall(r"(?i)<h1[\s>]", html))
@@ -193,6 +239,16 @@ def main() -> int:
         print("sitemap: %d URLs" % len(locs))
 
     print("\n%s: %d pages checked" % (where, checked))
+    if amazon_links_total[0] == 0:
+        print(
+            "Amazon links: 0 found. The tag checks passed VACUOUSLY - commerce is "
+            "not activated yet. This is not the same as 'all links verified'."
+        )
+    else:
+        print(
+            "Amazon links: %d found, all carrying tag=%s"
+            % (amazon_links_total[0], OWN_TAG)
+        )
     if failures:
         print("FAIL: %d finding(s)\n" % len(failures))
         for f in failures:
