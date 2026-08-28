@@ -1,6 +1,7 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ComparisonBuying } from '@/components/ComparisonBuying';
+import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -29,15 +30,15 @@ const jsonLd = {
   ],
 };
 
-const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', letterSpacing: '0.15em', fontSize: '0.7rem' };
-const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)', lineHeight: 1.1 };
-const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' };
-const bodyStyle: React.CSSProperties = { color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
-const linkStyle: React.CSSProperties = { color: 'oklch(0.43 0.22 295)' };
+const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.15em', fontSize: '0.7rem' };
+const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.1 };
+const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)' };
+const bodyStyle: React.CSSProperties = { color: 'var(--body-text)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
+const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <div style={eyebrowStyle} className="uppercase font-semibold mb-6 flex items-center gap-3">
-    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
     {children}
   </div>
 );
@@ -75,15 +76,15 @@ export default function AbsVsPetgPage() {
       <SiteNav />
       <main id="main-content" className="pt-20">
         {/* Hero */}
-        <section aria-label="Page introduction" className="pt-20 pb-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Page introduction" className="pt-20 pb-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
-            <div style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontSize: '0.75rem', letterSpacing: '0.05em' }} className="uppercase font-semibold mb-4">
+            <div style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontSize: '0.75rem', letterSpacing: '0.05em' }} className="uppercase font-semibold mb-4">
               <Link href="/" className="hover:underline">Home</Link>
-              <span style={{ color: 'oklch(0.55 0.015 295)', margin: '0 0.5rem' }}>/</span>
-              <span style={{ color: 'oklch(0.48 0.015 295)' }}>ABS vs PETG</span>
+              <span style={{ color: 'var(--muted-foreground)', margin: '0 0.5rem' }}>/</span>
+              <span style={{ color: 'var(--muted-foreground)' }}>ABS vs PETG</span>
             </div>
-            <h1 style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)', lineHeight: 1.05 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              ABS vs PETG: <span style={{ color: 'oklch(0.43 0.22 295)' }}>which wins?</span>
+            <h1 style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.05 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              ABS vs PETG: <span style={{ color: 'var(--brand-primary)' }}>which wins?</span>
             </h1>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="text-base">
               ABS used to be the go-to for strong parts. PETG changed that. For most functional prints, PETG is easier, safer, and stronger where it counts. This page shows you the four situations where ABS still wins, and when PETG is the smarter call.
@@ -92,14 +93,14 @@ export default function AbsVsPetgPage() {
         </section>
 
         {/* Comparison table */}
-        <section aria-label="ABS vs PETG comparison table" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="ABS vs PETG comparison table" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>SIDE BY SIDE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">See the key differences before you load the spool.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
-              <div style={{ background: 'oklch(0.92 0.012 295)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '200px 1fr 1fr' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
+              <div style={{ background: 'var(--surface-2)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '200px 1fr 1fr' }}>
                 {['Property', 'ABS', 'PETG'].map((h) => (
-                  <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">{h}</span>
+                  <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">{h}</span>
                 ))}
               </div>
               {SPECS.map(([prop, abs, petg], i) => (
@@ -107,13 +108,13 @@ export default function AbsVsPetgPage() {
                   key={prop}
                   style={{
                     padding: '0.875rem 1.25rem',
-                    borderTop: '1px solid oklch(0.84 0.015 295)',
+                    borderTop: '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '200px 1fr 1fr',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{prop}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{prop}</span>
                   <span style={{ ...bodyStyle }} className="text-sm">{abs}</span>
                   <span style={{ ...bodyStyle }} className="text-sm">{petg}</span>
                 </div>
@@ -123,24 +124,24 @@ export default function AbsVsPetgPage() {
         </section>
 
         {/* When ABS wins */}
-        <section aria-label="When ABS is the better choice" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="When ABS is the better choice" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>ABS WINS</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">The 4 situations where ABS is the right call.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
               {ABS_WINS.map((w, i) => (
                 <div
                   key={w.n}
                   style={{
                     padding: '1.25rem 1.5rem',
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '60px 1fr',
                     gap: '1rem',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontVariantNumeric: 'tabular-nums' }} className="text-lg font-bold">{w.n}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontVariantNumeric: 'tabular-nums' }} className="text-lg font-bold">{w.n}</span>
                   <div>
                     <p style={h3Style} className="font-bold mb-2">{w.title}</p>
                     <p style={{ ...bodyStyle }} className="text-sm">{w.body}</p>
@@ -152,28 +153,28 @@ export default function AbsVsPetgPage() {
         </section>
 
         {/* When PETG wins */}
-        <section aria-label="When PETG is the better choice" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="When PETG is the better choice" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>PETG WINS</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Use PETG and skip the enclosure, fumes, and warping.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
-              <div style={{ background: 'oklch(0.92 0.012 295)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '240px 1fr' }}>
-                <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">Advantage</span>
-                <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">Why it matters</span>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+              <div style={{ background: 'var(--surface-2)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '240px 1fr' }}>
+                <span style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">Advantage</span>
+                <span style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">Why it matters</span>
               </div>
               {PETG_WINS.map((w, i) => (
                 <div
                   key={w.title}
                   style={{
                     padding: '1.25rem 1.25rem',
-                    borderTop: '1px solid oklch(0.84 0.015 295)',
+                    borderTop: '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '240px 1fr',
                     gap: '1rem',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{w.title}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{w.title}</span>
                   <p style={{ ...bodyStyle }} className="text-sm">{w.body}</p>
                 </div>
               ))}
@@ -182,7 +183,7 @@ export default function AbsVsPetgPage() {
         </section>
 
         {/* ASA alternative */}
-        <section aria-label="ASA as an alternative to ABS" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="ASA as an alternative to ABS" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>OUTDOOR · USE ASA INSTEAD</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">Outdoor part? Skip ABS. Use ASA.</h2>
@@ -193,7 +194,7 @@ export default function AbsVsPetgPage() {
         </section>
 
         {/* Verdict */}
-        <section aria-label="Final verdict" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="Final verdict" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>VERDICT</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">The one-sentence verdict.</h2>
@@ -213,7 +214,7 @@ export default function AbsVsPetgPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'var(--surface-2)', borderTop: '1px solid var(--border)' }}>
           <div className="max-w-3xl mx-auto">
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Both materials, one reference sheet.</h2>
@@ -223,8 +224,8 @@ export default function AbsVsPetgPage() {
             <Link
               href="/free-download"
               style={{
-                background: 'oklch(0.43 0.22 295)',
-                color: 'oklch(0.99 0 0)',
+                background: 'var(--brand-primary)',
+                color: 'var(--on-primary)',
                 fontFamily: 'var(--font-display)',
                 letterSpacing: '0.08em',
                 borderRadius: '0.25rem',
@@ -237,6 +238,8 @@ export default function AbsVsPetgPage() {
           </div>
         </section>
         <ComparisonBuying slugs={['abs', 'petg']} />
+
+        <OwnedServiceCta variant="comparison" />
 
       </main>
       <SiteFooter />

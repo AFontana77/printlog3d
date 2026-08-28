@@ -1,17 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Chakra_Petch, Fira_Sans } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { AffiliateClickTracker } from "@/components/analytics/affiliate-click-tracker";
+import { OwnedServiceTracker } from "@/components/analytics/owned-service-tracker";
 
-const chakraPetch = Chakra_Petch({
+// Specified by the brand package. No binaries are redistributed; next/font
+// self-hosts them at build time.
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
 });
 
-const firaSans = Fira_Sans({
+const inter = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
@@ -46,24 +49,28 @@ export const metadata: Metadata = {
     description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
   },
   alternates: { canonical: SITE_URL },
-  // No apple-touch-icon is declared: public/icons/icon-192.png does not
-  // exist, and pointing at a missing file is worse than omitting it.
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: [
+      { url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/favicon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/brand/favicon-180.png", sizes: "180x180" }],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#6D28D9",
+  themeColor: "#0066FF",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${chakraPetch.variable} ${firaSans.variable} h-full antialiased`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         <AffiliateClickTracker />
+        <OwnedServiceTracker />
         {/* Google Tag Manager - GTM-J369GLG4 */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-J369GLG4');`}

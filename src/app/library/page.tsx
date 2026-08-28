@@ -55,12 +55,12 @@ export default function MaterialsIndexPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       <main id="main-content" className="pt-20">
-        <section className="pt-20 pb-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section className="pt-20 pb-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <div
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
+                color: 'var(--brand-primary)',
                 letterSpacing: '0.15em',
                 fontSize: '0.7rem',
               }}
@@ -72,7 +72,7 @@ export default function MaterialsIndexPage() {
                   display: 'inline-block',
                   width: '24px',
                   height: '1px',
-                  background: 'oklch(0.43 0.22 295)',
+                  background: 'var(--brand-primary)',
                   flexShrink: 0,
                 }}
               />
@@ -81,17 +81,17 @@ export default function MaterialsIndexPage() {
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
+                color: 'var(--foreground)',
                 lineHeight: 1.05,
                 fontVariantNumeric: 'tabular-nums',
               }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
             >
               Every setting,<br />
-              <span style={{ color: 'oklch(0.43 0.22 295)' }}>one page per material.</span>
+              <span style={{ color: 'var(--brand-primary)' }}>one page per material.</span>
             </h1>
             <p
-              style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
+              style={{ color: 'var(--body-text)', fontFamily: 'var(--font-body)' }}
               className="text-lg max-w-2xl leading-relaxed"
             >
               Nozzle and bed temperature, whether it needs an enclosure, whether it needs drying, and the
@@ -122,11 +122,11 @@ export default function MaterialsIndexPage() {
                 </thead>
                 <tbody>
                   {MATERIAL_PROFILES.map((m) => (
-                    <tr key={m.slug} className="border-b border-gray-100 hover:bg-violet-50/40">
+                    <tr key={m.slug} className="border-b border-gray-100 hover:bg-brand-tint/40">
                       <th scope="row" className="py-3 pr-4 text-left font-medium">
                         <Link
                           href={`/library/${m.slug}`}
-                          className="text-violet-800 hover:text-violet-900 underline underline-offset-4"
+                          className="text-brand hover:text-brand-dark underline underline-offset-4"
                         >
                           {m.category}
                         </Link>
@@ -162,14 +162,14 @@ export default function MaterialsIndexPage() {
                     <Link
                       key={m.slug}
                       href={`/library/${m.slug}`}
-                      className="group block bg-white rounded-xl border border-gray-100 p-5 hover:border-violet-200 hover:shadow-md transition-all"
+                      className="group block bg-white rounded-xl border border-gray-100 p-5 hover:border-brand-soft hover:shadow-md transition-all"
                     >
-                      <h3 className="font-semibold text-gray-900 group-hover:text-violet-700 transition-colors mb-1">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-brand-dark transition-colors mb-1">
                         {m.category}
                       </h3>
                       <p className="text-xs text-gray-500 mb-3">{m.fullName}</p>
                       <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">{m.summary}</p>
-                      <p className="mt-3 text-xs font-medium text-violet-800 tabular-nums">
+                      <p className="mt-3 text-xs font-medium text-brand tabular-nums">
                         {m.printTempC}&deg;C nozzle &middot; {m.bedTempC}&deg;C bed
                       </p>
                     </Link>
@@ -195,7 +195,7 @@ export default function MaterialsIndexPage() {
                 <li key={g.href}>
                   <Link
                     href={g.href}
-                    className="text-violet-800 hover:text-violet-900 font-medium underline underline-offset-4"
+                    className="text-brand hover:text-brand-dark font-medium underline underline-offset-4"
                   >
                     {g.label}
                   </Link>

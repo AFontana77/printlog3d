@@ -5,6 +5,8 @@ import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
 import { FilamentBuying } from '@/components/FilamentBuying';
 import { PrintServiceRoute } from '@/components/PrintServiceRoute';
 import { needsServiceRoute } from '@/lib/commerce';
+import { OwnedServiceCta } from '@/components/OwnedServiceCta';
+import { canOfferOwnedService } from '@/lib/ownedService';
 import { MATERIAL_PROFILES, getMaterialBySlug, type MaterialProfile } from '@/lib/materials';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -110,6 +112,43 @@ function gearFor(m: MaterialProfile): GearSpec[] {
       searchTerms: '3d printer enclosure',
     });
   }
+  // Warping is the named failure of every enclosure-required material, and
+  // adhesion is the half of that fix people skip. Query verified: 4/4 genuine
+  // PEI plates. "flexible build plate spring steel" was rejected - it returned
+  // resin-printer plates.
+  if (m.enclosure === 'Required') {
+    out.push({
+      category: 'Bed adhesion',
+      requirement: 'PEI sheet sized to your bed, or a PVP glue stick',
+      why: `${m.category} lifts at the corners before it fails anywhere else. A textured PEI surface plus a thin glue layer holds the first layer down while the chamber comes up to temperature.`,
+      searchTerms: 'PEI build plate 3d printer',
+    });
+  }
+
+  // Functional parts get bolted to things. Verified: 4/4 genuine brass inserts.
+  if (
+    m.goodFor.some((g) =>
+      /functional|bracket|gear|structural|load-bearing|snap-fit|jig|mount|fixture/i.test(g),
+    )
+  ) {
+    out.push({
+      category: 'Heat-set threaded inserts',
+      requirement: 'Brass, M3 unless your design says otherwise',
+      why: `Printed threads strip. If you are making ${m.goodFor[0].toLowerCase()} out of ${m.category}, melting brass inserts in gives you a metal thread that survives being undone more than once.`,
+      searchTerms: 'threaded inserts m3 brass',
+    });
+  }
+
+  // Only where clogging is the material's OWN documented failure.
+  if (/clog/i.test(m.commonProblem)) {
+    out.push({
+      category: 'Nozzle cleaning kit',
+      requirement: 'Needles sized to your nozzle, plus a spare nozzle or two',
+      why: `${m.category} is the material most likely to block a nozzle mid-print. Cleaning needles clear a partial blockage without a full teardown.`,
+      searchTerms: 'nozzle cleaning kit 3d printer needles',
+    });
+  }
+
   if (m.avoidFor.some((a) => a.toLowerCase().includes('brass nozzle'))) {
     out.push({
       category: 'Hardened steel nozzle',
@@ -247,9 +286,9 @@ export default async function MaterialPage({
       <main id="main-content" className="pt-20">
         <nav aria-label="Breadcrumb" className="px-4 py-3 bg-white border-b border-gray-100">
           <ol className="max-w-3xl mx-auto flex flex-wrap items-center gap-2 text-sm text-gray-500">
-            <li><Link href="/" className="hover:text-violet-700 transition-colors">Home</Link></li>
+            <li><Link href="/" className="hover:text-brand-dark transition-colors">Home</Link></li>
             <li aria-hidden="true" className="text-gray-300">/</li>
-            <li><Link href="/library" className="hover:text-violet-700 transition-colors">Materials</Link></li>
+            <li><Link href="/library" className="hover:text-brand-dark transition-colors">Materials</Link></li>
             <li aria-hidden="true" className="text-gray-300">/</li>
             <li className="text-gray-900 font-medium" aria-current="page">{m.category}</li>
           </ol>
@@ -258,7 +297,7 @@ export default async function MaterialPage({
         {/* Answer first. This is the block an assistant should be able to quote. */}
         <section className="py-12 px-4" style={{ backgroundColor: '#F5F3FF' }}>
           <div className="max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-violet-700 bg-violet-100 px-3 py-1 rounded-full mb-4">
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-brand bg-brand-tint px-3 py-1 rounded-full mb-4">
               {m.difficulty}
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
@@ -339,7 +378,7 @@ export default async function MaterialPage({
         <section className="py-12 px-4 bg-white">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-              <Droplets size={18} className="text-violet-600" aria-hidden="true" /> Drying
+              <Droplets size={18} className="text-brand" aria-hidden="true" /> Drying
             </h2>
             <p className="text-gray-700 leading-relaxed">{m.drying}</p>
           </div>
@@ -348,6 +387,8 @@ export default async function MaterialPage({
         {needsServiceRoute(m) && <PrintServiceRoute material={m} />}
 
         <FilamentBuying material={m} />
+
+        {canOfferOwnedService(m) && <OwnedServiceCta variant="material" material={m} />}
 
         <GearAdvice
           heading={`What you need to print ${m.category}`}
@@ -358,7 +399,7 @@ export default async function MaterialPage({
         <Faq items={faq} heading={`${m.category} questions`} />
 
         {compared && (
-          <section className="py-12 px-4 bg-violet-50 border-t border-violet-100">
+          <section className="py-12 px-4 bg-brand-tint border-t border-brand-soft">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-xl font-bold text-gray-900 mb-3">
                 {m.category} or {compared.category}?
@@ -371,7 +412,7 @@ export default async function MaterialPage({
               </p>
               <Link
                 href={`/library/${compared.slug}`}
-                className="inline-flex items-center gap-2 font-semibold text-violet-800 hover:text-violet-900 min-h-[44px]"
+                className="inline-flex items-center gap-2 font-semibold text-brand hover:text-brand-dark min-h-[44px]"
               >
                 Read the {compared.category}{' '}settings guide &rarr;
               </Link>
@@ -387,7 +428,7 @@ export default async function MaterialPage({
                 <li key={g.href}>
                   <Link
                     href={g.href}
-                    className="text-violet-800 hover:text-violet-900 font-medium underline underline-offset-4"
+                    className="text-brand hover:text-brand-dark font-medium underline underline-offset-4"
                   >
                     {g.label}
                   </Link>
@@ -405,7 +446,7 @@ export default async function MaterialPage({
                 <Link
                   key={s.slug}
                   href={`/library/${s.slug}`}
-                  className="block bg-white rounded-xl border border-gray-100 p-4 hover:border-violet-200 hover:shadow-md transition-all"
+                  className="block bg-white rounded-xl border border-gray-100 p-4 hover:border-brand-soft hover:shadow-md transition-all"
                 >
                   <div className="font-semibold text-gray-900">{s.category}</div>
                   <div className="text-sm text-gray-500 mt-0.5">
@@ -416,7 +457,7 @@ export default async function MaterialPage({
             </div>
             <Link
               href="/library"
-              className="mt-6 inline-flex items-center gap-2 font-semibold text-violet-800 hover:text-violet-900 min-h-[44px]"
+              className="mt-6 inline-flex items-center gap-2 font-semibold text-brand hover:text-brand-dark min-h-[44px]"
             >
               All {MATERIAL_PROFILES.length}{' '}materials &rarr;
             </Link>

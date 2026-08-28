@@ -1,6 +1,7 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ComparisonBuying } from '@/components/ComparisonBuying';
+import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -29,15 +30,15 @@ const jsonLd = {
   ],
 };
 
-const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', letterSpacing: '0.15em', fontSize: '0.7rem' };
-const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)', lineHeight: 1.1 };
-const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' };
-const bodyStyle: React.CSSProperties = { color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
-const linkStyle: React.CSSProperties = { color: 'oklch(0.43 0.22 295)' };
+const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.15em', fontSize: '0.7rem' };
+const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.1 };
+const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)' };
+const bodyStyle: React.CSSProperties = { color: 'var(--body-text)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
+const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <div style={eyebrowStyle} className="uppercase font-semibold mb-6 flex items-center gap-3">
-    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
     {children}
   </div>
 );
@@ -88,15 +89,15 @@ export default function PlaVsAbsPage() {
       <SiteNav />
       <main id="main-content" className="pt-20">
         {/* Hero */}
-        <section aria-label="Page introduction" className="pt-20 pb-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Page introduction" className="pt-20 pb-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
-            <div style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontSize: '0.75rem', letterSpacing: '0.05em' }} className="uppercase font-semibold mb-4">
+            <div style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontSize: '0.75rem', letterSpacing: '0.05em' }} className="uppercase font-semibold mb-4">
               <Link href="/" className="hover:underline">Home</Link>
-              <span style={{ color: 'oklch(0.55 0.015 295)', margin: '0 0.5rem' }}>/</span>
-              <span style={{ color: 'oklch(0.48 0.015 295)' }}>PLA vs ABS</span>
+              <span style={{ color: 'var(--muted-foreground)', margin: '0 0.5rem' }}>/</span>
+              <span style={{ color: 'var(--muted-foreground)' }}>PLA vs ABS</span>
             </div>
-            <h1 style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)', lineHeight: 1.05 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              PLA vs ABS: <span style={{ color: 'oklch(0.43 0.22 295)' }}>upgrade or stay?</span>
+            <h1 style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.05 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              PLA vs ABS: <span style={{ color: 'var(--brand-primary)' }}>upgrade or stay?</span>
             </h1>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="text-base">
               Most beginners assume ABS is the next step after PLA. It is not. For most printers, PETG is a better upgrade than ABS. Easier to print, no fumes, no enclosure required. This page shows you when ABS is actually worth the hassle and when to stay on PLA.
@@ -105,14 +106,14 @@ export default function PlaVsAbsPage() {
         </section>
 
         {/* Comparison table */}
-        <section aria-label="PLA vs ABS comparison table" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="PLA vs ABS comparison table" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>SIDE BY SIDE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">PLA vs ABS: know the gap before you switch.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
-              <div style={{ background: 'oklch(0.92 0.012 295)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '180px 1fr 1fr' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
+              <div style={{ background: 'var(--surface-2)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '180px 1fr 1fr' }}>
                 {['Property', 'PLA', 'ABS'].map((h) => (
-                  <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">{h}</span>
+                  <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">{h}</span>
                 ))}
               </div>
               {SPECS.map(([prop, pla, abs], i) => (
@@ -120,13 +121,13 @@ export default function PlaVsAbsPage() {
                   key={prop}
                   style={{
                     padding: '0.875rem 1.25rem',
-                    borderTop: '1px solid oklch(0.84 0.015 295)',
+                    borderTop: '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '180px 1fr 1fr',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{prop}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{prop}</span>
                   <span style={{ ...bodyStyle }} className="text-sm">{pla}</span>
                   <span style={{ ...bodyStyle }} className="text-sm">{abs}</span>
                 </div>
@@ -136,24 +137,24 @@ export default function PlaVsAbsPage() {
         </section>
 
         {/* Why most don't need ABS */}
-        <section aria-label="Why most printers don't need ABS" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Why most printers don't need ABS" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>FRICTION POINTS</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Three reasons ABS will frustrate you before it helps you.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
               {REASONS.map((r, i) => (
                 <div
                   key={r.n}
                   style={{
                     padding: '1.25rem 1.5rem',
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '60px 1fr',
                     gap: '1rem',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontVariantNumeric: 'tabular-nums' }} className="text-lg font-bold">{r.n}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontVariantNumeric: 'tabular-nums' }} className="text-lg font-bold">{r.n}</span>
                   <div>
                     <p style={h3Style} className="font-bold mb-2">{r.title}</p>
                     <p style={{ ...bodyStyle }} className="text-sm">{r.body}</p>
@@ -165,7 +166,7 @@ export default function PlaVsAbsPage() {
         </section>
 
         {/* Upgrade path */}
-        <section aria-label="The better filament upgrade path" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="The better filament upgrade path" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>UPGRADE PATH</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">The path that gets you printing better parts faster.</h2>
@@ -180,17 +181,17 @@ export default function PlaVsAbsPage() {
                   <div
                     style={{
                       flex: 1,
-                      background: 'oklch(0.99 0.004 295)',
-                      border: '1px solid oklch(0.84 0.015 295)',
+                      background: 'var(--surface-0)',
+                      border: '1px solid var(--border)',
                       borderRadius: '0.25rem',
                       padding: '1.25rem 1rem',
                     }}
                   >
-                    <p style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', letterSpacing: '0.05em' }} className="text-2xl font-bold mb-1">{step.label}</p>
-                    <p style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.08em', fontSize: '0.65rem' }} className="uppercase font-semibold">{step.sub}</p>
+                    <p style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.05em' }} className="text-2xl font-bold mb-1">{step.label}</p>
+                    <p style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.08em', fontSize: '0.65rem' }} className="uppercase font-semibold">{step.sub}</p>
                   </div>
                   {i < arr.length - 1 && (
-                    <span style={{ color: 'oklch(0.43 0.22 295)', fontFamily: 'var(--font-display)' }} className="text-2xl font-bold hidden sm:block">→</span>
+                    <span style={{ color: 'var(--brand-primary)', fontFamily: 'var(--font-display)' }} className="text-2xl font-bold hidden sm:block">→</span>
                   )}
                 </div>
               ))}
@@ -202,24 +203,24 @@ export default function PlaVsAbsPage() {
         </section>
 
         {/* When ABS is right */}
-        <section aria-label="When ABS is the correct material" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="When ABS is the correct material" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>USE ABS WHEN</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Four situations where ABS is the right material.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
               {ABS_USES.map((u, i) => (
                 <div
                   key={u.n}
                   style={{
                     padding: '1.25rem 1.5rem',
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '60px 1fr',
                     gap: '1rem',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontVariantNumeric: 'tabular-nums' }} className="text-lg font-bold">{u.n}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontVariantNumeric: 'tabular-nums' }} className="text-lg font-bold">{u.n}</span>
                   <p style={{ ...bodyStyle }} className="text-sm">{u.body}</p>
                 </div>
               ))}
@@ -228,27 +229,27 @@ export default function PlaVsAbsPage() {
         </section>
 
         {/* PLA strengths */}
-        <section aria-label="PLA strengths worth remembering" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="PLA strengths worth remembering" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>PLA STRENGTHS</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">Why experienced printers still reach for PLA.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-8">
               A lot of experienced printers still reach for PLA. Not because they have not learned ABS, but because PLA is actually the right tool for a large class of prints.
             </p>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
               {PLA_STRENGTHS.map((s, i) => (
                 <div
                   key={i}
                   style={{
                     padding: '1rem 1.25rem',
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '40px 1fr',
                     gap: '0.75rem',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontVariantNumeric: 'tabular-nums' }} className="text-sm font-bold">{String(i + 1).padStart(2, '0')}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontVariantNumeric: 'tabular-nums' }} className="text-sm font-bold">{String(i + 1).padStart(2, '0')}</span>
                   <p style={{ ...bodyStyle }} className="text-sm">{s}</p>
                 </div>
               ))}
@@ -260,11 +261,11 @@ export default function PlaVsAbsPage() {
         </section>
 
         {/* Cross-links */}
-        <section aria-label="Related material guides" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Related material guides" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>RELATED</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Keep going.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
               {RELATED.map((r, i) => (
                 <Link
                   key={r.href}
@@ -274,14 +275,14 @@ export default function PlaVsAbsPage() {
                     gridTemplateColumns: '240px 1fr 100px',
                     gap: '1rem',
                     padding: '1rem 1.25rem',
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                     alignItems: 'center',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{r.title}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{r.title}</span>
                   <p style={{ ...bodyStyle }} className="text-sm">{r.desc}</p>
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', letterSpacing: '0.08em', fontSize: '0.7rem', textAlign: 'right' }} className="uppercase font-semibold">Read &rarr;</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.08em', fontSize: '0.7rem', textAlign: 'right' }} className="uppercase font-semibold">Read &rarr;</span>
                 </Link>
               ))}
             </div>
@@ -289,7 +290,7 @@ export default function PlaVsAbsPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'var(--surface-2)', borderTop: '1px solid var(--border)' }}>
           <div className="max-w-3xl mx-auto">
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Both materials, one reference sheet.</h2>
@@ -299,8 +300,8 @@ export default function PlaVsAbsPage() {
             <Link
               href="/free-download"
               style={{
-                background: 'oklch(0.43 0.22 295)',
-                color: 'oklch(0.99 0 0)',
+                background: 'var(--brand-primary)',
+                color: 'var(--on-primary)',
                 fontFamily: 'var(--font-display)',
                 letterSpacing: '0.08em',
                 borderRadius: '0.25rem',
@@ -313,6 +314,8 @@ export default function PlaVsAbsPage() {
           </div>
         </section>
         <ComparisonBuying slugs={['pla', 'abs']} />
+
+        <OwnedServiceCta variant="comparison" />
 
       </main>
       <SiteFooter />

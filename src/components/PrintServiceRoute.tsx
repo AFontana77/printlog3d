@@ -63,7 +63,7 @@ export function PrintServiceRoute({ material }: { material: MaterialProfile }) {
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-violet-800 hover:text-violet-900 underline underline-offset-4 inline-flex items-center gap-1.5 min-h-[44px]"
+                className="font-semibold text-brand hover:text-brand-dark underline underline-offset-4 inline-flex items-center gap-1.5 min-h-[44px]"
               >
                 {s.name}
                 <ExternalLink size={13} aria-hidden="true" />

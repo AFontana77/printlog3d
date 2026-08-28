@@ -9,16 +9,16 @@ export const metadata: Metadata = {
 
 const headingStyle = {
   fontFamily: 'var(--font-display)',
-  color: 'oklch(0.15 0.02 295)',
+  color: 'var(--foreground)',
 };
 
 const bodyStyle = {
-  color: 'oklch(0.35 0.018 295)',
+  color: 'var(--body-text)',
   fontFamily: 'var(--font-body)',
 };
 
 const linkStyle = {
-  color: 'oklch(0.43 0.22 295)',
+  color: 'var(--brand-primary)',
 };
 
 export default function PrivacyPage() {
@@ -26,24 +26,24 @@ export default function PrivacyPage() {
     <>
       <SiteNav />
       <main id="main-content" className="pt-20">
-        <section className="py-16 px-4" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section className="py-16 px-4" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-3xl mx-auto">
             <div
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
+                color: 'var(--brand-primary)',
                 letterSpacing: '0.15em',
                 fontSize: '0.7rem',
               }}
               className="uppercase font-semibold mb-8 flex items-center gap-3"
             >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
               LEGAL · POLICY
             </div>
             <h1 style={{ ...headingStyle, lineHeight: 1.05 }} className="text-4xl sm:text-5xl font-bold mb-3">
               Privacy Policy
             </h1>
-            <p style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }} className="text-sm mb-10">
+            <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm mb-10">
               Last updated: April 17, 2026
             </p>
 
@@ -56,8 +56,8 @@ export default function PrivacyPage() {
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">2. Information We Collect</h2>
             <p style={bodyStyle} className="mb-3">This website collects the minimum data needed to run it:</p>
             <ul style={bodyStyle} className="list-disc pl-6 mb-4 space-y-2">
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Email address.</strong> If you sign up for the free settings sheet or another form on this site, we collect your email address. See section 8 for details.</li>
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Basic site analytics.</strong> We use Google Tag Manager to see which pages are visited and which outbound links are clicked. This does not include your name or email unless you separately submit a form.</li>
+              <li><strong style={{ color: 'var(--foreground)' }}>Email address.</strong> If you sign up for the free settings sheet or another form on this site, we collect your email address. See section 8 for details.</li>
+              <li><strong style={{ color: 'var(--foreground)' }}>Basic site analytics.</strong> We use Google Tag Manager to see which pages are visited and which outbound links are clicked. This does not include your name or email unless you separately submit a form.</li>
             </ul>
             <p style={bodyStyle} className="mb-4">The website does not have a print log feature. That is planned for the PrintLog3D mobile app, which is in development. When the app is released, we will update this policy to explain what it collects before it collects anything.</p>
 
@@ -72,8 +72,8 @@ export default function PrivacyPage() {
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">4. Third-Party Services</h2>
             <ul style={bodyStyle} className="list-disc pl-6 mb-4 space-y-1">
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Google Tag Manager.</strong> Measures site traffic and outbound clicks. See section 2.</li>
-              <li><strong style={{ color: 'oklch(0.15 0.02 295)' }}>Resend.</strong> Sends the settings sheet and any email updates you sign up for.</li>
+              <li><strong style={{ color: 'var(--foreground)' }}>Google Tag Manager.</strong> Measures site traffic and outbound clicks. See section 2.</li>
+              <li><strong style={{ color: 'var(--foreground)' }}>Resend.</strong> Sends the settings sheet and any email updates you sign up for.</li>
             </ul>
             <p style={bodyStyle} className="mb-4">When the PrintLog3D app is released, we will update this section to list any additional services it uses, such as purchase processing.</p>
 
@@ -95,7 +95,7 @@ export default function PrivacyPage() {
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">8. Email you give us on this website</h2>
 
-            <p style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }} className="text-sm mb-10">If you enter your email address in a signup form on this website, we store it so we can send you the updates you asked for. We also record which page you signed up from and when you gave consent. We use Resend to send and manage that mail. We do not sell your address, and every email has an unsubscribe link. This is separate from anything described above: your email address is not linked to any other data on this site or in any of our apps.</p>
+            <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm mb-10">If you enter your email address in a signup form on this website, we store it so we can send you the updates you asked for. We also record which page you signed up from and when you gave consent. We use Resend to send and manage that mail. We do not sell your address, and every email has an unsubscribe link. This is separate from anything described above: your email address is not linked to any other data on this site or in any of our apps.</p>
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">9. Contact</h2>
             <p style={bodyStyle} className="leading-relaxed">

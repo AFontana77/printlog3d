@@ -9,6 +9,7 @@ import {
   activeAffiliateMerchants,
   hasAnyAffiliateRelationship,
 } from '@/lib/commerce';
+import { OWNED_SERVICE, ownedServiceMaterials } from '@/lib/ownedService';
 
 /**
  * Affiliate disclosure, derived from merchant status rather than written by hand.
@@ -67,7 +68,7 @@ export default function DisclosurePage() {
                 <ul className="space-y-2 mb-4">
                   {active.map((m) => (
                     <li key={m.id} className="text-gray-700 leading-relaxed flex gap-2">
-                      <span aria-hidden="true" className="text-violet-600">
+                      <span aria-hidden="true" className="text-brand">
                         &bull;
                       </span>
                       {m.disclosureName ?? m.name}
@@ -92,6 +93,23 @@ export default function DisclosurePage() {
                 marked with <code>rel=&quot;sponsored&quot;</code>.
               </p>
             )}
+
+            <h2 className="text-xl font-bold text-gray-900 mt-10 mb-3">
+              A business we own
+            </h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              <strong>{OWNED_SERVICE.name}</strong> ({OWNED_SERVICE.domain}) is another Anvil
+              Road property. When we link to it we have a direct commercial interest, which is
+              a stronger relationship than an affiliate one, so we say so on every page that
+              links to it rather than only here.
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We only offer it for the materials it actually prints:{' '}
+              {ownedServiceMaterials().map((x) => x.category).join(', ')}. For everything else,
+              including PEEK, polycarbonate and plain nylon, it is not offered at all and we
+              point to independent services instead. Owning a service does not make it the
+              right answer, and on the hardest materials it is not.
+            </p>
 
             <h2 className="text-xl font-bold text-gray-900 mt-10 mb-3">
               Links we do not earn from
@@ -130,7 +148,7 @@ export default function DisclosurePage() {
               The{' '}
               <Link
                 href="/library/peek"
-                className="text-violet-800 hover:text-violet-900 underline underline-offset-4"
+                className="text-brand hover:text-brand-dark underline underline-offset-4"
               >
                 PEEK page
               </Link>{' '}
@@ -145,21 +163,21 @@ export default function DisclosurePage() {
               See our{' '}
               <Link
                 href="/privacy"
-                className="text-violet-800 hover:text-violet-900 underline underline-offset-4"
+                className="text-brand hover:text-brand-dark underline underline-offset-4"
               >
                 privacy policy
               </Link>{' '}
               and{' '}
               <Link
                 href="/terms"
-                className="text-violet-800 hover:text-violet-900 underline underline-offset-4"
+                className="text-brand hover:text-brand-dark underline underline-offset-4"
               >
                 terms
               </Link>
               , or reach us via the{' '}
               <Link
                 href="/support"
-                className="text-violet-800 hover:text-violet-900 underline underline-offset-4"
+                className="text-brand hover:text-brand-dark underline underline-offset-4"
               >
                 support page
               </Link>

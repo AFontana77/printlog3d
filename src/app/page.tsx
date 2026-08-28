@@ -1,433 +1,284 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
-import type { Metadata } from 'next';
 import { MATERIAL_PROFILES } from '@/lib/materials';
+import { OwnedServiceCta } from '@/components/OwnedServiceCta';
+import type { Metadata } from 'next';
+
+/**
+ * Homepage: authority gateway.
+ *
+ * Every number and every material name derives from MATERIAL_PROFILES. The
+ * previous version hardcoded a spec preview that disagreed with the pages it
+ * linked to, and advertised TPU, which this site does not document.
+ *
+ * The app is described as in development because it is: the iTunes lookup for
+ * com.anvilroad.printlog3d returns resultCount 0.
+ */
+
+const BASE = 'https://www.printlog3d.com';
 
 export const metadata: Metadata = {
-  title: "Filament Materials and Print Settings",
-  description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
+  title: 'Filament settings for every material',
+  description:
+    'Nozzle and bed temperatures, enclosure and drying requirements, and the fault each material actually fails with. Seventeen materials, one page each, from PLA to PEEK.',
+  alternates: { canonical: BASE },
 };
 
-// Derived, so the preview can never disagree with the page it links to.
-const PREVIEW_SLUGS = ["pla", "petg", "abs", "asa", "peek"];
-const SPEC_ROWS = PREVIEW_SLUGS.map((slug) => {
-  const m = MATERIAL_PROFILES.find((x) => x.slug === slug);
-  if (!m) throw new Error(`Homepage preview references unknown material: ${slug}`);
-  return { mat: m.category, nozzle: `${m.printTempC}°C`, bed: `${m.bedTempC}°C` };
-});
+/** Icon file per material, from the brand package. Falls back to the family icon. */
+const ICON: Record<string, string> = {
+  PLA: 'pla', 'PLA Matte': 'pla', 'PLA Silk': 'pla', 'PLA Wood': 'pla', 'PLA Metal': 'pla',
+  PETG: 'petg', 'PETG-CF': 'composite-filaments', PCTG: 'petg', CPE: 'petg',
+  ABS: 'abs', ASA: 'asa', HIPS: 'abs',
+  'Nylon PA6': 'nylon', 'Nylon PA12': 'nylon', 'PA-CF': 'composite-filaments',
+  PC: 'polycarbonate', PEEK: 'peek',
+};
 
-const FEATURE_ROWS = [
-  { feature: "Material reference", desc: "17 materials with typical print temp, bed temp, and known issue notes." },
-  { feature: "Print log", desc: "Log slicer settings, filament batch, nozzle temp, and result for every print." },
-  { feature: "Settings history", desc: "See what actually worked for a given material. Your settings, not YouTube." },
-  { feature: "Failure notes", desc: "Log warping, stringing, or layer adhesion issues. Know what to avoid next time." },
+const TASKS = [
+  { icon: 'material-profiles', label: 'Choose a filament', href: '/library', hint: 'Compare all 17 by temperature, enclosure and difficulty.' },
+  { icon: 'stringing', label: 'Fix stringing', href: '/3d-print-stringing', hint: 'Retraction, temperature, and the moisture cause people miss.' },
+  { icon: 'drying', label: 'Dry filament', href: '/how-to-dry-filament', hint: 'Which materials need it, at what temperature, for how long.' },
+  { icon: 'compare', label: 'Compare materials', href: '/pla-vs-petg', hint: 'PLA against PETG and ABS, with the trade-offs stated.' },
+  { icon: 'peek', label: 'Print an advanced material', href: '/library/peek', hint: 'What PEEK, polycarbonate and carbon-fibre nylon really need.' },
+  { icon: 'printable-sheet', label: 'Get the field guide', href: '/free-download', hint: 'Every setting on a printable sheet. Free, no signup.' },
 ];
 
-const STATS = [
-  { num: `${MATERIAL_PROFILES.length}`, label: "materials covered", sub: "PLA · PETG · ABS · ASA · nylon · PEEK · more" },
-  { num: "6", label: "in-depth guides", sub: "PLA vs PETG · drying · stringing · more" },
-  { num: "$0", label: "to browse", sub: "Free site, free settings sheet" },
-];
+const LEVELS = [
+  { level: 'Beginner', blurb: 'Prints on a stock machine.' },
+  { level: 'Intermediate', blurb: 'Needs an enclosure or a dryer.' },
+  { level: 'Advanced', blurb: 'Enclosure, dry box, and a hot end past 250C.' },
+  { level: 'Expert', blurb: 'Beyond most desktop printers.' },
+] as const;
 
 export default function HomePage() {
+  const needsDrying = MATERIAL_PROFILES.filter((m) => m.needsDrying).length;
+  const needsEnclosure = MATERIAL_PROFILES.filter((m) => m.enclosure === 'Required').length;
+
+  const org = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'PrintLog3D',
+    url: BASE,
+    publisher: { '@type': 'Organization', name: 'Anvil Road LLC' },
+  };
+
   return (
     <>
       <SiteNav />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(org) }} />
+
       <main id="main-content" className="pt-20">
-
-        {/* Section 1: Hero */}
-        <section style={{ background: 'oklch(0.96 0.008 295)' }} className="pt-32 pb-20 px-6">
-          <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_380px] gap-12 items-start">
-
-            {/* Left: text */}
-            <div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  color: 'oklch(0.43 0.22 295)',
-                  letterSpacing: '0.15em',
-                  fontSize: '0.7rem',
-                }}
-                className="uppercase font-semibold mb-8 flex items-center gap-3"
+        {/* Hero */}
+        <section className="pt-16 pb-14 px-6 relative overflow-hidden" style={{ background: 'var(--surface-1)' }}>
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 opacity-[0.06] brand-hatch pointer-events-none"
+          />
+          <div className="max-w-5xl mx-auto relative">
+            <div className="flex items-center gap-3 mb-6">
+              <span aria-hidden="true" className="accent-rule" style={{ display: 'inline-block', width: 28, height: 2 }} />
+              <span
+                className="uppercase font-semibold tracking-[0.15em] text-[0.7rem]"
+                style={{ color: 'var(--brand-primary)', fontFamily: 'var(--font-display)' }}
               >
-                <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
-                PrintLog3D · Filament materials + print log
-              </div>
-
-              <h1
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  color: 'oklch(0.15 0.02 295)',
-                  lineHeight: 1.05,
-                }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6"
-              >
-                17 materials.<br />
-                <span style={{ color: 'oklch(0.43 0.22 295)' }}>One settings reference.</span>
-              </h1>
-
-              <p
-                style={{
-                  color: 'oklch(0.35 0.018 295)',
-                  maxWidth: '46ch',
-                  fontFamily: 'var(--font-body)',
-                  lineHeight: 1.6,
-                }}
-                className="text-base mb-8"
-              >
-                Look up PLA, PETG, ABS, ASA, nylon, polycarbonate and PEEK by temperature and print
-                characteristics. Skip the guesswork. Stop printing from memory.
-              </p>
-
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/library"
-                  style={{
-                    background: 'oklch(0.43 0.22 295)',
-                    color: 'oklch(0.99 0 0)',
-                    fontFamily: 'var(--font-display)',
-                    letterSpacing: '0.08em',
-                    borderRadius: '0.25rem',
-                  }}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold uppercase min-h-[48px] transition-colors press-feedback"
-                >
-                  Browse the Materials &rarr;
-                </Link>
-                <Link
-                  href="/free-download"
-                  style={{
-                    border: '1px solid oklch(0.84 0.015 295)',
-                    color: 'oklch(0.43 0.22 295)',
-                    fontFamily: 'var(--font-display)',
-                    letterSpacing: '0.08em',
-                    borderRadius: '0.25rem',
-                    background: 'transparent',
-                  }}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold uppercase min-h-[48px] transition-colors"
-                >
-                  Free Settings Sheet
-                </Link>
-              </div>
-
-              <p
-                style={{ color: 'oklch(0.55 0.015 295)', fontVariantNumeric: 'tabular-nums' }}
-                className="mt-4 text-sm"
-              >
-                The PrintLog3D app is in development. The site covers 17 materials, using the typical published range for each one.
-              </p>
+                {MATERIAL_PROFILES.length} materials &middot; one settings reference
+              </span>
             </div>
 
-            {/* Right: spec preview panel */}
-            <div
-              style={{
-                background: 'oklch(0.99 0.004 295)',
-                border: '1px solid oklch(0.84 0.015 295)',
-                borderRadius: '0.25rem',
-                overflow: 'hidden',
-                fontVariantNumeric: 'tabular-nums',
-              }}
+            <h1
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 max-w-3xl"
+              style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.05 }}
             >
-              {/* Header bar */}
-              <div style={{ background: 'oklch(0.43 0.22 295)', padding: '0.625rem 1rem' }}>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    color: 'oklch(0.99 0 0)',
-                    letterSpacing: '0.12em',
-                    fontSize: '0.65rem',
-                  }}
-                  className="uppercase font-semibold"
-                >
-                  Filament specs preview
-                </span>
-              </div>
+              Dial in the right settings for{' '}
+              <span style={{ color: 'var(--brand-primary)' }}>every filament.</span>
+            </h1>
 
-              {/* Column headers */}
-              <div
-                style={{
-                  borderBottom: '1px solid oklch(0.84 0.015 295)',
-                  padding: '0.5rem 1rem',
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 70px 70px',
-                }}
+            <p
+              className="text-lg mb-9 max-w-2xl leading-relaxed"
+              style={{ color: 'var(--body-text)' }}
+            >
+              Nozzle and bed temperature, whether it needs an enclosure, whether it needs drying,
+              and the fault it actually fails with. One page per material, written to be used at
+              the machine rather than read once.
+            </p>
+
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/library"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold uppercase tracking-wider min-h-[48px] rounded transition-colors press-feedback"
+                style={{ background: 'var(--brand-primary)', color: 'var(--on-primary)', fontFamily: 'var(--font-display)' }}
               >
-                {['Material', 'Nozzle', 'Bed'].map((h) => (
-                  <span
-                    key={h}
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      color: 'oklch(0.48 0.015 295)',
-                      fontSize: '0.65rem',
-                      letterSpacing: '0.1em',
-                    }}
-                    className="uppercase font-semibold"
-                  >
-                    {h}
-                  </span>
-                ))}
-              </div>
-
-              {/* Data rows */}
-              {SPEC_ROWS.map((r, i) => (
-                <div
-                  key={r.mat}
-                  style={{
-                    padding: '0.625rem 1rem',
-                    borderBottom: i < SPEC_ROWS.length - 1 ? '1px solid oklch(0.84 0.015 295)' : 'none',
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 70px 70px',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
-                  }}
-                >
-                  <span
-                    style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' }}
-                    className="text-sm font-medium"
-                  >
-                    {r.mat}
-                  </span>
-                  <span
-                    style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }}
-                    className="text-sm"
-                  >
-                    {r.nozzle}
-                  </span>
-                  <span
-                    style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }}
-                    className="text-sm"
-                  >
-                    {r.bed}
-                  </span>
-                </div>
-              ))}
-
-              {/* Footer link */}
-              <div style={{ padding: '0.625rem 1rem', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
-                <Link
-                  href="/library"
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    color: 'oklch(0.43 0.22 295)',
-                    letterSpacing: '0.08em',
-                    fontSize: '0.75rem',
-                  }}
-                  className="uppercase font-semibold"
-                >
-                  View all 17 materials &rarr;
-                </Link>
-              </div>
+                Find filament settings
+              </Link>
+              <Link
+                href="/free-download"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold uppercase tracking-wider min-h-[48px] rounded border transition-colors"
+                style={{ borderColor: 'var(--border)', color: 'var(--foreground)', fontFamily: 'var(--font-display)' }}
+              >
+                Download the field guide
+              </Link>
             </div>
 
+            <p className="mt-6 text-sm" style={{ color: 'var(--muted-foreground)' }}>
+              Typical manufacturer-published ranges for each material class. Not measurements we took.
+            </p>
           </div>
         </section>
 
-        {/* Section 2: Stat strip */}
-        <section style={{ background: 'oklch(0.15 0.02 295)' }} className="py-12 px-6">
-          <div className="max-w-6xl mx-auto grid sm:grid-cols-3 gap-8">
-            {STATS.map((s) => (
-              <div key={s.label} style={{ borderLeft: '1px solid oklch(0.28 0.025 295)', paddingLeft: '1.5rem' }}>
+        {/* At a glance */}
+        <section className="py-10 px-6 border-y" style={{ borderColor: 'var(--border)', background: 'var(--surface-0)' }}>
+          <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6">
+            {[
+              { n: String(MATERIAL_PROFILES.length), l: 'materials documented' },
+              { n: String(needsDrying), l: 'that need drying first' },
+              { n: String(needsEnclosure), l: 'that need an enclosure' },
+              { n: '6', l: 'in-depth guides' },
+            ].map((s) => (
+              <div key={s.l}>
                 <div
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    color: 'oklch(0.62 0.16 315)',
-                    lineHeight: 1,
-                    fontVariantNumeric: 'tabular-nums',
-                  }}
-                  className="text-5xl font-bold"
+                  className="text-3xl sm:text-4xl font-bold tabular-nums"
+                  style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }}
                 >
-                  {s.num}
+                  {s.n}
                 </div>
-                <div style={{ color: 'oklch(0.85 0.01 295)' }} className="text-sm font-semibold mt-1">
-                  {s.label}
-                </div>
-                <div style={{ color: 'oklch(0.55 0.012 295)' }} className="text-xs mt-0.5">
-                  {s.sub}
-                </div>
+                <div className="text-sm mt-1" style={{ color: 'var(--muted-foreground)' }}>{s.l}</div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Section 3: Value statement + spec-table feature list */}
-        <section style={{ background: 'oklch(0.99 0.004 295)' }} className="py-20 px-6">
+        {/* Task router */}
+        <section className="py-16 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
-                lineHeight: 1.05,
-                maxWidth: '22ch',
-              }}
-              className="text-4xl sm:text-5xl font-bold mb-4"
+              className="text-3xl font-bold mb-8"
+              style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }}
             >
-              Most log apps give you a blank screen.
+              What are you trying to do?
             </h2>
-            <p
-              style={{
-                color: 'oklch(0.48 0.015 295)',
-                maxWidth: '52ch',
-                fontFamily: 'var(--font-body)',
-                lineHeight: 1.65,
-              }}
-              className="text-base mb-14"
-            >
-              PrintLog3D covers 17 filament materials, using the typical published range for each one. Searchable and organized.
-              The print log and settings history features below are part of the companion app,
-              in development now.
-            </p>
-
-            {/* Spec-table feature rows */}
-            <div
-              style={{
-                border: '1px solid oklch(0.84 0.015 295)',
-                borderRadius: '0.25rem',
-                overflow: 'hidden',
-              }}
-            >
-              {/* Header row */}
-              <div
-                style={{
-                  background: 'oklch(0.92 0.012 295)',
-                  padding: '0.625rem 1.25rem',
-                  display: 'grid',
-                  gridTemplateColumns: '200px 1fr',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    color: 'oklch(0.48 0.015 295)',
-                    letterSpacing: '0.1em',
-                    fontSize: '0.65rem',
-                  }}
-                  className="uppercase font-semibold"
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {TASKS.map((t) => (
+                <Link
+                  key={t.href}
+                  href={t.href}
+                  className="group flex gap-4 p-5 rounded-xl border transition-all hover:shadow-md"
+                  style={{ borderColor: 'var(--border)', background: 'var(--surface-0)' }}
                 >
-                  Feature
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    color: 'oklch(0.48 0.015 295)',
-                    letterSpacing: '0.1em',
-                    fontSize: '0.65rem',
-                  }}
-                  className="uppercase font-semibold"
-                >
-                  What it does
-                </span>
-              </div>
-
-              {FEATURE_ROWS.map((f, i) => (
-                <div
-                  key={f.feature}
-                  style={{
-                    padding: '1rem 1.25rem',
-                    borderTop: '1px solid oklch(0.84 0.015 295)',
-                    display: 'grid',
-                    gridTemplateColumns: '200px 1fr',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      color: 'oklch(0.43 0.22 295)',
-                      letterSpacing: '0.03em',
-                    }}
-                    className="text-sm font-semibold"
-                  >
-                    {f.feature}
+                  <Image
+                    src={`/brand/icons/${t.icon}.png`}
+                    alt=""
+                    aria-hidden="true"
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    className="h-10 w-10 flex-shrink-0"
+                  />
+                  <span>
+                    <span className="block font-semibold" style={{ color: 'var(--foreground)' }}>{t.label}</span>
+                    <span className="block text-sm mt-1 leading-relaxed" style={{ color: 'var(--muted-foreground)' }}>
+                      {t.hint}
+                    </span>
                   </span>
-                  <p
-                    style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
-                    className="text-sm leading-relaxed"
-                  >
-                    {f.desc}
-                  </p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section 4: CTA */}
-        <section
-          style={{
-            background: 'oklch(0.92 0.012 295)',
-            borderTop: '1px solid oklch(0.84 0.015 295)',
-          }}
-          className="py-20 px-6"
-        >
-          <div className="max-w-3xl mx-auto">
-            <div
-              style={{
-                fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
-                letterSpacing: '0.15em',
-                fontSize: '0.7rem',
-              }}
-              className="uppercase font-semibold mb-4 flex items-center gap-3"
-            >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
-              Free to start
+        {/* Material library */}
+        <section className="py-16 px-6" style={{ background: 'var(--surface-1)' }}>
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+              <h2
+                className="text-3xl font-bold"
+                style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }}
+              >
+                The material library
+              </h2>
+              <Link href="/library" className="text-sm font-semibold text-brand hover:text-brand-dark underline underline-offset-4 min-h-[44px] flex items-center">
+                All {MATERIAL_PROFILES.length} materials, side by side
+              </Link>
             </div>
 
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
-                lineHeight: 1.05,
-              }}
-              className="text-4xl sm:text-5xl font-bold mb-4"
-            >
-              Get the settings sheet first.
-            </h2>
+            {LEVELS.map(({ level, blurb }) => {
+              const group = MATERIAL_PROFILES.filter((m) => m.difficulty === level);
+              if (!group.length) return null;
+              return (
+                <div key={level} className="mb-8 last:mb-0">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider mb-1" style={{ color: 'var(--brand-primary)', fontFamily: 'var(--font-display)' }}>
+                    {level}
+                  </h3>
+                  <p className="text-sm mb-4" style={{ color: 'var(--muted-foreground)' }}>{blurb}</p>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {group.map((m) => (
+                      <Link
+                        key={m.slug}
+                        href={`/library/${m.slug}`}
+                        className="flex items-center gap-3 p-4 rounded-xl border transition-all hover:shadow-md"
+                        style={{ borderColor: 'var(--border)', background: 'var(--surface-0)' }}
+                      >
+                        <Image
+                          src={`/brand/icons/${ICON[m.category] ?? 'material-profiles'}.png`}
+                          alt=""
+                          aria-hidden="true"
+                          width={32}
+                          height={32}
+                          loading="lazy"
+                          className="h-8 w-8 flex-shrink-0"
+                        />
+                        <span className="min-w-0">
+                          <span className="block font-semibold truncate" style={{ color: 'var(--foreground)' }}>{m.category}</span>
+                          <span className="block text-xs tabular-nums mt-0.5" style={{ color: 'var(--muted-foreground)' }}>
+                            {m.printTempC}&deg;C &middot; bed {m.bedTempC}&deg;C
+                            {m.enclosure === 'Required' ? ' · enclosure' : ''}
+                          </span>
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
 
-            <p
-              style={{
-                color: 'oklch(0.48 0.015 295)',
-                maxWidth: '44ch',
-                fontFamily: 'var(--font-body)',
-              }}
-              className="text-lg mb-8"
-            >
-              Download the printable filament reference sheet. Use it at your desk today, no app needed.
-              A companion app with the full material reference and print log is in development. We will
-              share it here when it ships.
-            </p>
-
-            <div className="flex flex-wrap gap-3">
+        {/* Field guide */}
+        <section className="py-16 px-6" style={{ background: 'var(--surface-0)' }}>
+          <div className="max-w-5xl mx-auto grid lg:grid-cols-[auto_1fr] gap-8 items-center">
+            <Image
+              src="/brand/badges/free-settings-sheet.png"
+              alt=""
+              aria-hidden="true"
+              width={112}
+              height={112}
+              loading="lazy"
+              className="h-24 w-24 lg:h-28 lg:w-28"
+            />
+            <div>
+              <h2
+                className="text-3xl font-bold mb-3"
+                style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }}
+              >
+                The Filament Settings Field Guide
+              </h2>
+              <p className="leading-relaxed mb-6 max-w-2xl" style={{ color: 'var(--body-text)' }}>
+                Every material on one printable reference: nozzle and bed temperature, enclosure,
+                drying, and what each one fails with. Keep it by the machine. Free, and no email
+                required.
+              </p>
               <Link
                 href="/free-download"
-                style={{
-                  background: 'oklch(0.43 0.22 295)',
-                  color: 'oklch(0.99 0 0)',
-                  fontFamily: 'var(--font-display)',
-                  letterSpacing: '0.08em',
-                  borderRadius: '0.25rem',
-                }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold uppercase min-h-[48px] transition-colors press-feedback"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold uppercase tracking-wider min-h-[48px] rounded transition-colors press-feedback"
+                style={{ background: 'var(--brand-accent)', color: 'var(--on-accent)', fontFamily: 'var(--font-display)' }}
               >
-                Get the Free PDF
-              </Link>
-              <Link
-                href="/library"
-                style={{
-                  border: '1px solid oklch(0.84 0.015 295)',
-                  color: 'oklch(0.43 0.22 295)',
-                  fontFamily: 'var(--font-display)',
-                  letterSpacing: '0.08em',
-                  borderRadius: '0.25rem',
-                  background: 'transparent',
-                }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold uppercase min-h-[48px] transition-colors"
-              >
-                Browse the Materials
+                Get the field guide
               </Link>
             </div>
           </div>
         </section>
 
+        <OwnedServiceCta variant="guide-thanks" />
       </main>
       <SiteFooter />
     </>

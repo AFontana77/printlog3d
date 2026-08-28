@@ -1,6 +1,7 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
+import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -29,15 +30,15 @@ const jsonLd = {
   ],
 };
 
-const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', letterSpacing: '0.15em', fontSize: '0.7rem' };
-const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)', lineHeight: 1.1 };
-const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' };
-const bodyStyle: React.CSSProperties = { color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
-const linkStyle: React.CSSProperties = { color: 'oklch(0.43 0.22 295)' };
+const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.15em', fontSize: '0.7rem' };
+const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.1 };
+const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)' };
+const bodyStyle: React.CSSProperties = { color: 'var(--body-text)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
+const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <div style={eyebrowStyle} className="uppercase font-semibold mb-6 flex items-center gap-3">
-    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
     {children}
   </div>
 );
@@ -113,15 +114,15 @@ export default function HowToDryFilamentPage() {
       <SiteNav />
       <main id="main-content" className="pt-20">
         {/* Hero */}
-        <section aria-label="Page introduction" className="pt-20 pb-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Page introduction" className="pt-20 pb-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
-            <div style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontSize: '0.75rem', letterSpacing: '0.05em' }} className="uppercase font-semibold mb-4">
+            <div style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontSize: '0.75rem', letterSpacing: '0.05em' }} className="uppercase font-semibold mb-4">
               <Link href="/" className="hover:underline">Home</Link>
-              <span style={{ color: 'oklch(0.55 0.015 295)', margin: '0 0.5rem' }}>/</span>
-              <span style={{ color: 'oklch(0.48 0.015 295)' }}>How to Dry Filament</span>
+              <span style={{ color: 'var(--muted-foreground)', margin: '0 0.5rem' }}>/</span>
+              <span style={{ color: 'var(--muted-foreground)' }}>How to Dry Filament</span>
             </div>
-            <h1 style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)', lineHeight: 1.05 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              How to <span style={{ color: 'oklch(0.43 0.22 295)' }}>dry filament.</span>
+            <h1 style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.05 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              How to <span style={{ color: 'var(--brand-primary)' }}>dry filament.</span>
             </h1>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="text-base">
               Bad prints often have nothing to do with your slicer settings. The filament is wet. Moisture turns to steam in the nozzle and ruins the surface, the layer bonds, and the stringing. Dry the filament and those problems disappear. Here is how to tell if yours is wet and how to fix it.
@@ -130,24 +131,24 @@ export default function HowToDryFilamentPage() {
         </section>
 
         {/* Signs of wet filament */}
-        <section aria-label="Signs that your filament is wet" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="Signs that your filament is wet" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>DIAGNOSIS · 5 SIGNS</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Your filament is wet. Here is how to tell.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
               {SIGNS.map((s, i) => (
                 <div
                   key={s.num}
                   style={{
                     padding: '1.25rem 1.5rem',
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '60px 1fr',
                     gap: '1rem',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontVariantNumeric: 'tabular-nums' }} className="text-lg font-bold">{s.num}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontVariantNumeric: 'tabular-nums' }} className="text-lg font-bold">{s.num}</span>
                   <div>
                     <p style={h3Style} className="font-semibold mb-1">{s.title}</p>
                     <p style={{ ...bodyStyle }} className="text-sm">{s.desc}</p>
@@ -159,17 +160,17 @@ export default function HowToDryFilamentPage() {
         </section>
 
         {/* Absorption rates */}
-        <section aria-label="Moisture absorption by filament type" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Moisture absorption by filament type" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>ABSORPTION RATES</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">Know which filaments go bad fastest.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-10">
               Fastest to slowest. Listed from most to least moisture-sensitive.
             </p>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
-              <div style={{ background: 'oklch(0.92 0.012 295)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '140px 140px 1fr' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+              <div style={{ background: 'var(--surface-2)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '140px 140px 1fr' }}>
                 {['Material', 'Speed', 'Detail'].map((h) => (
-                  <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">{h}</span>
+                  <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">{h}</span>
                 ))}
               </div>
               {ABSORB_RATES.map((r, i) => (
@@ -177,14 +178,14 @@ export default function HowToDryFilamentPage() {
                   key={r.material}
                   style={{
                     padding: '1rem 1.25rem',
-                    borderTop: '1px solid oklch(0.84 0.015 295)',
+                    borderTop: '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '140px 140px 1fr',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{r.material}</span>
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' }} className="text-sm">{r.speed}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{r.material}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }} className="text-sm">{r.speed}</span>
                   <p style={{ ...bodyStyle }} className="text-sm">{r.detail}</p>
                 </div>
               ))}
@@ -193,24 +194,24 @@ export default function HowToDryFilamentPage() {
         </section>
 
         {/* 3 drying methods */}
-        <section aria-label="Three methods for drying filament" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="Three methods for drying filament" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>METHODS · RANKED BY SAFETY</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">The three ways to dry filament.</h2>
 
             {/* Method 1 */}
-            <div style={{ background: 'oklch(0.96 0.008 295)', border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', padding: '1.5rem', marginBottom: '1rem' }}>
+            <div style={{ background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: '0.25rem', padding: '1.5rem', marginBottom: '1rem' }}>
               <div className="flex items-center gap-3 mb-4">
-                <span style={{ background: 'oklch(0.43 0.22 295)', color: 'oklch(0.99 0 0)', fontFamily: 'var(--font-display)', letterSpacing: '0.1em', fontSize: '0.65rem', padding: '0.25rem 0.5rem', borderRadius: '0.125rem' }} className="uppercase font-semibold">Best</span>
+                <span style={{ background: 'var(--brand-primary)', color: 'var(--on-primary)', fontFamily: 'var(--font-display)', letterSpacing: '0.1em', fontSize: '0.65rem', padding: '0.25rem 0.5rem', borderRadius: '0.125rem' }} className="uppercase font-semibold">Best</span>
                 <h3 style={h3Style} className="text-xl font-bold">01. Dedicated filament dryer ($30-60)</h3>
               </div>
               <p style={{ ...bodyStyle }} className="text-sm mb-5">
                 The easiest option. Set it and leave it. SUNLU, Sovol, and eSUN all make good ones. You can print directly from the dryer while it runs. No need to wait.
               </p>
-              <div style={{ background: 'oklch(0.99 0.004 295)', border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
-                <div style={{ background: 'oklch(0.92 0.012 295)', padding: '0.5rem 1rem', display: 'grid', gridTemplateColumns: '1fr 100px 100px' }}>
+              <div style={{ background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
+                <div style={{ background: 'var(--surface-2)', padding: '0.5rem 1rem', display: 'grid', gridTemplateColumns: '1fr 100px 100px' }}>
                   {['Material', 'Temp', 'Time'].map((h) => (
-                    <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.6rem' }} className="uppercase font-semibold">{h}</span>
+                    <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.6rem' }} className="uppercase font-semibold">{h}</span>
                   ))}
                 </div>
                 {DRYER_TEMPS.map((row, i) => (
@@ -218,22 +219,22 @@ export default function HowToDryFilamentPage() {
                     key={row[0]}
                     style={{
                       padding: '0.625rem 1rem',
-                      borderTop: '1px solid oklch(0.84 0.015 295)',
+                      borderTop: '1px solid var(--border)',
                       display: 'grid',
                       gridTemplateColumns: '1fr 100px 100px',
-                      background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                      background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                     }}
                   >
-                    <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{row[0]}</span>
-                    <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' }} className="text-sm">{row[1]}</span>
-                    <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' }} className="text-sm">{row[2]}</span>
+                    <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{row[0]}</span>
+                    <span style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }} className="text-sm">{row[1]}</span>
+                    <span style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }} className="text-sm">{row[2]}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Method 2 */}
-            <div style={{ background: 'oklch(0.96 0.008 295)', border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', padding: '1.5rem', marginBottom: '1rem' }}>
+            <div style={{ background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: '0.25rem', padding: '1.5rem', marginBottom: '1rem' }}>
               <h3 style={h3Style} className="text-xl font-bold mb-3">02. Food dehydrator</h3>
               <p style={{ ...bodyStyle }} className="text-sm">
                 Works well if the dehydrator reaches high enough temps. Many units max at 70°C. Fine for most materials. The key check: measure if a standard 1kg spool fits inside before buying. Some smaller dehydrators cannot fit a full spool without removing a shelf tray. Run at the same temps listed above. 4 to 6 hours is usually enough for PLA, PETG, and ABS. Nylon needs more time.
@@ -241,9 +242,9 @@ export default function HowToDryFilamentPage() {
             </div>
 
             {/* Method 3 */}
-            <div style={{ background: 'oklch(0.96 0.008 295)', border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', padding: '1.5rem' }}>
+            <div style={{ background: 'var(--surface-1)', border: '1px solid var(--border)', borderRadius: '0.25rem', padding: '1.5rem' }}>
               <div className="flex items-center gap-3 mb-4">
-                <span style={{ background: 'oklch(0.62 0.16 315)', color: 'oklch(0.99 0 0)', fontFamily: 'var(--font-display)', letterSpacing: '0.1em', fontSize: '0.65rem', padding: '0.25rem 0.5rem', borderRadius: '0.125rem' }} className="uppercase font-semibold">Use Caution</span>
+                <span style={{ background: 'var(--brand-accent)', color: 'var(--on-primary)', fontFamily: 'var(--font-display)', letterSpacing: '0.1em', fontSize: '0.65rem', padding: '0.25rem 0.5rem', borderRadius: '0.125rem' }} className="uppercase font-semibold">Use Caution</span>
                 <h3 style={h3Style} className="text-xl font-bold">03. Household oven</h3>
               </div>
               <p style={{ ...bodyStyle }} className="text-sm mb-3">
@@ -257,27 +258,27 @@ export default function HowToDryFilamentPage() {
         </section>
 
         {/* Storage after drying */}
-        <section aria-label="How to store filament after drying" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="How to store filament after drying" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>STORAGE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">Keep it dry between prints.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-8">
               Drying fixes the problem, but only until the spool absorbs moisture again. Proper storage keeps filament dry between uses.
             </p>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
               {STORAGE_TIPS.map((tip, i) => (
                 <div
                   key={i}
                   style={{
                     padding: '1rem 1.25rem',
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '40px 1fr',
                     gap: '0.75rem',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontVariantNumeric: 'tabular-nums' }} className="text-sm font-bold">{String(i + 1).padStart(2, '0')}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontVariantNumeric: 'tabular-nums' }} className="text-sm font-bold">{String(i + 1).padStart(2, '0')}</span>
                   <p style={{ ...bodyStyle }} className="text-sm">{tip}</p>
                 </div>
               ))}
@@ -292,7 +293,7 @@ export default function HowToDryFilamentPage() {
           items={DRYING_EQUIPMENT}
         />
 
-        <section aria-label="Materials beyond consumer drying equipment" className="py-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Materials beyond consumer drying equipment" className="py-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-3xl mx-auto">
             <h2 style={h2Style} className="text-2xl sm:text-3xl font-bold mb-4">Some materials need an oven, not a dryer.</h2>
             <p style={bodyStyle} className="text-base mb-4">
@@ -311,9 +312,11 @@ export default function HowToDryFilamentPage() {
           </div>
         </section>
 
-        <section aria-label="Related guides" className="py-12 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <OwnedServiceCta variant="troubleshooting" tone="inline" />
+
+        <section aria-label="Related guides" className="py-12 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
-            <p style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold mb-4">Related guides</p>
+            <p style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold mb-4">Related guides</p>
             <div className="flex flex-wrap gap-x-6 gap-y-2">
               <Link href="/3d-printing-filament-guide" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">3D Printing Filament Guide</Link>
               <Link href="/3d-print-stringing" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">Fix Stringing</Link>
@@ -324,7 +327,7 @@ export default function HowToDryFilamentPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'var(--surface-2)', borderTop: '1px solid var(--border)' }}>
           <div className="max-w-3xl mx-auto">
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Keep the drying numbers by the machine.</h2>
@@ -334,8 +337,8 @@ export default function HowToDryFilamentPage() {
             <Link
               href="/free-download"
               style={{
-                background: 'oklch(0.43 0.22 295)',
-                color: 'oklch(0.99 0 0)',
+                background: 'var(--brand-primary)',
+                color: 'var(--on-primary)',
                 fontFamily: 'var(--font-display)',
                 letterSpacing: '0.08em',
                 borderRadius: '0.25rem',

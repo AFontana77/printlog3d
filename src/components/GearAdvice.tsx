@@ -62,7 +62,7 @@ export function GearAdvice({
           {items.map((item) => (
             <div key={item.category} className="bg-white rounded-xl border border-gray-100 p-5">
               <h3 className="font-semibold text-gray-900 mb-1">{item.category}</h3>
-              <p className="text-sm text-violet-800 font-medium mb-2">{item.requirement}</p>
+              <p className="text-sm text-brand font-medium mb-2">{item.requirement}</p>
               <p className="text-sm text-gray-600 leading-relaxed">{item.why}</p>
               {enrolled &&
                 (() => {
@@ -75,7 +75,7 @@ export function GearAdvice({
                       rel="nofollow noopener noreferrer sponsored"
                       data-affiliate-brand="amazon"
                       data-affiliate-network="amazon"
-                      className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-violet-800 hover:text-violet-900 min-h-[44px]"
+                      className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark min-h-[44px]"
                     >
                       <ExternalLink size={14} aria-hidden="true" />
                       See {item.category.toLowerCase()} on Amazon

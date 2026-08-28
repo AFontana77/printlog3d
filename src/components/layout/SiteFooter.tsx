@@ -1,10 +1,18 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-gray-100 py-10 px-4 mt-auto" role="contentinfo">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-        <div className="font-semibold text-violet-800">PrintLog3D</div>
+        <Image
+          src="/brand/emblem.webp"
+          alt="PrintLog3D"
+          width={36}
+          height={36}
+          loading="lazy"
+          className="h-9 w-9"
+        />
         <div className="flex flex-wrap justify-center gap-6">
           <Link href="/library" className="hover:text-gray-900 transition-colors">Materials</Link>
           <Link href="/3d-printing-filament-guide" className="hover:text-gray-900 transition-colors">Guides</Link>

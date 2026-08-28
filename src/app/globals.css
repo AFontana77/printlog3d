@@ -19,25 +19,66 @@
   --radius-xl: calc(var(--radius) * 1.4);
 }
 
+/* ---------------------------------------------------------------------------
+   PrintLog3D brand system.
+
+   Palette is the owner-supplied package (06-brand-elements/palette.json). The
+   site previously carried 116 hardcoded oklch violet literals across 14 files;
+   they now all resolve through these tokens, so the identity lives in one place.
+
+   CONTRAST, calculated against white rather than assumed:
+     graphite  #121417   17.0:1   body text
+     charcoal  #2A2D33   13.6:1   headings on tinted surfaces
+     steel     #6B7077    4.99:1  muted text, passes AA
+     blue      #0066FF    4.83:1  links and primary, passes AA for normal text
+     orange    #FF6A00    2.87:1  FAILS as text -- accent and graphics ONLY.
+                                  As a fill it carries GRAPHITE text at 6.43:1.
+
+   The orange line is why --brand-accent is never assigned to a text colour and
+   why no white-on-orange button exists. Brand assets do not override
+   accessibility.
+   --------------------------------------------------------------------------- */
 :root {
-  --background: oklch(0.99 0.004 295);
-  --foreground: oklch(0.15 0.02 295);
-  --primary: oklch(0.43 0.22 295);
-  --primary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.96 0.008 295);
-  --muted-foreground: oklch(0.48 0.015 295);
-  --border: oklch(0.84 0.015 295);
-  --input: oklch(0.84 0.015 295);
-  --ring: oklch(0.43 0.22 295);
+  /* raw brand palette */
+  --graphite: #121417;
+  --charcoal: #2A2D33;
+  --steel: #6B7077;
+  --slate: #A7ACB3;
+  --fog: #F2F4F7;
+  --electric-blue: #0066FF;
+  --safety-orange: #FF6A00;
+
+  /* semantic tokens -- components reference these, never the raw palette */
+  --background: #FFFFFF;
+  --foreground: var(--graphite);
+  --body-text: var(--charcoal);
+  --muted-foreground: var(--steel);
+  --border: var(--slate);
+  --input: var(--slate);
+
+  --brand-primary: var(--electric-blue);
+  --brand-primary-dark: #0052CC;
+  --brand-accent: var(--safety-orange);
+  --on-primary: #FFFFFF;
+  --on-accent: var(--graphite);
+
+  --surface-0: #FFFFFF;
+  --surface-1: var(--fog);
+  --surface-2: #E6E9EE;
+
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--on-primary);
+  --muted: var(--surface-1);
+  --ring: var(--brand-primary);
+  --accent: var(--brand-accent);
+  --surface: var(--surface-1);
+  --surface2: var(--surface-2);
+  --brand-hero-bg: var(--surface-1);
   --radius: 0.25rem;
-  --brand-primary: oklch(0.43 0.22 295);
-  --brand-hero-bg: oklch(0.96 0.008 295);
-  --accent: oklch(0.62 0.16 315);
-  --surface: oklch(0.96 0.008 295);
-  --surface2: oklch(0.92 0.012 295);
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06);
-  --shadow-md: 0 4px 16px -4px rgb(0 0 0 / 0.10);
-  --shadow-lg: 0 8px 30px -6px rgb(0 0 0 / 0.12);
+
+  --shadow-sm: 0 1px 2px 0 rgb(18 20 23 / 0.06);
+  --shadow-md: 0 4px 14px -4px rgb(18 20 23 / 0.10);
+  --shadow-lg: 0 10px 32px -8px rgb(18 20 23 / 0.14);
   --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -74,5 +115,42 @@
   }
   .btn-primary:hover {
     background: oklch(0.38 0.21 295);
+  }
+}
+
+/* --- brand utilities -------------------------------------------------------
+   Replaces the Tailwind violet-* classes the site used to carry. Defined once
+   so a palette change never becomes another site-wide find-and-replace. */
+@layer utilities {
+  .text-brand { color: var(--brand-primary); }
+  .hover\:text-brand-dark:hover { color: var(--brand-primary-dark); }
+  .bg-brand { background-color: var(--brand-primary); }
+  .hover\:bg-brand-dark:hover { background-color: var(--brand-primary-dark); }
+  .bg-brand-tint { background-color: #EAF1FF; }
+  .hover\:bg-brand-tint:hover { background-color: #EAF1FF; }
+  .border-brand-soft { border-color: #C7DAFF; }
+  .hover\:border-brand-soft:hover { border-color: #C7DAFF; }
+  .from-brand { --tw-gradient-from: var(--brand-primary); }
+  .to-brand-dark { --tw-gradient-to: var(--brand-primary-dark); }
+
+  /* Accent is deliberately fill-only. There is no .text-accent utility,
+     because #FF6A00 on white is 2.87:1 and fails AA. */
+  .bg-accent { background-color: var(--brand-accent); color: var(--on-accent); }
+  .border-accent { border-color: var(--brand-accent); }
+  .accent-rule { background-color: var(--brand-accent); }
+
+  .brand-hatch {
+    background-image: url('/brand/patterns/technical-hatch.webp');
+    background-size: 512px;
+    background-repeat: repeat;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

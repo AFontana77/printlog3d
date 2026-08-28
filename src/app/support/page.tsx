@@ -39,24 +39,24 @@ export default function SupportPage() {
     <>
       <SiteNav />
       <main id="main-content" className="pt-20">
-        <section className="py-16 px-4" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section className="py-16 px-4" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-3xl mx-auto">
             <div
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
+                color: 'var(--brand-primary)',
                 letterSpacing: '0.15em',
                 fontSize: '0.7rem',
               }}
               className="uppercase font-semibold mb-8 flex items-center gap-3"
             >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
               SUPPORT · CONTACT
             </div>
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
+                color: 'var(--foreground)',
                 lineHeight: 1.05,
               }}
               className="text-4xl sm:text-5xl font-bold mb-4"
@@ -64,7 +64,7 @@ export default function SupportPage() {
               Support
             </h1>
             <p
-              style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
+              style={{ color: 'var(--body-text)', fontFamily: 'var(--font-body)' }}
               className="text-base mb-10"
             >
               Get help with PrintLog3D or give us feedback.
@@ -72,8 +72,8 @@ export default function SupportPage() {
 
             <div
               style={{
-                background: 'oklch(0.99 0.004 295)',
-                border: '1px solid oklch(0.84 0.015 295)',
+                background: 'var(--surface-0)',
+                border: '1px solid var(--border)',
                 borderRadius: '0.25rem',
                 padding: '1.5rem',
                 marginBottom: '3rem',
@@ -82,7 +82,7 @@ export default function SupportPage() {
               <div
                 style={{
                   fontFamily: 'var(--font-display)',
-                  color: 'oklch(0.48 0.015 295)',
+                  color: 'var(--muted-foreground)',
                   letterSpacing: '0.1em',
                   fontSize: '0.65rem',
                 }}
@@ -91,7 +91,7 @@ export default function SupportPage() {
                 EMAIL SUPPORT
               </div>
               <p
-                style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
+                style={{ color: 'var(--body-text)', fontFamily: 'var(--font-body)' }}
                 className="text-sm mb-3"
               >
                 We respond within 1 to 2 business days.
@@ -100,7 +100,7 @@ export default function SupportPage() {
                 href="mailto:support@printlog3d.com"
                 style={{
                   fontFamily: 'var(--font-display)',
-                  color: 'oklch(0.43 0.22 295)',
+                  color: 'var(--brand-primary)',
                   letterSpacing: '0.04em',
                 }}
                 className="text-base font-semibold hover:underline"
@@ -112,7 +112,7 @@ export default function SupportPage() {
             <h2
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
+                color: 'var(--foreground)',
               }}
               className="text-2xl font-bold mb-6"
             >
@@ -121,7 +121,7 @@ export default function SupportPage() {
 
             <div
               style={{
-                border: '1px solid oklch(0.84 0.015 295)',
+                border: '1px solid var(--border)',
                 borderRadius: '0.25rem',
                 overflow: 'hidden',
               }}
@@ -130,14 +130,14 @@ export default function SupportPage() {
                 <details
                   key={faq.q}
                   style={{
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
                   <summary
                     style={{
                       fontFamily: 'var(--font-display)',
-                      color: 'oklch(0.15 0.02 295)',
+                      color: 'var(--foreground)',
                       padding: '1rem 1.25rem',
                       cursor: 'pointer',
                       listStyle: 'none',
@@ -148,11 +148,11 @@ export default function SupportPage() {
                     className="font-semibold"
                   >
                     {faq.q}
-                    <span style={{ color: 'oklch(0.43 0.22 295)' }} className="text-lg">+</span>
+                    <span style={{ color: 'var(--brand-primary)' }} className="text-lg">+</span>
                   </summary>
                   <div
                     style={{
-                      color: 'oklch(0.35 0.018 295)',
+                      color: 'var(--body-text)',
                       fontFamily: 'var(--font-body)',
                       padding: '0 1.25rem 1.25rem',
                     }}
@@ -165,10 +165,10 @@ export default function SupportPage() {
             </div>
 
             <p
-              style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }}
+              style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }}
               className="mt-10 text-sm text-center"
             >
-              See our <a href="/privacy" style={{ color: 'oklch(0.43 0.22 295)' }} className="hover:underline">Privacy Policy</a> for information on how we handle your data.
+              See our <a href="/privacy" style={{ color: 'var(--brand-primary)' }} className="hover:underline">Privacy Policy</a> for information on how we handle your data.
             </p>
           </div>
         </section>

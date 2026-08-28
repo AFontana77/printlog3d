@@ -56,7 +56,7 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
     >
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-          <ShoppingCart size={20} className="text-violet-600" aria-hidden="true" />
+          <ShoppingCart size={20} className="text-brand" aria-hidden="true" />
           Buying {material.category}
         </h2>
 
@@ -94,7 +94,7 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
         <ul className="space-y-2 mb-8">
           {checks.map((c) => (
             <li key={c} className="text-sm text-gray-600 leading-relaxed flex gap-2">
-              <span aria-hidden="true" className="text-violet-600 flex-shrink-0">
+              <span aria-hidden="true" className="text-brand flex-shrink-0">
                 &bull;
               </span>
               {c}
@@ -114,7 +114,7 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
                     href={r.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-violet-800 hover:text-violet-900 underline underline-offset-4 inline-flex items-center gap-1.5 min-h-[44px]"
+                    className="font-semibold text-brand hover:text-brand-dark underline underline-offset-4 inline-flex items-center gap-1.5 min-h-[44px]"
                   >
                     {r.name}
                     <ExternalLink size={13} aria-hidden="true" />
@@ -168,7 +168,7 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
           Not sure this is the right material?{' '}
           <Link
             href="/library"
-            className="text-violet-800 hover:text-violet-900 underline underline-offset-4"
+            className="text-brand hover:text-brand-dark underline underline-offset-4"
           >
             Compare all materials
           </Link>

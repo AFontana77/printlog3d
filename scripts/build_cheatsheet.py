@@ -1,3 +1,9 @@
+# SUPERSEDED 2026-08-28. The owner supplied a designed Filament Settings
+# Field Guide, which is now the canonical download at
+# public/PrintLog3D-Filament-Settings-Field-Guide.pdf.
+# Do NOT run this against that path: it would overwrite the owner file.
+# Retained only as the record of how the interim generated sheet was built.
+
 """Build the PrintLog3D filament settings cheat sheet PDF.
 
 Source of truth is src/lib/materials.ts (MATERIAL_PROFILES). This script

@@ -179,12 +179,12 @@ export default async function FilamentDetailPage({
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="px-4 py-3 bg-white border-b border-gray-100">
           <ol className="max-w-3xl mx-auto flex flex-wrap items-center gap-2 text-sm text-gray-500">
-            <li><Link href="/" className="hover:text-violet-700 transition-colors">Home</Link></li>
+            <li><Link href="/" className="hover:text-brand-dark transition-colors">Home</Link></li>
             <li aria-hidden="true" className="text-gray-300">/</li>
-            <li><Link href="/library" className="hover:text-violet-700 transition-colors">Library</Link></li>
+            <li><Link href="/library" className="hover:text-brand-dark transition-colors">Library</Link></li>
             <li aria-hidden="true" className="text-gray-300">/</li>
             <li>
-              <Link href={`/library/${category}`} className="hover:text-violet-700 transition-colors">
+              <Link href={`/library/${category}`} className="hover:text-brand-dark transition-colors">
                 {filament.category}
               </Link>
             </li>
@@ -213,14 +213,14 @@ export default async function FilamentDetailPage({
                   </figcaption>
                 </figure>
               ) : (
-                <div className="w-full h-48 rounded-2xl bg-gradient-to-br from-violet-600 to-violet-900 flex items-center justify-center">
+                <div className="w-full h-48 rounded-2xl bg-gradient-to-br from-brand to-brand-dark flex items-center justify-center">
                   <SpoolIcon />
                 </div>
               )}
             </div>
 
             {/* Category badge */}
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-violet-700 bg-violet-100 px-3 py-1 rounded-full mb-4">
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-brand bg-brand-tint px-3 py-1 rounded-full mb-4">
               <Thermometer size={12} /> {filament.category}
               {filament.subcategory && ` · ${filament.subcategory}`}
             </div>
@@ -240,7 +240,7 @@ export default async function FilamentDetailPage({
         <section className="py-10 px-4 bg-white border-b border-gray-100">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
-              <Zap size={18} className="text-violet-600" /> Quick Specs
+              <Zap size={18} className="text-brand" /> Quick Specs
             </h2>
             {specs.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -302,7 +302,7 @@ export default async function FilamentDetailPage({
               </p>
               <Link
                 href={`/library/${category}`}
-                className="inline-flex items-center gap-2 bg-violet-700 hover:bg-violet-800 text-white font-semibold px-6 py-3 rounded-xl transition-colors min-h-[48px]"
+                className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-semibold px-6 py-3 rounded-xl transition-colors min-h-[48px]"
               >
                 Read the {filament.category} guide <ArrowRight size={16} aria-hidden="true" />
               </Link>
@@ -312,7 +312,7 @@ export default async function FilamentDetailPage({
 
         {/* The PrintLog3D app is not published on either store, so this block
             offers the reference sheet that does exist instead. */}
-        <section className="py-14 px-4 bg-violet-50">
+        <section className="py-14 px-4 bg-brand-tint">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-3">
               Keep the {filament.category} numbers on your desk
@@ -324,13 +324,13 @@ export default async function FilamentDetailPage({
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 href="/free-download"
-                className="inline-flex items-center justify-center gap-2 bg-violet-700 text-white font-semibold px-8 py-3 rounded-xl hover:bg-violet-800 transition-colors min-h-[48px]"
+                className="inline-flex items-center justify-center gap-2 bg-brand text-white font-semibold px-8 py-3 rounded-xl hover:bg-brand-dark transition-colors min-h-[48px]"
               >
                 <Download size={18} aria-hidden="true" /> Get the settings sheet
               </Link>
               <Link
                 href={`/library/${category}`}
-                className="inline-flex items-center justify-center gap-2 border border-violet-200 text-violet-800 font-medium px-8 py-3 rounded-xl hover:bg-violet-100 transition-colors min-h-[48px]"
+                className="inline-flex items-center justify-center gap-2 border border-brand-soft text-brand font-medium px-8 py-3 rounded-xl hover:bg-brand-tint transition-colors min-h-[48px]"
               >
                 {filament.category} guide
               </Link>

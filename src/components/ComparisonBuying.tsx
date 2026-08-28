@@ -53,7 +53,7 @@ function Choice({ m }: { m: MaterialProfile }) {
       <div className="flex flex-wrap gap-3 items-center">
         <Link
           href={`/library/${m.slug}`}
-          className="inline-flex items-center gap-2 font-semibold text-violet-800 hover:text-violet-900 underline underline-offset-4 min-h-[44px]"
+          className="inline-flex items-center gap-2 font-semibold text-brand hover:text-brand-dark underline underline-offset-4 min-h-[44px]"
         >
           Full {m.category} settings
         </Link>
@@ -113,7 +113,7 @@ export function ComparisonBuying({
             <ul className="space-y-2">
               {anyNeedsEnclosure && (
                 <li className="text-sm text-gray-700 leading-relaxed flex gap-2">
-                  <span aria-hidden="true" className="text-violet-600 flex-shrink-0">
+                  <span aria-hidden="true" className="text-brand flex-shrink-0">
                     &bull;
                   </span>
                   {materials.find((m) => m.enclosure === 'Required')?.category} needs an
@@ -122,13 +122,13 @@ export function ComparisonBuying({
               )}
               {anyNeedsDrying && (
                 <li className="text-sm text-gray-700 leading-relaxed flex gap-2">
-                  <span aria-hidden="true" className="text-violet-600 flex-shrink-0">
+                  <span aria-hidden="true" className="text-brand flex-shrink-0">
                     &bull;
                   </span>
                   Buy vacuum-sealed with desiccant, and read{' '}
                   <Link
                     href="/how-to-dry-filament"
-                    className="text-violet-800 hover:text-violet-900 underline underline-offset-4"
+                    className="text-brand hover:text-brand-dark underline underline-offset-4"
                   >
                     how to dry filament
                   </Link>{' '}
@@ -136,7 +136,7 @@ export function ComparisonBuying({
                 </li>
               )}
               <li className="text-sm text-gray-700 leading-relaxed flex gap-2">
-                <span aria-hidden="true" className="text-violet-600 flex-shrink-0">
+                <span aria-hidden="true" className="text-brand flex-shrink-0">
                   &bull;
                 </span>
                 Check the published diameter tolerance. &plusmn;0.02mm is good; &plusmn;0.05mm

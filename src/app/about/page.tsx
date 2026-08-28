@@ -14,33 +14,33 @@ export default function AboutPage() {
       <SiteNav />
       <main id="main-content" className="pt-20">
         {/* Hero */}
-        <section className="pt-20 pb-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section className="pt-20 pb-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <div
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
+                color: 'var(--brand-primary)',
                 letterSpacing: '0.15em',
                 fontSize: '0.7rem',
               }}
               className="uppercase font-semibold mb-8 flex items-center gap-3"
             >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
               ABOUT · ANVIL ROAD LLC
             </div>
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
+                color: 'var(--foreground)',
                 lineHeight: 1.05,
               }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
             >
-              Built for printers who log <span style={{ color: 'oklch(0.43 0.22 295)' }}>everything.</span>
+              Built for printers who log <span style={{ color: 'var(--brand-primary)' }}>everything.</span>
             </h1>
             <p
               style={{
-                color: 'oklch(0.35 0.018 295)',
+                color: 'var(--body-text)',
                 fontFamily: 'var(--font-body)',
                 maxWidth: '60ch',
                 lineHeight: 1.65,
@@ -51,7 +51,7 @@ export default function AboutPage() {
             </p>
             <p
               style={{
-                color: 'oklch(0.35 0.018 295)',
+                color: 'var(--body-text)',
                 fontFamily: 'var(--font-body)',
                 maxWidth: '60ch',
                 lineHeight: 1.65,
@@ -64,8 +64,8 @@ export default function AboutPage() {
               <Link
                 href="/library"
                 style={{
-                  background: 'oklch(0.43 0.22 295)',
-                  color: 'oklch(0.99 0 0)',
+                  background: 'var(--brand-primary)',
+                  color: 'var(--on-primary)',
                   fontFamily: 'var(--font-display)',
                   letterSpacing: '0.08em',
                   borderRadius: '0.25rem',
@@ -77,8 +77,8 @@ export default function AboutPage() {
               <Link
                 href="/free-download"
                 style={{
-                  border: '1px solid oklch(0.84 0.015 295)',
-                  color: 'oklch(0.43 0.22 295)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--brand-primary)',
                   fontFamily: 'var(--font-display)',
                   letterSpacing: '0.08em',
                   borderRadius: '0.25rem',
@@ -94,24 +94,24 @@ export default function AboutPage() {
         </section>
 
         {/* Anvil Road */}
-        <section className="py-16 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section className="py-16 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <div
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
+                color: 'var(--brand-primary)',
                 letterSpacing: '0.15em',
                 fontSize: '0.7rem',
               }}
               className="uppercase font-semibold mb-6 flex items-center gap-3"
             >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
               PUBLISHER
             </div>
             <h2
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
+                color: 'var(--foreground)',
                 lineHeight: 1.1,
               }}
               className="text-3xl sm:text-4xl font-bold mb-4"
@@ -120,7 +120,7 @@ export default function AboutPage() {
             </h2>
             <p
               style={{
-                color: 'oklch(0.35 0.018 295)',
+                color: 'var(--body-text)',
                 fontFamily: 'var(--font-body)',
                 maxWidth: '60ch',
                 lineHeight: 1.65,

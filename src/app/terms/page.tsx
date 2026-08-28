@@ -9,16 +9,16 @@ export const metadata: Metadata = {
 
 const headingStyle = {
   fontFamily: 'var(--font-display)',
-  color: 'oklch(0.15 0.02 295)',
+  color: 'var(--foreground)',
 };
 
 const bodyStyle = {
-  color: 'oklch(0.35 0.018 295)',
+  color: 'var(--body-text)',
   fontFamily: 'var(--font-body)',
 };
 
 const linkStyle = {
-  color: 'oklch(0.43 0.22 295)',
+  color: 'var(--brand-primary)',
 };
 
 export default function TermsPage() {
@@ -26,24 +26,24 @@ export default function TermsPage() {
     <>
       <SiteNav />
       <main id="main-content" className="pt-20">
-        <section className="py-16 px-4" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section className="py-16 px-4" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-3xl mx-auto">
             <div
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
+                color: 'var(--brand-primary)',
                 letterSpacing: '0.15em',
                 fontSize: '0.7rem',
               }}
               className="uppercase font-semibold mb-8 flex items-center gap-3"
             >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
               LEGAL · TERMS
             </div>
             <h1 style={{ ...headingStyle, lineHeight: 1.05 }} className="text-4xl sm:text-5xl font-bold mb-3">
               Terms of Service
             </h1>
-            <p style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }} className="text-sm mb-10">
+            <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm mb-10">
               Last updated: April 18, 2026
             </p>
 

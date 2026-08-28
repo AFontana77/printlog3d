@@ -1,6 +1,7 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
+import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -31,18 +32,18 @@ const jsonLd = {
 
 const eyebrowStyle: React.CSSProperties = {
   fontFamily: 'var(--font-display)',
-  color: 'oklch(0.43 0.22 295)',
+  color: 'var(--brand-primary)',
   letterSpacing: '0.15em',
   fontSize: '0.7rem',
 };
-const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)', lineHeight: 1.1 };
-const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' };
-const bodyStyle: React.CSSProperties = { color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
-const linkStyle: React.CSSProperties = { color: 'oklch(0.43 0.22 295)' };
+const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.1 };
+const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)' };
+const bodyStyle: React.CSSProperties = { color: 'var(--body-text)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
+const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <div style={eyebrowStyle} className="uppercase font-semibold mb-6 flex items-center gap-3">
-    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'oklch(0.43 0.22 295)', flexShrink: 0 }} />
+    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
     {children}
   </div>
 );
@@ -122,15 +123,15 @@ export default function StringingPage() {
       <SiteNav />
       <main id="main-content" className="pt-20">
         {/* Hero */}
-        <section aria-label="Page introduction" className="pt-20 pb-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Page introduction" className="pt-20 pb-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
-            <div style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontSize: '0.75rem', letterSpacing: '0.05em' }} className="uppercase font-semibold mb-4">
+            <div style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontSize: '0.75rem', letterSpacing: '0.05em' }} className="uppercase font-semibold mb-4">
               <Link href="/" className="hover:underline">Home</Link>
-              <span style={{ color: 'oklch(0.55 0.015 295)', margin: '0 0.5rem' }}>/</span>
-              <span style={{ color: 'oklch(0.48 0.015 295)' }}>3D Print Stringing</span>
+              <span style={{ color: 'var(--muted-foreground)', margin: '0 0.5rem' }}>/</span>
+              <span style={{ color: 'var(--muted-foreground)' }}>3D Print Stringing</span>
             </div>
-            <h1 style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)', lineHeight: 1.05 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              3D print stringing: <span style={{ color: 'oklch(0.43 0.22 295)' }}>causes and fixes.</span>
+            <h1 style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.05 }} className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              3D print stringing: <span style={{ color: 'var(--brand-primary)' }}>causes and fixes.</span>
             </h1>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="text-base">
               Stringing means the settings are off. Not slightly off. Wrong in a specific, fixable way. Five adjustments cover 90% of stringing problems. Work through them in order and the threads disappear.
@@ -139,7 +140,7 @@ export default function StringingPage() {
         </section>
 
         {/* What stringing is */}
-        <section aria-label="What causes stringing" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="What causes stringing" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>ROOT CAUSE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">Why your print strings (the real reasons).</h2>
@@ -153,7 +154,7 @@ export default function StringingPage() {
         </section>
 
         {/* Fix checklist */}
-        <section aria-label="Stringing fix checklist in order of impact" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="Stringing fix checklist in order of impact" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>FIX SEQUENCE · IN ORDER</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">The five-step fix that stops 90% of stringing.</h2>
@@ -163,8 +164,8 @@ export default function StringingPage() {
                 <div
                   key={fix.n}
                   style={{
-                    background: 'oklch(0.99 0.004 295)',
-                    border: '1px solid oklch(0.84 0.015 295)',
+                    background: 'var(--surface-0)',
+                    border: '1px solid var(--border)',
                     borderRadius: '0.25rem',
                     padding: '1.5rem 1.5rem',
                     display: 'grid',
@@ -176,7 +177,7 @@ export default function StringingPage() {
                   <span
                     style={{
                       fontFamily: 'var(--font-display)',
-                      color: 'oklch(0.43 0.22 295)',
+                      color: 'var(--brand-primary)',
                       fontSize: '2rem',
                       lineHeight: 1,
                       fontVariantNumeric: 'tabular-nums',
@@ -189,53 +190,53 @@ export default function StringingPage() {
                     <h3 style={h3Style} className="text-lg font-bold mb-3">{fix.title}</h3>
                     <p style={{ ...bodyStyle }} className="text-sm mb-4">{fix.body}</p>
                     {fix.table && (
-                      <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
+                      <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
                         {fix.table.map((row, i) => (
                           <div
                             key={row.extruder}
                             style={{
                               padding: '0.75rem 1rem',
-                              borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
+                              borderTop: i === 0 ? 'none' : '1px solid var(--border)',
                               display: 'grid',
                               gridTemplateColumns: '1fr 100px',
                               gap: '0.75rem',
                               alignItems: 'center',
-                              background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                              background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                             }}
                           >
                             <div>
-                              <p style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{row.extruder}</p>
-                              <p style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }} className="text-xs">{row.detail}</p>
+                              <p style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{row.extruder}</p>
+                              <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-xs">{row.detail}</p>
                             </div>
-                            <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' }} className="text-base font-bold text-right">{row.value}</span>
+                            <span style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }} className="text-base font-bold text-right">{row.value}</span>
                           </div>
                         ))}
                       </div>
                     )}
                     {fix.temps && (
-                      <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
+                      <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
                         {fix.temps.map((t, i) => (
                           <div
                             key={t.mat}
                             style={{
                               padding: '0.625rem 1rem',
-                              borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
+                              borderTop: i === 0 ? 'none' : '1px solid var(--border)',
                               display: 'grid',
                               gridTemplateColumns: '80px 100px 1fr',
                               gap: '0.75rem',
                               alignItems: 'center',
-                              background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                              background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                             }}
                           >
-                            <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{t.mat}</span>
-                            <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.15 0.02 295)' }} className="text-sm font-bold">{t.target}</span>
-                            <span style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }} className="text-xs">{t.from}</span>
+                            <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{t.mat}</span>
+                            <span style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }} className="text-sm font-bold">{t.target}</span>
+                            <span style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-xs">{t.from}</span>
                           </div>
                         ))}
                       </div>
                     )}
                     {fix.note && (
-                      <p style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }} className="text-xs mt-3">{fix.note}</p>
+                      <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-xs mt-3">{fix.note}</p>
                     )}
                   </div>
                 </div>
@@ -244,8 +245,8 @@ export default function StringingPage() {
               {/* Fix 5 */}
               <div
                 style={{
-                  background: 'oklch(0.99 0.004 295)',
-                  border: '1px solid oklch(0.84 0.015 295)',
+                  background: 'var(--surface-0)',
+                  border: '1px solid var(--border)',
                   borderRadius: '0.25rem',
                   padding: '1.5rem',
                   display: 'grid',
@@ -254,7 +255,7 @@ export default function StringingPage() {
                   alignItems: 'start',
                 }}
               >
-                <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', fontSize: '2rem', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }} className="font-bold">05</span>
+                <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', fontSize: '2rem', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }} className="font-bold">05</span>
                 <div>
                   <h3 style={h3Style} className="text-lg font-bold mb-3">Dry the filament</h3>
                   <p style={{ ...bodyStyle }} className="text-sm">
@@ -269,27 +270,27 @@ export default function StringingPage() {
         </section>
 
         {/* Material-specific notes */}
-        <section aria-label="Stringing notes by filament material" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <section aria-label="Stringing notes by filament material" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>BY MATERIAL</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Why PETG always strings more than PLA.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
-              <div style={{ background: 'oklch(0.92 0.012 295)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '140px 1fr' }}>
-                <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">Material</span>
-                <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">Notes</span>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+              <div style={{ background: 'var(--surface-2)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '140px 1fr' }}>
+                <span style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">Material</span>
+                <span style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">Notes</span>
               </div>
               {MATERIAL_NOTES.map((m, i) => (
                 <div
                   key={m.material}
                   style={{
                     padding: '1rem 1.25rem',
-                    borderTop: '1px solid oklch(0.84 0.015 295)',
+                    borderTop: '1px solid var(--border)',
                     display: 'grid',
                     gridTemplateColumns: '140px 1fr',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{m.material}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{m.material}</span>
                   <p style={{ ...bodyStyle }} className="text-sm">{m.note}</p>
                 </div>
               ))}
@@ -298,15 +299,15 @@ export default function StringingPage() {
         </section>
 
         {/* How to test */}
-        <section aria-label="How to test your stringing fixes" className="py-20 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section aria-label="How to test your stringing fixes" className="py-20 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>TEST PROTOCOL</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">Test your fix in 20 minutes, not two hours.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-6">
               Print a stringing torture test. The classic spiked sphere or Cthulhu model from Printables or Thingiverse works well. It has many tall spikes and open space between them, exactly the conditions that reveal stringing. One test print takes 15 to 25 minutes and tells you more than 30 minutes of guessing.
             </p>
-            <div style={{ background: 'oklch(0.99 0.004 295)', border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', padding: '1.25rem 1.5rem' }}>
-              <div style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold mb-2">Critical Rule</div>
+            <div style={{ background: 'var(--surface-0)', border: '1px solid var(--border)', borderRadius: '0.25rem', padding: '1.25rem 1.5rem' }}>
+              <div style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold mb-2">Critical Rule</div>
               <p style={h3Style} className="font-bold mb-2">Change one variable per test.</p>
               <p style={{ ...bodyStyle }} className="text-sm">
                 Change ONE setting, print the test, evaluate. Never change two variables at once. If you change temp and retraction at the same time and stringing gets better, you will not know which fix worked, or which one to keep.
@@ -322,11 +323,13 @@ export default function StringingPage() {
           items={STRINGING_GEAR}
         />
 
-        <section aria-label="Related guides" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
+        <OwnedServiceCta variant="troubleshooting" />
+
+        <section aria-label="Related guides" className="py-20 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>RELATED</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Fix the next problem.</h2>
-            <div style={{ border: '1px solid oklch(0.84 0.015 295)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
               {RELATED.map((r, i) => (
                 <Link
                   key={r.href}
@@ -336,14 +339,14 @@ export default function StringingPage() {
                     gridTemplateColumns: '240px 1fr 100px',
                     gap: '1rem',
                     padding: '1rem 1.25rem',
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(0.84 0.015 295)',
-                    background: i % 2 === 0 ? 'oklch(0.99 0.004 295)' : 'oklch(0.97 0.006 295)',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
                     alignItems: 'center',
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)' }} className="text-sm font-semibold">{r.title}</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{r.title}</span>
                   <p style={{ ...bodyStyle }} className="text-sm">{r.desc}</p>
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.43 0.22 295)', letterSpacing: '0.08em', fontSize: '0.7rem', textAlign: 'right' }} className="uppercase font-semibold">Read &rarr;</span>
+                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.08em', fontSize: '0.7rem', textAlign: 'right' }} className="uppercase font-semibold">Read &rarr;</span>
                 </Link>
               ))}
             </div>
@@ -351,7 +354,7 @@ export default function StringingPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'var(--surface-2)', borderTop: '1px solid var(--border)' }}>
           <div className="max-w-3xl mx-auto">
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Write down the settings that fixed it.</h2>
@@ -361,8 +364,8 @@ export default function StringingPage() {
             <Link
               href="/free-download"
               style={{
-                background: 'oklch(0.43 0.22 295)',
-                color: 'oklch(0.99 0 0)',
+                background: 'var(--brand-primary)',
+                color: 'var(--on-primary)',
                 fontFamily: 'var(--font-display)',
                 letterSpacing: '0.08em',
                 borderRadius: '0.25rem',

@@ -14,14 +14,17 @@ import type { Metadata } from 'next';
  * to the site owner. No file was ever built and none was ever sent, while the
  * meta description simultaneously claimed "no signup required".
  *
- * Both halves are fixed here. The PDF is real and generated from
- * MATERIAL_PROFILES by scripts/build_cheatsheet.py, and it downloads directly
- * with no email required, which is what the page always claimed. The list
- * signup stays, honestly described as a list rather than as the way to get the
- * file.
+ * Both halves are fixed here. The PDF is real and downloads directly with no
+ * email required, which is what the page always claimed.
+ *
+ * The file is now the owner-supplied Filament Settings Field Guide, installed
+ * byte-for-byte. It replaced a version generated from MATERIAL_PROFILES by
+ * scripts/build_cheatsheet.py; that generator is retained but SUPERSEDED, and
+ * must not be run against this path or it will overwrite the owner's file. The
+ * previous URL redirects here rather than 404ing.
  */
 
-const PDF = '/printlog3d-filament-settings-cheat-sheet.pdf';
+const PDF = '/PrintLog3D-Filament-Settings-Field-Guide.pdf';
 const BASE = 'https://www.printlog3d.com';
 
 export const metadata: Metadata = {
@@ -43,12 +46,12 @@ export default function FreeDownloadPage() {
     <>
       <SiteNav />
       <main id="main-content" className="pt-20">
-        <section className="pt-20 pb-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+        <section className="pt-20 pb-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
             <div
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
+                color: 'var(--brand-primary)',
                 letterSpacing: '0.15em',
                 fontSize: '0.7rem',
               }}
@@ -60,7 +63,7 @@ export default function FreeDownloadPage() {
                   display: 'inline-block',
                   width: '24px',
                   height: '1px',
-                  background: 'oklch(0.43 0.22 295)',
+                  background: 'var(--brand-primary)',
                   flexShrink: 0,
                 }}
               />
@@ -69,17 +72,17 @@ export default function FreeDownloadPage() {
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
+                color: 'var(--foreground)',
                 lineHeight: 1.05,
               }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
             >
               Free 3D print{' '}
-              <span style={{ color: 'oklch(0.43 0.22 295)' }}>settings cheat sheet.</span>
+              <span style={{ color: 'var(--brand-primary)' }}>settings cheat sheet.</span>
             </h1>
             <p
               style={{
-                color: 'oklch(0.35 0.018 295)',
+                color: 'var(--body-text)',
                 fontFamily: 'var(--font-body)',
                 maxWidth: '52ch',
                 lineHeight: 1.6,
@@ -95,8 +98,8 @@ export default function FreeDownloadPage() {
               href={PDF}
               download
               style={{
-                background: 'oklch(0.43 0.22 295)',
-                color: 'oklch(0.99 0 0)',
+                background: 'var(--brand-primary)',
+                color: 'var(--on-primary)',
                 fontFamily: 'var(--font-display)',
                 letterSpacing: '0.08em',
                 borderRadius: '0.25rem',
@@ -107,7 +110,7 @@ export default function FreeDownloadPage() {
               Download the PDF &darr;
             </a>
             <p
-              style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }}
+              style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }}
               className="text-xs mt-3"
             >
               Direct download. No email needed.
@@ -121,7 +124,7 @@ export default function FreeDownloadPage() {
               <h2
                 style={{
                   fontFamily: 'var(--font-display)',
-                  color: 'oklch(0.15 0.02 295)',
+                  color: 'var(--foreground)',
                   lineHeight: 1.15,
                 }}
                 className="text-2xl font-bold mb-5"
@@ -132,10 +135,10 @@ export default function FreeDownloadPage() {
                 {CONTENTS.map((c) => (
                   <li
                     key={c}
-                    style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
+                    style={{ color: 'var(--body-text)', fontFamily: 'var(--font-body)' }}
                     className="text-sm leading-relaxed flex gap-3"
                   >
-                    <span aria-hidden="true" style={{ color: 'oklch(0.43 0.22 295)' }}>
+                    <span aria-hidden="true" style={{ color: 'var(--brand-primary)' }}>
                       &bull;
                     </span>
                     {c}
@@ -143,7 +146,7 @@ export default function FreeDownloadPage() {
                 ))}
               </ul>
               <p
-                style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }}
+                style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }}
                 className="text-xs mt-6 leading-relaxed"
               >
                 Every figure is a typical manufacturer-published range for that material class. They are not
@@ -154,8 +157,8 @@ export default function FreeDownloadPage() {
             <div>
               <div
                 style={{
-                  background: 'oklch(0.99 0.004 295)',
-                  border: '1px solid oklch(0.84 0.015 295)',
+                  background: 'var(--surface-0)',
+                  border: '1px solid var(--border)',
                   borderRadius: '0.25rem',
                   padding: '2rem',
                 }}
@@ -163,7 +166,7 @@ export default function FreeDownloadPage() {
                 <div
                   style={{
                     fontFamily: 'var(--font-display)',
-                    color: 'oklch(0.48 0.015 295)',
+                    color: 'var(--muted-foreground)',
                     letterSpacing: '0.1em',
                     fontSize: '0.65rem',
                   }}
@@ -174,7 +177,7 @@ export default function FreeDownloadPage() {
                 <h2
                   style={{
                     fontFamily: 'var(--font-display)',
-                    color: 'oklch(0.15 0.02 295)',
+                    color: 'var(--foreground)',
                     lineHeight: 1.15,
                   }}
                   className="text-xl font-bold mb-3"
@@ -182,7 +185,7 @@ export default function FreeDownloadPage() {
                   Hear when we add a material
                 </h2>
                 <p
-                  style={{ color: 'oklch(0.35 0.018 295)', fontFamily: 'var(--font-body)' }}
+                  style={{ color: 'var(--body-text)', fontFamily: 'var(--font-body)' }}
                   className="text-sm mb-6"
                 >
                   You already have the sheet. This is just the list we use when a new material guide goes up
@@ -190,7 +193,7 @@ export default function FreeDownloadPage() {
                 </p>
                 <EmailCaptureForm buttonLabel="Join the list" />
                 <p
-                  style={{ color: 'oklch(0.48 0.015 295)', fontFamily: 'var(--font-body)' }}
+                  style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }}
                   className="text-xs mt-4"
                 >
                   Unsubscribe any time.
@@ -203,15 +206,15 @@ export default function FreeDownloadPage() {
         <section
           className="py-20 px-6"
           style={{
-            background: 'oklch(0.92 0.012 295)',
-            borderTop: '1px solid oklch(0.84 0.015 295)',
+            background: 'var(--surface-2)',
+            borderTop: '1px solid var(--border)',
           }}
         >
           <div className="max-w-3xl mx-auto">
             <div
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.43 0.22 295)',
+                color: 'var(--brand-primary)',
                 letterSpacing: '0.15em',
                 fontSize: '0.7rem',
               }}
@@ -223,7 +226,7 @@ export default function FreeDownloadPage() {
                   display: 'inline-block',
                   width: '24px',
                   height: '1px',
-                  background: 'oklch(0.43 0.22 295)',
+                  background: 'var(--brand-primary)',
                   flexShrink: 0,
                 }}
               />
@@ -232,7 +235,7 @@ export default function FreeDownloadPage() {
             <h2
               style={{
                 fontFamily: 'var(--font-display)',
-                color: 'oklch(0.15 0.02 295)',
+                color: 'var(--foreground)',
                 lineHeight: 1.05,
               }}
               className="text-3xl sm:text-4xl font-bold mb-4"
@@ -241,7 +244,7 @@ export default function FreeDownloadPage() {
             </h2>
             <p
               style={{
-                color: 'oklch(0.35 0.018 295)',
+                color: 'var(--body-text)',
                 fontFamily: 'var(--font-body)',
                 maxWidth: '52ch',
               }}
@@ -254,8 +257,8 @@ export default function FreeDownloadPage() {
               <Link
                 href="/library"
                 style={{
-                  background: 'oklch(0.43 0.22 295)',
-                  color: 'oklch(0.99 0 0)',
+                  background: 'var(--brand-primary)',
+                  color: 'var(--on-primary)',
                   fontFamily: 'var(--font-display)',
                   letterSpacing: '0.08em',
                   borderRadius: '0.25rem',
@@ -268,8 +271,8 @@ export default function FreeDownloadPage() {
               <Link
                 href="/how-to-dry-filament"
                 style={{
-                  border: '1px solid oklch(0.84 0.015 295)',
-                  color: 'oklch(0.43 0.22 295)',
+                  border: '1px solid var(--border)',
+                  color: 'var(--brand-primary)',
                   fontFamily: 'var(--font-display)',
                   letterSpacing: '0.08em',
                   borderRadius: '0.25rem',
