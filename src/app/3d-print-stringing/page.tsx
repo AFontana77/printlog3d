@@ -1,5 +1,6 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -85,6 +86,26 @@ const MATERIAL_NOTES = [
   { material: 'PETG', note: 'Strings more than PLA. This is normal. Some thin wisps are acceptable and easy to remove with a heat gun pass. If you have heavy cobwebbing, lower temp first (5°C), then check retraction. Enable combing. PETG stringing should never be as heavy as what you see from Nylon or wet filament.' },
   { material: 'TPU', note: 'Strings heavily due to high flexibility. Reduce retraction to near-zero (0-1mm on direct drive) and print slow (30-35 mm/s). Combing helps a lot. Accept some stringing. TPU is difficult to print completely clean and most stringing snaps off easily once the print is done.' },
   { material: 'Nylon', note: 'Strings badly when wet. Always dry Nylon before printing: 70-80°C for 12+ hours. After drying, tune retraction and use combing. Dry Nylon should string at roughly the same level as PETG.' },
+];
+
+/**
+ * Two items, both tied to this page's own diagnosis. Wet filament is the most
+ * common cause of stringing that survives retraction tuning, so a dryer is the
+ * fix and dry storage is what stops it coming back. Nothing else belongs here.
+ */
+const STRINGING_GEAR: GearSpec[] = [
+  {
+    category: 'Filament dryer',
+    requirement: 'Must reach 65C for PETG, 80C if you print nylon',
+    why: 'If stringing survives correct retraction and a lower nozzle temperature, the filament is wet. Drying it is the fix, and no slicer setting substitutes for it. Budget units stopping at 55C will not dry PETG properly.',
+    searchTerms: 'filament dryer 65C',
+  },
+  {
+    category: 'Airtight storage with desiccant',
+    requirement: 'Sealed container plus rechargeable silica gel',
+    why: 'PETG re-absorbs moisture within a couple of weeks on an open shelf, so a spool you dried last month is wet again. Storage is what makes the fix stick.',
+    searchTerms: 'airtight filament storage container desiccant',
+  },
 ];
 
 const RELATED = [
@@ -295,6 +316,12 @@ export default function StringingPage() {
         </section>
 
         {/* Related guides */}
+        <GearAdvice
+          heading="If it is wet filament"
+          intro="Stringing that survives correct retraction and a lower nozzle temperature is usually moisture. Two things fix it and keep it fixed."
+          items={STRINGING_GEAR}
+        />
+
         <section aria-label="Related guides" className="py-20 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
           <div className="max-w-5xl mx-auto">
             <Eyebrow>RELATED</Eyebrow>
