@@ -1,5 +1,6 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -70,6 +71,39 @@ const STORAGE_TIPS = [
   'Vacuum storage bags remove air entirely. Best option for long-term Nylon and TPU storage.',
   'Desiccant packs recharge in an oven at 120°C for 1 hour. Reuse them indefinitely.',
   'Log the date you opened each spool. After 2 to 3 weeks in humid air, PETG and TPU likely need drying again.',
+];
+
+/**
+ * Derived from the DRYER_TEMPS table above: nylon at 70-80C is the hottest case
+ * this guide documents, so 80C is the number that decides whether a given unit
+ * can actually do the job. Budget dryers commonly stop at 55-60C, which covers
+ * PLA and nothing else demanding.
+ */
+const DRYING_EQUIPMENT: GearSpec[] = [
+  {
+    category: 'Filament dryer',
+    requirement: 'Must reach 80C to cover nylon',
+    why: 'A unit that stops at 55-60C will dry PLA and little else. Nylon needs 70-80C for 12 hours or more, so the maximum temperature is the specification that decides whether a dryer is worth owning. Check it on the spec sheet, not in the product title.',
+    searchTerms: 'filament dryer 80C',
+  },
+  {
+    category: 'Hygrometer',
+    requirement: 'Small digital unit that fits in a storage box',
+    why: 'The cheapest way to stop guessing. If the box reads under 20% relative humidity the filament inside is fine, and you can skip a drying cycle you did not need.',
+    searchTerms: 'mini digital hygrometer',
+  },
+  {
+    category: 'Airtight storage with rechargeable desiccant',
+    requirement: 'Sealed container plus indicating silica gel',
+    why: 'Drying a spool achieves nothing if it then sits on an open shelf. Indicating desiccant changes colour when spent, and recharges in an oven at 120C for an hour, so it is a one-time purchase.',
+    searchTerms: 'airtight filament storage container rechargeable desiccant',
+  },
+  {
+    category: 'Vacuum storage bags',
+    requirement: 'Valve type, sized for a 1 kg spool',
+    why: 'For spools you will not touch for months. Removing the air entirely beats desiccant alone for long-term nylon and TPU storage.',
+    searchTerms: 'vacuum storage bags filament spool',
+  },
 ];
 
 export default function HowToDryFilamentPage() {
@@ -252,6 +286,31 @@ export default function HowToDryFilamentPage() {
         </section>
 
         {/* Cross-links */}
+        <GearAdvice
+          heading="What you actually need"
+          intro="Four things cover every drying and storage case on this page. Each one is listed with the specification that decides whether a given product will do the job, because that is the part product titles tend to omit."
+          items={DRYING_EQUIPMENT}
+        />
+
+        <section aria-label="Materials beyond consumer drying equipment" className="py-16 px-6" style={{ background: 'oklch(0.96 0.008 295)' }}>
+          <div className="max-w-3xl mx-auto">
+            <h2 style={h2Style} className="text-2xl sm:text-3xl font-bold mb-4">Some materials need an oven, not a dryer.</h2>
+            <p style={bodyStyle} className="text-base mb-4">
+              Everything above assumes a filament dryer topping out around 80&deg;C, which covers
+              every material most people print. It does not cover the high-temperature engineering
+              materials. PEEK needs 120 to 150&deg;C for three hours or more, which is a laboratory
+              oven, not a spool warmer.
+            </p>
+            <p style={bodyStyle} className="text-base">
+              If you are drying one of those, do not buy a filament dryer and hope. Check the{' '}
+              <Link href="/library/peek" style={linkStyle} className="underline hover:no-underline">PEEK</Link>,{' '}
+              <Link href="/library/pa-cf" style={linkStyle} className="underline hover:no-underline">PA-CF</Link>{' '}and{' '}
+              <Link href="/library/pc" style={linkStyle} className="underline hover:no-underline">polycarbonate</Link>{' '}
+              pages for the actual requirement first.
+            </p>
+          </div>
+        </section>
+
         <section aria-label="Related guides" className="py-12 px-6" style={{ background: 'oklch(0.99 0.004 295)' }}>
           <div className="max-w-5xl mx-auto">
             <p style={{ fontFamily: 'var(--font-display)', color: 'oklch(0.48 0.015 295)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold mb-4">Related guides</p>
@@ -265,12 +324,12 @@ export default function HowToDryFilamentPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Download the app" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
           <div className="max-w-3xl mx-auto">
-            <Eyebrow>FREE APP</Eyebrow>
-            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Log open dates and dry dates. Never print wet filament.</h2>
+            <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Keep the drying numbers by the machine.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              You opened a PETG spool two weeks ago. Is it still dry? You will not know unless you logged the date. Log your open date and last dry date per spool in PrintLog3D. Before your next print session, check the app. If it has been more than a week in humid air, dry it first. Clean prints start before you hit print.
+              Every material on this page is on our one-page settings sheet, including the drying temperature and time each one needs. Print it, keep it by the machine, and note the date you opened each spool on it. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

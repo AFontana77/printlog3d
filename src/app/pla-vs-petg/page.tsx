@@ -1,5 +1,6 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { ComparisonBuying } from '@/components/ComparisonBuying';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -291,12 +292,12 @@ export default function PlaVsPetgPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Download the app" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
           <div className="max-w-3xl mx-auto">
-            <Eyebrow>FREE APP</Eyebrow>
-            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Stop reprinting calibration squares. Build a settings library.</h2>
+            <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Both materials, one reference sheet.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              PETG from one brand and PETG from another need different retraction settings. Log your print temp, bed temp, and retraction distance per spool in PrintLog3D. Next time you open that same brand, you know the settings that worked. No calibration cube. No wasted filament.
+              PETG from one brand and PETG from another need different retraction settings. Our one-page settings sheet gives you the starting point for both materials, with the temperatures and drying requirements side by side. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"
@@ -314,6 +315,8 @@ export default function PlaVsPetgPage() {
             </Link>
           </div>
         </section>
+        <ComparisonBuying slugs={['pla', 'petg']} />
+
       </main>
       <SiteFooter />
     </>

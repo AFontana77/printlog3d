@@ -263,12 +263,12 @@ export default function FilamentGuidePage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Download the app" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
           <div className="max-w-3xl mx-auto">
-            <Eyebrow>FREE APP</Eyebrow>
-            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Log every material you try. Never start from zero again.</h2>
+            <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Every material, on one page.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              Every material has its own quirks. So does every brand within that material. Log your print temp, bed temp, retraction, and notes per spool in PrintLog3D. When you revisit that material six months later, you have a starting point that actually worked. No guessing. No wasted first prints.
+              Every material has its own quirks. Our one-page settings sheet puts the print temperature, bed temperature, enclosure and drying requirement for all of them on a single page you can keep by the printer. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

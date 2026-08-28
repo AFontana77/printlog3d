@@ -37,6 +37,9 @@ BANNED = {
     "dead Google Play link": r'href="https://play\.google\.com"',
     "unpublished app price": r"\$6\.99",
     "app availability claim": r"free on (iPhone|iOS)",
+    # The app is not published. These phrases all assert it is usable today,
+    # and they survived a first sweep on six guide pages that were out of scope.
+    "app usability claim": r"FREE APP|in PrintLog3D|check the app|Download the app",
     "untagged Amazon link": r"amazon\.com/s\?k=(?![^\"]*tag=)",
     "missing tracking placeholder": r"PENDING_TRACKING_ID",
     "NaN render": r"NaN",
@@ -80,6 +83,21 @@ AMAZON_LINK_RE = re.compile(r'href="(https://(?:www\.)?amazon\.com/[^"]*)"')
 TAG_RE = re.compile(r"[?&]tag=([A-Za-z0-9_-]+)")
 
 
+DEAD_HREF_RE = re.compile(r'<a\b[^>]*\bhref="(#|)"[^>]*>', re.IGNORECASE)
+
+
+def check_dead_ctas(html, label, failures):
+    """No empty and no placeholder-hash hrefs.
+
+    A source grep cannot catch these: href="" arises from data, not markup, and
+    renders as a button that silently does nothing. Crawling production is the
+    only way to see it.
+    """
+    for m in DEAD_HREF_RE.finditer(html):
+        kind = "fake # CTA" if '"#"' in m.group(0) else 'empty href=""'
+        failures.append("%s -> %s: %s" % (label, kind, m.group(0)[:80]))
+
+
 def check_amazon(html, label, failures):
     """Returns the number of Amazon links found, and appends any failures."""
     links = AMAZON_LINK_RE.findall(html)
@@ -102,6 +120,7 @@ def check_amazon(html, label, failures):
 
 STATIC_PAGES = [
     "", "/library", "/free-download", "/about", "/support", "/privacy", "/terms",
+    "/disclosure",
     "/pla-vs-petg", "/pla-vs-abs", "/abs-vs-petg",
     "/3d-printing-filament-guide", "/how-to-dry-filament", "/3d-print-stringing",
 ]
@@ -195,6 +214,7 @@ def main() -> int:
                 failures.append("%s -> %s x%d" % (label, name, len(hits)))
 
         amazon_links_total[0] += check_amazon(html, label, failures)
+        check_dead_ctas(html, label, failures)
 
         # Exactly one h1 per page.
         h1 = len(re.findall(r"(?i)<h1[\s>]", html))

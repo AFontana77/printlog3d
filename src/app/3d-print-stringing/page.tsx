@@ -324,12 +324,12 @@ export default function StringingPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Download the app" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
           <div className="max-w-3xl mx-auto">
-            <Eyebrow>FREE APP</Eyebrow>
-            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Log the retraction settings that fixed it.</h2>
+            <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Write down the settings that fixed it.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              You found the retraction distance that killed the stringing. Write it down somewhere you will actually find it. Log retraction distance, print temp, and travel speed per spool in PrintLog3D. Next time you load that brand, you open the app and start from what worked. No torture test. No wasted filament. Just print.
+              The retraction distance that fixed your stringing is worth keeping. Our one-page settings sheet has the temperature and retraction starting points for every material we document, with room to write in what actually worked. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

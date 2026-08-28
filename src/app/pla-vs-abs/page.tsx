@@ -1,5 +1,6 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { ComparisonBuying } from '@/components/ComparisonBuying';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -288,12 +289,12 @@ export default function PlaVsAbsPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Download the app" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
           <div className="max-w-3xl mx-auto">
-            <Eyebrow>FREE APP</Eyebrow>
-            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Build a settings library you can trust across both materials.</h2>
+            <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Both materials, one reference sheet.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              PLA from different brands prints differently. ABS from different brands definitely prints differently. Log your temp, bed adhesion method, and enclosure notes per spool in PrintLog3D. When you revisit that brand, you open the app and start from what already worked. No tuning from scratch. No wasted test prints.
+              PLA and ABS behave nothing alike, and the settings that matter differ for each. Our one-page settings sheet has both, including the enclosure and drying requirements that decide whether an ABS print succeeds. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"
@@ -311,6 +312,8 @@ export default function PlaVsAbsPage() {
             </Link>
           </div>
         </section>
+        <ComparisonBuying slugs={['pla', 'abs']} />
+
       </main>
       <SiteFooter />
     </>

@@ -2,6 +2,9 @@ import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { Faq, type FaqItem } from '@/components/Faq';
 import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
+import { FilamentBuying } from '@/components/FilamentBuying';
+import { PrintServiceRoute } from '@/components/PrintServiceRoute';
+import { needsServiceRoute } from '@/lib/commerce';
 import { MATERIAL_PROFILES, getMaterialBySlug, type MaterialProfile } from '@/lib/materials';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -335,6 +338,10 @@ export default async function MaterialPage({
             <p className="text-gray-700 leading-relaxed">{m.drying}</p>
           </div>
         </section>
+
+        {needsServiceRoute(m) && <PrintServiceRoute material={m} />}
+
+        <FilamentBuying material={m} />
 
         <GearAdvice
           heading={`What you need to print ${m.category}`}

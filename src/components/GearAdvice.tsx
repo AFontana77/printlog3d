@@ -1,4 +1,4 @@
-import { isEnrolled, affiliateLinkProps } from '@/lib/affiliateLinks';
+import { AMAZON, amazonSearchUrl } from '@/lib/commerce';
 import { ExternalLink } from 'lucide-react';
 
 /**
@@ -47,10 +47,13 @@ export function GearAdvice({
   intro: string;
 }) {
   if (items.length === 0) return null;
-  const enrolled = isEnrolled('amazon');
+  const enrolled = AMAZON.status === 'enrolled';
 
   return (
-    <section className="py-14 px-4 bg-gray-50 border-t border-gray-100">
+    <section
+      className="py-14 px-4 bg-gray-50 border-t border-gray-100"
+      data-placement="gear-advice"
+    >
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-gray-900 mb-3">{heading}</h2>
         <p className="text-gray-600 mb-6 leading-relaxed">{intro}</p>
@@ -61,17 +64,24 @@ export function GearAdvice({
               <h3 className="font-semibold text-gray-900 mb-1">{item.category}</h3>
               <p className="text-sm text-violet-800 font-medium mb-2">{item.requirement}</p>
               <p className="text-sm text-gray-600 leading-relaxed">{item.why}</p>
-              {enrolled && (
-                <a
-                  {...affiliateLinkProps('amazon', `/s?k=${encodeURIComponent(item.searchTerms)}`)}
-                  target="_blank"
-                  rel="nofollow noopener noreferrer sponsored"
-                  className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-violet-800 hover:text-violet-900 min-h-[44px]"
-                >
-                  <ExternalLink size={14} aria-hidden="true" />
-                  See {item.category.toLowerCase()} on Amazon
-                </a>
-              )}
+              {enrolled &&
+                (() => {
+                  const href = amazonSearchUrl(item.searchTerms);
+                  if (!href) return null;
+                  return (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="nofollow noopener noreferrer sponsored"
+                      data-affiliate-brand="amazon"
+                      data-affiliate-network="amazon"
+                      className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-violet-800 hover:text-violet-900 min-h-[44px]"
+                    >
+                      <ExternalLink size={14} aria-hidden="true" />
+                      See {item.category.toLowerCase()} on Amazon
+                    </a>
+                  );
+                })()}
             </div>
           ))}
         </div>

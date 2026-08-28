@@ -1,5 +1,6 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { ComparisonBuying } from '@/components/ComparisonBuying';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -212,12 +213,12 @@ export default function AbsVsPetgPage() {
         </section>
 
         {/* App CTA */}
-        <section aria-label="Download the app" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
+        <section aria-label="Free settings sheet" className="py-20 px-6" style={{ background: 'oklch(0.92 0.012 295)', borderTop: '1px solid oklch(0.84 0.015 295)' }}>
           <div className="max-w-3xl mx-auto">
-            <Eyebrow>FREE APP</Eyebrow>
-            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Know your baseline before you load the next spool.</h2>
+            <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Both materials, one reference sheet.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              ABS needs enclosure temps logged. PETG needs retraction dialed per brand. Log your enclosure temp, print speed, and bed temp per spool in PrintLog3D. Next time you pull out that same material, you start from your last successful print. No reprints. No lost settings.
+              ABS needs enclosure temperatures. PETG needs retraction dialled in per brand. Our one-page settings sheet covers both, alongside every other material we document. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"
@@ -235,6 +236,8 @@ export default function AbsVsPetgPage() {
             </Link>
           </div>
         </section>
+        <ComparisonBuying slugs={['abs', 'petg']} />
+
       </main>
       <SiteFooter />
     </>
