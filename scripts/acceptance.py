@@ -131,11 +131,20 @@ STATIC_PAGES = [
     "/pla-vs-petg", "/pla-vs-abs", "/abs-vs-petg",
     "/3d-printing-filament-guide", "/how-to-dry-filament", "/3d-print-stringing",
 ]
-MATERIALS = [
-    "pla", "pla-matte", "pla-metal", "pla-silk", "pla-wood", "petg", "petg-cf",
-    "pctg", "cpe", "abs", "asa", "hips", "nylon-pa6", "nylon-pa12", "pa-cf",
-    "pc", "peek",
-]
+def _materials_from_source() -> list[str]:
+    """Read the slugs from materials.ts, the single definition of a material.
+
+    A hardcoded copy here silently checked 17 slugs after the library grew to
+    30, and still printed PASS. Deriving removes the possibility.
+    """
+    src = (REPO / "src" / "lib" / "materials.ts").read_text(encoding="utf-8")
+    slugs = re.findall(r"^\s*slug: '([a-z0-9-]+)',", src, re.MULTILINE)
+    if not slugs:
+        raise SystemExit("acceptance: could not parse any slug from materials.ts")
+    return slugs
+
+
+MATERIALS = _materials_from_source()
 # A sample of the noindexed catalogue entries.
 SAMPLE_ENTRIES = [
     "/library/peek/bambu-lab-peek-premium",
@@ -265,7 +274,10 @@ def main() -> int:
             failures.append("sitemap -> unexpected %s" % extra)
         print("sitemap: %d URLs" % len(locs))
 
-    print("\n%s: %d pages checked" % (where, checked))
+    print(
+        "\n%s: %d pages checked (%d materials derived from materials.ts)"
+        % (where, checked, len(MATERIALS))
+    )
     if amazon_links_total[0] == 0:
         print(
             "Amazon links: 0 found. The tag checks passed VACUOUSLY - commerce is "

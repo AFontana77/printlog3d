@@ -73,6 +73,22 @@ const CAPABILITY: Record<string, CapabilityState> = {
   'PLA Silk': 'NOT_SUPPORTED',
   'PLA Wood': 'NOT_SUPPORTED',
   'PLA Metal': 'NOT_SUPPORTED',
+
+  // Added 2026-08-28. TPU was found CONDITIONAL by the capability audit and had
+  // no page to attach to until now; it does.
+  TPU: 'CONDITIONAL',
+  TPE: 'NOT_SUPPORTED',
+  PVA: 'NOT_SUPPORTED',
+  PP: 'NOT_SUPPORTED',
+  PVB: 'NOT_SUPPORTED',
+  'PLA-CF': 'NOT_SUPPORTED',
+  'PA-GF': 'NOT_SUPPORTED',
+  'ASA-CF': 'NOT_SUPPORTED',
+  PEI: 'NOT_SUPPORTED',
+  PPS: 'NOT_SUPPORTED',
+  'Conductive PLA': 'NOT_SUPPORTED',
+  'Glow PLA': 'NOT_SUPPORTED',
+  'Magnetic PLA': 'NOT_SUPPORTED',
 };
 
 export function capabilityFor(m: MaterialProfile): CapabilityState {

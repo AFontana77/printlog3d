@@ -104,6 +104,21 @@ const SOURCING: Record<string, Sourcing> = {
   'PA-CF': 'engineering',
   PC: 'engineering',
   PEEK: 'engineering',
+
+  // Added 2026-08-28.
+  TPU: 'commodity',            // widely stocked, every major brand carries it
+  TPE: 'specialist',           // far thinner general-retail coverage than TPU
+  PVA: 'specialist',           // support material, sold mostly by filament specialists
+  PP: 'specialist',
+  PVB: 'specialist',
+  'PLA-CF': 'commodity',       // now stocked as broadly as plain PLA variants
+  'PA-GF': 'engineering',
+  'ASA-CF': 'specialist',
+  PEI: 'engineering',          // $200-500/kg, not a general-retail product
+  PPS: 'engineering',
+  'Conductive PLA': 'specialist',
+  'Glow PLA': 'commodity',
+  'Magnetic PLA': 'commodity',
 };
 
 export function sourcingFor(m: MaterialProfile): Sourcing {
@@ -122,6 +137,21 @@ export function filamentSearchTerms(m: MaterialProfile): string | null {
   // Verified against the live Amazon catalogue on 2026-08-24. Overrides exist
   // only where the default pattern returned the wrong material.
   const OVERRIDES: Record<string, string | null> = {
+    // The default "{category} filament 1.75mm" pattern returns the wrong
+    // product for these, so each is spelled the way a shopper searches.
+    TPU: 'TPU filament 1.75mm flexible',
+    TPE: 'TPE flexible filament 1.75mm',
+    PVA: 'PVA dissolvable support filament 1.75mm',
+    PP: 'polypropylene filament 1.75mm',
+    PVB: 'PVB filament 1.75mm smoothable',
+    'PA-GF': 'glass fiber nylon filament 1.75mm',
+    'Conductive PLA': 'conductive PLA filament 1.75mm',
+    'Glow PLA': 'glow in the dark PLA filament 1.75mm',
+    'Magnetic PLA': 'iron filled magnetic PLA filament 1.75mm',
+    // Industrial materials general retail does not meaningfully stock. Same
+    // decision as CPE: no Amazon link rather than a misleading one.
+    PEI: null,
+    PPS: null,
     // "cpe filament 1.75mm" returns TPU and PLA. "CPE 3D printer filament"
     // returns four PLA listings. Amazon does not stock this material under any
     // name a reader would search, so it gets no Amazon link at all.

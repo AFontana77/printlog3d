@@ -7,7 +7,8 @@ import { PrintServiceRoute } from '@/components/PrintServiceRoute';
 import { needsServiceRoute } from '@/lib/commerce';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import { canOfferOwnedService } from '@/lib/ownedService';
-import { MATERIAL_PROFILES, getMaterialBySlug, type MaterialProfile } from '@/lib/materials';
+import { MATERIAL_PROFILES, getMaterialBySlug, iconFor, type MaterialProfile } from '@/lib/materials';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -297,12 +298,28 @@ export default async function MaterialPage({
         {/* Answer first. This is the block an assistant should be able to quote. */}
         <section className="py-12 px-4" style={{ backgroundColor: '#F5F3FF' }}>
           <div className="max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-brand bg-brand-tint px-3 py-1 rounded-full mb-4">
-              {m.difficulty}
+            <div className="flex items-start gap-5 mb-5">
+              <Image
+                src={`/brand/icons/${iconFor(m)}.png`}
+                alt=""
+                aria-hidden="true"
+                width={72}
+                height={72}
+                priority
+                className="h-16 w-16 sm:h-[72px] sm:w-[72px] flex-shrink-0"
+              />
+              <div className="min-w-0">
+                <h1
+                  className="text-3xl sm:text-4xl font-bold mb-1 leading-tight"
+                  style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)', letterSpacing: '-0.02em' }}
+                >
+                  {m.category} print settings
+                </h1>
+                <p className="text-sm" style={{ color: 'var(--muted-foreground)' }}>
+                  {m.fullName} &middot; {m.difficulty}
+                </p>
+              </div>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-              {m.category} print settings
-            </h1>
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
               <strong>{m.category}</strong> ({m.fullName}) prints at{' '}
               <strong>{m.printTempC}&deg;C</strong> with the bed at <strong>{m.bedTempC}&deg;C</strong>.{' '}

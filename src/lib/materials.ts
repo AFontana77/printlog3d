@@ -416,6 +416,282 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
       'People expect metal strength. The filler adds weight and finish, and reduces strength compared with plain PLA.',
     comparedWith: 'PLA',
   },
+  {
+    category: 'TPU',
+    slug: 'tpu',
+    fullName: 'Thermoplastic Polyurethane',
+    summary:
+      'The flexible one. Rubbery, tough, and abrasion resistant, and the only common filament that survives being bent repeatedly. Printing it is a mechanical problem rather than a temperature one.',
+    printTempC: '220-250',
+    bedTempC: '30-50',
+    enclosure: 'Not needed',
+    coolingFan: 'Yes, low',
+    retraction: '0-1mm, as little as you can get away with',
+    priceBandUsd: '$25-45',
+    drying:
+      'Hygroscopic. Dry at 50C for 4-6 hours. Wet TPU strings into a spider web and the surface goes rough.',
+    needsDrying: true,
+    difficulty: 'Intermediate',
+    goodFor: ['Phone and tablet cases', 'Gaskets and seals', 'Vibration dampers and feet', 'RC tyres and wheels', 'Shoe insoles and grips'],
+    avoidFor: ['Long Bowden tubes', 'Fine detail', 'Fast printing', 'Anything rigid'],
+    commonProblem:
+      'The filament buckles between the drive gear and the hot end instead of feeding, and the print turns into a tangle. Slow to 15-25 mm/s and use direct drive. On a Bowden setup this is a hardware limit, not a settings problem.',
+    comparedWith: 'TPE',
+  },
+  {
+    category: 'TPE',
+    slug: 'tpe',
+    fullName: 'Thermoplastic Elastomer',
+    summary:
+      'Softer and stretchier than TPU, and harder to print for exactly that reason. Choose it when the part has to feel genuinely rubbery rather than merely flexible.',
+    printTempC: '210-240',
+    bedTempC: '30-50',
+    enclosure: 'Not needed',
+    coolingFan: 'Yes, low',
+    retraction: '0-0.5mm',
+    priceBandUsd: '$30-55',
+    drying: 'Hygroscopic. Dry at 45-50C for 4-6 hours.',
+    needsDrying: true,
+    difficulty: 'Advanced',
+    goodFor: ['Soft-touch grips', 'Wearable and prosthetic padding', 'Squeezable parts', 'Low-pressure seals'],
+    avoidFor: ['Bowden printers', 'Any geared extruder with a long unsupported filament path', 'Detailed models'],
+    commonProblem:
+      'Everything that goes wrong with TPU goes wrong sooner. A lower Shore hardness means the filament compresses more readily in the extruder, so direct drive is effectively mandatory and 15 mm/s is a sensible ceiling.',
+    comparedWith: 'TPU',
+  },
+  {
+    category: 'PVA',
+    slug: 'pva',
+    fullName: 'Polyvinyl Alcohol',
+    summary:
+      'A support material that dissolves in plain water. It exists so you can print geometry that would otherwise be impossible to clean up, and it is useless without a second extruder.',
+    printTempC: '190-220',
+    bedTempC: '45-60',
+    enclosure: 'Not needed',
+    coolingFan: 'Yes',
+    retraction: '2-4mm',
+    priceBandUsd: '$40-90',
+    drying:
+      'The most hygroscopic filament in common use. Dry at 45C for 6-8 hours and print straight from a dry box. Left in open air it can absorb enough moisture to be unusable within a day.',
+    needsDrying: true,
+    difficulty: 'Intermediate',
+    goodFor: ['Dissolvable supports for PLA and PETG', 'Enclosed internal geometry', 'Fragile overhangs that would break during removal'],
+    avoidFor: ['Single-extruder printers', 'Humid workshops without sealed storage', 'Structural parts of any kind'],
+    commonProblem:
+      'It degrades in the hot end during long prints, because it has already absorbed water on the spool. Store it sealed from the moment it arrives, not from the moment it misbehaves.',
+    comparedWith: 'HIPS',
+  },
+  {
+    category: 'PP',
+    slug: 'pp',
+    fullName: 'Polypropylene',
+    summary:
+      'Chemically inert, fatigue resistant, and the best material available for living hinges. It also refuses to stick to almost every build surface, which is the whole difficulty.',
+    printTempC: '220-250',
+    bedTempC: '85-100',
+    enclosure: 'Recommended',
+    coolingFan: 'Yes, low',
+    retraction: '0.5-1.5mm',
+    priceBandUsd: '$40-80',
+    drying: 'Mildly hygroscopic. Dry at 60-70C for 4 hours if it has been open a while.',
+    needsDrying: false,
+    difficulty: 'Advanced',
+    goodFor: ['Living hinges that flex thousands of times', 'Chemical containers and lab fittings', 'Automotive trim clips', 'Food-adjacent parts'],
+    avoidFor: ['PEI and glass beds', 'Large flat parts', 'Anything needing dimensional precision'],
+    commonProblem:
+      'It will not stick. The standard answer is packing tape or a polypropylene-specific sheet, because PP bonds to itself and to very little else. Bed temperature alone will not fix it.',
+    comparedWith: 'PETG',
+  },
+  {
+    category: 'PVB',
+    slug: 'pvb',
+    fullName: 'Polyvinyl Butyral',
+    summary:
+      'Prints about as easily as PLA and smooths with isopropyl alcohol rather than acetone, which makes glass-clear parts achievable without a solvent cabinet.',
+    printTempC: '215-235',
+    bedTempC: '60-75',
+    enclosure: 'Not needed',
+    coolingFan: 'Yes',
+    retraction: '2-4mm',
+    priceBandUsd: '$30-50',
+    drying: 'Hygroscopic. Dry at 50C for 4-6 hours.',
+    needsDrying: true,
+    difficulty: 'Intermediate',
+    goodFor: ['Transparent and translucent parts', 'Vases and display pieces', 'Prints you intend to polish', 'Light diffusers'],
+    avoidFor: ['Load-bearing parts', 'Anything left in sun or damp', 'High-temperature service'],
+    commonProblem:
+      'It absorbs moisture from the air noticeably faster than PLA, and a spool left out for a fortnight prints cloudy rather than clear. The clarity people buy it for is the first thing moisture takes away.',
+    comparedWith: 'PETG',
+  },
+  {
+    category: 'PLA-CF',
+    slug: 'pla-cf',
+    fullName: 'Carbon Fibre Reinforced PLA',
+    summary:
+      'PLA with chopped carbon fibre for stiffness and a matte black finish that hides layer lines completely. Easier than any other composite, and abrasive enough to need a hardened nozzle.',
+    printTempC: '190-230',
+    bedTempC: '50-60',
+    enclosure: 'Not needed',
+    coolingFan: 'Yes',
+    retraction: '0.2-0.5mm',
+    priceBandUsd: '$30-50',
+    drying: 'Mildly hygroscopic. Dry at 45-55C for 4-6 hours.',
+    needsDrying: false,
+    difficulty: 'Intermediate',
+    goodFor: ['Stiff brackets and mounts', 'Matte cosmetic prints', 'Drone and RC frames', 'Jigs and fixtures'],
+    avoidFor: ['Brass nozzles', 'Parts needing impact toughness', 'Fine detail below 0.4mm'],
+    commonProblem:
+      'People expect carbon fibre to mean stronger. It means stiffer and more brittle: PLA-CF snaps where plain PLA would bend. Stiffness is the reason to choose it, not strength.',
+    comparedWith: 'PLA',
+  },
+  {
+    category: 'PA-GF',
+    slug: 'pa-gf',
+    fullName: 'Glass Fibre Reinforced Nylon',
+    summary:
+      'Nylon with chopped glass fibre. Tougher and less brittle than the carbon-filled version, at some cost in stiffness, and it keeps nylon impact resistance rather than trading it away.',
+    printTempC: '250-280',
+    bedTempC: '80-100',
+    enclosure: 'Required',
+    coolingFan: 'Minimal',
+    retraction: '0.3-0.6mm',
+    priceBandUsd: '$60-110',
+    drying: 'Very hygroscopic. Dry at 70-80C for 8-12 hours and print from a dry box.',
+    needsDrying: true,
+    difficulty: 'Advanced',
+    goodFor: ['Impact-loaded brackets', 'Tooling and fixtures', 'Parts that must not shatter', 'High-cycle mechanical components'],
+    avoidFor: ['Brass nozzles', 'Open-frame printers', 'Cosmetic finishes'],
+    commonProblem:
+      'Glass fibre is more abrasive than carbon, not less. A hardened steel nozzle is the minimum and a ruby or tungsten tip is worth it if you print this regularly.',
+    comparedWith: 'PA-CF',
+  },
+  {
+    category: 'ASA-CF',
+    slug: 'asa-cf',
+    fullName: 'Carbon Fibre Reinforced ASA',
+    summary:
+      'ASA with carbon fibre: UV stability and heat resistance, plus stiffness and a matte finish. The natural choice for an outdoor part that also has to hold its shape under load.',
+    printTempC: '240-270',
+    bedTempC: '90-110',
+    enclosure: 'Required',
+    coolingFan: 'No, or very low',
+    retraction: '0.3-0.5mm',
+    priceBandUsd: '$40-70',
+    drying: 'Hygroscopic. Dry at 70-80C for 4 hours.',
+    needsDrying: true,
+    difficulty: 'Advanced',
+    goodFor: ['Outdoor structural brackets', 'Roof and garden fittings', 'Automotive exterior parts', 'Antenna and sensor mounts'],
+    avoidFor: ['Brass nozzles', 'Unventilated rooms', 'Open-frame printers'],
+    commonProblem:
+      'It warps like ASA and wears nozzles like a composite, so it inherits both problems at once. Enclose the printer and fit a hardened nozzle before the first print rather than after.',
+    comparedWith: 'ASA',
+  },
+  {
+    category: 'PEI',
+    slug: 'pei',
+    fullName: 'Polyetherimide, sold as ULTEM',
+    summary:
+      'An aerospace-grade thermoplastic with a UL 94 V-0 flame rating and a glass transition around 186C. It needs a 400C hot end and a heated chamber, so it is machine-limited rather than skill-limited.',
+    printTempC: '370-410',
+    bedTempC: '140-180',
+    enclosure: 'Required',
+    coolingFan: 'No',
+    retraction: '1-2mm',
+    priceBandUsd: '$200-500',
+    drying:
+      'Dry at 120-150C for several hours. This is a laboratory oven, not a filament dryer, and skipping it produces visible voids.',
+    needsDrying: true,
+    difficulty: 'Expert',
+    goodFor: ['Aerospace and rail interiors where flame rating matters', 'Continuous service near 170C', 'Chemically aggressive environments'],
+    avoidFor: ['Any printer without a 400C hot end and a heated chamber', 'Hobby budgets', 'Beginners'],
+    commonProblem:
+      'A heated bed is not a heated chamber. Large parts delaminate partway up even at the right nozzle temperature, because the chamber needs to hold 120-180C for the layers to fuse.',
+    comparedWith: 'PEEK',
+  },
+  {
+    category: 'PPS',
+    slug: 'pps',
+    fullName: 'Polyphenylene Sulfide',
+    summary:
+      'A semi-crystalline engineering polymer with excellent chemical and heat resistance. Usually sold carbon-filled, because neat PPS shrinks enough to be impractical on a desktop machine.',
+    printTempC: '300-340',
+    bedTempC: '120-150',
+    enclosure: 'Required',
+    coolingFan: 'No',
+    retraction: '0.5-1.5mm',
+    priceBandUsd: '$150-350',
+    drying: 'Dry at 100-120C for several hours. A filament dryer will not reach this.',
+    needsDrying: true,
+    difficulty: 'Expert',
+    goodFor: ['Chemical and fuel handling components', 'Parts in sustained heat above 150C', 'Electrical insulation in hot environments'],
+    avoidFor: ['Standard desktop printers', 'Anything cosmetic', 'Unfilled grades on an open frame'],
+    commonProblem:
+      'Crystallisation shrinkage. The part comes off the plate dimensionally different from the model, and the fix is chamber temperature and part design rather than slicer settings.',
+    comparedWith: 'PEEK',
+  },
+  {
+    category: 'Conductive PLA',
+    slug: 'conductive-pla',
+    fullName: 'Carbon-Loaded Conductive PLA',
+    summary:
+      'PLA loaded with conductive carbon black. It conducts well enough for a capacitive touch pad or a low-current sensor trace, and nowhere near well enough to be treated as wire.',
+    printTempC: '195-220',
+    bedTempC: '50-60',
+    enclosure: 'Not needed',
+    coolingFan: 'Yes',
+    retraction: '1-3mm',
+    priceBandUsd: '$50-90',
+    drying: 'Mildly hygroscopic. Dry at 45C for 4-6 hours.',
+    needsDrying: false,
+    difficulty: 'Intermediate',
+    goodFor: ['Capacitive touch surfaces', 'Low-voltage sensor traces', 'Static-dissipative fixtures', 'Educational circuit demonstrations'],
+    avoidFor: ['Mains voltage or anything above extra-low voltage', 'Power-carrying conductors', 'Long traces where resistance accumulates', 'Structural parts'],
+    commonProblem:
+      'Its resistance is orders of magnitude higher than metal, and it rises with trace length, so a circuit that works across 20mm fails across 200mm. Treat it as a resistive material, never as a substitute for wire, and never put it near mains voltage.',
+    comparedWith: 'PLA',
+  },
+  {
+    category: 'Glow PLA',
+    slug: 'glow-pla',
+    fullName: 'Glow-in-the-Dark PLA',
+    summary:
+      'PLA carrying strontium aluminate phosphor, which charges under light and releases it slowly in the dark. It prints like PLA and wears nozzles like a composite.',
+    printTempC: '200-225',
+    bedTempC: '50-60',
+    enclosure: 'Not needed',
+    coolingFan: 'Yes',
+    retraction: '0.2-0.5mm',
+    priceBandUsd: '$25-45',
+    drying: 'Mildly hygroscopic. Dry at 45C for 4-6 hours.',
+    needsDrying: false,
+    difficulty: 'Intermediate',
+    goodFor: ['Signage and wayfinding', 'Props and costume pieces', 'Light switch surrounds and door markers', 'Toys'],
+    avoidFor: ['Brass nozzles', 'Fine detail', 'Anything expecting sustained brightness'],
+    commonProblem:
+      'The phosphor is a hard mineral, so it eats brass nozzles faster than most carbon-filled filaments. Fit hardened steel first. Brightness also depends on how much light it has absorbed, so a part kept indoors will glow far less than the spool photograph suggests.',
+    comparedWith: 'PLA',
+  },
+  {
+    category: 'Magnetic PLA',
+    slug: 'magnetic-pla',
+    fullName: 'Iron-Filled Magnetic PLA',
+    summary:
+      'PLA packed with iron powder. Parts are noticeably heavy, can be rusted deliberately for an aged finish, and are attracted to magnets, which is not the same as being magnetic.',
+    printTempC: '195-225',
+    bedTempC: '50-60',
+    enclosure: 'Not needed',
+    coolingFan: 'Yes',
+    retraction: '0.2-0.5mm',
+    priceBandUsd: '$35-60',
+    drying: 'Mildly hygroscopic. Dry at 45C for 4-6 hours.',
+    needsDrying: false,
+    difficulty: 'Intermediate',
+    goodFor: ['Props that should feel solid', 'Parts intended to be rusted for finish', 'Fridge-magnet-backed pieces', 'Display models'],
+    avoidFor: ['Brass nozzles', 'Structural parts', 'Anything that must not corrode', 'Fine detail'],
+    commonProblem:
+      'It is ferromagnetic, not magnetised: a printed part sticks to a magnet but will not hold anything up by itself. It also genuinely rusts, which is the point for some projects and a defect for others, so seal it if you do not want that.',
+    comparedWith: 'PLA Metal',
+  },
 ];
 
 const BY_SLUG = new Map(MATERIAL_PROFILES.map((m) => [m.slug, m]));
@@ -432,4 +708,32 @@ export function getMaterialByCategory(category: string): MaterialProfile | undef
 /** Materials that need a dryer. Drives the honest accessory recommendation. */
 export function materialsNeedingDrying(): MaterialProfile[] {
   return MATERIAL_PROFILES.filter((m) => m.needsDrying);
+}
+
+/**
+ * Brand-package icon per material.
+ *
+ * The package ships 21 category icons against 30 materials, so families share a
+ * mark: every PLA compound uses the spool, every fibre-filled material uses the
+ * honeycomb, and the two flexibles use the wave. That is deliberate — a shared
+ * family mark reads as a system, whereas inventing four more icons to force a
+ * one-to-one map would break the visual language the package establishes.
+ */
+const MATERIAL_ICON: Record<string, string> = {
+  PLA: 'pla', 'PLA Matte': 'pla', 'PLA Silk': 'pla', 'PLA Wood': 'pla', 'PLA Metal': 'pla',
+  'Conductive PLA': 'pla', 'Glow PLA': 'pla', 'Magnetic PLA': 'pla',
+  PETG: 'petg', PCTG: 'petg', CPE: 'petg', PVB: 'petg',
+  'PETG-CF': 'composite-filaments', 'PLA-CF': 'composite-filaments',
+  'PA-CF': 'composite-filaments', 'PA-GF': 'composite-filaments',
+  'ASA-CF': 'composite-filaments',
+  ABS: 'abs', HIPS: 'abs', ASA: 'asa',
+  'Nylon PA6': 'nylon', 'Nylon PA12': 'nylon',
+  PC: 'polycarbonate', PEEK: 'peek', PEI: 'peek', PPS: 'peek',
+  TPU: 'flexible-filaments', TPE: 'flexible-filaments',
+  PVA: 'support-removal', PP: 'material-profiles',
+};
+
+export function iconFor(m: MaterialProfile | string): string {
+  const key = typeof m === 'string' ? m : m.category;
+  return MATERIAL_ICON[key] ?? 'material-profiles';
 }
