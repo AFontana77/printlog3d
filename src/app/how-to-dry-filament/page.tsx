@@ -82,9 +82,9 @@ const STORAGE_TIPS = [
 const DRYING_EQUIPMENT: GearSpec[] = [
   {
     category: 'Filament dryer',
-    requirement: 'Must reach 80C to cover nylon',
-    why: 'A unit that stops at 55-60C will dry PLA and little else. Nylon needs 70-80C for 12 hours or more, so the maximum temperature is the specification that decides whether a dryer is worth owning. Check it on the spec sheet, not in the product title.',
-    searchTerms: 'filament dryer 80C',
+    requirement: 'Must reach 70C to cover nylon',
+    why: 'A unit that stops at 55-60C will dry PLA and little else. Nylon needs 70-80C for 12 hours or more, so 70C is the floor worth buying and anything higher is margin. Maximum temperature is the specification that decides whether a dryer is worth owning, and it is usually buried in the spec sheet rather than the product title.',
+    searchTerms: 'filament dryer nylon',
   },
   {
     category: 'Hygrometer',

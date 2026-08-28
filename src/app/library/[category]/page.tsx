@@ -76,21 +76,27 @@ function gearFor(m: MaterialProfile): GearSpec[] {
   const out: GearSpec[] = [];
   if (m.needsDrying) {
     const dryTemp = m.drying.match(/(\d+)(?:-(\d+))?C/);
-    const needed = dryTemp ? Number(dryTemp[2] ?? dryTemp[1]) : 65;
+    // "Must reach AT LEAST x" is the LOW end of the range, not the high end.
+    // Reading the upper bound demanded 80C for nylon when the site's own data
+    // says 70-80C, and 80C is above what most real dryers deliver.
+    const needed = dryTemp ? Number(dryTemp[1]) : 65;
+    const ceiling = dryTemp ? Number(dryTemp[2] ?? dryTemp[1]) : 65;
     // Consumer filament dryers top out around 90C. Above that, pointing the
     // reader at a dryer sends them after a product that cannot do the job,
     // and contradicts this page's own drying section.
-    if (needed <= 90) {
+    if (ceiling <= 90) {
       out.push({
         category: 'Filament dryer',
         requirement: `Must reach at least ${needed}C`,
         why: `${m.category} will not print cleanly wet, and many budget dryers stop at 55-60C. Check the maximum temperature before buying, not the marketing copy.`,
-        searchTerms: `filament dryer ${needed}C`,
+        // At 70C and above, a temperature-token search returns thin and
+        // partly unsuitable results; searching for nylon-rated units does not.
+        searchTerms: needed >= 70 ? 'filament dryer nylon' : `filament dryer ${needed}C`,
       });
     } else {
       out.push({
         category: 'High-temperature oven',
-        requirement: `Must hold ${needed}C steadily`,
+        requirement: `Must hold ${ceiling}C steadily`,
         why: `${m.category} needs drying well above what any consumer filament dryer reaches. This is lab oven territory, not a spool warmer, and it is one of the reasons the material is impractical on a desktop setup.`,
         searchTerms: 'laboratory drying oven',
       });

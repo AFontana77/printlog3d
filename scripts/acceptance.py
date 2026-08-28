@@ -80,7 +80,14 @@ SIBLING_TAGS = (
 )
 
 AMAZON_LINK_RE = re.compile(r'href="(https://(?:www\.)?amazon\.com/[^"]*)"')
+# HTML entity-encodes the query separator, so a live href reads
+# `...?k=petg&amp;tag=printlog3d-20`. Matching on a bare `&` reports every
+# correctly tagged link as untagged. Unescape before parsing.
 TAG_RE = re.compile(r"[?&]tag=([A-Za-z0-9_-]+)")
+
+
+def unescape_href(url: str) -> str:
+    return url.replace("&amp;", "&").replace("&#38;", "&")
 
 
 DEAD_HREF_RE = re.compile(r'<a\b[^>]*\bhref="(#|)"[^>]*>', re.IGNORECASE)
@@ -100,7 +107,7 @@ def check_dead_ctas(html, label, failures):
 
 def check_amazon(html, label, failures):
     """Returns the number of Amazon links found, and appends any failures."""
-    links = AMAZON_LINK_RE.findall(html)
+    links = [unescape_href(u) for u in AMAZON_LINK_RE.findall(html)]
     for url in links:
         tags = TAG_RE.findall(url)
         if not tags:

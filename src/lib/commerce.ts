@@ -63,7 +63,8 @@ export function amazonTag(): string {
   return amazonProgram?.tracking_value || '';
 }
 
-export function amazonSearchUrl(terms: string): string | null {
+export function amazonSearchUrl(terms: string | null): string | null {
+  if (!terms) return null;
   if (AMAZON.status !== 'enrolled') return null;
   const tag = amazonTag();
   if (!tag) return null;
@@ -117,9 +118,20 @@ export function sourcingFor(m: MaterialProfile): Sourcing {
  * that do not exist; recommending "PETG filament 1.75mm" cannot repeat that
  * mistake, and it does not pretend one manufacturer is universally best.
  */
-export function filamentSearchTerms(m: MaterialProfile): string {
-  const base = m.category.toLowerCase().replace('nylon ', 'nylon ');
-  return `${base} filament 1.75mm`;
+export function filamentSearchTerms(m: MaterialProfile): string | null {
+  // Verified against the live Amazon catalogue on 2026-08-24. Overrides exist
+  // only where the default pattern returned the wrong material.
+  const OVERRIDES: Record<string, string | null> = {
+    // "cpe filament 1.75mm" returns TPU and PLA. "CPE 3D printer filament"
+    // returns four PLA listings. Amazon does not stock this material under any
+    // name a reader would search, so it gets no Amazon link at all.
+    CPE: null,
+    // The default returned a carbon-fibre nylon in second place. This returns
+    // genuine PEEK throughout.
+    PEEK: 'PEEK 3D printer filament',
+  };
+  if (m.category in OVERRIDES) return OVERRIDES[m.category];
+  return `${m.category.toLowerCase()} filament 1.75mm`;
 }
 
 // ---------------------------------------------------------------------------
