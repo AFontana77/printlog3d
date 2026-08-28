@@ -127,7 +127,7 @@ def check_amazon(html, label, failures):
 
 STATIC_PAGES = [
     "", "/library", "/free-download", "/about", "/support", "/privacy", "/terms",
-    "/disclosure",
+    "/disclosure", "/get-it-printed",
     "/pla-vs-petg", "/pla-vs-abs", "/abs-vs-petg",
     "/3d-printing-filament-guide", "/how-to-dry-filament", "/3d-print-stringing",
 ]

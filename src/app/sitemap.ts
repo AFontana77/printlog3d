@@ -32,6 +32,7 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
   { path: '/how-to-dry-filament', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/3d-print-stringing', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/free-download', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/get-it-printed', priority: 0.75, changeFrequency: 'monthly' },
   { path: '/disclosure', priority: 0.4, changeFrequency: 'yearly' },
   { path: '/about', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/support', priority: 0.4, changeFrequency: 'yearly' },
