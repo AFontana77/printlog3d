@@ -245,6 +245,33 @@ def jsonld_blocks(html: str) -> list[dict]:
     return blocks
 
 
+def check_field_guide(failures):
+    """The lead magnet must contain what the page promises.
+
+    The PDF is owner-made artwork and cannot be regenerated from source, so the
+    page copy is the thing that has to track it. It drifted once already: the
+    offer read "all 31 materials" while the file held 19, TPU among the missing.
+    """
+    root = Path(__file__).resolve().parent.parent
+    pdf = root / "public" / "PrintLog3D-Filament-Settings-Field-Guide.pdf"
+    ts = (root / "src" / "lib" / "fieldGuide.ts").read_text(encoding="utf-8")
+    claimed = re.findall(r"^    '([^']+)',", ts, re.M)
+    if not pdf.is_file():
+        failures.append("FIELD GUIDE -> PDF missing at %s" % pdf.name)
+        return
+    try:
+        from PyPDF2 import PdfReader
+    except ImportError:
+        print("  (field-guide check skipped: PyPDF2 not installed)")
+        return
+    pages = [(pg.extract_text() or "") for pg in PdfReader(str(pdf)).pages]
+    text = chr(10).join(pages)
+    for m in claimed:
+        if m not in text:
+            failures.append("FIELD GUIDE -> claims %s but the PDF does not contain it" % m)
+    print("  field guide: %d materials claimed, all present in the PDF" % len(claimed))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     g = ap.add_mutually_exclusive_group(required=True)
@@ -256,6 +283,7 @@ def main() -> int:
 
     failures: list[str] = []
     asset_cache: dict[str, int] = {}
+    check_field_guide(failures)
     checked = 0
     amazon_links_total = [0]
 

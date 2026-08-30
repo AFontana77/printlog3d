@@ -2,6 +2,7 @@ import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { EmailCaptureForm } from '@/components/EmailCaptureForm';
 import { MATERIAL_PROFILES } from '@/lib/materials';
+import { FIELD_GUIDE_COUNT } from '@/lib/fieldGuide';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -29,12 +30,12 @@ const BASE = 'https://www.printlog3d.com';
 
 export const metadata: Metadata = {
   title: 'Free filament settings cheat sheet (PDF)',
-  description: `A one-page printable reference with nozzle and bed temperatures, enclosure and drying requirements for ${MATERIAL_PROFILES.length} filament materials. Direct download, no signup required.`,
+  description: `A printable reference with nozzle and bed temperatures, enclosure and drying requirements for ${FIELD_GUIDE_COUNT} filament materials. Direct download, no signup required.`,
   alternates: { canonical: `${BASE}/free-download` },
 };
 
 const CONTENTS = [
-  `All ${MATERIAL_PROFILES.length} materials on one table, from PLA to PEEK`,
+  `The ${FIELD_GUIDE_COUNT} materials you are most likely to load, on one table, from PLA to PEEK`,
   'Nozzle and bed temperature ranges',
   'Enclosure needed: yes or no, per material',
   'Part cooling and the drying temperature each material wants',
@@ -90,7 +91,7 @@ export default function FreeDownloadPage() {
               className="text-base mb-8"
             >
               Two pages. Nozzle and bed temperatures, enclosure and drying needs for{' '}
-              {MATERIAL_PROFILES.length} materials, plus the fault each one actually fails with. Print it and
+              {FIELD_GUIDE_COUNT} materials, plus the fault each one actually fails with. Print it and
               hang it next to your machine.
             </p>
 
@@ -266,7 +267,7 @@ export default function FreeDownloadPage() {
                 }}
                 className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold min-h-[48px] transition-colors press-feedback"
               >
-                All {MATERIAL_PROFILES.length} materials &rarr;
+                All {MATERIAL_PROFILES.length} material profiles &rarr;
               </Link>
               <Link
                 href="/how-to-dry-filament"
