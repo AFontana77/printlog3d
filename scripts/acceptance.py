@@ -318,6 +318,21 @@ def main() -> int:
     failures: list[str] = []
     asset_cache: dict[str, int] = {}
     check_field_guide(failures)
+
+    # The IndexNow key must be reachable at /<key>.txt or submission
+    # silently stops working. Nothing links to it, so no other check
+    # would ever notice it had gone.
+    if args.prod:
+        _k = re.search(
+            r"INDEXNOW_KEY = '([0-9a-f]+)'",
+            (Path(__file__).resolve().parent.parent / 'src' / 'lib' / 'indexnow.ts')
+            .read_text(encoding='utf-8'),
+        ).group(1)
+        _st, _body = fetch_prod('/%s.txt' % _k)
+        if _st != 200 or _k not in _body:
+            failures.append('INDEXNOW -> key file /%s.txt not serving the key (HTTP %s)' % (_k, _st))
+        else:
+            print('  indexnow: key file serving correctly')
     checked = 0
     amazon_links_total = [0]
 
