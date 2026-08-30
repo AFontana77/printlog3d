@@ -1,6 +1,6 @@
 {
  "_note": "Amazon product image LINKS only. No image bytes are stored. Entries expire 24h after fetched_at per the Associates Operating Agreement; the render component falls back to a branded placeholder once stale.",
- "fetched_at": "2026-08-30T09:00:32+00:00",
+ "fetched_at": "2026-08-30T11:02:02+00:00",
  "ttl_hours": 24,
  "partner_tag": "printlog3d-20",
  "items": {
@@ -63,6 +63,45 @@
      "height": 500
     }
    ]
+  },
+  "B009EU5ZM0": {
+   "title": "J-B Weld 50112 ClearWeld 5 Minute Set Epoxy Syringe - Clear - 25 ml, 25ml",
+   "primary": {
+    "url": "https://m.media-amazon.com/images/I/414qB5XjOeL._SL500_.jpg",
+    "width": 500,
+    "height": 500
+   },
+   "variants": [
+    {
+     "url": "https://m.media-amazon.com/images/I/41EyOgzPk-L._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/41IAqppjhnL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/41t8Pi3NjlL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/41-7R2sfJqL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    }
+   ]
+  },
+  "B0166FFCHS": {
+   "title": "Bob Smith Industries BSI-157H Maxi Cure/Insta-Set Combo Pack (3 oz. Combined),Clear",
+   "primary": {
+    "url": "https://m.media-amazon.com/images/I/411ZzyEod3L._SL500_.jpg",
+    "width": 500,
+    "height": 500
+   },
+   "variants": []
   },
   "B01HBJ8Y00": {
    "title": "28 Pcs 120 to 3000 Grit Wet Dry Sandpaper Assortment 9 * 3.6 Inches for Automotive Sanding",
@@ -184,6 +223,36 @@
     }
    ]
   },
+  "B07VDP2S3P": {
+   "title": "OVERTURE TPU 95A Flexible 3D Printer Filament 1.75mm, 1kg Black",
+   "primary": {
+    "url": "https://m.media-amazon.com/images/I/415hQ79ETVL._SL500_.jpg",
+    "width": 417,
+    "height": 500
+   },
+   "variants": [
+    {
+     "url": "https://m.media-amazon.com/images/I/411ztwQrigL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51hv8DjKwQL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51dkq+PrtGL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51zuz0Z5G1L._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    }
+   ]
+  },
   "B07WCR5Y4B": {
    "title": "TempPro TempAir Digital Hygrometer Indoor Thermometer",
    "primary": {
@@ -274,6 +343,36 @@
     }
    ]
   },
+  "B08CGCHWMP": {
+   "title": "MaxTite Isopropyl Alcohol 99.9% (32oz)",
+   "primary": {
+    "url": "https://m.media-amazon.com/images/I/41sEvzei5OL._SL500_.jpg",
+    "width": 500,
+    "height": 500
+   },
+   "variants": [
+    {
+     "url": "https://m.media-amazon.com/images/I/51WjONQ9ZIL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51cXamX101L._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51Cw6GeWEkL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51zzXaf82qL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    }
+   ]
+  },
   "B0969LK4ZT": {
    "title": "XIFOWE MK8 Nozzles 24 pcs Assorted Sizes 3D Printer Extruders Brass Nozzles",
    "primary": {
@@ -334,6 +433,36 @@
     }
    ]
   },
+  "B0BVG2K1BQ": {
+   "title": "TEQStone 3D Printer Glue Stick 6 Pack, Perfect First Layer Adhesion, Prevents Warping on Heat Bed, Easy Release for ABS PLA PETG Filaments and Various Build Plate, 36g/1.27oz",
+   "primary": {
+    "url": "https://m.media-amazon.com/images/I/51hwzsEeRZL._SL500_.jpg",
+    "width": 500,
+    "height": 500
+   },
+   "variants": [
+    {
+     "url": "https://m.media-amazon.com/images/I/51c5zPl+oSL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/31byxwV1nlL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51PgdaZ7qLL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51BSJtid8hL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    }
+   ]
+  },
   "B0D8HMR1HT": {
    "title": "90W Digital Soldering Iron for Heat Set Inserts with M2-M8 Tips 3D Printing",
    "primary": {
@@ -359,6 +488,36 @@
     },
     {
      "url": "https://m.media-amazon.com/images/I/41+G+t3w-NL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    }
+   ]
+  },
+  "B0FKGNZ36S": {
+   "title": "Bartoline Filler Primer Spray Paint, Gray, 13.5 oz - Sandable Finish Multi-Surface Filler & Primer for Metal, Wood & Plastic - Fast-Drying - 400 ml",
+   "primary": {
+    "url": "https://m.media-amazon.com/images/I/313sIOIDm1L._SL500_.jpg",
+    "width": 500,
+    "height": 500
+   },
+   "variants": [
+    {
+     "url": "https://m.media-amazon.com/images/I/41Cg6jHpZQL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51W4KlUXAyL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/41nVZq9EYZL._SL500_.jpg",
+     "width": 500,
+     "height": 500
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/51GhA0nF09L._SL500_.jpg",
      "width": 500,
      "height": 500
     }
