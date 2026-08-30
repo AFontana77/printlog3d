@@ -28,24 +28,14 @@ BUILD = REPO / ".next" / "server" / "app"
 BASE = "https://www.printlog3d.com"
 
 # Claims that must appear nowhere on the site.
-BANNED = {
-    "fabricated filament count": r"1,260",
-    "fabricated source name": r"Filamentpedia",
-    "firsthand testing claim": r"\btested\b(?![^<]{0,40}by the manufacturer)",
-    "we tested / our lab": r"\b(we tested|we measured|our lab|I tested)\b",
-    "false Associates membership": r"participates in the Amazon Associates",
-    "dead App Store link": r'href="https://apps\.apple\.com"',
-    "dead Google Play link": r'href="https://play\.google\.com"',
-    "unpublished app price": r"\$6\.99",
-    "app availability claim": r"free on (iPhone|iOS)",
-    # The app is not published. These phrases all assert it is usable today,
-    # and they survived a first sweep on six guide pages that were out of scope.
-    "app usability claim": r"FREE APP|in PrintLog3D|check the app|Download the app",
-    "untagged Amazon link": r"amazon\.com/s\?k=(?![^\"]*tag=)",
-    "missing tracking placeholder": r"PENDING_TRACKING_ID",
-    "NaN render": r"NaN",
-    "em dash": r"—",
-}
+# Banned wording lives in banned-claims.json so the hydrated layer enforces the
+# SAME rules. Two copies of a rule set is the drift this property keeps paying
+# for; the em dash that escaped M1.5 escaped because only one layer existed.
+_BANNED_RAW = json.loads(
+    (Path(__file__).resolve().parent / "banned-claims.json").read_text(encoding="utf-8")
+)["patterns"]
+BANNED = {k: v for k, v in _BANNED_RAW.items()}
+
 
 # Checks where a negation in the preceding clause flips the meaning. "not
 # numbers we measured" is a disclaimer; "we measured" on its own is a claim.
@@ -169,6 +159,17 @@ STATIC_PAGES = [
     "/3d-printing-filament-guide", "/how-to-dry-filament", "/3d-print-stringing",
     "/3d-printer-troubleshooting", "/asa-vs-abs",
 ]
+def _material_categories_from_source() -> list[str]:
+    """Canonical category names, read from the same file the pages render from."""
+    src = (Path(__file__).resolve().parent.parent / "src" / "lib" / "materials.ts").read_text(
+        encoding="utf-8"
+    )
+    return re.findall(r"^    category: '([^']+)'", src, re.M)
+
+
+MATERIAL_CATEGORIES = _material_categories_from_source()
+
+
 def _materials_from_source() -> list[str]:
     """Read the slugs from materials.ts, the single definition of a material.
 
@@ -246,16 +247,22 @@ def jsonld_blocks(html: str) -> list[dict]:
 
 
 def check_field_guide(failures):
-    """The lead magnet must contain what the page promises.
+    """The lead magnet must contain what the page promises, and vice versa.
 
-    The PDF is owner-made artwork and cannot be regenerated from source, so the
-    page copy is the thing that has to track it. It drifted once already: the
-    offer read "all 31 materials" while the file held 19, TPU among the missing.
+    The page copy is the only half of this that can be corrected in code -- the
+    PDF is a produced asset -- so the copy is what has to track the file.
+
+    Matching is deliberately strict. A material counts as covered only if it
+    OPENS a line, which is what a settings row looks like here. Substring and
+    even word-boundary matching both over-count: `PP` hides inside other tokens,
+    and `PEI` appears in real prose as a build-plate surface rather than as a
+    profile. Both were miscounted once, by the first version of this check.
     """
     root = Path(__file__).resolve().parent.parent
     pdf = root / "public" / "PrintLog3D-Filament-Settings-Field-Guide.pdf"
     ts = (root / "src" / "lib" / "fieldGuide.ts").read_text(encoding="utf-8")
     claimed = re.findall(r"^    '([^']+)',", ts, re.M)
+
     if not pdf.is_file():
         failures.append("FIELD GUIDE -> PDF missing at %s" % pdf.name)
         return
@@ -264,12 +271,38 @@ def check_field_guide(failures):
     except ImportError:
         print("  (field-guide check skipped: PyPDF2 not installed)")
         return
-    pages = [(pg.extract_text() or "") for pg in PdfReader(str(pdf)).pages]
-    text = chr(10).join(pages)
+
+    reader = PdfReader(str(pdf))
+    pages = [(pg.extract_text() or "") for pg in reader.pages]
+    lines = [ln.strip() for ln in chr(10).join(pages).split(chr(10)) if ln.strip()]
+
+    def opens_a_line(name):
+        for ln in lines:
+            if ln == name:
+                return True
+            if ln.startswith(name) and not ln[len(name):len(name) + 1].isalnum():
+                return True
+        return False
+
     for m in claimed:
-        if m not in text:
-            failures.append("FIELD GUIDE -> claims %s but the PDF does not contain it" % m)
-    print("  field guide: %d materials claimed, all present in the PDF" % len(claimed))
+        if not opens_a_line(m):
+            failures.append(
+                "FIELD GUIDE -> claims %s but no settings row for it in the PDF" % m
+            )
+
+    # The other direction: a material documented in the guide must still exist
+    # as a live profile, or the download sends readers somewhere that is gone.
+    canon = set(MATERIAL_CATEGORIES)
+    for m in claimed:
+        if m not in canon:
+            failures.append(
+                "FIELD GUIDE -> claims %s, which is not a canonical material profile" % m
+            )
+
+    print(
+        "  field guide: %d materials, each a real settings row and a live profile "
+        "(library has %d)" % (len(claimed), len(canon))
+    )
 
 
 def main() -> int:

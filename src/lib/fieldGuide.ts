@@ -23,7 +23,19 @@
 export const FIELD_GUIDE = {
   path: '/PrintLog3D-Filament-Settings-Field-Guide.pdf',
   pages: 4,
-  /** Verified present in the shipped PDF, by text extraction, 2026-08-30. */
+  /**
+   * Verified present in the shipped PDF as a settings row, 2026-08-30.
+   *
+   * Corrected in M1.6 from 19 to 17. The first pass used a substring test and
+   * counted two materials the guide does not cover:
+   *   PP  -- matched inside another token, never appears on its own.
+   *   PEI -- appears in real prose, but as a BUILD PLATE surface ('Nylon does
+   *          not like PEI'), not as a material profile. Right token, wrong
+   *          meaning, which a word-boundary test alone still accepts.
+   *
+   * 17 is also what the PDF's own metadata subject line says, which is the
+   * corroboration the first pass should have checked against its own count.
+   */
   covers: [
     'PLA',
     'PLA Silk',
@@ -39,8 +51,6 @@ export const FIELD_GUIDE = {
     'HIPS',
     'PC',
     'PEEK',
-    'PEI',
-    'PP',
     'Nylon PA6',
     'Nylon PA12',
     'PA-CF',

@@ -139,7 +139,11 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
 
         {verified && amazonUrl && (
           <div className="mb-6 bg-gray-50 rounded-xl border border-gray-100 p-4 flex gap-4 items-start">
-            <AmazonProductImage asin={verified.asin} productName={verified.name} />
+            <AmazonProductImage
+              asin={verified.asin}
+              productName={verified.name}
+              className="h-20 w-20 sm:h-24 sm:w-24 object-contain flex-shrink-0 rounded"
+            />
             <div className="min-w-0">
               <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
                 Verified listing

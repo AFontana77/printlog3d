@@ -46,11 +46,16 @@ export function getProductImage(asin?: string | null): ManifestItem | null {
 export function AmazonProductImage({
   asin,
   productName,
-  className = '',
+  className = 'h-16 w-16 object-contain flex-shrink-0 rounded',
 }: {
   asin?: string | null;
   /** Used only as context for assistive tech. The image itself is decorative. */
   productName: string;
+  /**
+   * Sizing classes. Defaulted rather than empty on purpose: the manifest
+   * carries the real 500px intrinsic width, so an unsized instance lays out
+   * at 500px and overflows any phone. That shipped once, on /library/tpu.
+   */
   className?: string;
 }) {
   const item = getProductImage(asin);

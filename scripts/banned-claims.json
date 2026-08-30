@@ -1,0 +1,19 @@
+{
+  "_comment": "Single source for banned wording. Read by BOTH acceptance layers: scripts/acceptance.py (server HTML) and scripts/hydrated-acceptance.mjs (after hydration). Kept in one file because two copies of a rule set is the exact drift this property has now been bitten by three times -- comparison specs, icon extensions, and field-guide contents. Patterns are written to be valid in both Python re and JS RegExp.",
+  "patterns": {
+    "fabricated filament count": "1,260",
+    "fabricated source name": "Filamentpedia",
+    "firsthand testing claim": "\\btested\\b(?![^<]{0,40}by the manufacturer)",
+    "we tested / our lab": "\\b(we tested|we measured|our lab|I tested)\\b",
+    "false Associates membership": "participates in the Amazon Associates",
+    "dead App Store link": "href=\"https://apps\\.apple\\.com\"",
+    "dead Google Play link": "href=\"https://play\\.google\\.com\"",
+    "unpublished app price": "\\$6\\.99",
+    "app availability claim": "free on (iPhone|iOS)",
+    "app usability claim": "FREE APP|in PrintLog3D|check the app|Download the app",
+    "untagged Amazon link": "amazon\\.com/s\\?k=(?![^\\\"]*tag=)",
+    "missing tracking placeholder": "PENDING_TRACKING_ID",
+    "NaN render": "NaN",
+    "em dash": "\u2014"
+  }
+}
