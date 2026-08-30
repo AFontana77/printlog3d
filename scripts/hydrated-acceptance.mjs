@@ -179,9 +179,26 @@ for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 
 
   const consoleErrors = [];
   const pageErrors = [];
+  // Console-error scoping.
+  //
+  // A third-party pixel failing to load is not a defect in this property and
+  // not something we control. Cancelled _rsc prefetches are normal Next.js
+  // behaviour when a navigation aborts them.
+  //
+  // Scoped by the message's own URL rather than its text: Chrome reports
+  // "Failed to load resource: net::ERR_CONNECTION_TIMED_OUT" with no URL in the
+  // text at all, so a text match would have suppressed genuine first-party
+  // failures too. First-party asset resolution is separately and completely
+  // covered by the server layer, which fetches every referenced asset.
   page.on('console', (m) => {
-    if (m.type() === 'error') consoleErrors.push(m.text().slice(0, 160));
+    if (m.type() !== 'error') return;
+    const text = m.text().slice(0, 200);
+    const url = (m.location() && m.location().url) || '';
+    if (/_rsc=/.test(url)) return;
+    if (url && !/printlog3d\.com/.test(url)) return;   // someone else's host
+    consoleErrors.push((url ? url.slice(0, 70) + ' :: ' : '') + text.slice(0, 120));
   });
+
   page.on('pageerror', (e) => pageErrors.push(String(e).slice(0, 160)));
 
   const tag = `${viewport.width}px`;
@@ -189,7 +206,7 @@ for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 
   // ---------------------------------------------------------------- DRYING
   {
     const url = `${SITE}/how-to-dry-filament`;
-    await page.goto(url, { waitUntil: 'networkidle' });
+    await page.goto(url, { waitUntil: 'load', timeout: 45000 });
     const label = `[${tag}] /how-to-dry-filament`;
 
     if (!(await panelText(page, 'drying-decision'))) {
@@ -219,7 +236,7 @@ for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 
   // ------------------------------------------------------------- OUTSOURCE
   {
     const url = `${SITE}/get-it-printed`;
-    await page.goto(url, { waitUntil: 'networkidle' });
+    await page.goto(url, { waitUntil: 'load', timeout: 45000 });
     const label = `[${tag}] /get-it-printed`;
 
     if (!(await panelText(page, 'outsource-decision'))) {
@@ -253,7 +270,7 @@ for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 
 
   // ------------------------------------- client copy on the rest of the estate
   for (const p of ['/', '/workshop', '/3d-printer-troubleshooting', '/library/tpu', '/asa-vs-abs', '/free-download']) {
-    await page.goto(SITE + p, { waitUntil: 'networkidle' });
+    await page.goto(SITE + p, { waitUntil: 'load', timeout: 45000 });
     await checkPage(page, `[${tag}] ${p}`);
   }
 

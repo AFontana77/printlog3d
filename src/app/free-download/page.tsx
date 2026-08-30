@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 const CONTENTS = [
-  `The ${FIELD_GUIDE_COUNT} materials you are most likely to load, on one table, from PLA to PEEK`,
+  `Every one of the ${FIELD_GUIDE_COUNT} materials in the library, on one table, from PLA to PEEK`,
   'Nozzle and bed temperature ranges',
   'Enclosure needed: yes or no, per material',
   'Part cooling and the drying temperature each material wants',
@@ -91,7 +91,7 @@ export default function FreeDownloadPage() {
               className="text-base mb-8"
             >
               Two pages. Nozzle and bed temperatures, enclosure and drying needs for{' '}
-              {FIELD_GUIDE_COUNT} materials, plus the fault each one actually fails with. Print it and
+              All {FIELD_GUIDE_COUNT} materials, plus the fault each one actually fails with. Print it and
               hang it next to your machine.
             </p>
 
