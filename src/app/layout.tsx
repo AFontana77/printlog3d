@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import { AffiliateClickTracker } from "@/components/analytics/affiliate-click-tracker";
 import { OwnedServiceTracker } from "@/components/analytics/owned-service-tracker";
+import { MATERIAL_PROFILES } from '@/lib/materials';
 
 // Specified by the brand package. No binaries are redistributed; next/font
 // self-hosts them at build time.
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     default: "PrintLog3D: filament print settings by material",
     template: "%s | PrintLog3D",
   },
-  description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
+  description: `Nozzle and bed temperatures, enclosure needs and drying guidance for ${MATERIAL_PROFILES.length} filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.`,
   keywords: ["filament print settings", "pla print temperature", "petg print temperature", "abs enclosure", "filament drying temperature"],
   authors: [{ name: "Anvil Road LLC" }],
   creator: "Anvil Road LLC",
@@ -41,12 +42,12 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "PrintLog3D",
     title: "PrintLog3D: filament print settings by material",
-    description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
+    description: `Nozzle and bed temperatures, enclosure needs and drying guidance for ${MATERIAL_PROFILES.length} filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.`,
   },
   twitter: {
     card: "summary_large_image",
     title: "PrintLog3D: filament print settings by material",
-    description: "Nozzle and bed temperatures, enclosure needs and drying guidance for 17 filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.",
+    description: `Nozzle and bed temperatures, enclosure needs and drying guidance for ${MATERIAL_PROFILES.length} filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.`,
   },
   alternates: { canonical: SITE_URL },
   icons: {

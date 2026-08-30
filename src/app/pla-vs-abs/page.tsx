@@ -14,6 +14,7 @@ import {
   h3Style,
   linkStyle,
 } from '@/components/comparison/shared';
+import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -63,7 +64,7 @@ const PLA_STRENGTHS = [
 const RELATED = [
   { href: '/pla-vs-petg', title: 'PLA vs PETG', desc: 'The most common comparison. When to step up.' },
   { href: '/abs-vs-petg', title: 'ABS vs PETG', desc: 'Which is better for functional parts?' },
-  { href: '/library', title: 'All 17 Materials', desc: 'Print settings, enclosure and drying for every material.' },
+  { href: '/library', title: `All ${MATERIAL_PROFILES.length} Materials`, desc: 'Print settings, enclosure and drying for every material.' },
   { href: '/3d-print-stringing', title: 'Fix Stringing', desc: 'Retraction, temp, and combing explained.' },
 ];
 

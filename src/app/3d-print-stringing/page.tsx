@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
+import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -113,7 +114,7 @@ const RELATED = [
   { href: '/how-to-dry-filament', title: 'How to Dry Filament', desc: 'Signs of wet filament and all 3 drying methods.' },
   { href: '/pla-vs-petg', title: 'PLA vs PETG', desc: 'Why PETG strings more and when to use each.' },
   { href: '/abs-vs-petg', title: 'ABS vs PETG', desc: 'Which is better for functional parts?' },
-  { href: '/library', title: 'All 17 Materials', desc: 'Print settings, enclosure and drying for every material.' },
+  { href: '/library', title: `All ${MATERIAL_PROFILES.length} Materials`, desc: 'Print settings, enclosure and drying for every material.' },
 ];
 
 export default function StringingPage() {

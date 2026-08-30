@@ -1,11 +1,12 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import Link from 'next/link';
+import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'The story behind PrintLog3D, a 17-material filament reference with a print log app in development. Dial in your print settings.',
+  description: `The story behind PrintLog3D, a ${MATERIAL_PROFILES.length}-material filament reference with a print log app in development. Dial in your print settings.`,
 };
 
 export default function AboutPage() {

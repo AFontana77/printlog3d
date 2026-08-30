@@ -14,6 +14,7 @@ import {
   h3Style,
   linkStyle,
 } from '@/components/comparison/shared';
+import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -198,7 +199,7 @@ export default function AbsVsPetgPage() {
             <div className="flex flex-wrap gap-x-6 gap-y-2">
               <Link href="/pla-vs-petg" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">PLA vs PETG</Link>
               <Link href="/pla-vs-abs" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">PLA vs ABS</Link>
-              <Link href="/library" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">All 17 materials</Link>
+              <Link href="/library" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">All {MATERIAL_PROFILES.length} materials</Link>
               <Link href="/how-to-dry-filament" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">Dry your filament</Link>
             </div>
           </div>

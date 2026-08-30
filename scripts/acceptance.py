@@ -247,63 +247,89 @@ def jsonld_blocks(html: str) -> list[dict]:
     return blocks
 
 
+MATRIX_MATERIAL_X = 45.0     # measured column origin of the matrix rows
+MATRIX_X_TOLERANCE = 1.5
+# The guide disambiguates one material name that also names a build surface.
+PDF_LABEL_TO_CATEGORY = {"PEI (ULTEM)": "PEI"}
+
+
+def _pdf_matrix_rows(pdf_path):
+    """Material names read structurally, by column position.
+
+    Returns None when PyMuPDF is unavailable, so the caller can skip rather
+    than pretend the check passed.
+    """
+    try:
+        import fitz
+    except ImportError:
+        return None
+
+    rows = []
+    doc = fitz.open(str(pdf_path))
+    for page in doc:
+        if "FILAMENT SETTINGS MATRIX" not in page.get_text():
+            continue
+        by_line = {}
+        for w in page.get_text("words"):
+            x0, y0, _, _, word = w[0], w[1], w[2], w[3], w[4]
+            if abs(x0 - MATRIX_MATERIAL_X) <= MATRIX_X_TOLERANCE:
+                by_line[round(y0, 1)] = [word]
+            else:
+                key = round(y0, 1)
+                if key in by_line and x0 < 130:
+                    by_line[key].append(word)
+        for _, parts in sorted(by_line.items()):
+            rows.append(" ".join(parts))
+    doc.close()
+    return rows
+
+
 def check_field_guide(failures):
-    """The lead magnet must contain what the page promises, and vice versa.
+    """The landing page, the PDF and the material library must agree exactly.
 
-    The page copy is the only half of this that can be corrected in code -- the
-    PDF is a produced asset -- so the copy is what has to track the file.
-
-    Matching is deliberately strict. A material counts as covered only if it
-    OPENS a line, which is what a settings row looks like here. Substring and
-    even word-boundary matching both over-count: `PP` hides inside other tokens,
-    and `PEI` appears in real prose as a build-plate surface rather than as a
-    profile. Both were miscounted once, by the first version of this check.
+    Three numbers, one truth. The page derives its claim from fieldGuide.ts, the
+    PDF is built from materials.ts, and this asserts the loop closed.
     """
     root = Path(__file__).resolve().parent.parent
     pdf = root / "public" / "PrintLog3D-Filament-Settings-Field-Guide.pdf"
     ts = (root / "src" / "lib" / "fieldGuide.ts").read_text(encoding="utf-8")
     claimed = re.findall(r"^    '([^']+)',", ts, re.M)
+    canon = list(MATERIAL_CATEGORIES)
 
     if not pdf.is_file():
         failures.append("FIELD GUIDE -> PDF missing at %s" % pdf.name)
         return
-    try:
-        from PyPDF2 import PdfReader
-    except ImportError:
-        print("  (field-guide check skipped: PyPDF2 not installed)")
+
+    rows = _pdf_matrix_rows(pdf)
+    if rows is None:
+        print("  (field-guide structural check skipped: PyMuPDF not installed)")
         return
 
-    reader = PdfReader(str(pdf))
-    pages = [(pg.extract_text() or "") for pg in reader.pages]
-    lines = [ln.strip() for ln in chr(10).join(pages).split(chr(10)) if ln.strip()]
+    normalised = [PDF_LABEL_TO_CATEGORY.get(r, r) for r in rows]
 
-    def opens_a_line(name):
-        for ln in lines:
-            if ln == name:
-                return True
-            if ln.startswith(name) and not ln[len(name):len(name) + 1].isalnum():
-                return True
-        return False
-
+    # FORWARD: everything the page promises is a real row and a live profile.
     for m in claimed:
-        if not opens_a_line(m):
-            failures.append(
-                "FIELD GUIDE -> claims %s but no settings row for it in the PDF" % m
-            )
-
-    # The other direction: a material documented in the guide must still exist
-    # as a live profile, or the download sends readers somewhere that is gone.
-    canon = set(MATERIAL_CATEGORIES)
-    for m in claimed:
+        if m not in normalised:
+            failures.append("FIELD GUIDE -> claims %s but it is not a matrix row in the PDF" % m)
         if m not in canon:
-            failures.append(
-                "FIELD GUIDE -> claims %s, which is not a canonical material profile" % m
-            )
+            failures.append("FIELD GUIDE -> claims %s, which is not a canonical material" % m)
 
-    print(
-        "  field guide: %d materials, each a real settings row and a live profile "
-        "(library has %d)" % (len(claimed), len(canon))
-    )
+    # REVERSE: everything the PDF documents is canonical and still has a page.
+    for m in normalised:
+        if m not in canon:
+            failures.append("FIELD GUIDE -> PDF documents %s, which is not a canonical material" % m)
+        if m not in claimed:
+            failures.append("FIELD GUIDE -> PDF documents %s but the page does not claim it" % m)
+
+    # EXACT COUNTS. Equal sets can still hide a duplicated row.
+    if not (len(claimed) == len(normalised) == len(canon)):
+        failures.append(
+            "FIELD GUIDE -> counts disagree: page claims %d, PDF rows %d, library %d"
+            % (len(claimed), len(normalised), len(canon))
+        )
+    else:
+        print("  field guide: %d claimed = %d PDF matrix rows = %d live profiles"
+              % (len(claimed), len(normalised), len(canon)))
 
 
 def main() -> int:
@@ -353,6 +379,17 @@ def main() -> int:
 
         vis = visible_text(html)
         check_assets(html, label, failures, asset_cache, get)
+
+        # No page may state a material count that disagrees with the library.
+        # Six pages -- including the site-wide metadata used on every one of
+        # them -- still said 17 after the library grew to 31, because the
+        # number was typed rather than derived.
+        for _n in set(re.findall(r'(\d{1,3}) (?:filament )?materials?', vis, re.I)):
+            if int(_n) != len(MATERIALS):
+                failures.append(
+                    '%s -> states "%s materials" but the library has %d'
+                    % (label, _n, len(MATERIALS))
+                )
 
         # No dead-end material profile. A profile that offers only the
         # workshop hub is the 'related articles dump where a specific next

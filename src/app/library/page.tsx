@@ -18,7 +18,7 @@ import type { Metadata } from 'next';
 const BASE = 'https://www.printlog3d.com';
 
 export const metadata: Metadata = {
-  title: 'Filament materials: print settings for 17 material types',
+  title: `Filament materials: print settings for ${MATERIAL_PROFILES.length} material types`,
   description:
     'Nozzle and bed temperatures, enclosure requirements and drying for PLA, PETG, ABS, ASA, nylon, polycarbonate, PEEK and more. Typical manufacturer-published ranges, set out per material.',
   alternates: { canonical: `${BASE}/library` },
