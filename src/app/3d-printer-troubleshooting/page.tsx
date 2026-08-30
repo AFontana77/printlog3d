@@ -133,6 +133,15 @@ const AFTER_PRINTING: Symptom[] = [
     icon: 'layer-adhesion',
   },
   {
+    symptom: 'The supports will not come off',
+    looksLike: 'They are fused to the part, or removing them tears the surface.',
+    firstCheck:
+      'Cut, do not pull. Most of the damage people blame on supports happens while levering them off with fingers.',
+    href: '/workshop/removing-supports-and-deburring',
+    linkLabel: 'Removing supports without damage',
+    icon: 'support-removal',
+  },
+  {
     symptom: 'The surface is rough or blobby',
     looksLike: 'Zits, seams and a finish you would not show anybody.',
     firstCheck:
