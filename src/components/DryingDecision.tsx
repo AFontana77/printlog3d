@@ -139,7 +139,7 @@ export function DryingDecision() {
                 style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }}
               >
                 {material.needsDrying
-                  ? `Yes — ${material.category} is hygroscopic.`
+                  ? `Yes. Dry ${material.category} before printing.`
                   : `${material.category} does not normally need drying.`}
               </p>
 
