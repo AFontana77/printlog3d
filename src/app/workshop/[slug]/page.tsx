@@ -143,6 +143,41 @@ export default async function WorkshopResourcePage({
                 steps={SEQUENCES[r.diagram].steps}
               />
             )}
+            {r.download && (
+              <div
+                className="mb-10 rounded-xl border p-5"
+                style={{ borderColor: 'var(--border)', background: 'var(--surface-1)' }}
+              >
+                <p
+                  className="text-xs uppercase tracking-wide mb-1"
+                  style={{ color: 'var(--muted-foreground)' }}
+                >
+                  Free download &middot; {r.download.format}
+                </p>
+                <p
+                  className="font-bold text-lg mb-2"
+                  style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }}
+                >
+                  {r.download.label}
+                </p>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--body-text)' }}>
+                  {r.download.note}
+                </p>
+                <a
+                  href={r.download.path}
+                  download
+                  className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold uppercase tracking-wider min-h-[48px] rounded press-feedback"
+                  style={{
+                    background: 'var(--brand-primary)',
+                    color: 'var(--on-primary)',
+                    fontFamily: 'var(--font-display)',
+                  }}
+                >
+                  Download the source
+                </a>
+              </div>
+            )}
+
             {r.sections.map((sec) => (
               <section key={sec.heading} className="mb-10 last:mb-0">
                 <h2

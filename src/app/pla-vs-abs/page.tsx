@@ -1,9 +1,19 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ComparisonBuying } from '@/components/ComparisonBuying';
+import { Faq } from '@/components/Faq';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
 import { specRows, type SpecRow } from '@/components/ComparisonSpecs';
+import {
+  Eyebrow,
+  SpecGrid,
+  comparisonJsonLd,
+  bodyStyle,
+  h2Style,
+  h3Style,
+  linkStyle,
+} from '@/components/comparison/shared';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,38 +21,14 @@ export const metadata: Metadata = {
   description: "PLA vs ABS compared: why most beginners don't need ABS, when ABS's heat resistance and machinability are worth the hassle, and the better upgrade path (PLA to PETG to ASA).",
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Article',
-      headline: 'PLA vs ABS: When to Upgrade and When to Stick with PLA',
-      description: "PLA vs ABS compared: why most beginners don't need ABS, when ABS's heat resistance and machinability are worth the hassle, and the better upgrade path.",
-      url: 'https://www.printlog3d.com/pla-vs-abs',
-      publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.printlog3d.com' },
-        { '@type': 'ListItem', position: 2, name: 'PLA vs ABS', item: 'https://www.printlog3d.com/pla-vs-abs' },
-      ],
-    },
-  ],
-};
+const jsonLd = comparisonJsonLd({
+  title: 'PLA vs ABS: When to Upgrade and When to Stick with PLA',
+  description: "PLA vs ABS compared: why most beginners don't need ABS, when ABS's heat resistance and machinability are worth the hassle, and the better upgrade path.",
+  url: 'https://www.printlog3d.com/pla-vs-abs',
+  breadcrumb: 'PLA vs ABS',
+});
 
-const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.15em', fontSize: '0.7rem' };
-const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.1 };
-const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)' };
-const bodyStyle: React.CSSProperties = { color: 'var(--body-text)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
-const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
 
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <div style={eyebrowStyle} className="uppercase font-semibold mb-6 flex items-center gap-3">
-    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
-    {children}
-  </div>
-);
 
 // Derived from materials.ts so this table cannot contradict the material
 // pages. Only the editorial rows, which have no canonical field, are literal.
@@ -81,6 +67,34 @@ const RELATED = [
   { href: '/3d-print-stringing', title: 'Fix Stringing', desc: 'Retraction, temp, and combing explained.' },
 ];
 
+const FAQ = [
+  {
+    question: 'Should a beginner print ABS?',
+    answer:
+      'Not without an enclosure. ABS warps hard in moving air and will lift off the bed on an open-frame printer in a cool room. PLA needs none of that, which is why it is the default first filament.',
+  },
+  {
+    question: 'Is ABS stronger than PLA?',
+    answer:
+      'Tougher rather than stronger. PLA is stiffer and resists bending more, but it fails suddenly. ABS absorbs impact and survives being dropped, and it holds its shape to about 100C where PLA sags near 60C.',
+  },
+  {
+    question: 'Do I need to ventilate when printing ABS?',
+    answer:
+      'Yes. ABS gives off styrene while printing, and it is noticeable. Print it in a ventilated space or an enclosure with filtration, not a closed bedroom.',
+  },
+  {
+    question: 'Can ABS be smoothed?',
+    answer:
+      'Yes, with acetone. It dissolves the surface and lets it re-form glossy, which removes layer lines entirely. PLA does not respond to acetone, so if a smooth finish matters that is a genuine reason to choose ABS.',
+  },
+  {
+    question: 'What should I use instead of ABS outdoors?',
+    answer:
+      'ASA. It is the same material family with the ultraviolet-sensitive component swapped out, so it prints almost identically and does not go chalky in sunlight.',
+  },
+];
+
 export default function PlaVsAbsPage() {
   return (
     <>
@@ -109,29 +123,7 @@ export default function PlaVsAbsPage() {
           <div className="max-w-5xl mx-auto">
             <Eyebrow>SIDE BY SIDE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">PLA vs ABS: know the gap before you switch.</h2>
-            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
-              <div style={{ background: 'var(--surface-2)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '180px 1fr 1fr' }}>
-                {['Property', 'PLA', 'ABS'].map((h) => (
-                  <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">{h}</span>
-                ))}
-              </div>
-              {SPECS.map(([prop, pla, abs], i) => (
-                <div
-                  key={prop}
-                  style={{
-                    padding: '0.875rem 1.25rem',
-                    borderTop: '1px solid var(--border)',
-                    display: 'grid',
-                    gridTemplateColumns: '180px 1fr 1fr',
-                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
-                  }}
-                >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{prop}</span>
-                  <span style={{ ...bodyStyle }} className="text-sm">{pla}</span>
-                  <span style={{ ...bodyStyle }} className="text-sm">{abs}</span>
-                </div>
-              ))}
-            </div>
+            <SpecGrid rows={SPECS} />
           </div>
         </section>
 
@@ -312,6 +304,8 @@ export default function PlaVsAbsPage() {
             </Link>
           </div>
         </section>
+        <Faq items={FAQ} heading="Common questions" />
+
         <ComparisonBuying slugs={['pla', 'abs']} />
 
         <OwnedServiceCta variant="comparison" />

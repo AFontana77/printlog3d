@@ -16,6 +16,7 @@ this HTML no matter how many matches are present.
 from __future__ import annotations
 
 import argparse
+import html as _html
 import json
 import re
 from urllib.parse import unquote
@@ -229,7 +230,7 @@ def visible_text(html: str) -> str:
     out = re.sub(r"(?is)<script.*?</script>", " ", html)
     out = re.sub(r"(?is)<style.*?</style>", " ", out)
     out = re.sub(r"(?s)<[^>]+>", " ", out)
-    return re.sub(r"\s+", " ", out)
+    return _html.unescape(re.sub(r"\s+", " ", out))
 
 
 def jsonld_blocks(html: str) -> list[dict]:
@@ -337,6 +338,16 @@ def main() -> int:
 
         vis = visible_text(html)
         check_assets(html, label, failures, asset_cache, get)
+
+        # No dead-end material profile. A profile that offers only the
+        # workshop hub is the 'related articles dump where a specific next
+        # action exists' the journey rules forbid. 15 of 31 did exactly that
+        # until the cross-links were derived from material properties.
+        if path.startswith('/library/') and path.count('/') == 2:
+            if not re.search(r'href="/workshop/[a-z0-9-]+"', html):
+                failures.append(
+                    '%s -> no specific workshop step; only the hub' % label
+                )
 
         for name, pattern in BANNED.items():
             hits = [

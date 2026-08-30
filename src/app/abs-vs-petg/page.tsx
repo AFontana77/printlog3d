@@ -1,9 +1,19 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ComparisonBuying } from '@/components/ComparisonBuying';
+import { Faq } from '@/components/Faq';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
 import { specRows, type SpecRow } from '@/components/ComparisonSpecs';
+import {
+  Eyebrow,
+  SpecGrid,
+  comparisonJsonLd,
+  bodyStyle,
+  h2Style,
+  h3Style,
+  linkStyle,
+} from '@/components/comparison/shared';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,38 +21,14 @@ export const metadata: Metadata = {
   description: "ABS vs PETG compared: heat resistance, warp risk, fumes, ease of print, and why PETG wins for most functional parts unless you specifically need ABS's higher temperature tolerance.",
 };
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Article',
-      headline: 'ABS vs PETG: Which Is Better for Functional Parts?',
-      description: "ABS vs PETG compared: heat resistance, warp risk, fumes, ease of print, and why PETG wins for most functional parts unless you specifically need ABS's higher temperature tolerance.",
-      url: 'https://www.printlog3d.com/abs-vs-petg',
-      publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.printlog3d.com' },
-        { '@type': 'ListItem', position: 2, name: 'ABS vs PETG', item: 'https://www.printlog3d.com/abs-vs-petg' },
-      ],
-    },
-  ],
-};
+const jsonLd = comparisonJsonLd({
+  title: 'ABS vs PETG: Which Is Better for Functional Parts?',
+  description: "ABS vs PETG compared: heat resistance, warp risk, fumes, ease of print, and why PETG wins for most functional parts unless you specifically need ABS's higher temperature tolerance.",
+  url: 'https://www.printlog3d.com/abs-vs-petg',
+  breadcrumb: 'ABS vs PETG',
+});
 
-const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.15em', fontSize: '0.7rem' };
-const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.1 };
-const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)' };
-const bodyStyle: React.CSSProperties = { color: 'var(--body-text)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
-const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
 
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <div style={eyebrowStyle} className="uppercase font-semibold mb-6 flex items-center gap-3">
-    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
-    {children}
-  </div>
-);
 
 // Derived from materials.ts so this table cannot contradict the material
 // pages. Only the editorial rows, which have no canonical field, are literal.
@@ -66,6 +52,34 @@ const PETG_WINS = [
   { title: 'No styrene fumes', body: 'ABS emits styrene, a suspected carcinogen. Always print ABS with ventilation or a filtration enclosure. PETG is much safer. No harsh fumes, fine to print in an office or home workspace.' },
   { title: 'Better layer adhesion', body: 'PETG bonds between layers better than ABS. For most mechanical loading scenarios, a PETG print is actually stronger than ABS despite the lower heat resistance.' },
   { title: 'More forgiving to print', body: 'PETG has a wider process window. ABS requires tight temp control, a warm enclosure, and a hot bed. PETG tolerates more variation and fails less often.' },
+];
+
+const FAQ = [
+  {
+    question: 'Is PETG as strong as ABS?',
+    answer:
+      "For most parts, near enough, and it is far easier to print. ABS wins on heat, holding shape to roughly 100C against PETG's 80C. Below that, PETG usually does the job without an enclosure or fumes.",
+  },
+  {
+    question: 'Do I need an enclosure for PETG?',
+    answer:
+      'No. PETG shrinks little enough to print on an open frame, which is the single biggest practical difference between the two. ABS needs still, warm air or it lifts.',
+  },
+  {
+    question: 'Can PETG be acetone smoothed?',
+    answer:
+      'No. Acetone does nothing useful to PETG, and sanding dulls it rather than polishing it. If a smooth finish matters, ABS gives you a finishing route PETG does not have.',
+  },
+  {
+    question: 'Which is better for functional parts?',
+    answer:
+      "PETG for most, ABS when heat is involved. PETG's flexibility means a bracket bends instead of snapping, and it needs no special hardware to print reliably.",
+  },
+  {
+    question: 'Does ABS or PETG smell more?',
+    answer:
+      "ABS, clearly. It releases styrene and needs ventilation. PETG's emissions are minimal by comparison, which matters if the printer shares a room with you.",
+  },
 ];
 
 export default function AbsVsPetgPage() {
@@ -96,29 +110,7 @@ export default function AbsVsPetgPage() {
           <div className="max-w-5xl mx-auto">
             <Eyebrow>SIDE BY SIDE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">See the key differences before you load the spool.</h2>
-            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden', fontVariantNumeric: 'tabular-nums' }}>
-              <div style={{ background: 'var(--surface-2)', padding: '0.625rem 1.25rem', display: 'grid', gridTemplateColumns: '200px 1fr 1fr' }}>
-                {['Property', 'ABS', 'PETG'].map((h) => (
-                  <span key={h} style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)', letterSpacing: '0.1em', fontSize: '0.65rem' }} className="uppercase font-semibold">{h}</span>
-                ))}
-              </div>
-              {SPECS.map(([prop, abs, petg], i) => (
-                <div
-                  key={prop}
-                  style={{
-                    padding: '0.875rem 1.25rem',
-                    borderTop: '1px solid var(--border)',
-                    display: 'grid',
-                    gridTemplateColumns: '200px 1fr 1fr',
-                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
-                  }}
-                >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{prop}</span>
-                  <span style={{ ...bodyStyle }} className="text-sm">{abs}</span>
-                  <span style={{ ...bodyStyle }} className="text-sm">{petg}</span>
-                </div>
-              ))}
-            </div>
+            <SpecGrid rows={SPECS} />
           </div>
         </section>
 
@@ -236,6 +228,8 @@ export default function AbsVsPetgPage() {
             </Link>
           </div>
         </section>
+        <Faq items={FAQ} heading="Common questions" />
+
         <ComparisonBuying slugs={['abs', 'petg']} />
 
         <OwnedServiceCta variant="comparison" />

@@ -1,4 +1,5 @@
 import type { GearSpec } from '@/components/GearAdvice';
+import { MATERIAL_PROFILES } from '@/lib/materials';
 
 /**
  * The workshop layer.
@@ -68,6 +69,12 @@ export type WorkshopResource = {
    * decoration, and M1.4 deferred these rather than ship that.
    */
   diagram?: 'heatSetInsert' | 'fitTest' | 'filamentStorage' | 'coldPull';
+  /**
+   * A file the reader can take away. Deliberately source or a worksheet
+   * rather than a mesh: a clearance figure is a property of the reader's
+   * printer, so a fixed STL would hide the two parameters that matter.
+   */
+  download?: { path: string; label: string; format: string; note: string };
 };
 
 export const WORKSHOP: WorkshopResource[] = [
@@ -75,6 +82,12 @@ export const WORKSHOP: WorkshopResource[] = [
   {
     slug: '3d-print-tolerance',
     diagram: 'fitTest',
+    download: {
+      path: '/printlog3d-fit-test-coupon.scad',
+      label: 'Stepped fit-test coupon',
+      format: 'OpenSCAD source',
+      note: 'Parametric source, not a mesh, so you can set the nominal size and the step to your own part. We have not test-printed it, and this site does not publish measurements it did not take.',
+    },
     stage: 'inspect',
     title: 'Tolerance and measurement',
     heading: '3D print tolerance: what fits and what does not',
@@ -104,6 +117,14 @@ export const WORKSHOP: WorkshopResource[] = [
           'There is no universal clearance number, and any site that gives you one is guessing on your behalf. The figure depends on your printer, the material, the print orientation, how well extrusion is calibrated and the geometry itself, and those vary more between two machines than the number would suggest.',
           'What does transfer is the method. Print a test coupon with the same feature at several clearances, on the same machine, in the same material and orientation as the real part. A stepped fit-test print takes twenty minutes and gives you a number that is true for your setup rather than for somebody else\'s.',
           'As a starting point for that test rather than as an answer: a sliding fit generally needs noticeably more clearance than people expect, and a press fit needs less material removed than a printed hole already loses to segmentation. Start the coupon around a couple of tenths of a millimetre either side of nominal and bracket from there.',
+        ],
+      },
+      {
+        heading: 'The coupon, if you would rather model it yourself',
+        body: [
+          'The geometry is deliberately trivial, and you do not need our file to build it. A flat plate, a row of holes around your nominal size, each one a fixed step larger than the last, and a number beside each hole saying how far above nominal it sits.',
+          'Six holes at 0.10mm steps covers the range most fits land in. Make the plate a little thinner than the hardware you are testing, so a bolt or a rod seats all the way through, and leave about 4mm of material around each hole so a thin wall is not what fails.',
+          'Print it flat, in the real material, at the settings you will use for the real part. A coupon printed in PLA tells you very little about a PETG fit, and one printed on its side tells you very little about a hole printed flat.',
         ],
       },
       {
@@ -841,7 +862,48 @@ export function resourcesForStage(stage: Stage): WorkshopResource[] {
   return WORKSHOP.filter((r) => r.stage === stage);
 }
 
-/** Workshop resources especially relevant to a material, for cross-linking. */
+/**
+ * Workshop resources especially relevant to a material, for cross-linking.
+ *
+ * Curated `relatedMaterials` first. Where a material has none, the steps are
+ * derived from its own properties rather than left empty.
+ *
+ * The reason is an M1.6 audit: 15 of 31 profiles appeared in no resource's list,
+ * so their "after the print" block rendered nothing and the only onward route
+ * was the generic workshop hub. That is exactly the "related articles dump where
+ * a specific next action exists" that the journey rules forbid — and it was not
+ * an authoring oversight so much as an inevitability, since every new material
+ * starts life in nobody's list.
+ *
+ * Deriving it means a material added tomorrow is never orphaned.
+ */
 export function workshopForMaterial(materialSlug: string): WorkshopResource[] {
-  return WORKSHOP.filter((r) => r.relatedMaterials.includes(materialSlug));
+  const curated = WORKSHOP.filter((r) => r.relatedMaterials.includes(materialSlug));
+  if (curated.length) return curated;
+
+  const m = MATERIAL_PROFILES.find((p) => p.slug === materialSlug);
+  if (!m) return [];
+
+  const pick = new Set<string>();
+
+  // Every printed part gets measured before anyone trusts it.
+  pick.add('3d-print-tolerance');
+
+  // Hygroscopic materials live or die on how they were stored.
+  if (m.needsDrying) pick.add('filament-storage');
+
+  // Filled and loaded compounds chew through a brass nozzle.
+  const abrasive =
+    /-(CF|GF)$/.test(m.category) ||
+    /Glow|Metal|Wood/.test(m.category) ||
+    m.avoidFor.some((a) => a.toLowerCase().includes('brass'));
+  if (abrasive) pick.add('nozzle-maintenance');
+
+  // Anything that needs a chamber is a warping and adhesion problem first.
+  if (m.enclosure === 'Required') pick.add('bed-adhesion-and-first-layer');
+
+  // Soluble supports exist to be removed.
+  if (/PVA|HIPS/.test(m.category)) pick.add('removing-supports-and-deburring');
+
+  return WORKSHOP.filter((r) => pick.has(r.slug));
 }

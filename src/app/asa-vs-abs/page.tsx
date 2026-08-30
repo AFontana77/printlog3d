@@ -5,6 +5,15 @@ import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import { Faq } from '@/components/Faq';
 import { specRows, type SpecRow } from '@/components/ComparisonSpecs';
 import Link from 'next/link';
+import {
+  Eyebrow,
+  SpecGrid,
+  comparisonJsonLd,
+  bodyStyle,
+  h2Style,
+  h3Style,
+  linkStyle,
+} from '@/components/comparison/shared';
 import type { Metadata } from 'next';
 
 /**
@@ -57,38 +66,14 @@ const FAQ = [
   },
 ];
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Article',
-      headline: TITLE,
-      description: DESC,
-      url: URL,
-      publisher: { '@type': 'Organization', name: 'PrintLog3D', url: 'https://www.printlog3d.com' },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.printlog3d.com' },
-        { '@type': 'ListItem', position: 2, name: 'ASA vs ABS', item: URL },
-      ],
-    },
-  ],
-};
+const jsonLd = comparisonJsonLd({
+  title: TITLE,
+  description: DESC,
+  url: URL,
+  breadcrumb: 'ASA vs ABS',
+});
 
-const eyebrowStyle: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--brand-primary)', letterSpacing: '0.15em', fontSize: '0.7rem' };
-const h2Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)', lineHeight: 1.1 };
-const h3Style: React.CSSProperties = { fontFamily: 'var(--font-display)', color: 'var(--foreground)' };
-const bodyStyle: React.CSSProperties = { color: 'var(--body-text)', fontFamily: 'var(--font-body)', lineHeight: 1.65 };
-const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
 
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <div style={eyebrowStyle} className="uppercase font-semibold mb-6 flex items-center gap-3">
-    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
-    {children}
-  </div>
-);
 
 // Derived from materials.ts so this table cannot contradict the material pages.
 // Only the editorial rows, which have no canonical field, are literal.
@@ -138,24 +123,7 @@ export default function AsaVsAbsPage() {
           <div className="max-w-5xl mx-auto">
             <Eyebrow>SIDE BY SIDE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Nearly the same spool, until you take it outdoors.</h2>
-            <div style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
-              {SPECS.map(([prop, asa, abs], i) => (
-                <div
-                  key={prop}
-                  style={{
-                    padding: '0.875rem 1.25rem',
-                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
-                    display: 'grid',
-                    gridTemplateColumns: '200px 1fr 1fr',
-                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
-                  }}
-                >
-                  <span style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }} className="text-sm font-semibold">{prop}</span>
-                  <span style={bodyStyle} className="text-sm">{asa}</span>
-                  <span style={bodyStyle} className="text-sm">{abs}</span>
-                </div>
-              ))}
-            </div>
+            <SpecGrid rows={SPECS} />
             <p style={bodyStyle} className="text-sm mt-4">
               Temperatures, enclosure, drying, difficulty and price come from the{' '}
               <Link href="/library/asa" style={linkStyle} className="underline underline-offset-4">ASA</Link>{' '}

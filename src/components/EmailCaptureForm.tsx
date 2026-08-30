@@ -72,7 +72,8 @@ export function EmailCaptureForm({
         className="px-4 py-4 text-sm"
         role="status"
       >
-        You&apos;re on the list. Thanks for signing up.
+        You&apos;re on the list. The field guide is the download button above,
+        and it is yours either way.
       </div>
     );
   }
@@ -118,7 +119,7 @@ export function EmailCaptureForm({
           onChange={(e) => setConsent(e.target.checked)}
           className="mt-1 h-4 w-4 shrink-0"
         />
-        <span>Send me the download and occasional 3D printing resources. Unsubscribe anytime.</span>
+        <span>Send me occasional 3D printing resources. Unsubscribe anytime.</span>
       </label>
 
       {state === 'error' && message ? (
