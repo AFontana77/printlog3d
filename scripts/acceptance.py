@@ -282,7 +282,11 @@ def main() -> int:
         xml = ""  # the local sitemap is a route handler, not a static file
     if xml:
         locs = re.findall(r"<loc>(.*?)</loc>", xml)
-        expected = {BASE + p for p in STATIC_PAGES} | {BASE + "/library/" + m for m in MATERIALS}
+        expected = (
+            {BASE + p for p in STATIC_PAGES}
+            | {BASE + "/library/" + m for m in MATERIALS}
+            | {BASE + "/workshop/" + w for w in WORKSHOP}
+        )
         expected = {u.rstrip("/") if u != BASE else u for u in expected}
         got = {u.rstrip("/") if u != BASE else u for u in locs}
         for missing in sorted(expected - got):
