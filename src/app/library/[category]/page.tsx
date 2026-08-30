@@ -5,6 +5,7 @@ import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
 import { FilamentBuying } from '@/components/FilamentBuying';
 import { PrintServiceRoute } from '@/components/PrintServiceRoute';
 import { needsServiceRoute } from '@/lib/commerce';
+import { workshopForMaterial } from '@/lib/workshop';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import { canOfferOwnedService } from '@/lib/ownedService';
 import { MATERIAL_PROFILES, getMaterialBySlug, iconFor, type MaterialProfile } from '@/lib/materials';
@@ -433,6 +434,31 @@ export default async function MaterialPage({
               >
                 Read the {compared.category}{' '}settings guide &rarr;
               </Link>
+            </div>
+          </section>
+        )}
+
+        {workshopForMaterial(m.slug).length > 0 && (
+          <section className="py-12 px-4 border-t" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }}>
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }}>
+                After the print
+              </h2>
+              <p className="text-sm mb-5" style={{ color: 'var(--muted-foreground)' }}>
+                The workshop steps that matter most for {m.category}.
+              </p>
+              <ul className="space-y-2">
+                {workshopForMaterial(m.slug).map((r) => (
+                  <li key={r.slug}>
+                    <Link
+                      href={`/workshop/${r.slug}`}
+                      className="font-semibold text-brand hover:text-brand-dark underline underline-offset-4"
+                    >
+                      {r.heading}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </section>
         )}

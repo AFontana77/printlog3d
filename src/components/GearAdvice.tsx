@@ -1,4 +1,6 @@
-import { AMAZON, amazonSearchUrl } from '@/lib/commerce';
+import { AMAZON, amazonSearchUrl, amazonTag } from '@/lib/commerce';
+import { productFor, productUrl } from '@/lib/products';
+import { AmazonProductImage } from '@/components/AmazonProductImage';
 import { ExternalLink } from 'lucide-react';
 
 /**
@@ -64,7 +66,43 @@ export function GearAdvice({
               <h3 className="font-semibold text-gray-900 mb-1">{item.category}</h3>
               <p className="text-sm text-brand font-medium mb-2">{item.requirement}</p>
               <p className="text-sm text-gray-600 leading-relaxed">{item.why}</p>
+
+              {/* A verified product where one exists. The guidance above stands
+                  on its own when it does not. */}
+              {(() => {
+                const product = productFor(item.category);
+                if (!enrolled || !product) return null;
+                const tag = amazonTag();
+                if (!tag) return null;
+                return (
+                  <a
+                    href={productUrl(product, tag)}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer sponsored"
+                    data-affiliate-brand="amazon"
+                    data-affiliate-network="amazon"
+                    className="mt-4 flex items-center gap-4 rounded-lg border p-3 transition-colors hover:bg-brand-tint"
+                    style={{ borderColor: 'var(--border)' }}
+                  >
+                    <AmazonProductImage
+                      asin={product.asin}
+                      productName={product.name}
+                      className="h-16 w-16 object-contain flex-shrink-0 rounded"
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
+                        {product.brand} &middot; {product.name}
+                      </span>
+                      <span className="block text-xs mt-0.5 leading-relaxed" style={{ color: 'var(--muted-foreground)' }}>
+                        {product.spec}
+                      </span>
+                    </span>
+                    <ExternalLink size={14} aria-hidden="true" className="flex-shrink-0 text-brand" />
+                  </a>
+                );
+              })()}
               {enrolled &&
+                !productFor(item.category) &&
                 (() => {
                   const href = amazonSearchUrl(item.searchTerms);
                   if (!href) return null;

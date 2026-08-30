@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { MATERIAL_PROFILES } from '@/lib/materials';
+import { WORKSHOP } from '@/lib/workshop';
 
 /**
  * Sitemap.
@@ -33,6 +34,7 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
   { path: '/3d-print-stringing', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/free-download', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/get-it-printed', priority: 0.75, changeFrequency: 'monthly' },
+  { path: '/workshop', priority: 0.85, changeFrequency: 'monthly' },
   { path: '/disclosure', priority: 0.4, changeFrequency: 'yearly' },
   { path: '/about', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/support', priority: 0.4, changeFrequency: 'yearly' },
@@ -55,6 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.9,
+    })),
+    // Derived, so a new workshop resource is listed without a manual edit.
+    ...WORKSHOP.map((r) => ({
+      url: `${BASE}/workshop/${r.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
     })),
   ];
 }

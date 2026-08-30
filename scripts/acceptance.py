@@ -127,7 +127,7 @@ def check_amazon(html, label, failures):
 
 STATIC_PAGES = [
     "", "/library", "/free-download", "/about", "/support", "/privacy", "/terms",
-    "/disclosure", "/get-it-printed",
+    "/disclosure", "/get-it-printed", "/workshop",
     "/pla-vs-petg", "/pla-vs-abs", "/abs-vs-petg",
     "/3d-printing-filament-guide", "/how-to-dry-filament", "/3d-print-stringing",
 ]
@@ -145,6 +145,18 @@ def _materials_from_source() -> list[str]:
 
 
 MATERIALS = _materials_from_source()
+
+
+def _workshop_from_source() -> list[str]:
+    """Derive workshop slugs too, for the same reason MATERIALS is derived."""
+    src = (REPO / "src" / "lib" / "workshop.ts").read_text(encoding="utf-8")
+    slugs = re.findall(r"^\s*slug: '([a-z0-9-]+)',", src, re.MULTILINE)
+    if not slugs:
+        raise SystemExit("acceptance: could not parse any workshop slug")
+    return slugs
+
+
+WORKSHOP = _workshop_from_source()
 # A sample of the noindexed catalogue entries.
 SAMPLE_ENTRIES = [
     "/library/peek/bambu-lab-peek-premium",
@@ -208,7 +220,12 @@ def main() -> int:
     checked = 0
     amazon_links_total = [0]
 
-    paths = STATIC_PAGES + ["/library/" + m for m in MATERIALS] + SAMPLE_ENTRIES
+    paths = (
+        STATIC_PAGES
+        + ["/library/" + m for m in MATERIALS]
+        + ["/workshop/" + w for w in WORKSHOP]
+        + SAMPLE_ENTRIES
+    )
 
     for path in paths:
         status, html = get(path)
