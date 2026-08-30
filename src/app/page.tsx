@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
-import { MATERIAL_PROFILES, iconFor } from '@/lib/materials';
+import { MATERIAL_PROFILES, iconFor, iconSrc } from '@/lib/materials';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import type { Metadata } from 'next';
 
@@ -122,7 +122,7 @@ export default function HomePage() {
                           className="group flex items-center gap-4 py-3 -mx-3 px-3 rounded-lg transition-colors hover:bg-brand-tint"
                         >
                           <Image
-                            src={`/brand/icons/${iconFor(m)}.png`}
+                            src={iconSrc(iconFor(m))}
                             alt=""
                             aria-hidden="true"
                             width={56}
@@ -177,7 +177,7 @@ export default function HomePage() {
                 <li key={g.href}>
                   <Link href={g.href} className="group flex items-center gap-5 py-5 transition-colors">
                     <Image
-                      src={`/brand/icons/${g.icon}.png`}
+                      src={iconSrc(g.icon)}
                       alt=""
                       aria-hidden="true"
                       width={48}
@@ -207,7 +207,7 @@ export default function HomePage() {
         <section className="py-16 px-6 border-t" style={{ background: 'var(--surface-0)', borderColor: 'var(--border)' }}>
           <div className="max-w-5xl mx-auto flex flex-col sm:flex-row gap-8 items-start sm:items-center">
             <Image
-              src="/brand/badges/free-settings-sheet.png"
+              src="/brand/badges/free-settings-sheet.webp"
               alt=""
               aria-hidden="true"
               width={128}

@@ -7,7 +7,8 @@ import { Faq } from '@/components/Faq';
 import { GearAdvice } from '@/components/GearAdvice';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import { WORKSHOP, STAGES, resourceBySlug } from '@/lib/workshop';
-import { getMaterialBySlug, iconFor } from '@/lib/materials';
+import { ProcessDiagram, SEQUENCES } from '@/components/ProcessDiagram';
+import { getMaterialBySlug, iconFor, iconSrc } from '@/lib/materials';
 import type { Metadata } from 'next';
 
 /**
@@ -101,7 +102,7 @@ export default async function WorkshopResourcePage({
             <div className="flex items-start gap-5 mb-5">
               {stage && (
                 <Image
-                  src={`/brand/icons/${stage.icon}.png`}
+                  src={iconSrc(stage.icon)}
                   alt=""
                   aria-hidden="true"
                   width={72}
@@ -133,6 +134,15 @@ export default async function WorkshopResourcePage({
 
         <article className="py-12 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-3xl mx-auto">
+            {/* The sequence at the top, where it orients the reader before the
+                prose rather than illustrating it afterwards. */}
+            {r.diagram && (
+              <ProcessDiagram
+                title={SEQUENCES[r.diagram].title}
+                description={SEQUENCES[r.diagram].description}
+                steps={SEQUENCES[r.diagram].steps}
+              />
+            )}
             {r.sections.map((sec) => (
               <section key={sec.heading} className="mb-10 last:mb-0">
                 <h2
@@ -176,7 +186,7 @@ export default async function WorkshopResourcePage({
                       className="flex items-center gap-3 py-2.5 -mx-3 px-3 rounded-lg transition-colors hover:bg-brand-tint"
                     >
                       <Image
-                        src={`/brand/icons/${iconFor(m)}.png`}
+                        src={iconSrc(iconFor(m))}
                         alt=""
                         aria-hidden="true"
                         width={40}

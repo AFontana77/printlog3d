@@ -586,6 +586,34 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
       'It warps like ASA and wears nozzles like a composite, so it inherits both problems at once. Enclose the printer and fit a hardened nozzle before the first print rather than after.',
     comparedWith: 'ASA',
   },
+  // Added M1.5. Not a route-count addition: this site already documents PLA-CF,
+  // PETG-CF, PA-CF and ASA-CF, so polycarbonate was the one hole in its own
+  // composite family, and `pc cf filament` measures 590/month. The ranges span
+  // the published desktop grades, which sit well apart — Bambu PC-CF around
+  // 260-280°C, Prusament PC Blend CF around 275-285°C, 3DXTech CarbonX higher
+  // again — so the band is wide on purpose rather than averaged into a single
+  // number no manufacturer actually states.
+  {
+    category: 'PC-CF',
+    slug: 'pc-cf',
+    fullName: 'Carbon Fibre Reinforced Polycarbonate',
+    summary:
+      'Polycarbonate with carbon fibre: the stiffest and most heat-tolerant material most desktop printers can reach, at the cost of needing every piece of hardware at once. Chosen when a part has to stay rigid while hot.',
+    printTempC: '260-300',
+    bedTempC: '100-120',
+    enclosure: 'Required',
+    coolingFan: 'No, or very low',
+    retraction: '0.3-0.5mm',
+    priceBandUsd: '$50-90',
+    drying: 'Strongly hygroscopic. Dry at 80C for 6-8 hours.',
+    needsDrying: true,
+    difficulty: 'Expert',
+    goodFor: ['Rigid brackets that run hot', 'Jigs and fixtures near machinery', 'Structural drone and RC parts', 'Under-bonnet mounts'],
+    avoidFor: ['Brass nozzles', 'Open-frame printers', 'Hot ends that stop below 280C', 'Parts needing impact toughness'],
+    commonProblem:
+      'The carbon fibre removes much of polycarbonate\'s impact toughness while keeping all of its difficulty. If a part has to survive being dropped rather than stay stiff when warm, plain PC is the better choice and PA-CF better still.',
+    comparedWith: 'PC',
+  },
   {
     category: 'PEI',
     slug: 'pei',
@@ -729,9 +757,22 @@ const MATERIAL_ICON: Record<string, string> = {
   ABS: 'abs', HIPS: 'abs', ASA: 'asa',
   'Nylon PA6': 'nylon', 'Nylon PA12': 'nylon',
   PC: 'polycarbonate', PEEK: 'peek', PEI: 'peek', PPS: 'peek',
+  'PC-CF': 'composite-filaments',
   TPU: 'flexible-filaments', TPE: 'flexible-filaments',
   PVA: 'support-removal', PP: 'material-profiles',
 };
+
+/**
+ * Full URL for a brand icon.
+ *
+ * The extension lives here and only here. It was previously written out at each
+ * call site as `.png` while the brand package ships `.webp`, so every icon on the
+ * site 404ed from the day the brand system landed. Deriving the whole URL means a
+ * call site cannot disagree with the files on disk.
+ */
+export function iconSrc(name: string): string {
+  return `/brand/icons/${name}.webp`;
+}
 
 export function iconFor(m: MaterialProfile | string): string {
   const key = typeof m === 'string' ? m : m.category;

@@ -8,7 +8,7 @@ import { needsServiceRoute } from '@/lib/commerce';
 import { workshopForMaterial } from '@/lib/workshop';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import { canOfferOwnedService } from '@/lib/ownedService';
-import { MATERIAL_PROFILES, getMaterialBySlug, iconFor, type MaterialProfile } from '@/lib/materials';
+import { MATERIAL_PROFILES, getMaterialBySlug, iconFor, type MaterialProfile, iconSrc } from '@/lib/materials';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -301,7 +301,7 @@ export default async function MaterialPage({
           <div className="max-w-3xl mx-auto">
             <div className="flex items-start gap-5 mb-5">
               <Image
-                src={`/brand/icons/${iconFor(m)}.png`}
+                src={iconSrc(iconFor(m))}
                 alt=""
                 aria-hidden="true"
                 width={72}

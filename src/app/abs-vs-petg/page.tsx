@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ComparisonBuying } from '@/components/ComparisonBuying';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
+import { specRows, type SpecRow } from '@/components/ComparisonSpecs';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -43,17 +44,15 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const SPECS: [string, string, string][] = [
-  ['Print temp', '230-250°C', '230-250°C'],
-  ['Bed temp', '100-110°C', '70-85°C'],
-  ['Enclosure', 'Required', 'Not required'],
+// Derived from materials.ts so this table cannot contradict the material
+// pages. Only the editorial rows, which have no canonical field, are literal.
+const SPECS: SpecRow[] = specRows('ABS', 'PETG', [
   ['Heat resistance', '~100°C deformation', '~80°C deformation'],
   ['Chemical resistance', 'Good', 'Moderate'],
   ['Fumes', 'Yes (styrene)', 'Minimal'],
   ['Warping risk', 'High without enclosure', 'Low'],
   ['Post-processing', 'Sandable, acetone-smoothable', 'Limited (sanding dulls surface)'],
-  ['Difficulty', 'Advanced', 'Intermediate'],
-];
+]);
 
 const ABS_WINS = [
   { n: '01', title: 'Parts that need to survive above 80°C', body: 'PETG deforms around 80°C. ABS holds to ~100°C. If your part lives near a heat source, engine bay, oven-adjacent, under-hood, ABS has the edge.' },

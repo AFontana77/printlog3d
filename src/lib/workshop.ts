@@ -10,8 +10,14 @@ import type { GearSpec } from '@/components/GearAdvice';
  *
  * The journey is a real sequence, not a taxonomy invented to hold pages:
  *
- *   PRINT -> INSPECT -> CLEAN -> FINISH -> ASSEMBLE   (what happens to the part)
+ *   CALIBRATE -> FIRST LAYER -> INSPECT -> CLEAN -> FINISH -> ASSEMBLE
+ *                                                     (what happens to the part)
  *   STORE -> MAINTAIN                                  (what happens to the kit)
+ *
+ * Calibrate and first layer were added in M1.5 against measured demand: printer
+ * calibration is 2,400/month and bed adhesion sums to roughly 1,100 across its
+ * terms. They sit before inspect because that is where they sit in real life —
+ * both are things you do before a part exists to measure.
  *
  * SOURCING, unchanged from the material layer: everything here is either
  * mechanical fact, manufacturer-published practice, or plainly-labelled
@@ -20,13 +26,23 @@ import type { GearSpec } from '@/components/GearAdvice';
  * figure that will not fit somebody's insert.
  */
 
-export type Stage = 'inspect' | 'clean' | 'finish' | 'assemble' | 'store' | 'maintain';
+export type Stage =
+  | 'calibrate'
+  | 'adhesion'
+  | 'inspect'
+  | 'clean'
+  | 'finish'
+  | 'assemble'
+  | 'store'
+  | 'maintain';
 
 export const STAGES: { id: Stage; label: string; verb: string; icon: string }[] = [
-  { id: 'inspect', label: 'Inspect', verb: 'Did it come out the right size?', icon: 'calibration' },
+  { id: 'calibrate', label: 'Calibrate', verb: 'Make the machine print the size you asked for.', icon: 'calibration' },
+  { id: 'adhesion', label: 'First layer', verb: 'Get it to stick, and stay stuck.', icon: 'bed-temperature' },
+  { id: 'inspect', label: 'Inspect', verb: 'Did it come out the right size?', icon: 'search' },
   { id: 'clean', label: 'Clean up', verb: 'Get the supports and brim off without damage.', icon: 'support-removal' },
-  { id: 'finish', label: 'Finish', verb: 'Take the layer lines down.', icon: 'layer-adhesion' },
-  { id: 'assemble', label: 'Assemble', verb: 'Put threads in plastic that will survive.', icon: 'settings' },
+  { id: 'finish', label: 'Finish', verb: 'Take the layer lines down, then colour it.', icon: 'layer-adhesion' },
+  { id: 'assemble', label: 'Assemble', verb: 'Threads and joints that survive being used.', icon: 'settings' },
   { id: 'store', label: 'Store filament', verb: 'Keep the next spool printable.', icon: 'drying' },
   { id: 'maintain', label: 'Maintain', verb: 'Keep the nozzle doing its job.', icon: 'nozzle-temperature' },
 ];
@@ -46,12 +62,19 @@ export type WorkshopResource = {
   faq: { question: string; answer: string }[];
   /** Material slugs this resource is especially relevant to. */
   relatedMaterials: string[];
+  /**
+   * Key into SEQUENCES. Present only where the order of operations is the
+   * actual content -- a diagram on a page that is already a list of facts is
+   * decoration, and M1.4 deferred these rather than ship that.
+   */
+  diagram?: 'heatSetInsert' | 'fitTest' | 'filamentStorage' | 'coldPull';
 };
 
 export const WORKSHOP: WorkshopResource[] = [
   // ---------------------------------------------------------------- INSPECT
   {
     slug: '3d-print-tolerance',
+    diagram: 'fitTest',
     stage: 'inspect',
     title: 'Tolerance and measurement',
     heading: '3D print tolerance: what fits and what does not',
@@ -263,6 +286,7 @@ export const WORKSHOP: WorkshopResource[] = [
   // --------------------------------------------------------------- ASSEMBLE
   {
     slug: 'heat-set-inserts',
+    diagram: 'heatSetInsert',
     stage: 'assemble',
     title: 'Heat-set inserts',
     heading: 'Heat-set threaded inserts in 3D printed parts',
@@ -338,6 +362,7 @@ export const WORKSHOP: WorkshopResource[] = [
   // ------------------------------------------------------------------ STORE
   {
     slug: 'filament-storage',
+    diagram: 'filamentStorage',
     stage: 'store',
     title: 'Filament storage',
     heading: 'How to store 3D printer filament',
@@ -412,6 +437,7 @@ export const WORKSHOP: WorkshopResource[] = [
   // --------------------------------------------------------------- MAINTAIN
   {
     slug: 'nozzle-maintenance',
+    diagram: 'coldPull',
     stage: 'maintain',
     title: 'Nozzle maintenance',
     heading: 'Cleaning and replacing a 3D printer nozzle',
@@ -482,6 +508,328 @@ export const WORKSHOP: WorkshopResource[] = [
       },
     ],
     relatedMaterials: ['pa-cf', 'petg-cf', 'pla-cf', 'glow-pla', 'magnetic-pla'],
+  },
+  // -------------------------------------------------------------- CALIBRATE
+  {
+    slug: 'printer-calibration',
+    stage: 'calibrate',
+    title: 'Calibration',
+    heading: '3D printer calibration: what to do, and in what order',
+    metaTitle: '3D printer calibration: the order that actually matters',
+    metaDescription:
+      'What calibration means on an FDM printer, the order to work through it, what a calibration cube does and does not tell you, and why elephant foot is a first-layer setting rather than a fault.',
+    lede:
+      'Calibration is four separate jobs, and doing them out of order wastes an afternoon. Get the first layer right, then extrusion, then flow, then temperature. Each one is measured against something physical, and a step tuned before the step beneath it will simply be tuned again.',
+    sections: [
+      {
+        heading: 'The order, and why it is that order',
+        body: [
+          'Nozzle height first, because every measurement afterwards is taken from a part sitting on the plate. Then extrusion, so the printer pushes the length of filament it thinks it does. Then flow, so the amount landing in a wall matches the model. Temperature last, because it changes how the plastic behaves and would invalidate anything tuned before it.',
+          'Work upwards and each step stays true. Start with temperature and you will retune it after the first layer moves.',
+        ],
+      },
+      {
+        heading: 'What a calibration cube actually tells you',
+        body: [
+          'A 20mm cube is a measuring reference, not a quality test. Print it, measure X, Y and Z with calipers, and compare against 20mm. It reports whether the machine is putting material where it says, and nothing else.',
+          'It will not tell you about overhangs, bridging, retraction or surface finish, and a cube that measures perfectly can still print a poor part. Treat a good cube as a licence to move on rather than as a result.',
+          'A cube reading consistently oversized usually means over-extrusion or a squashed first layer lifting the whole measurement, not a machine that needs its steps changed.',
+        ],
+      },
+      {
+        heading: 'Extrusion and flow are different problems',
+        body: [
+          'Extrusion calibration, often called e-steps, asks whether the extruder moves the length of filament it was told to. Mark the filament, ask for 100mm, measure what was actually pulled in. It is a mechanical count and it is either right or it is not.',
+          'Flow, sometimes called extrusion multiplier, asks whether the volume landing in a wall matches the slicer. Print a single-wall object, measure the wall with calipers, and compare against the nozzle width the slicer used. A wall consistently thicker than asked for is over-extrusion.',
+          'Doing flow before e-steps means correcting a volume error with a multiplier that is hiding a mechanical one, and the error comes back the moment a different material goes in.',
+        ],
+      },
+      {
+        heading: 'Elephant foot is a setting, not a fault',
+        body: [
+          'The first layer or two splaying outwards is elephant foot. It happens because the first layer is deliberately squashed into the plate and the plastic has nowhere to go but sideways, and it is worse when the plate is hot and the nozzle is low.',
+          'Most slicers carry a first-layer horizontal compensation or elephant-foot setting that shrinks the bottom layers to cancel it. That is the correct fix. Raising the nozzle to make it go away trades a cosmetic problem for an adhesion problem, and adhesion is the harder of the two to live with.',
+          'It matters more than it looks: a base flared by a couple of tenths is exactly the amount that stops a part sitting flat in an assembly.',
+        ],
+      },
+    ],
+    gear: [
+      {
+        category: 'Digital calipers',
+        requirement: 'Reads to 0.01mm, holds zero when closed',
+        why: 'Every step here is measured rather than judged by eye. Without calipers, calibration is guessing with extra steps.',
+        searchTerms: 'digital calipers 6 inch',
+      },
+    ],
+    faq: [
+      {
+        question: 'What order should I calibrate a 3D printer in?',
+        answer:
+          'First layer and nozzle height, then extrusion (e-steps), then flow, then temperature. Each step is measured from the one before it, so tuning out of order means tuning twice.',
+      },
+      {
+        question: 'What does a calibration cube tell you?',
+        answer:
+          'Whether the printer produces the dimensions it was asked for. Print a 20mm cube, measure all three axes with calipers, compare against 20mm. It says nothing about overhangs, retraction or surface finish.',
+      },
+      {
+        question: 'How do I fix elephant foot?',
+        answer:
+          'Use the first-layer horizontal compensation or elephant-foot setting in your slicer, which shrinks the bottom layers to cancel the squash. Raising the nozzle also removes it but costs you first-layer adhesion.',
+      },
+      {
+        question: 'What is the difference between e-steps and flow rate?',
+        answer:
+          'E-steps ask whether the extruder moves the length of filament it was told to, measured by marking and pulling 100mm. Flow asks whether the volume in a printed wall matches the slicer, measured with calipers on a single-wall print.',
+      },
+    ],
+    relatedMaterials: ['pla', 'petg', 'abs'],
+  },
+
+  // --------------------------------------------------------------- ADHESION
+  {
+    slug: 'bed-adhesion-and-first-layer',
+    stage: 'adhesion',
+    title: 'Bed adhesion and the first layer',
+    heading: 'Why your print is not sticking to the bed',
+    metaTitle: '3D print not sticking to the bed: causes, in order of likelihood',
+    metaDescription:
+      'The usual reason a print will not stick is a plate with skin oil on it. Then nozzle height, then bed temperature, then a material that was always going to lift. How to work through them in that order.',
+    lede:
+      'Start with the plate, not the settings. Skin oil from handling a part off the bed is the most common cause of a print that will not stick, and it is invisible. Wash the plate, then check nozzle height, then bed temperature, and only then consider whether the material itself is the problem.',
+    sections: [
+      {
+        heading: 'Clean the plate first, every time',
+        body: [
+          'Fingerprints leave a film that plastic will not key into, and it builds up exactly where you grip the plate to flex a part off. Washing with warm water and dish soap, then drying fully, resets a plate more reliably than wiping it.',
+          'Isopropyl alcohol is the quick version between prints and it is worth keeping to hand, though it moves grease around more than it removes it. Use alcohol for a touch-up and soap and water when adhesion has genuinely dropped off.',
+          'Textured PEI keeps working long after it looks past it. A smooth PEI sheet that has gone glassy in one patch has usually lost its texture there permanently, and that patch will keep failing.',
+        ],
+      },
+      {
+        heading: 'Nozzle height: squashed, not placed',
+        body: [
+          'A first layer should be pressed into the plate so the extrusions spread and fuse into a continuous sheet, with no gaps between neighbouring lines. A first layer that looks like tidy round strings sitting on the surface is too high, and it will lift.',
+          'Too low is its own failure: the nozzle ploughs, the extruder skips, and you get a translucent smear rather than a layer. The window between the two is smaller than most people expect, which is why the height is worth setting properly rather than nudging.',
+        ],
+      },
+      {
+        heading: 'Bed temperature does one job',
+        body: [
+          'The heated bed keeps the plastic near the plate soft enough to stay bonded while the layers above it cool and pull. Too cold and the corners win. Hotter is not automatically better, though: an over-hot plate softens the base enough to deform it, which is elephant foot arriving by a different route.',
+          'Each material has a range for this, and the range is on its page here rather than repeated as one number that would be wrong for most of them.',
+        ],
+      },
+      {
+        heading: 'Warping is shrinkage, and some materials always do it',
+        body: [
+          'A part that sticks and then peels a corner is not an adhesion problem, it is a shrinkage problem. The plastic contracts as it cools, the contraction pulls the corners inwards and upwards, and the bond gives way at the weakest point.',
+          'This is a material property. ABS, ASA and the nylons shrink enough that a draught across the printer is sufficient to lift a corner, which is why they want an enclosure rather than more glue. PLA and PETG shrink little enough that a clean plate is usually the whole answer.',
+          'A brim buys you more bonded area at the corners and costs a moment with the cutters afterwards. It is the cheapest thing to try, and on a tall part with a small footprint it is often the only thing that works.',
+        ],
+      },
+    ],
+    gear: [
+      {
+        category: 'Isopropyl alcohol',
+        requirement: '90% or higher, for between-print cleaning',
+        why: 'The quick reset between prints. Keep soap and water for when adhesion has genuinely dropped off, because alcohol moves grease as much as it lifts it.',
+        searchTerms: 'isopropyl alcohol 99 percent',
+      },
+      {
+        category: 'Glue stick',
+        requirement: 'Washable solid stick, nothing scented or glittered',
+        why: 'A release layer as much as an adhesive. On glass and smooth PEI it also stops PETG bonding so well that it takes a divot out of the plate.',
+        searchTerms: 'glue stick 3d printing bed adhesion',
+      },
+    ],
+    faq: [
+      {
+        question: 'Why is my 3D print not sticking to the bed?',
+        answer:
+          'Most often the plate has skin oil on it from handling. Wash it with warm water and dish soap and dry it fully. If that does not fix it, check the nozzle is low enough that the first layer is squashed into a continuous sheet, then check the bed temperature for your material.',
+      },
+      {
+        question: 'How do I clean a 3D printer build plate?',
+        answer:
+          'Warm water and dish soap, then dry completely. Isopropyl alcohol is fine as a quick clean between prints but it redistributes grease more than it removes it.',
+      },
+      {
+        question: 'Why does my print warp at the corners?',
+        answer:
+          'Warping is the plastic shrinking as it cools and pulling the corners up. It is a material property rather than an adhesion fault. ABS, ASA and the nylons need an enclosure to control it; PLA and PETG rarely warp on a clean plate.',
+      },
+      {
+        question: 'Should the first layer be squashed?',
+        answer:
+          'Yes. The extrusions should spread and fuse into a continuous sheet with no gaps between lines. A first layer that looks like round strings sitting on the plate is too high and will lift.',
+      },
+    ],
+    relatedMaterials: ['abs', 'asa', 'nylon-pa6', 'nylon-pa12', 'petg', 'pc'],
+  },
+
+  // ----------------------------------------------------------------- FINISH
+  {
+    slug: 'painting-3d-prints',
+    stage: 'finish',
+    title: 'Painting',
+    heading: 'How to paint a 3D print so the finish lasts',
+    metaTitle: 'Painting 3D prints: preparation, primer and paint that sticks',
+    metaDescription:
+      'Paint does not stick to a printed surface, it sticks to a prepared one. Sanding, filler primer, which paints work on PLA, PETG and ABS, and why a fingerprint ruins the job before you start.',
+    lede:
+      'Almost every bad paint job on a 3D print is a preparation problem rather than a paint problem. Sand the layer lines back, wash the part, spray a filler primer to fill what is left, sand that, and only then paint. Primer is the step people skip and the step that decides the result.',
+    sections: [
+      {
+        heading: 'Wash the part before you touch it with anything',
+        body: [
+          'Handling a printed part puts skin oil into the surface texture, and paint will not key through it. Warm water and dish soap, then dry fully, and handle it by an edge or with gloves afterwards.',
+          'This costs two minutes and it is the difference between a finish that survives handling and one that lifts in sheets the first time it is picked up.',
+        ],
+      },
+      {
+        heading: 'Filler primer does the work sanding cannot',
+        body: [
+          'Sanding takes the peaks off the layer lines but it will not fill the valleys, and paint is far too thin to bridge them. Filler primer, sometimes sold as high-build or sandable primer, is thick enough to sit in those valleys and give you a surface to flatten.',
+          'The sequence that works is sand, prime, sand the primer, prime again if lines still show. Each pass is faster than the one before it because there is less left to remove. On a part with visible layer lines, expect two primer coats.',
+          'Primer also gives paint a consistent colour to sit on, which matters more than it sounds. Spraying a light colour straight onto a dark print costs several extra coats and buries detail.',
+        ],
+      },
+      {
+        heading: 'Which paint on which plastic',
+        body: [
+          'Once a part is primed, the primer is the surface and the paint no longer has to bond to the plastic at all. That is the point of it, and it is why the same acrylic works over PLA, PETG and ABS alike.',
+          'Unprimed is a different question. Acrylics will sit on PLA reasonably well. PETG is a poor host for paint without primer, and ABS is chemically vulnerable to solvent-based paints, which can soften and craze the surface. If you are painting straight onto plastic, test on a scrap piece from the same spool first.',
+          'Spray in thin coats and let each flash off. A heavy coat runs, and a run on a textured print cannot be sanded out without going back to bare plastic.',
+        ],
+      },
+      {
+        heading: 'Heat, again',
+        body: [
+          'PLA softens at temperatures a dark part reaches in sunlight, and it will certainly soften if a heat gun is used to speed drying. Let paint cure at room temperature.',
+          'This is the same constraint that governs sanding PLA. The material is not being awkward, it simply has a low glass transition, and every finishing step has to respect it.',
+        ],
+      },
+    ],
+    gear: [
+      {
+        category: 'Filler primer',
+        requirement: 'Sandable and high-build, rated for plastic on the can',
+        why: 'Fills the valleys between layer lines that sanding cannot reach. Check the can lists plastic: much filler primer is solvent-based automotive product, and solvent can craze ABS and soften PLA.',
+        searchTerms: 'filler primer spray sandable plastic',
+      },
+      {
+        category: 'Wet/dry sanding assortment',
+        requirement: 'A grit sequence, not one sheet',
+        why: 'Layer lines come off with coarse grit and primer is flattened with fine. Jumping straight to fine paper polishes the peaks and leaves the valleys.',
+        searchTerms: 'wet dry sandpaper assortment 400 3000',
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you need to prime a 3D print before painting?',
+        answer:
+          'Yes, if you want the layer lines gone. Sanding removes the peaks but not the valleys, and paint is too thin to fill them. A sandable filler primer sits in the valleys and gives you a surface to flatten.',
+      },
+      {
+        question: 'What paint works on 3D prints?',
+        answer:
+          'Over primer, ordinary acrylic spray or brush paint works on PLA, PETG and ABS alike, because the primer is the surface the paint bonds to. Straight onto bare plastic, acrylics are the safer choice; solvent-based paints can craze ABS.',
+      },
+      {
+        question: 'How do you get rid of layer lines before painting?',
+        answer:
+          'Sand with coarse grit to take the peaks down, spray a filler primer to fill the valleys, then sand the primer back. Repeat the primer step if lines still show. Two coats is normal on a visibly ridged print.',
+      },
+      {
+        question: 'Should I wash a 3D print before painting it?',
+        answer:
+          'Yes. Skin oil from handling sits in the surface texture and stops paint keying to it. Warm water and dish soap, dried fully, then handle it by an edge.',
+      },
+    ],
+    relatedMaterials: ['pla', 'petg', 'abs', 'asa', 'pla-matte'],
+  },
+
+  // --------------------------------------------------------------- ASSEMBLE
+  {
+    slug: 'gluing-3d-printed-parts',
+    stage: 'assemble',
+    title: 'Gluing and joining',
+    heading: 'The best glue for 3D printed parts, by material',
+    metaTitle: 'Best glue for 3D prints: what actually bonds PLA, PETG and ABS',
+    metaDescription:
+      'Cyanoacrylate for most jobs, epoxy where the joint carries load or needs filling, and solvent welding for ABS and ASA only. Which adhesive suits which plastic, and how to prepare a printed face so it holds.',
+    lede:
+      'Cyanoacrylate handles most printed joints, epoxy is the choice where the joint carries load or the faces do not meet cleanly, and solvent welding genuinely fuses ABS and ASA rather than gluing them. The plastic decides which of the three you reach for, and the surface preparation decides whether it holds.',
+    sections: [
+      {
+        heading: 'Match the adhesive to the plastic',
+        body: [
+          'Cyanoacrylate, plain superglue, bonds PLA, ABS, ASA and the composite variants of each without ceremony. It is fast, it is strong in shear, and it is brittle under impact. For most brackets, figures and repairs it is the right answer.',
+          'PETG is a poorer host. It has a smoother, lower-energy surface than PLA and cyanoacrylate can sit on it rather than grip. Keying the faces with sandpaper first makes more difference on PETG than on anything else, and epoxy is the more reliable choice when the joint matters.',
+          'TPU and the flexibles need an adhesive that stays flexible. A rigid bond on a part designed to bend simply moves the failure to the edge of the glue line, and it will fail there on the first flex.',
+        ],
+      },
+      {
+        heading: 'Epoxy where the joint has a job to do',
+        body: [
+          'Two-part epoxy is slower and messier and it is what you want when the joint is structural, when the faces do not meet perfectly, or when you need working time to align parts. It fills gaps that cyanoacrylate cannot bridge, and it stays tougher under impact.',
+          'Printed faces are rarely as flat as they look, particularly on a face that was against supports. Epoxy is forgiving of that in a way a thin adhesive is not.',
+        ],
+      },
+      {
+        heading: 'Solvent welding is a different thing entirely',
+        body: [
+          'Acetone dissolves ABS and ASA. Applied to two mating faces it softens both, and as it evaporates the plastic re-forms as one piece. That is a weld, not a bond, and it is stronger than any adhesive joint you will make in those materials.',
+          'It only works on plastics the solvent attacks. PLA, PETG and the nylons do not solvent weld with acetone, and attempting it produces a wet part and nothing else. Do not extrapolate the technique across materials.',
+          'Acetone is flammable and its vapour needs ventilation. This is a job for open air or an extracted space, not a closed room.',
+        ],
+      },
+      {
+        heading: 'Prepare the faces, and design the joint',
+        body: [
+          'Key both faces with sandpaper and clean off the dust. A printed surface looks rough but its ridges run in one direction, and adhesive keys far better into a randomly scratched face than into parallel layer lines.',
+          'Where you control the model, give the joint some help: a lip, a peg, a recess, anything that locates the parts and adds bonded area. Adhesive is much better in shear than in peel, and a flat butt joint between two printed faces is the weakest arrangement available.',
+        ],
+      },
+    ],
+    gear: [
+      {
+        category: 'Cyanoacrylate adhesive',
+        requirement: 'Thin or medium viscosity, with an accelerator',
+        why: 'The default for printed joints. An accelerator matters on PETG and on large faces, where the glue would otherwise skin before it grips.',
+        searchTerms: 'cyanoacrylate super glue accelerator kit',
+      },
+      {
+        category: 'Two-part epoxy',
+        requirement: 'Five-minute or slower, gap filling',
+        why: 'For joints that carry load or faces that do not meet cleanly. The slower cure buys alignment time that superglue does not give you.',
+        searchTerms: 'two part epoxy adhesive syringe',
+      },
+    ],
+    faq: [
+      {
+        question: 'What is the best glue for 3D printed parts?',
+        answer:
+          'Cyanoacrylate for most joints in PLA, ABS and ASA. Two-part epoxy where the joint carries load or the faces do not meet cleanly. For ABS and ASA specifically, acetone solvent welding is stronger than either.',
+      },
+      {
+        question: 'How do you glue PLA?',
+        answer:
+          'Cyanoacrylate bonds PLA well. Key both faces with sandpaper, clean off the dust, and use epoxy instead if the joint is structural. PLA does not solvent weld with acetone.',
+      },
+      {
+        question: 'Can you glue PETG?',
+        answer:
+          'Yes, but it is harder than PLA because the surface is smoother and lower energy. Sand both faces first, use an accelerator with cyanoacrylate, or choose epoxy where the joint matters.',
+      },
+      {
+        question: 'Does acetone weld 3D printed parts?',
+        answer:
+          'On ABS and ASA, yes. It dissolves the surface of both faces so they re-form as one piece, which is stronger than an adhesive joint. It does nothing useful on PLA, PETG or nylon.',
+      },
+    ],
+    relatedMaterials: ['pla', 'petg', 'abs', 'asa', 'tpu'],
   },
 ];
 

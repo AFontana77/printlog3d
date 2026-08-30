@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ComparisonBuying } from '@/components/ComparisonBuying';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
+import { specRows, type SpecRow } from '@/components/ComparisonSpecs';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -43,17 +44,15 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const SPECS: [string, string, string][] = [
-  ['Print temp', '190-220°C', '230-250°C'],
-  ['Bed temp', '45-60°C (or none)', '70-85°C'],
-  ['Enclosure needed', 'No', 'No'],
+// Derived from materials.ts so this table cannot contradict the material
+// pages. Only the editorial rows, which have no canonical field, are literal.
+const SPECS: SpecRow[] = specRows('PLA', 'PETG', [
   ['Heat resistance', 'Low (~60°C)', 'Moderate (~80°C)'],
   ['Layer adhesion', 'Good', 'Excellent'],
   ['UV resistance', 'Poor (yellows)', 'Moderate'],
   ['Flexibility', 'Brittle', 'Semi-flexible'],
   ['Stringing tendency', 'Low', 'Higher'],
-  ['Ease of print', 'Very easy', 'Moderate'],
-];
+]);
 
 const PLA_USES = [
   'Indoor decorative prints, models, and figures.',

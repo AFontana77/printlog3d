@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from urllib.parse import unquote
 import sys
 import urllib.request
 from pathlib import Path
@@ -125,11 +126,48 @@ def check_amazon(html, label, failures):
     return len(links)
 
 
+# Local assets referenced by a page: both direct src/href and the next/image
+# proxy form, which hides the real path inside a query parameter.
+ASSET_RE = re.compile(r'(?:src|href)="(/[^"?]+\.(?:webp|png|jpg|jpeg|svg|ico|pdf))"')
+NEXT_IMG_RE = re.compile(r'/_next/image\?url=([^"&]+)')
+
+
+PUBLIC = Path(__file__).resolve().parent.parent / "public"
+
+
+def resolve_asset_local(path: str) -> int:
+    """Assets live in public/, not in the prerendered route output."""
+    f = PUBLIC / path.lstrip("/")
+    return 200 if f.is_file() else 404
+
+
+def check_assets(html, label, failures, cache, get):
+    """Every referenced local asset must resolve.
+
+    Checked once per URL across the whole run, because the same icon appears on
+    dozens of pages and one 404 is one defect, not fifty.
+    """
+    urls = set(ASSET_RE.findall(html))
+    for enc in NEXT_IMG_RE.findall(html):
+        u = unquote(unescape_href(enc))
+        if u.startswith("/"):
+            urls.add(u)
+    for u in sorted(urls):
+        if u in cache:
+            status = cache[u]
+        else:
+            status = get(u)[0] if get is fetch_prod else resolve_asset_local(u)
+            cache[u] = status
+        if status != 200:
+            failures.append("ASSET %s -> HTTP %s (referenced by %s)" % (u, status, label))
+
+
 STATIC_PAGES = [
     "", "/library", "/free-download", "/about", "/support", "/privacy", "/terms",
     "/disclosure", "/get-it-printed", "/workshop",
     "/pla-vs-petg", "/pla-vs-abs", "/abs-vs-petg",
     "/3d-printing-filament-guide", "/how-to-dry-filament", "/3d-print-stringing",
+    "/3d-printer-troubleshooting", "/asa-vs-abs",
 ]
 def _materials_from_source() -> list[str]:
     """Read the slugs from materials.ts, the single definition of a material.
@@ -217,6 +255,7 @@ def main() -> int:
     where = "PRODUCTION" if args.prod else "LOCAL BUILD"
 
     failures: list[str] = []
+    asset_cache: dict[str, int] = {}
     checked = 0
     amazon_links_total = [0]
 
@@ -236,6 +275,7 @@ def main() -> int:
             continue
 
         vis = visible_text(html)
+        check_assets(html, label, failures, asset_cache, get)
 
         for name, pattern in BANNED.items():
             hits = [

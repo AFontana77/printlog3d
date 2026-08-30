@@ -32,6 +32,8 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
   { path: '/pla-vs-abs', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/how-to-dry-filament', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/3d-print-stringing', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/3d-printer-troubleshooting', priority: 0.85, changeFrequency: 'monthly' },
+  { path: '/asa-vs-abs', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/free-download', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/get-it-printed', priority: 0.75, changeFrequency: 'monthly' },
   { path: '/workshop', priority: 0.85, changeFrequency: 'monthly' },

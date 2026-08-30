@@ -59,6 +59,8 @@ const CAPABILITY: Record<string, CapabilityState> = {
   // Everything below is absent from the quote engine's material array.
   ASA: 'NOT_SUPPORTED',
   PC: 'NOT_SUPPORTED',
+  // Plain PC is absent from the quote array, so the reinforced grade is too.
+  'PC-CF': 'NOT_SUPPORTED',
   PEEK: 'NOT_SUPPORTED',
   HIPS: 'NOT_SUPPORTED',
   PCTG: 'NOT_SUPPORTED',

@@ -130,7 +130,69 @@ export const PRODUCTS: Product[] = [
     forCategory: 'Hardened steel nozzle',
     spec: 'Hardened steel for abrasive filament. MK8 is a thread pattern, not a universal fit',
   },
+  // ------------------------------------------------------------ M1.5 additions
+  {
+    asin: "B08CGCHWMP",
+    name: 'Isopropyl alcohol, 99.9%, 32 oz',
+    brand: 'MaxTite',
+    forCategory: 'Isopropyl alcohol',
+    spec: 'High purity, so it flashes off the plate instead of leaving a film of its own',
+  },
+  {
+    asin: "B0BVG2K1BQ",
+    name: 'Build plate glue sticks, 6 pack',
+    brand: 'TEQStone',
+    forCategory: 'Glue stick',
+    spec: 'Washes off with water, which is the property that matters when it has to come back off the plate',
+  },
+  {
+    asin: "B0FKGNZ36S",
+    name: 'Sandable filler primer, grey',
+    brand: 'Bartoline',
+    forCategory: 'Filler primer',
+    spec: 'One of the few filler primers whose own label names plastic alongside metal and wood',
+  },
+  {
+    asin: "B0166FFCHS",
+    name: 'CA glue and accelerator combo',
+    brand: 'Bob Smith Industries',
+    forCategory: 'Cyanoacrylate adhesive',
+    spec: 'Glue and accelerator together, which is what PETG and large bonded faces actually need',
+  },
+  {
+    asin: "B009EU5ZM0",
+    name: 'Clear 5-minute epoxy syringe, 25 ml',
+    brand: 'J-B Weld',
+    forCategory: 'Two-part epoxy',
+    spec: 'Twin syringe meters both parts evenly, and five minutes is enough to align a joint',
+  },
 ];
+
+/**
+ * Verified filament, keyed by material slug.
+ *
+ * Filament commerce is otherwise a search link on purpose, because a specific
+ * spool is the single most perishable thing we could link to and the guidance
+ * has to survive one dying. TPU is the exception worth making: `tpu filament`
+ * measures 18,100 searches a month, the largest material term this site covers,
+ * and a reader arriving on that term is buying rather than reading.
+ *
+ * Same standard as everything else here — verified LIVE with imagery, and no
+ * printer-brand fit claim in the title.
+ */
+export const FILAMENT_PRODUCTS: Record<string, Product> = {
+  tpu: {
+    asin: "B07VDP2S3P",
+    name: 'TPU 95A flexible filament, 1.75mm, 1 kg',
+    brand: 'Overture',
+    forCategory: 'TPU filament',
+    spec: 'Shore 95A, the hardness most desktop printers can actually feed without a direct drive fight',
+  },
+};
+
+export function filamentProductFor(materialSlug: string): Product | undefined {
+  return FILAMENT_PRODUCTS[materialSlug];
+}
 
 const BY_CATEGORY = new Map(PRODUCTS.map((p) => [p.forCategory, p]));
 

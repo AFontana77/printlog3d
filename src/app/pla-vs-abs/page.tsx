@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ComparisonBuying } from '@/components/ComparisonBuying';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import Link from 'next/link';
+import { specRows, type SpecRow } from '@/components/ComparisonSpecs';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -43,16 +44,14 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const SPECS: [string, string, string][] = [
-  ['Print temp', '190-220°C', '230-250°C'],
-  ['Bed temp', 'Optional (45-60°C)', '100-110°C (required)'],
-  ['Enclosure', 'No', 'Required'],
+// Derived from materials.ts so this table cannot contradict the material
+// pages. Only the editorial rows, which have no canonical field, are literal.
+const SPECS: SpecRow[] = specRows('PLA', 'ABS', [
   ['Heat resistance', '~60°C deformation', '~100°C deformation'],
   ['Strength', 'Moderate', 'High'],
   ['Post-processing', 'Limited', 'Sandable, acetone-smoothable'],
   ['Fumes', 'None', 'Styrene (ventilate)'],
-  ['Difficulty', 'Easy', 'Hard'],
-];
+]);
 
 const REASONS = [
   { n: '01', title: 'Warping is a real problem', body: "ABS warps badly without an enclosed, heated chamber. If your printer does not have an enclosure, you will fight warping on almost every ABS print, especially on larger parts. PLA prints flat without any of this friction." },

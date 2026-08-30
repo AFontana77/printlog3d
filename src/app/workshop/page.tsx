@@ -4,6 +4,7 @@ import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { STAGES, WORKSHOP, resourcesForStage } from '@/lib/workshop';
 import type { Metadata } from 'next';
+import { iconSrc } from '@/lib/materials';
 
 /**
  * Workshop hub — the second gateway.
@@ -80,7 +81,7 @@ export default function WorkshopHubPage() {
                         {i + 1}
                       </span>
                       <Image
-                        src={`/brand/icons/${stage.icon}.png`}
+                        src={iconSrc(stage.icon)}
                         alt=""
                         aria-hidden="true"
                         width={48}

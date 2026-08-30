@@ -5,9 +5,12 @@ import {
   AMAZON,
   SPECIALIST_RETAILERS,
   amazonSearchUrl,
+  amazonTag,
   filamentSearchTerms,
   sourcingFor,
 } from '@/lib/commerce';
+import { filamentProductFor, productUrl } from '@/lib/products';
+import { AmazonProductImage } from '@/components/AmazonProductImage';
 
 /**
  * Where to buy the material itself.
@@ -48,6 +51,10 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
   const sourcing = sourcingFor(material);
   const amazonUrl = amazonSearchUrl(filamentSearchTerms(material));
   const checks = buyingChecks(material);
+  // A verified spool where one exists, the search link otherwise. Filament is
+  // the most perishable thing on this site to link to, so the search link is
+  // the floor and a named product is the upgrade -- never the only path.
+  const verified = filamentProductFor(material.slug);
 
   return (
     <section
@@ -127,6 +134,31 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
               Named because they stock this class of material and publish specifications. We have
               no commercial relationship with either, and these are ordinary links.
             </p>
+          </div>
+        )}
+
+        {verified && amazonUrl && (
+          <div className="mb-6 bg-gray-50 rounded-xl border border-gray-100 p-4 flex gap-4 items-start">
+            <AmazonProductImage asin={verified.asin} productName={verified.name} />
+            <div className="min-w-0">
+              <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                Verified listing
+              </p>
+              <p className="font-semibold text-gray-900 leading-snug">{verified.name}</p>
+              <p className="text-sm text-gray-600 leading-relaxed mt-1">{verified.spec}.</p>
+              <a
+                href={productUrl(verified, amazonTag() || '')}
+                target="_blank"
+                rel="nofollow noopener noreferrer sponsored"
+                data-affiliate-brand="amazon"
+                data-affiliate-network="amazon"
+                data-affiliate-material={material.category}
+                className="mt-3 inline-flex items-center gap-2 text-brand hover:text-brand-dark font-semibold underline underline-offset-4 min-h-[44px]"
+              >
+                {verified.brand} on Amazon
+                <ExternalLink size={13} aria-hidden="true" />
+              </a>
+            </div>
           </div>
         )}
 

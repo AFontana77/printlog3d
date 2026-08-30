@@ -1,0 +1,632 @@
+{
+  "clusters": {
+    "calibration_fit": [
+      {
+        "kw": "3d printer calibration",
+        "sv": 2400,
+        "cpc": null,
+        "comp": 0,
+        "kd": 15
+      },
+      {
+        "kw": "3d printer calibration cube",
+        "sv": 880,
+        "cpc": null,
+        "comp": 0,
+        "kd": 2
+      },
+      {
+        "kw": "elephant foot 3d printing",
+        "sv": 320,
+        "cpc": null,
+        "comp": 0,
+        "kd": 0
+      },
+      {
+        "kw": "flow rate calibration",
+        "sv": 170,
+        "cpc": 5.02,
+        "comp": 0.02,
+        "kd": 6
+      },
+      {
+        "kw": "how to level 3d printer bed",
+        "sv": 170,
+        "cpc": 0.23,
+        "comp": 0.07,
+        "kd": 1
+      },
+      {
+        "kw": "e steps calibration",
+        "sv": 140,
+        "cpc": null,
+        "comp": 0,
+        "kd": 0
+      },
+      {
+        "kw": "first layer calibration",
+        "sv": 90,
+        "cpc": null,
+        "comp": 0,
+        "kd": 7
+      },
+      {
+        "kw": "3d printing shrinkage",
+        "sv": 50,
+        "cpc": null,
+        "comp": 0,
+        "kd": 0
+      },
+      {
+        "kw": "extrusion multiplier calibration",
+        "sv": 30,
+        "cpc": null,
+        "comp": 0,
+        "kd": 4
+      },
+      {
+        "kw": "dimensional accuracy 3d printing",
+        "sv": 30,
+        "cpc": null,
+        "comp": 0.19,
+        "kd": 0
+      },
+      {
+        "kw": "3d print holes too small",
+        "sv": 10,
+        "cpc": null,
+        "comp": 0,
+        "kd": 0
+      }
+    ],
+    "troubleshooting": [
+      {
+        "kw": "3d printer troubleshooting",
+        "sv": 1300,
+        "cpc": 1.52,
+        "comp": 0.03,
+        "kd": 13
+      },
+      {
+        "kw": "how to unclog 3d printer nozzle",
+        "sv": 590,
+        "cpc": 0.33,
+        "comp": 0.12,
+        "kd": 0
+      },
+      {
+        "kw": "3d printing bridging",
+        "sv": 590,
+        "cpc": 0.33,
+        "comp": 0.04,
+        "kd": 0
+      },
+      {
+        "kw": "3d print not sticking to bed",
+        "sv": 590,
+        "cpc": 0.15,
+        "comp": 0.27,
+        "kd": 0
+      },
+      {
+        "kw": "clogged nozzle 3d printer",
+        "sv": 480,
+        "cpc": 0.16,
+        "comp": 0.15,
+        "kd": 4
+      },
+      {
+        "kw": "3d print warping",
+        "sv": 390,
+        "cpc": 0.08,
+        "comp": 0.04,
+        "kd": 0
+      },
+      {
+        "kw": "under extrusion",
+        "sv": 390,
+        "cpc": 0.84,
+        "comp": 0,
+        "kd": 1
+      },
+      {
+        "kw": "over extrusion",
+        "sv": 260,
+        "cpc": null,
+        "comp": 0,
+        "kd": 0
+      },
+      {
+        "kw": "layer shifting 3d printing",
+        "sv": 260,
+        "cpc": 0.07,
+        "comp": 0.02,
+        "kd": 0
+      },
+      {
+        "kw": "first layer not sticking",
+        "sv": 30,
+        "cpc": null,
+        "comp": 0.02,
+        "kd": 1
+      },
+      {
+        "kw": "layer adhesion 3d printing",
+        "sv": 20,
+        "cpc": null,
+        "comp": 0,
+        "kd": 0
+      },
+      {
+        "kw": "3d printing blobs and zits",
+        "sv": 10,
+        "cpc": null,
+        "comp": 0,
+        "kd": 22
+      },
+      {
+        "kw": "weak layer adhesion"
+      },
+      {
+        "kw": "3d print failed halfway"
+      }
+    ],
+    "post_processing": [
+      {
+        "kw": "painting 3d prints",
+        "sv": 2400,
+        "cpc": 0.89,
+        "comp": 0.19,
+        "kd": 0
+      },
+      {
+        "kw": "best glue for 3d prints",
+        "sv": 1300,
+        "cpc": 0.77,
+        "comp": 0.61,
+        "kd": 2
+      },
+      {
+        "kw": "how to paint 3d prints",
+        "sv": 880,
+        "cpc": 0.42,
+        "comp": 0.07,
+        "kd": 0
+      },
+      {
+        "kw": "acetone smoothing abs",
+        "sv": 480,
+        "cpc": null,
+        "comp": 0.03,
+        "kd": 4
+      },
+      {
+        "kw": "gluing 3d printed parts",
+        "sv": 320,
+        "cpc": 0.54,
+        "comp": 0.86,
+        "kd": 0
+      },
+      {
+        "kw": "vapor smoothing 3d prints",
+        "sv": 260,
+        "cpc": 25.15,
+        "comp": 0.15,
+        "kd": 0
+      },
+      {
+        "kw": "polishing 3d prints",
+        "sv": 210,
+        "cpc": 0.29,
+        "comp": 0.06,
+        "kd": 0
+      },
+      {
+        "kw": "how to glue pla",
+        "sv": 110,
+        "cpc": 1.39,
+        "comp": 0.04,
+        "kd": 0
+      },
+      {
+        "kw": "priming 3d prints",
+        "sv": 50,
+        "cpc": null,
+        "comp": 0.12,
+        "kd": 0
+      }
+    ],
+    "filament_care": [
+      {
+        "kw": "filament dry box",
+        "sv": 2900,
+        "cpc": 0.97,
+        "comp": 1,
+        "kd": 4
+      },
+      {
+        "kw": "how to store filament",
+        "sv": 390,
+        "cpc": 0.49,
+        "comp": 0.9,
+        "kd": 0
+      },
+      {
+        "kw": "desiccant for filament",
+        "sv": 210,
+        "cpc": 0.85,
+        "comp": 0.79,
+        "kd": 0
+      },
+      {
+        "kw": "wet filament",
+        "sv": 170,
+        "cpc": null,
+        "comp": 0,
+        "kd": 0
+      },
+      {
+        "kw": "how to tell if filament is wet",
+        "sv": 110,
+        "cpc": null,
+        "comp": 0.01,
+        "kd": 0
+      },
+      {
+        "kw": "filament moisture",
+        "sv": 20,
+        "cpc": null,
+        "comp": 0.06,
+        "kd": 1
+      }
+    ],
+    "maintenance": [
+      {
+        "kw": "how to clean 3d printer nozzle",
+        "sv": 1000,
+        "cpc": 0.38,
+        "comp": 0.09,
+        "kd": 0
+      },
+      {
+        "kw": "cold pull 3d printer",
+        "sv": 590,
+        "cpc": 0.03,
+        "comp": 0.01,
+        "kd": 4
+      },
+      {
+        "kw": "hardened steel nozzle",
+        "sv": 480,
+        "cpc": 1.83,
+        "comp": 0.61,
+        "kd": 0
+      },
+      {
+        "kw": "how to clean build plate",
+        "sv": 110,
+        "cpc": null,
+        "comp": 0.01,
+        "kd": 0
+      },
+      {
+        "kw": "how to change 3d printer nozzle",
+        "sv": 50,
+        "cpc": null,
+        "comp": 0.03,
+        "kd": 0
+      },
+      {
+        "kw": "brass vs hardened steel nozzle",
+        "sv": 40,
+        "cpc": 3.72,
+        "comp": 0.04,
+        "kd": 0
+      },
+      {
+        "kw": "how to clean pei sheet",
+        "sv": 20,
+        "cpc": null,
+        "comp": 0,
+        "kd": 2
+      },
+      {
+        "kw": "hotend maintenance"
+      },
+      {
+        "kw": "extruder gear cleaning"
+      }
+    ],
+    "material_gaps": [
+      {
+        "kw": "asa filament",
+        "sv": 12100,
+        "cpc": 1.5,
+        "comp": 1,
+        "kd": 0
+      },
+      {
+        "kw": "pla plus",
+        "sv": 1000,
+        "cpc": 1.12,
+        "comp": 0.94,
+        "kd": 10
+      },
+      {
+        "kw": "petg cf filament",
+        "sv": 720,
+        "cpc": 1.88,
+        "comp": 1,
+        "kd": 0
+      },
+      {
+        "kw": "pc cf filament",
+        "sv": 590,
+        "cpc": 1.36,
+        "comp": 1,
+        "kd": 0
+      },
+      {
+        "kw": "pa12 filament",
+        "sv": 590,
+        "cpc": 2.75,
+        "comp": 1,
+        "kd": 0
+      },
+      {
+        "kw": "pom filament",
+        "sv": 480,
+        "cpc": 1.91,
+        "comp": 0.91,
+        "kd": 0
+      },
+      {
+        "kw": "pekk filament",
+        "sv": 320,
+        "cpc": 2.3,
+        "comp": 1,
+        "kd": 0
+      },
+      {
+        "kw": "pvdf filament",
+        "sv": 260,
+        "cpc": 2.63,
+        "comp": 1,
+        "kd": 0
+      },
+      {
+        "kw": "pc abs filament",
+        "sv": 260,
+        "cpc": 1.81,
+        "comp": 1,
+        "kd": 0
+      },
+      {
+        "kw": "abs cf filament",
+        "sv": 140,
+        "cpc": 3.75,
+        "comp": 1,
+        "kd": 0
+      },
+      {
+        "kw": "pa11 filament",
+        "sv": 90,
+        "cpc": 1.96,
+        "comp": 0.98,
+        "kd": 0
+      },
+      {
+        "kw": "pla+ filament"
+      }
+    ],
+    "outsourcing": [
+      {
+        "kw": "3d printing service",
+        "sv": 60500,
+        "cpc": 9.18,
+        "comp": 0.21,
+        "kd": 72
+      },
+      {
+        "kw": "online 3d printing service",
+        "sv": 14800,
+        "cpc": 10.84,
+        "comp": 0.65,
+        "kd": 67
+      },
+      {
+        "kw": "3d printing service near me",
+        "sv": 6600,
+        "cpc": 4.42,
+        "comp": 0.31,
+        "kd": 25
+      },
+      {
+        "kw": "custom 3d printing service",
+        "sv": 880,
+        "cpc": 4.95,
+        "comp": 0.82,
+        "kd": 66
+      },
+      {
+        "kw": "prototype 3d printing service",
+        "sv": 260,
+        "cpc": 19.44,
+        "comp": 0.42,
+        "kd": 0
+      },
+      {
+        "kw": "small batch 3d printing",
+        "sv": 20,
+        "cpc": 15.54,
+        "comp": 0.62,
+        "kd": 25
+      },
+      {
+        "kw": "when to outsource 3d printing"
+      }
+    ],
+    "comparisons": [
+      {
+        "kw": "pla vs petg",
+        "sv": 6600,
+        "cpc": 0.53,
+        "comp": 0.34,
+        "kd": 0
+      },
+      {
+        "kw": "asa vs abs",
+        "sv": 1900,
+        "cpc": 4.12,
+        "comp": 0.12,
+        "kd": 0
+      },
+      {
+        "kw": "abs vs asa",
+        "sv": 1600,
+        "cpc": 3.17,
+        "comp": 0.1,
+        "kd": 0
+      },
+      {
+        "kw": "petg vs asa",
+        "sv": 880,
+        "cpc": 0.02,
+        "comp": 0.06,
+        "kd": 0
+      },
+      {
+        "kw": "tpu vs tpe",
+        "sv": 720,
+        "cpc": 177.83,
+        "comp": 0.02,
+        "kd": 0
+      },
+      {
+        "kw": "pla vs tpu",
+        "sv": 320,
+        "cpc": 0.26,
+        "comp": 0.04,
+        "kd": 0
+      },
+      {
+        "kw": "petg vs tpu",
+        "sv": 210,
+        "cpc": null,
+        "comp": 0.02,
+        "kd": 0
+      },
+      {
+        "kw": "petg vs pctg",
+        "sv": 210,
+        "cpc": 2.95,
+        "comp": 0.19,
+        "kd": 0
+      },
+      {
+        "kw": "nylon vs petg",
+        "sv": 170,
+        "cpc": null,
+        "comp": 0.02,
+        "kd": 0
+      },
+      {
+        "kw": "abs vs nylon",
+        "sv": 170,
+        "cpc": null,
+        "comp": 0.02,
+        "kd": 0
+      },
+      {
+        "kw": "pla vs nylon",
+        "sv": 90,
+        "cpc": null,
+        "comp": 0.02,
+        "kd": 0
+      },
+      {
+        "kw": "pla vs pla+"
+      }
+    ],
+    "tpu": [
+      {
+        "kw": "tpu filament",
+        "sv": 18100,
+        "cpc": 1,
+        "comp": 1,
+        "kd": 4
+      },
+      {
+        "kw": "flexible filament",
+        "sv": 2900,
+        "cpc": 1.1,
+        "comp": 0.9,
+        "kd": 3
+      },
+      {
+        "kw": "tpu print settings",
+        "sv": 390,
+        "cpc": 0.42,
+        "comp": 0.1,
+        "kd": 0
+      },
+      {
+        "kw": "tpu temperature",
+        "sv": 390,
+        "cpc": 0.45,
+        "comp": 0.03,
+        "kd": 0
+      },
+      {
+        "kw": "how to print tpu",
+        "sv": 320,
+        "cpc": 0.32,
+        "comp": 0.09,
+        "kd": 4
+      },
+      {
+        "kw": "tpu vs petg",
+        "sv": 260,
+        "cpc": 0.25,
+        "comp": 0.04,
+        "kd": 0
+      },
+      {
+        "kw": "tpu stringing",
+        "sv": 260,
+        "cpc": 0.47,
+        "comp": 0.05,
+        "kd": 0
+      },
+      {
+        "kw": "tpu retraction settings",
+        "sv": 140,
+        "cpc": 0.42,
+        "comp": 0.05,
+        "kd": 0
+      },
+      {
+        "kw": "tpu drying",
+        "sv": 90,
+        "cpc": 0.8,
+        "comp": 0.06,
+        "kd": 0
+      },
+      {
+        "kw": "printing flexible filament",
+        "sv": 70,
+        "cpc": 0.79,
+        "comp": 0.76,
+        "kd": 0
+      },
+      {
+        "kw": "best tpu settings",
+        "sv": 50,
+        "cpc": 0.29,
+        "comp": 0.09,
+        "kd": 0
+      }
+    ]
+  },
+  "cost": 0.02208
+}

@@ -2,6 +2,7 @@ import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { GearAdvice, type GearSpec } from '@/components/GearAdvice';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
+import { DryingDecision } from '@/components/DryingDecision';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -287,6 +288,8 @@ export default function HowToDryFilamentPage() {
         </section>
 
         {/* Cross-links */}
+        <DryingDecision />
+
         <GearAdvice
           heading="What you actually need"
           intro="Four things cover every drying and storage case on this page. Each one is listed with the specification that decides whether a given product will do the job, because that is the part product titles tend to omit."

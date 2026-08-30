@@ -2,8 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { OutsourceDecision } from '@/components/OutsourceDecision';
 import { Faq, type FaqItem } from '@/components/Faq';
-import { MATERIAL_PROFILES, iconFor, type MaterialProfile } from '@/lib/materials';
+import { MATERIAL_PROFILES, iconFor, type MaterialProfile, iconSrc } from '@/lib/materials';
 import { servicesFor } from '@/lib/commerce';
 import { OWNED_SERVICE, capabilityFor } from '@/lib/ownedService';
 import type { Metadata } from 'next';
@@ -164,7 +165,7 @@ export default function GetItPrintedPage() {
                     style={{ background: 'var(--surface-0)', borderColor: 'var(--border)' }}
                   >
                     <Image
-                      src={`/brand/icons/${iconFor(m)}.png`}
+                      src={iconSrc(iconFor(m))}
                       alt=""
                       aria-hidden="true"
                       width={48}
@@ -264,6 +265,8 @@ export default function GetItPrintedPage() {
             </a>
           </div>
         </section>
+
+        <OutsourceDecision />
 
         <Faq items={faq} heading="Common questions about print services" />
       </main>
