@@ -35,6 +35,34 @@ const LEVELS = [
   { level: 'Expert', blurb: 'Beyond what most desktop printers can physically do.' },
 ] as const;
 
+/**
+ * The four jobs people arrive with. Ordered by how many of them arrive with it,
+ * which puts the material lookup first because that is what this site is for.
+ * Buying gear sits third rather than first on purpose.
+ */
+const INTENTS = [
+  {
+    href: '#materials',
+    label: 'Choose a filament',
+    line: 'Settings, drying and enclosure for every material we document.',
+  },
+  {
+    href: '/3d-printer-troubleshooting',
+    label: 'Fix a bad print',
+    line: 'Work from the symptom to the one thing worth checking first.',
+  },
+  {
+    href: '/recommended-gear',
+    label: 'Buy the right gear',
+    line: 'Dryers, nozzles, plates and finishing tools, with the reason for each.',
+  },
+  {
+    href: '/get-it-printed',
+    label: 'Get a part printed',
+    line: 'Decide whether to print it yourself, and where to send it if not.',
+  },
+];
+
 const GUIDES = [
   { icon: 'drying', label: 'How to dry filament', href: '/how-to-dry-filament', line: 'Which materials need it, at what temperature, for how long.' },
   { icon: 'stringing', label: 'How to stop stringing', href: '/3d-print-stringing', line: 'Retraction, temperature, and the moisture cause most people miss.' },
@@ -90,6 +118,43 @@ export default function HomePage() {
                 Free field guide
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/*
+          Intent gateway. Four things people arrive wanting to do, named as the
+          job rather than as a section.
+
+          Deliberately a compact typographic band, not four icon-heading-body
+          cards: the material index directly below is already a card grid, and a
+          second grid of the same shape above it would make the page read as two
+          menus and bury the index that is the actual product.
+        */}
+        <section className="px-6 pb-2" style={{ background: 'var(--surface-1)' }} aria-label="Start here">
+          <div className="max-w-5xl mx-auto pb-10">
+            <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4 border-t pt-8" style={{ borderColor: 'var(--border)' }}>
+              {INTENTS.map((it, i) => (
+                <li key={it.href}>
+                  <Link href={it.href} className="group block">
+                    <span
+                      className="block text-[0.65rem] font-bold tabular-nums mb-1.5"
+                      style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-display)', letterSpacing: '0.12em' }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className="block text-base font-bold leading-snug transition-colors group-hover:text-brand"
+                      style={{ color: 'var(--foreground)', fontFamily: 'var(--font-display)' }}
+                    >
+                      {it.label}
+                    </span>
+                    <span className="block text-sm mt-1 leading-relaxed" style={{ color: 'var(--body-text)' }}>
+                      {it.line}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 

@@ -1,6 +1,6 @@
 import { ArrowRight, Factory } from 'lucide-react';
 import type { MaterialProfile } from '@/lib/materials';
-import { OWNED_SERVICE, capabilityFor, type CapabilityState } from '@/lib/ownedService';
+import { OWNED_SERVICE, quoteUrlFor, capabilityFor, type CapabilityState } from '@/lib/ownedService';
 
 /**
  * Owned-service route to 3DPrinterOnDemand.
@@ -28,8 +28,8 @@ const COPY: Record<
   material: {
     heading: (m) => `Need the finished part instead of another spool of ${m}?`,
     body: (m) =>
-      `Upload the model and get a price. ${m} is one of the materials the service prints, so the quote is automatic rather than a wait.`,
-    cta: 'Get an instant quote',
+      `Upload the model and get a price. ${m} is one of the materials the service prints.`,
+    cta: 'Get a quote',
   },
   troubleshooting: {
     heading: () => 'Need the part now, without another test print?',
@@ -46,7 +46,7 @@ const COPY: Record<
   'guide-thanks': {
     heading: () => 'Need a part printed?',
     body: () =>
-      'The guide covers printing it yourself. If you would rather not, the service prints PLA and PETG with an instant quote.',
+      'The guide covers printing it yourself. If you would rather not, the service prints PLA and PETG.',
     cta: 'Get a quote',
   },
 };
@@ -73,6 +73,21 @@ export function OwnedServiceCta({
   const name = material?.category;
   const note = conditionalNote(state, name);
 
+  // Only a SUPPORTED material reaches the automated quote. Saying "instant"
+  // anywhere else contradicts the note directly beneath it, which is exactly
+  // the mismatch this component shipped with.
+  const ctaLabel =
+    variant === 'material' && state === 'SUPPORTED' ? 'Get an instant quote' : copy.cta;
+  const automated = state === 'SUPPORTED';
+
+  // Cross-property attribution. Without it every owned-service order looks
+  // like direct traffic and the channel cannot be measured at all.
+  const href = quoteUrlFor({
+    sourcePage: material ? `/library/${material.slug}` : variant,
+    placement: `owned-service-${variant}`,
+    material: name,
+  });
+
   return (
     <section
       className={
@@ -94,6 +109,9 @@ export function OwnedServiceCta({
 
         <p className="leading-relaxed mb-2" style={{ color: 'var(--body-text)' }}>
           {copy.body(name)}
+          {variant === 'material' && automated
+            ? ' The quote is automatic rather than a wait.'
+            : ''}
         </p>
 
         {note && (
@@ -108,7 +126,7 @@ export function OwnedServiceCta({
         </p>
 
         <a
-          href={OWNED_SERVICE.quoteUrl}
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
           data-event="owned_service_click"
@@ -118,7 +136,7 @@ export function OwnedServiceCta({
           className="inline-flex items-center gap-2 font-semibold px-6 py-3 rounded-xl transition-colors min-h-[48px]"
           style={{ background: 'var(--brand-primary)', color: 'var(--on-primary)' }}
         >
-          {copy.cta}
+          {ctaLabel}
           <ArrowRight size={16} aria-hidden="true" />
         </a>
 

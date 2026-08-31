@@ -22,6 +22,12 @@
 
 export type Product = {
   asin: string;
+  /** Program key in affiliateLinks.json. Amazon today; a direct merchant later. */
+  merchant?: string;
+  /** Cluster on /recommended-gear. Absent means it only appears contextually. */
+  cluster?: GearCluster;
+  /** When the listing was last confirmed live with imagery, via the Creators API. */
+  verified?: string;
   /** Our own short name. Never the Amazon title, which changes without notice. */
   name: string;
   brand: string;
@@ -31,12 +37,32 @@ export type Product = {
   spec: string;
 };
 
+export type GearCluster =
+  | 'drying-storage'
+  | 'nozzles-hotends'
+  | 'build-surfaces'
+  | 'finishing'
+  | 'assembly'
+  | 'measuring';
+
+export const CLUSTERS: { id: GearCluster; title: string; why: string }[] = [
+  { id: 'measuring', title: 'Measuring', why: 'Everything else on this page is guesswork without a number.' },
+  { id: 'drying-storage', title: 'Drying and storage', why: 'Moisture is the single most common cause of a print that looks tuned and still fails.' },
+  { id: 'nozzles-hotends', title: 'Nozzles and cleaning', why: 'A worn or partly blocked nozzle produces symptoms people spend evenings blaming on settings.' },
+  { id: 'build-surfaces', title: 'Build surface and adhesion', why: 'The first layer decides whether the print exists. Most adhesion failures are a dirty plate.' },
+  { id: 'finishing', title: 'Finishing', why: 'Removing supports and layer lines without damaging the part is a tooling problem, not a slicer one.' },
+  { id: 'assembly', title: 'Assembly and joining', why: 'Printed threads strip and printed joints peel. Both have specific answers.' },
+];
+
 export const PRODUCTS: Product[] = [
   {
     asin: "B001AQEZ2W",
     name: 'Electronic digital caliper, 0-6 inch',
     brand: 'iGaging',
     forCategory: 'Digital calipers',
+    merchant: 'amazon',
+    cluster: 'measuring',
+    verified: '2026-08-30',
     spec: 'Reads inch, millimetre and fraction, IP54 rated against workshop dust',
   },
   {
@@ -44,6 +70,9 @@ export const PRODUCTS: Product[] = [
     name: 'Diagonal flush cutters',
     brand: 'Klein Tools',
     forCategory: 'Flush cutters',
+    merchant: 'amazon',
+    cluster: 'finishing',
+    verified: '2026-08-30',
     spec: 'Genuinely flush jaws, so a support is severed rather than torn away',
   },
   {
@@ -51,6 +80,9 @@ export const PRODUCTS: Product[] = [
     name: 'Deburring tool with spare blades',
     brand: 'AFA Tooling',
     forCategory: 'Deburring tool',
+    merchant: 'amazon',
+    cluster: 'finishing',
+    verified: '2026-08-30',
     spec: 'Pivoting blade head that follows an edge instead of gouging across it',
   },
   {
@@ -58,6 +90,9 @@ export const PRODUCTS: Product[] = [
     name: 'Needle file set',
     brand: 'Hi-Spec',
     forCategory: 'Needle file set',
+    merchant: 'amazon',
+    cluster: 'finishing',
+    verified: '2026-08-30',
     spec: 'Assorted profiles for internal corners and printed holes sandpaper cannot reach',
   },
   {
@@ -65,6 +100,9 @@ export const PRODUCTS: Product[] = [
     name: 'Wet/dry sandpaper assortment',
     brand: 'Assorted',
     forCategory: 'Wet/dry sanding assortment',
+    merchant: 'amazon',
+    cluster: 'finishing',
+    verified: '2026-08-30',
     spec: '120 through 3000 grit, wet/dry backing so PLA can be sanded without heat',
   },
   {
@@ -72,6 +110,9 @@ export const PRODUCTS: Product[] = [
     name: 'M3 brass heat-set inserts, 100 pieces',
     brand: 'ruthex',
     forCategory: 'Brass heat-set inserts',
+    merchant: 'amazon',
+    cluster: 'assembly',
+    verified: '2026-08-30',
     spec: 'Publishes a recommended hole diameter, which is the number the whole job depends on',
   },
   {
@@ -79,6 +120,9 @@ export const PRODUCTS: Product[] = [
     name: 'Digital soldering iron with insert tips',
     brand: 'Mintion',
     forCategory: 'Soldering iron with insert tips',
+    merchant: 'amazon',
+    cluster: 'assembly',
+    verified: '2026-08-30',
     spec: 'Temperature controlled with M2 to M8 insert tips, so the insert goes in square',
   },
   {
@@ -86,6 +130,9 @@ export const PRODUCTS: Product[] = [
     name: 'Filament storage box with humidity monitor',
     brand: 'YOOPAI',
     forCategory: 'Airtight storage with rechargeable desiccant',
+    merchant: 'amazon',
+    cluster: 'drying-storage',
+    verified: '2026-08-30',
     spec: 'Sealed box with a built-in humidity readout, so the storage can be verified',
   },
   {
@@ -93,6 +140,9 @@ export const PRODUCTS: Product[] = [
     name: 'Indicating silica gel, rechargeable',
     brand: 'Dry & Dry',
     forCategory: 'Rechargeable desiccant',
+    merchant: 'amazon',
+    cluster: 'drying-storage',
+    verified: '2026-08-30',
     spec: 'Changes colour when spent and recharges in an oven, so it is bought once',
   },
   {
@@ -100,6 +150,9 @@ export const PRODUCTS: Product[] = [
     name: 'Filament vacuum storage bags with pump',
     brand: 'Odilona',
     forCategory: 'Vacuum storage bags',
+    merchant: 'amazon',
+    cluster: 'drying-storage',
+    verified: '2026-08-30',
     spec: 'Sized for 1 kg spools generally, with no printer-brand fit claim',
   },
   {
@@ -107,6 +160,9 @@ export const PRODUCTS: Product[] = [
     name: 'Digital hygrometer',
     brand: 'TempPro',
     forCategory: 'Hygrometer',
+    merchant: 'amazon',
+    cluster: 'drying-storage',
+    verified: '2026-08-30',
     spec: 'Small enough to sit inside a storage box, which is the only place the reading matters',
   },
   {
@@ -114,6 +170,9 @@ export const PRODUCTS: Product[] = [
     name: 'Nozzle cleaning kit with needles',
     brand: 'Assorted',
     forCategory: 'Nozzle cleaning kit',
+    merchant: 'amazon',
+    cluster: 'nozzles-hotends',
+    verified: '2026-08-30',
     spec: '0.4mm needles plus tweezers, thinner than the bore so the nozzle is not scored',
   },
   {
@@ -121,6 +180,9 @@ export const PRODUCTS: Product[] = [
     name: 'MK8 brass nozzle assortment',
     brand: 'XIFOWE',
     forCategory: 'Spare brass nozzles',
+    merchant: 'amazon',
+    cluster: 'nozzles-hotends',
+    verified: '2026-08-30',
     spec: 'MK8 pattern in assorted sizes. Check MK8 matches your hot end before ordering',
   },
   {
@@ -128,6 +190,9 @@ export const PRODUCTS: Product[] = [
     name: 'Hardened steel nozzles, MK8',
     brand: 'Creality',
     forCategory: 'Hardened steel nozzle',
+    merchant: 'amazon',
+    cluster: 'nozzles-hotends',
+    verified: '2026-08-30',
     spec: 'Hardened steel for abrasive filament. MK8 is a thread pattern, not a universal fit',
   },
   // ------------------------------------------------------------ M1.5 additions
@@ -136,6 +201,9 @@ export const PRODUCTS: Product[] = [
     name: 'Isopropyl alcohol, 99.9%, 32 oz',
     brand: 'MaxTite',
     forCategory: 'Isopropyl alcohol',
+    merchant: 'amazon',
+    cluster: 'build-surfaces',
+    verified: '2026-08-30',
     spec: 'High purity, so it flashes off the plate instead of leaving a film of its own',
   },
   {
@@ -143,6 +211,9 @@ export const PRODUCTS: Product[] = [
     name: 'Build plate glue sticks, 6 pack',
     brand: 'TEQStone',
     forCategory: 'Glue stick',
+    merchant: 'amazon',
+    cluster: 'build-surfaces',
+    verified: '2026-08-30',
     spec: 'Washes off with water, which is the property that matters when it has to come back off the plate',
   },
   {
@@ -150,6 +221,9 @@ export const PRODUCTS: Product[] = [
     name: 'Sandable filler primer, grey',
     brand: 'Bartoline',
     forCategory: 'Filler primer',
+    merchant: 'amazon',
+    cluster: 'finishing',
+    verified: '2026-08-30',
     spec: 'One of the few filler primers whose own label names plastic alongside metal and wood',
   },
   {
@@ -157,6 +231,9 @@ export const PRODUCTS: Product[] = [
     name: 'CA glue and accelerator combo',
     brand: 'Bob Smith Industries',
     forCategory: 'Cyanoacrylate adhesive',
+    merchant: 'amazon',
+    cluster: 'assembly',
+    verified: '2026-08-30',
     spec: 'Glue and accelerator together, which is what PETG and large bonded faces actually need',
   },
   {
@@ -164,6 +241,9 @@ export const PRODUCTS: Product[] = [
     name: 'Clear 5-minute epoxy syringe, 25 ml',
     brand: 'J-B Weld',
     forCategory: 'Two-part epoxy',
+    merchant: 'amazon',
+    cluster: 'assembly',
+    verified: '2026-08-30',
     spec: 'Twin syringe meters both parts evenly, and five minutes is enough to align a joint',
   },
 ];

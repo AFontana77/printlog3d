@@ -8,6 +8,8 @@ import {
   amazonTag,
   filamentSearchTerms,
   sourcingFor,
+  outboundUrl,
+  outboundDisclosure,
 } from '@/lib/commerce';
 import { filamentProductFor, productUrl } from '@/lib/products';
 import { AmazonProductImage } from '@/components/AmazonProductImage';
@@ -118,7 +120,7 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
               {SPECIALIST_RETAILERS.map((r) => (
                 <div key={r.id} className="bg-gray-50 rounded-xl border border-gray-100 p-4">
                   <a
-                    href={r.url}
+                    href={outboundUrl(r)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-semibold text-brand hover:text-brand-dark underline underline-offset-4 inline-flex items-center gap-1.5 min-h-[44px]"
@@ -130,9 +132,14 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
                 </div>
               ))}
             </div>
+            {/* Derived, not typed. This sentence was hardcoded as "no commercial
+                relationship with either", which becomes a false statement the
+                moment a program is approved -- and nothing would have flagged it. */}
             <p className="mt-3 text-xs text-gray-500">
-              Named because they stock this class of material and publish specifications. We have
-              no commercial relationship with either, and these are ordinary links.
+              Named because they stock this class of material and publish specifications.{' '}
+              {SPECIALIST_RETAILERS.some((r) => outboundDisclosure(r) === 'affiliate')
+                ? 'Some of these links earn us a commission, at no extra cost to you. Inclusion here is on merit and is not affected by that.'
+                : 'We have no commercial relationship with either, and these are ordinary links.'}
             </p>
           </div>
         )}

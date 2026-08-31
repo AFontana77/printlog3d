@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { MATERIAL_PROFILES } from '@/lib/materials';
-import { OWNED_SERVICE, capabilityFor } from '@/lib/ownedService';
-import { servicesFor } from '@/lib/commerce';
+import { OWNED_SERVICE, capabilityFor, quoteUrlFor } from '@/lib/ownedService';
+import { servicesFor, outboundUrl } from '@/lib/commerce';
 
 /**
  * Outsource decision tool.
@@ -211,7 +211,11 @@ export function OutsourceDecision() {
                     {OWNED_SERVICE.relationship}
                   </p>
                   <a
-                    href={OWNED_SERVICE.quoteUrl}
+                    href={quoteUrlFor({
+                      sourcePage: '/get-it-printed',
+                      placement: 'outsource-decision',
+                      material: material.category,
+                    })}
                     target="_blank"
                     rel="noopener noreferrer"
                     data-owned-service="3dprinterondemand"
@@ -239,7 +243,7 @@ export function OutsourceDecision() {
                   {alternatives.map((s) => (
                     <a
                       key={s.name}
-                      href={s.url}
+                      href={outboundUrl(s)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="mr-4 text-sm font-semibold underline underline-offset-4"

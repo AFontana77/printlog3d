@@ -1,5 +1,6 @@
 import { MATERIAL_PROFILES, type MaterialProfile } from './materials';
 import affiliateLinksData from '@/data/affiliateLinks.json';
+import { affiliateUrl, disclosureFor, type DisclosureType } from '@/lib/merchants';
 
 /**
  * Canonical commercial configuration for printlog3d.com.
@@ -170,6 +171,8 @@ export function filamentSearchTerms(m: MaterialProfile): string | null {
 
 export type Retailer = {
   id: string;
+  /** Key into affiliateLinks.json. Tracking attaches only once enrolled. */
+  program?: string;
   name: string;
   url: string;
   status: MerchantStatus;
@@ -178,12 +181,18 @@ export type Retailer = {
 };
 
 /**
- * Named on merit, linked editorially. No affiliate relationship exists with any
- * of these today, so no tracking is added and none is disclosed.
+ * Named on merit. Where a `program` key is present the URL is routed through
+ * the merchant layer, which attaches tracking ONLY once that program is
+ * enrolled -- so these render as plain editorial links today and start
+ * attributing the moment credentials land, with no page edit.
+ *
+ * Merit comes first regardless: Printed Solid carries no program key and stays
+ * recommended, because it is the right answer for nylon and composites.
  */
 export const SPECIALIST_RETAILERS: Retailer[] = [
   {
     id: 'matterhackers',
+    program: 'matterhackers',
     name: 'MatterHackers',
     url: 'https://www.matterhackers.com/',
     status: 'editorial',
@@ -203,6 +212,8 @@ export const SPECIALIST_RETAILERS: Retailer[] = [
 // ---------------------------------------------------------------------------
 
 export type PrintService = {
+  /** Key into affiliateLinks.json. Tracking attaches only once enrolled. */
+  program?: string;
   id: string;
   name: string;
   url: string;
@@ -247,6 +258,7 @@ export const PRINT_SERVICES: PrintService[] = [
   },
   {
     id: 'treatstock',
+    program: 'treatstock',
     name: 'Treatstock',
     url: 'https://www.treatstock.com/',
     status: 'editorial',
@@ -311,4 +323,21 @@ export function maxDryingTempC(): number {
     if (t > max) max = t;
   }
   return max;
+}
+
+
+/**
+ * Outbound URL for a named retailer or print service.
+ *
+ * Components must use this rather than reading `.url`, so activating a program
+ * reaches every placement at once. Returns the plain URL for anything with no
+ * program key or no live credentials.
+ */
+export function outboundUrl(entity: { url: string; program?: string }): string {
+  return entity.program ? affiliateUrl(entity.program, entity.url) : entity.url;
+}
+
+/** Disclosure to show beside that link, derived rather than typed per page. */
+export function outboundDisclosure(entity: { program?: string }): DisclosureType {
+  return entity.program ? disclosureFor(entity.program) : 'none';
 }

@@ -6,7 +6,7 @@ import { OutsourceDecision } from '@/components/OutsourceDecision';
 import { Faq, type FaqItem } from '@/components/Faq';
 import { MATERIAL_PROFILES, iconFor, type MaterialProfile, iconSrc } from '@/lib/materials';
 import { servicesFor } from '@/lib/commerce';
-import { OWNED_SERVICE, capabilityFor } from '@/lib/ownedService';
+import { OWNED_SERVICE, capabilityFor, quoteUrlFor } from '@/lib/ownedService';
 import type { Metadata } from 'next';
 
 /**
@@ -251,7 +251,7 @@ export default function GetItPrintedPage() {
               honest answer even though it earns us nothing.
             </p>
             <a
-              href={OWNED_SERVICE.quoteUrl}
+              href={quoteUrlFor({ sourcePage: '/get-it-printed', placement: 'hub-primary' })}
               target="_blank"
               rel="noopener noreferrer"
               data-event="owned_service_click"

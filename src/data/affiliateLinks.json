@@ -1,10 +1,11 @@
 {
   "_meta": {
     "purpose": "Affiliate program registry for printlog3d.com. Same shape as the other portfolio sites.",
-    "format_note": "Each program: { brand, base_url, tracking_param, tracking_value, status, network, commission, cookie, notes }. status = pending | queued_signup | enrolled | declined.",
+    "format_note": "Each program: { brand, base_url, tracking_param, tracking_value, tracking_style, status, network, commission, cookie, notes }. status = pending | queued_signup | enrolled | declined. tracking_style = query | path | none, describing how the program expects attribution to be attached.",
     "activation": "ACTIVE. Amazon links render across the material pages, gear blocks, comparison guides and the drying and stringing guides. Setting status back to 'pending' withdraws every Amazon link site-wide without touching a component.",
-    "last_updated": "2026-08-24",
-    "session": "WEBMON-PRINT property maturation"
+    "last_updated": "2026-08-31",
+    "session": "WEBMON-PRINT property maturation",
+    "merchant_neutrality": "Amazon is the default breadth layer, NOT the exclusive destination. Every program below is consumed through src/lib/merchants.ts, which attaches tracking ONLY where status is enrolled and a tracking_value exists. A pending program therefore renders exactly the plain editorial link it renders today, and activating it is a one-line change here rather than an edit across pages."
   },
   "programs": {
     "amazon": {
@@ -17,6 +18,90 @@
       "cookie": "24h",
       "notes": "Dedicated PrintLog3D tracking ID, created by the owner 2026-08-24 in the same Associates account as digpicframe-20. Verified against the Creators API before activation: getItems returned HTTP 200 with tag=printlog3d-20 present in detailPageURL. Never borrow a sibling property's tag; every monetised site in the portfolio has its own.",
       "tracking_value": "printlog3d-20"
+    },
+    "matterhackers": {
+      "brand": "MatterHackers",
+      "base_url": "https://www.matterhackers.com",
+      "status": "pending",
+      "network": "unconfirmed",
+      "tracking_param": "",
+      "tracking_style": "query",
+      "commission": "unknown",
+      "cookie": "unknown",
+      "notes": "Already linked editorially from the engineering-material pages (PEEK, PA-CF, nylons, PC). Program platform was ambiguous at last check: their own /affiliates page 404'd, and the program appears variously as Affiliatly and ShareASale. Resolve the platform BEFORE applying, then set status and tracking_value here. No page edit required.",
+      "tracking_value": ""
+    },
+    "polymaker": {
+      "brand": "Polymaker",
+      "base_url": "https://polymaker.com",
+      "status": "pending",
+      "network": "superfiliate",
+      "tracking_param": "",
+      "tracking_style": "query",
+      "commission": "5-20% tiered",
+      "cookie": "unknown",
+      "notes": "Direct program, no minimum, tiered commission. Signup is an owner action. Relevant to PLA, PETG, ABS, ASA, TPU, PC, composites and support materials. Note the legacy catalogue invented Polymaker product names; only real published lines may ever be named.",
+      "tracking_value": ""
+    },
+    "bambulab": {
+      "brand": "Bambu Lab",
+      "base_url": "https://bambulab.com",
+      "status": "pending",
+      "network": "unconfirmed",
+      "tracking_param": "",
+      "tracking_style": "query",
+      "commission": "unknown",
+      "cookie": "unknown",
+      "notes": "Printer and first-party filament. Relevant to the printer clusters on /recommended-gear.",
+      "tracking_value": ""
+    },
+    "creality": {
+      "brand": "Creality",
+      "base_url": "https://www.creality.com",
+      "status": "pending",
+      "network": "unconfirmed",
+      "tracking_param": "",
+      "tracking_style": "query",
+      "commission": "unknown",
+      "cookie": "unknown",
+      "notes": "Printers, nozzles and accessories. One verified hardened-nozzle ASIN already sells through Amazon; a direct program would be an alternative, not a replacement.",
+      "tracking_value": ""
+    },
+    "prusa": {
+      "brand": "Prusa",
+      "base_url": "https://www.prusa3d.com",
+      "status": "pending",
+      "network": "unconfirmed",
+      "tracking_param": "",
+      "tracking_style": "query",
+      "commission": "unknown",
+      "cookie": "unknown",
+      "notes": "Printers and Prusament filament. Prusament publishes per-spool QA data, which is a genuine editorial reason to cite them independent of any commission.",
+      "tracking_value": ""
+    },
+    "sunlu": {
+      "brand": "SUNLU",
+      "base_url": "https://www.sunlu.com",
+      "status": "pending",
+      "network": "unconfirmed",
+      "tracking_param": "",
+      "tracking_style": "query",
+      "commission": "unknown",
+      "cookie": "unknown",
+      "notes": "Budget filament and dryers. Amazon is likely to remain the better route for this brand.",
+      "tracking_value": ""
+    },
+    "treatstock": {
+      "brand": "Treatstock",
+      "base_url": "https://www.treatstock.com",
+      "status": "pending",
+      "network": "direct",
+      "tracking_param": "",
+      "tracking_style": "query",
+      "commission": "up to 5%",
+      "cookie": "6 months",
+      "notes": "The only print-service program confirmed live. Deep links supported. Currently linked editorially from material pages we cannot print in-house.",
+      "tracking_value": ""
     }
   }
 }

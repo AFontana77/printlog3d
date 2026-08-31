@@ -261,18 +261,37 @@ async function classify() {
 }
 
 // ---------------------------------------------------------------- images
-function auditImages() {
+async function auditImages() {
+  const cache = new Map();
   for (const [url, p] of pages) {
     if (!p.html) continue;
     for (const m of p.html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)) {
       const src = m[1].replace(/&amp;/g, '&');
       if (src.startsWith('data:')) continue;
+      // Images are fetched, not merely recorded. A broken product image is a
+      // blank well where a recommendation should be, and nothing else on this
+      // property would notice it.
+      const abs = src.startsWith('http') ? src : new URL(src, SITE).toString();
+      let st;
+      if (cache.has(abs)) {
+        st = cache.get(abs);
+      } else {
+        const r = await fetchWithRedirects(abs, 'GET');
+        st = r.status;
+        cache.set(abs, st);
+        if (st >= 400 || st === 0) {
+          const external = !abs.startsWith(ORIGIN);
+          const msg = `BROKEN IMAGE ${st || 'unreachable'} — ${abs.slice(0, 90)}  (on ${url})`;
+          // A first-party image is ours to fix; a merchant CDN blip is not.
+          (external ? advisory : blocking).push(msg);
+        }
+      }
       results.push({
         source_url: url,
         anchor_text: '[image]',
         target_url: src.slice(0, 200),
         final_url: '',
-        http_status: '',
+        http_status: st,
         scope: src.startsWith('http') && !src.startsWith(ORIGIN) ? 'external' : 'internal',
         classification: 'asset',
         merchant: '',
@@ -370,5 +389,5 @@ function write() {
 
 await crawl();
 await classify();
-auditImages();
+await auditImages();
 process.exit(write());

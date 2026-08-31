@@ -109,3 +109,30 @@ export function ownedServiceMaterials(): { category: string; state: CapabilitySt
     .filter(([, v]) => v === 'SUPPORTED' || v === 'CONDITIONAL')
     .map(([category, state]) => ({ category, state }));
 }
+
+
+/**
+ * Quote URL carrying cross-property attribution.
+ *
+ * Every handoff to 3DPrinterOnDemand should be traceable back to the page that
+ * sent it, or the owned-service channel is unmeasurable and indistinguishable
+ * from direct traffic.
+ *
+ * Deliberately carries NO personal data. Material, placement and source page are
+ * properties of the page, not of the reader, and nothing here is derived from a
+ * session, an identifier or anything a person typed.
+ */
+export function quoteUrlFor(opts: {
+  sourcePage: string;
+  placement: string;
+  material?: string;
+  campaign?: string;
+}): string {
+  const url = new URL(OWNED_SERVICE.quoteUrl);
+  url.searchParams.set('source', 'printlog3d');
+  url.searchParams.set('source_page', opts.sourcePage);
+  url.searchParams.set('placement', opts.placement);
+  if (opts.material) url.searchParams.set('material', opts.material);
+  url.searchParams.set('campaign', opts.campaign ?? 'printlog3d-referral');
+  return url.toString();
+}

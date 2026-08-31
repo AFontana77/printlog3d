@@ -1,6 +1,6 @@
 import { ExternalLink, Factory } from 'lucide-react';
 import type { MaterialProfile } from '@/lib/materials';
-import { servicesFor, serviceFraming } from '@/lib/commerce';
+import { servicesFor, serviceFraming, outboundUrl } from '@/lib/commerce';
 
 /**
  * The escape hatch.
@@ -60,7 +60,7 @@ export function PrintServiceRoute({ material }: { material: MaterialProfile }) {
           {servicesFor(material).map((s) => (
             <div key={s.id} className="bg-white rounded-xl border border-slate-200 p-4">
               <a
-                href={s.url}
+                href={outboundUrl(s)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold text-brand hover:text-brand-dark underline underline-offset-4 inline-flex items-center gap-1.5 min-h-[44px]"
