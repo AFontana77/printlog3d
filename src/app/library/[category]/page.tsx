@@ -232,6 +232,9 @@ function SpecCard({
   );
 }
 
+/** One review date for the material set: it is generated from one source. */
+const MATERIAL_DATA_REVIEWED = '2026-08-31';
+
 export default async function MaterialPage({
   params,
 }: {
@@ -507,6 +510,26 @@ export default async function MaterialPage({
           </div>
         </section>
       </main>
+        <section className="py-10 px-4 border-t" style={{ background: 'var(--surface-1)', borderColor: 'var(--border)' }} aria-label="Sources and methodology">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-sm font-bold uppercase tracking-wide mb-2" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-display)' }}>
+              Sources and methodology
+            </h2>
+            <p className="text-sm leading-relaxed mb-2" style={{ color: 'var(--body-text)' }}>
+              The temperatures, drying times and enclosure requirements above are{' '}
+              <strong>typical manufacturer-published ranges for this material class</strong>, not
+              measurements taken by PrintLog3D. Always check your own filament maker&apos;s figures,
+              which is the only source that knows what is on your spool.
+            </p>
+            <p className="text-sm" style={{ color: 'var(--muted-foreground)' }}>
+              Last reviewed {MATERIAL_DATA_REVIEWED} &middot;{' '}
+              <Link href="/editorial-policy" className="underline underline-offset-4" style={{ color: 'var(--brand-primary)' }}>
+                How we source and check this
+              </Link>
+            </p>
+          </div>
+        </section>
+
       <SiteFooter />
     </>
   );

@@ -158,7 +158,7 @@ def check_assets(html, label, failures, cache, get):
 
 STATIC_PAGES = [
     "", "/library", "/free-download", "/about", "/support", "/privacy", "/terms",
-    "/disclosure", "/get-it-printed", "/workshop", "/recommended-gear",
+    "/disclosure", "/editorial-policy", "/get-it-printed", "/workshop", "/recommended-gear",
     "/pla-vs-petg", "/pla-vs-abs", "/abs-vs-petg",
     "/3d-printing-filament-guide", "/how-to-dry-filament", "/3d-print-stringing",
     "/3d-printer-troubleshooting", "/asa-vs-abs",

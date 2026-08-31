@@ -21,6 +21,7 @@ export function SiteFooter() {
           <Link href="/free-download" className="hover:text-gray-900 transition-colors">Free Download</Link>
           <Link href="/about" className="hover:text-gray-900 transition-colors">About</Link>
           <Link href="/support" className="hover:text-gray-900 transition-colors">Support</Link>
+          <Link href="/editorial-policy" className="hover:text-gray-900 transition-colors">Editorial policy</Link>
           <Link href="/disclosure" className="hover:text-gray-900 transition-colors">Disclosure</Link>
           <Link href="/privacy" className="hover:text-gray-900 transition-colors">Privacy</Link>
           <Link href="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>

@@ -119,7 +119,7 @@ export function EmailCaptureForm({
           onChange={(e) => setConsent(e.target.checked)}
           className="mt-1 h-4 w-4 shrink-0"
         />
-        <span>Send me occasional 3D printing resources. Unsubscribe anytime.</span>
+        <span>Send me new material profiles, practical print fixes and verified gear updates. Unsubscribe anytime.</span>
       </label>
 
       {state === 'error' && message ? (

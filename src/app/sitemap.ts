@@ -38,6 +38,7 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
   { path: '/get-it-printed', priority: 0.75, changeFrequency: 'monthly' },
   { path: '/workshop', priority: 0.85, changeFrequency: 'monthly' },
   { path: '/recommended-gear', priority: 0.85, changeFrequency: 'monthly' },
+  { path: '/editorial-policy', priority: 0.55, changeFrequency: 'yearly' },
   { path: '/disclosure', priority: 0.4, changeFrequency: 'yearly' },
   { path: '/about', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/support', priority: 0.4, changeFrequency: 'yearly' },
