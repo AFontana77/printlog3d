@@ -32,10 +32,13 @@ BASE = "https://www.printlog3d.com"
 # Banned wording lives in banned-claims.json so the hydrated layer enforces the
 # SAME rules. Two copies of a rule set is the drift this property keeps paying
 # for; the em dash that escaped M1.5 escaped because only one layer existed.
-_BANNED_RAW = json.loads(
+_RULES = json.loads(
     (Path(__file__).resolve().parent / "banned-claims.json").read_text(encoding="utf-8")
-)["patterns"]
-BANNED = {k: v for k, v in _BANNED_RAW.items()}
+)
+BANNED = dict(_RULES["patterns"])
+# Literal program values only ever appear in one casing; prose rules must not
+# depend on casing at all. See the comment in banned-claims.json.
+CASE_SENSITIVE = set(_RULES.get("case_sensitive", []))
 
 
 # Checks where a negation in the preceding clause flips the meaning. "not
@@ -198,12 +201,18 @@ def _workshop_from_source() -> list[str]:
 
 WORKSHOP = _workshop_from_source()
 # A sample of the noindexed catalogue entries.
-SAMPLE_ENTRIES = [
-    "/library/peek/bambu-lab-peek-premium",
-    "/library/pla/hatchbox-pla-standard",
-    "/library/petg/cc3d-petg-standard",
-    "/library/abs/amazon-basics-abs-premium",
+# Retired legacy catalogue URLs. These must NOT resolve as pages any more.
+# Asserted as 301s to the real material profile, so reviving the route or
+# dropping the redirect fails acceptance rather than silently republishing a
+# thousand invented products.
+RETIRED_ENTRIES = [
+    ("/library/peek/bambu-lab-peek-premium", "/library/peek"),
+    ("/library/pla/hatchbox-pla-standard", "/library/pla"),
+    ("/library/petg/cc3d-petg-standard", "/library/petg"),
+    ("/library/abs/amazon-basics-abs-premium", "/library/abs"),
+    ("/library/pctg/polymaker-pctg-premium", "/library/pctg"),
 ]
+SAMPLE_ENTRIES = []
 
 
 def fetch_prod(path: str) -> tuple[int, str]:
@@ -332,6 +341,34 @@ def check_field_guide(failures):
               % (len(claimed), len(normalised), len(canon)))
 
 
+def check_retired_entries(failures):
+    """The generated catalogue must 301, never resolve.
+
+    A page that still answers 200 is still publishing an invented product, no
+    matter what its robots tag says.
+    """
+    import urllib.request as _u
+
+    class _NoRedirect(_u.HTTPRedirectHandler):
+        def redirect_request(self, *a, **k):
+            return None
+
+    opener = _u.build_opener(_NoRedirect)
+    for src, dest in RETIRED_ENTRIES:
+        try:
+            r = opener.open(_u.Request(BASE + src, method="GET"), timeout=30)
+            failures.append("LEGACY %s -> still resolves (HTTP %s); it must 301" % (src, r.status))
+        except _u.HTTPError as e:
+            loc = e.headers.get("Location", "")
+            if e.code not in (301, 308):
+                failures.append("LEGACY %s -> HTTP %s, expected 301" % (src, e.code))
+            elif not loc.rstrip("/").endswith(dest):
+                failures.append("LEGACY %s -> redirects to %s, expected %s" % (src, loc, dest))
+        except Exception as e:  # noqa: BLE001
+            failures.append("LEGACY %s -> could not be checked: %s" % (src, e))
+    print("  legacy catalogue: %d retired URLs asserted as 301" % len(RETIRED_ENTRIES))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     g = ap.add_mutually_exclusive_group(required=True)
@@ -344,6 +381,9 @@ def main() -> int:
     failures: list[str] = []
     asset_cache: dict[str, int] = {}
     check_field_guide(failures)
+
+    if args.prod:
+        check_retired_entries(failures)
 
     # The IndexNow key must be reachable at /<key>.txt or submission
     # silently stops working. Nothing links to it, so no other check
@@ -404,7 +444,9 @@ def main() -> int:
         for name, pattern in BANNED.items():
             hits = [
                 m
-                for m in re.finditer(pattern, html)
+                for m in re.finditer(
+                    pattern, html, 0 if name in CASE_SENSITIVE else re.IGNORECASE
+                )
                 if not (name in NEGATABLE and is_negated(html, m.start()))
             ]
             if hits:

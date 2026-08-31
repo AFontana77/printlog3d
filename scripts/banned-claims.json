@@ -15,5 +15,10 @@
     "missing tracking placeholder": "PENDING_TRACKING_ID",
     "NaN render": "NaN",
     "em dash": "\u2014"
-  }
+  },
+  "_case_sensitive_comment": "Rules listed in case_sensitive are matched exactly. Everything else is matched case-insensitively. Both matter and the default is wrong for both halves: FREE APP matched case-sensitively missed 'Get the Free App' on six pages for months, and NaN matched case-INsensitively fires on the 'nan' inside 'maintenance'. NaN and the placeholder token are literal program values that only ever appear in one casing.",
+  "case_sensitive": [
+    "NaN render",
+    "missing tracking placeholder"
+  ]
 }

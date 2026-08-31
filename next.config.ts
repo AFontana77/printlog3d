@@ -14,6 +14,18 @@ const nextConfig: NextConfig = {
     return [
       HOST_REDIRECT,
       {
+        // The 1,000 generated catalogue entries. They were a cartesian product
+        // of brands against materials and asserted products that do not exist,
+        // each with its own specification table. Noindex was not a sufficient
+        // remedy: the page still served the claim to anyone who requested the
+        // URL, and a disclaimer about the photograph does not retract the specs
+        // above it. Removed in favour of the real material profile, which is
+        // what every one of them was a degraded copy of.
+        source: '/library/:category/:slug',
+        destination: '/library/:category',
+        permanent: true,
+      },
+      {
         // The generated cheat sheet was live and linked before the owner
         // supplied the designed Field Guide. Permanent redirect rather than a
         // 404, so any existing link or bookmark still lands on a real file.

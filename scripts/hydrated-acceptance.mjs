@@ -44,9 +44,9 @@ const arg = (n, d) => {
 };
 const SITE = (arg('site', 'https://www.printlog3d.com')).replace(/\/$/, '');
 
-const banned = JSON.parse(
-  fs.readFileSync(path.join(HERE, 'banned-claims.json'), 'utf8'),
-).patterns;
+const rules = JSON.parse(fs.readFileSync(path.join(HERE, 'banned-claims.json'), 'utf8'));
+const banned = rules.patterns;
+const caseSensitive = new Set(rules.case_sensitive || []);
 
 const failures = [];
 const fail = (m) => failures.push(m);
@@ -60,7 +60,7 @@ function checkProse(text, where) {
     if (/href=|amazon\.com\/s\?k=/.test(pattern)) continue;
     let re;
     try {
-      re = new RegExp(pattern, 'i');
+      re = new RegExp(pattern, caseSensitive.has(name) ? '' : 'i');
     } catch {
       continue; // a pattern JS cannot compile is the server layer's to enforce
     }

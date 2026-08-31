@@ -301,7 +301,7 @@ export default function PlaVsAbsPage() {
               }}
               className="inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold min-h-[48px] transition-colors press-feedback"
             >
-              Get the Free App
+              Get the free field guide
             </Link>
           </div>
         </section>
