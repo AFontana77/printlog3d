@@ -5,7 +5,16 @@
     "activation": "ACTIVE. Amazon links render across the material pages, gear blocks, comparison guides and the drying and stringing guides. Setting status back to 'pending' withdraws every Amazon link site-wide without touching a component.",
     "last_updated": "2026-08-31",
     "session": "WEBMON-PRINT property maturation",
-    "merchant_neutrality": "Amazon is the default breadth layer, NOT the exclusive destination. Every program below is consumed through src/lib/merchants.ts, which attaches tracking ONLY where status is enrolled and a tracking_value exists. A pending program therefore renders exactly the plain editorial link it renders today, and activating it is a one-line change here rather than an edit across pages."
+    "merchant_neutrality": "Amazon is the default breadth layer, NOT the exclusive destination. Every program below is consumed through src/lib/merchants.ts, which attaches tracking ONLY where status is enrolled and a tracking_value exists. A pending program therefore renders exactly the plain editorial link it renders today, and activating it is a one-line change here rather than an edit across pages.",
+    "owner_action_priority": [
+      "1. MatterHackers (Affiliatly)",
+      "2. Polymaker (Superfiliate)",
+      "3. Creality (Impact)",
+      "4. Bambu Lab",
+      "5. Prusa",
+      "6. SUNLU",
+      "7. Treatstock"
+    ]
   },
   "programs": {
     "amazon": {
@@ -23,12 +32,12 @@
       "brand": "MatterHackers",
       "base_url": "https://www.matterhackers.com",
       "status": "pending",
-      "network": "unconfirmed",
+      "network": "affiliatly",
       "tracking_param": "",
       "tracking_style": "query",
       "commission": "unknown",
       "cookie": "unknown",
-      "notes": "Already linked editorially from the engineering-material pages (PEEK, PA-CF, nylons, PC). Program platform was ambiguous at last check: their own /affiliates page 404'd, and the program appears variously as Affiliatly and ShareASale. Resolve the platform BEFORE applying, then set status and tracking_value here. No page edit required.",
+      "notes": "MatterHackers - Affiliatly - pending owner signup/approval. Their own documentation references Affiliatly for affiliate visitor tracking, and a Visitor Bonus Program supplements the standard commission Affiliate Program. The earlier 'Affiliatly vs ShareASale' ambiguity is resolved and removed. HIGHEST PRIORITY: this site already sends engineering-material traffic there from PEEK, PA-CF, PC, PC-CF and the nylons.",
       "tracking_value": ""
     },
     "polymaker": {
@@ -38,9 +47,9 @@
       "network": "superfiliate",
       "tracking_param": "",
       "tracking_style": "query",
-      "commission": "5-20% tiered",
+      "commission": "verify after approval",
       "cookie": "unknown",
-      "notes": "Direct program, no minimum, tiered commission. Signup is an owner action. Relevant to PLA, PETG, ABS, ASA, TPU, PC, composites and support materials. Note the legacy catalogue invented Polymaker product names; only real published lines may ever be named.",
+      "notes": "Polymaker - pending - public terms vary by region and account. US-facing material advertises a 5% referral commission; some regional pages advertise tiering up to 20%. Do NOT assert a universal 5-20% range: verify the final US account commission after approval. No commission rate is published to readers in any case.",
       "tracking_value": ""
     },
     "bambulab": {
@@ -59,12 +68,12 @@
       "brand": "Creality",
       "base_url": "https://www.creality.com",
       "status": "pending",
-      "network": "unconfirmed",
+      "network": "impact (recommended) / awin",
       "tracking_param": "",
       "tracking_style": "query",
       "commission": "unknown",
       "cookie": "unknown",
-      "notes": "Printers, nozzles and accessories. One verified hardened-nozzle ASIN already sells through Amazon; a direct program would be an alternative, not a replacement.",
+      "notes": "Creality - pending - their affiliate documentation recommends Impact for new partners, with Awin also available. Owner action; do not apply automatically.",
       "tracking_value": ""
     },
     "prusa": {
