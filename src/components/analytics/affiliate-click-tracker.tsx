@@ -225,6 +225,19 @@ export function AffiliateClickTracker({ measurementId: mid }: { measurementId?: 
           a.getAttribute("data-affiliate-channel-sid") ||
           "UNKNOWN",
         product_id: asin || "UNKNOWN",
+        // The requirement the product satisfies, which is how this property
+        // organises commerce. More useful for analysis than the product name,
+        // which changes without notice on the retailer's side.
+        product_category: a.getAttribute("data-affiliate-category") || "",
+        material: a.getAttribute("data-affiliate-material") || "",
+        // exact_product vs search is the question that decides whether curating
+        // verified listings is worth the maintenance. Without it, the two are
+        // indistinguishable in the report.
+        destination_type: asin
+          ? "exact_product"
+          : url.pathname.startsWith("/s")
+            ? "search"
+            : "category",
         destination_host: host,
         link_text: linkText,
         placement,
