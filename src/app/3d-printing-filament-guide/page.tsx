@@ -30,7 +30,7 @@ const jsonLd = {
 
 const materials = [
   { name: 'PLA', printTemp: '190-220°C', bedTemp: '45-60°C (optional)', enclosure: 'No', difficulty: 'Beginner', bestFor: 'General printing, models, prototypes' },
-  { name: 'PETG', printTemp: '230-250°C', bedTemp: '70-85°C', enclosure: 'No', difficulty: 'Intermediate', bestFor: 'Functional parts, mild heat, food-safe' },
+  { name: 'PETG', printTemp: '230-250°C', bedTemp: '70-85°C', enclosure: 'No', difficulty: 'Intermediate', bestFor: 'Functional parts, mild heat' },
   { name: 'ABS', printTemp: '230-250°C', bedTemp: '100-110°C', enclosure: 'Yes (required)', difficulty: 'Advanced', bestFor: 'High-heat parts, chemical resistance' },
   { name: 'ASA', printTemp: '240-260°C', bedTemp: '90-100°C', enclosure: 'Yes (recommended)', difficulty: 'Advanced', bestFor: 'Outdoor, UV-resistant' },
   { name: 'Nylon', printTemp: '240-280°C', bedTemp: '70-90°C', enclosure: 'Yes', difficulty: 'Advanced', bestFor: 'High strength, self-lubricating' },
@@ -147,7 +147,7 @@ export default function FilamentGuidePage() {
             <Eyebrow>PLA</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Start here: PLA for learning, PETG for real parts.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-3">
-              PLA is the most beginner-friendly filament. It prints at low temps, produces no harsh fumes, and warps very little. It is made from corn starch, so it is biodegradable. The weak point: PLA deforms around 60°C. Leave a PLA print in a hot car and it warps. PLA+ versions add impact resistance and some flexibility. For most indoor uses, PLA is still the right answer even for experienced printers.
+              PLA is the most beginner-friendly filament. It prints at low temps, produces no harsh fumes, and warps very little. It is made from plant starch rather than petroleum, which is a real difference in feedstock. It is not, however, something that breaks down in a garden or in the sea: PLA needs the sustained heat and humidity of an industrial composting facility, and most kerbside schemes do not accept it. The weak point: PLA deforms around 60°C. Leave a PLA print in a hot car and it warps. PLA+ versions add impact resistance and some flexibility. For most indoor uses, PLA is still the right answer even for experienced printers.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
               Compare options: <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link> or <Link href="/pla-vs-abs" style={linkStyle} className="underline hover:no-underline">PLA vs ABS</Link>
@@ -161,7 +161,7 @@ export default function FilamentGuidePage() {
             <Eyebrow>PETG</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Move to PETG when the part needs to hold up.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-3">
-              PETG is the natural step up from PLA. It is stronger, handles more heat (up to ~80°C), and some brands are food-safe certified. The trade-off: it strings more than PLA, and it bonds aggressively to bare glass beds. Use a PEI sheet or glue stick. No enclosure needed.
+              PETG is the natural step up from PLA. It is stronger and handles more heat, to around 80°C. Some specific grades carry food-contact certification, which is a property of that manufacturer's resin and not of PETG as a class. The trade-off: it strings more than PLA, and it bonds aggressively to bare glass beds. Use a PEI sheet or glue stick. No enclosure needed.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
               Read the full breakdown: <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link> or <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link>
@@ -268,7 +268,7 @@ export default function FilamentGuidePage() {
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Every material, on one page.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              Every material has its own quirks. Our one-page settings sheet puts the print temperature, bed temperature, enclosure and drying requirement for all of them on a single page you can keep by the printer. A logging app is in development and we will say so here when it ships.
+              Every material has its own quirks. Our printable settings guide puts the print temperature, bed temperature, enclosure and drying requirement for all of them on a single page you can keep by the printer. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

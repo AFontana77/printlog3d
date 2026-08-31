@@ -289,7 +289,7 @@ export default function PlaVsPetgPage() {
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Both materials, one reference sheet.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              PETG from one brand and PETG from another need different retraction settings. Our one-page settings sheet gives you the starting point for both materials, with the temperatures and drying requirements side by side. A logging app is in development and we will say so here when it ships.
+              PETG from one brand and PETG from another need different retraction settings. Our printable settings guide gives you the starting point for both materials, with the temperatures and drying requirements side by side. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

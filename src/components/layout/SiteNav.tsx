@@ -8,6 +8,7 @@ const links = [
   { href: '/library', label: 'Materials' },
   { href: '/3d-printing-filament-guide', label: 'Guides' },
   { href: '/workshop', label: 'Workshop' },
+  { href: '/recommended-gear', label: 'Gear' },
   { href: '/get-it-printed', label: 'Get It Printed' },
   { href: '/free-download', label: 'Free Download' },
   { href: '/about', label: 'About' },

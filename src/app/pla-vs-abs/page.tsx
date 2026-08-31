@@ -287,7 +287,7 @@ export default function PlaVsAbsPage() {
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Both materials, one reference sheet.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              PLA and ABS behave nothing alike, and the settings that matter differ for each. Our one-page settings sheet has both, including the enclosure and drying requirements that decide whether an ABS print succeeds. A logging app is in development and we will say so here when it ships.
+              PLA and ABS behave nothing alike, and the settings that matter differ for each. Our printable settings guide has both, including the enclosure and drying requirements that decide whether an ABS print succeeds. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

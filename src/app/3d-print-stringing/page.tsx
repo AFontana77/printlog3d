@@ -360,7 +360,7 @@ export default function StringingPage() {
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Write down the settings that fixed it.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              The retraction distance that fixed your stringing is worth keeping. Our one-page settings sheet has the temperature and retraction starting points for every material we document, with room to write in what actually worked. A logging app is in development and we will say so here when it ships.
+              The retraction distance that fixed your stringing is worth keeping. Our printable settings guide has the temperature and retraction starting points for every material we document, with room to write in what actually worked. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

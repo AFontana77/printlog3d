@@ -52,11 +52,19 @@ export type MaterialProfile = {
   commonProblem: string;
   /** The material a reader is most likely weighing this against. */
   comparedWith: string;
+  /**
+   * How easy this is to actually buy. A separate question from how
+   * specialist it is: PCTG is an ordinary co-polyester and still hard to
+   * find, and a templated "widely stocked" sentence contradicted this
+   * property's own failure note on that page.
+   */
+  availability: 'widely' | 'common' | 'specialist' | 'limited' | 'industrial';
 };
 
 export const MATERIAL_PROFILES: MaterialProfile[] = [
   {
     category: 'PLA',
+    availability: 'widely',
     slug: 'pla',
     fullName: 'Polylactic Acid',
     summary:
@@ -79,6 +87,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PETG',
+    availability: 'widely',
     slug: 'petg',
     fullName: 'Polyethylene Terephthalate Glycol',
     summary:
@@ -101,6 +110,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'ABS',
+    availability: 'widely',
     slug: 'abs',
     fullName: 'Acrylonitrile Butadiene Styrene',
     summary:
@@ -122,6 +132,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'ASA',
+    availability: 'common',
     slug: 'asa',
     fullName: 'Acrylonitrile Styrene Acrylate',
     summary:
@@ -143,6 +154,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PC',
+    availability: 'specialist',
     slug: 'pc',
     fullName: 'Polycarbonate',
     summary:
@@ -165,10 +177,11 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PEEK',
+    availability: 'industrial',
     slug: 'peek',
     fullName: 'Polyether Ether Ketone',
     summary:
-      'An aerospace and medical grade polymer. It needs a 400C hot end and a heated chamber, so it is out of reach of nearly every consumer printer.',
+      'The polymer family used in aerospace and in medical implants, though a spool of printing filament carries no such certification itself. It needs a 400C hot end and a heated chamber, so it is out of reach of nearly every consumer printer.',
     printTempC: '370-420',
     bedTempC: '120-160',
     enclosure: 'Required',
@@ -186,6 +199,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'Nylon PA6',
+    availability: 'specialist',
     slug: 'nylon-pa6',
     fullName: 'Polyamide 6',
     summary:
@@ -208,6 +222,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'Nylon PA12',
+    availability: 'common',
     slug: 'nylon-pa12',
     fullName: 'Polyamide 12',
     summary:
@@ -229,6 +244,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PA-CF',
+    availability: 'specialist',
     slug: 'pa-cf',
     fullName: 'Carbon Fibre Reinforced Nylon',
     summary:
@@ -250,6 +266,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PETG-CF',
+    availability: 'common',
     slug: 'petg-cf',
     fullName: 'Carbon Fibre Reinforced PETG',
     summary:
@@ -271,6 +288,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PCTG',
+    availability: 'limited',
     slug: 'pctg',
     fullName: 'Polycyclohexylenedimethylene Terephthalate Glycol',
     summary:
@@ -292,6 +310,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'CPE',
+    availability: 'limited',
     slug: 'cpe',
     fullName: 'Co-Polyester',
     summary:
@@ -313,6 +332,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'HIPS',
+    availability: 'common',
     slug: 'hips',
     fullName: 'High-Impact Polystyrene',
     summary:
@@ -334,6 +354,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PLA Silk',
+    availability: 'widely',
     slug: 'pla-silk',
     fullName: 'Silk PLA',
     summary:
@@ -355,6 +376,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PLA Matte',
+    availability: 'widely',
     slug: 'pla-matte',
     fullName: 'Matte PLA',
     summary:
@@ -376,6 +398,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PLA Wood',
+    availability: 'common',
     slug: 'pla-wood',
     fullName: 'Wood-Filled PLA',
     summary:
@@ -397,6 +420,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PLA Metal',
+    availability: 'common',
     slug: 'pla-metal',
     fullName: 'Metal-Filled PLA',
     summary:
@@ -418,6 +442,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'TPU',
+    availability: 'common',
     slug: 'tpu',
     fullName: 'Thermoplastic Polyurethane',
     summary:
@@ -440,6 +465,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'TPE',
+    availability: 'specialist',
     slug: 'tpe',
     fullName: 'Thermoplastic Elastomer',
     summary:
@@ -461,6 +487,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PVA',
+    availability: 'common',
     slug: 'pva',
     fullName: 'Polyvinyl Alcohol',
     summary:
@@ -483,6 +510,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PP',
+    availability: 'limited',
     slug: 'pp',
     fullName: 'Polypropylene',
     summary:
@@ -504,6 +532,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PVB',
+    availability: 'specialist',
     slug: 'pvb',
     fullName: 'Polyvinyl Butyral',
     summary:
@@ -525,6 +554,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PLA-CF',
+    availability: 'common',
     slug: 'pla-cf',
     fullName: 'Carbon Fibre Reinforced PLA',
     summary:
@@ -546,6 +576,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PA-GF',
+    availability: 'specialist',
     slug: 'pa-gf',
     fullName: 'Glass Fibre Reinforced Nylon',
     summary:
@@ -567,6 +598,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'ASA-CF',
+    availability: 'specialist',
     slug: 'asa-cf',
     fullName: 'Carbon Fibre Reinforced ASA',
     summary:
@@ -595,6 +627,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   // number no manufacturer actually states.
   {
     category: 'PC-CF',
+    availability: 'limited',
     slug: 'pc-cf',
     fullName: 'Carbon Fibre Reinforced Polycarbonate',
     summary:
@@ -616,6 +649,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PEI',
+    availability: 'industrial',
     slug: 'pei',
     fullName: 'Polyetherimide, sold as ULTEM',
     summary:
@@ -638,6 +672,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'PPS',
+    availability: 'industrial',
     slug: 'pps',
     fullName: 'Polyphenylene Sulfide',
     summary:
@@ -659,6 +694,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'Conductive PLA',
+    availability: 'specialist',
     slug: 'conductive-pla',
     fullName: 'Carbon-Loaded Conductive PLA',
     summary:
@@ -680,6 +716,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'Glow PLA',
+    availability: 'specialist',
     slug: 'glow-pla',
     fullName: 'Glow-in-the-Dark PLA',
     summary:
@@ -701,6 +738,7 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
   {
     category: 'Magnetic PLA',
+    availability: 'specialist',
     slug: 'magnetic-pla',
     fullName: 'Iron-Filled Magnetic PLA',
     summary:

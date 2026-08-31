@@ -17,6 +17,7 @@ export function SiteFooter() {
           <Link href="/library" className="hover:text-gray-900 transition-colors">Materials</Link>
           <Link href="/3d-printing-filament-guide" className="hover:text-gray-900 transition-colors">Guides</Link>
           <Link href="/workshop" className="hover:text-gray-900 transition-colors">Workshop</Link>
+          <Link href="/recommended-gear" className="hover:text-gray-900 transition-colors">Recommended Gear</Link>
           <Link href="/get-it-printed" className="hover:text-gray-900 transition-colors">Get It Printed</Link>
           <Link href="/free-download" className="hover:text-gray-900 transition-colors">Free Download</Link>
           <Link href="/about" className="hover:text-gray-900 transition-colors">About</Link>

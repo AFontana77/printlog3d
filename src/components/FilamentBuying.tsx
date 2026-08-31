@@ -25,6 +25,28 @@ import { AmazonProductImage } from '@/components/AmazonProductImage';
  * check before buying a spool is the substance; the merchant is the convenience.
  */
 
+
+/**
+ * Buying context, driven by the material's own availability rather than by a
+ * three-way sourcing template.
+ *
+ * The template used to tell readers PCTG was "widely stocked and largely
+ * interchangeable" on a page whose own failure note said availability was its
+ * main problem. Two sentences on one page, arguing with each other.
+ */
+const AVAILABILITY_COPY: Record<MaterialProfile['availability'], (m: MaterialProfile) => string> = {
+  widely: (m) =>
+    `${m.category} is stocked by every general retailer and is largely interchangeable between reputable brands. Spend the money on tolerance and packaging rather than on a name.`,
+  common: (m) =>
+    `${m.category} is easy enough to find, though from fewer brands than PLA or PETG. Stick to sellers who publish a diameter tolerance.`,
+  specialist: (m) =>
+    `${m.category} is stocked unevenly by general retailers. A specialist supplier is usually the better source, both for availability and because they publish the spec sheet.`,
+  limited: (m) =>
+    `${m.category} is carried by relatively few brands, so sourcing is a real part of the job rather than an afterthought. Reliable options exist from selected manufacturers, but do not expect the choice of colours you get with PETG.`,
+  industrial: (m) =>
+    `${m.category} is an industrial material and general retailers are not a serious source for it. Buy from a specialist who publishes the datasheet, at a price high enough that the wrong spool is an expensive mistake.`,
+};
+
 /** Checks that decide whether a given spool is worth buying, per sourcing tier. */
 function buyingChecks(m: MaterialProfile): string[] {
   const checks = [
@@ -70,31 +92,9 @@ export function FilamentBuying({ material }: { material: MaterialProfile }) {
         </h2>
 
         <p className="text-gray-600 mb-6 leading-relaxed">
-          {sourcing === 'commodity' && (
-            <>
-              {material.category} is widely stocked and largely interchangeable between
-              reputable brands. Typical street price is{' '}
-              <strong>{material.priceBandUsd} per 1&nbsp;kg spool</strong>. Spend the money on
-              tolerance and packaging rather than on a name.
-            </>
-          )}
-          {sourcing === 'specialist' && (
-            <>
-              {material.category} is stocked unevenly by general retailers. A specialist
-              supplier is usually the better source, both for availability and because they
-              publish the spec sheet. Typical street price is{' '}
-              <strong>{material.priceBandUsd} per 1&nbsp;kg spool</strong>.
-            </>
-          )}
-          {sourcing === 'engineering' && (
-            <>
-              {material.category} is an engineering material and general retailers are not a
-              serious source for it. Buy from a specialist who publishes the datasheet.
-              Typical street price is{' '}
-              <strong>{material.priceBandUsd} per 1&nbsp;kg spool</strong>, which is high
-              enough that buying the wrong spool is an expensive mistake.
-            </>
-          )}
+          {AVAILABILITY_COPY[material.availability](material)}{' '}
+          Typical street price is{' '}
+          <strong>{material.priceBandUsd} per 1&nbsp;kg spool</strong>.
         </p>
 
         <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-3">

@@ -59,10 +59,13 @@ function conditionalNote(state: CapabilityState, material?: string): string | nu
 export function OwnedServiceCta({
   variant,
   material,
+  sourcePage,
   tone = 'panel',
 }: {
   variant: Variant;
   material?: MaterialProfile;
+  /** Real path of the page carrying this CTA, for cross-property reporting. */
+  sourcePage?: string;
   /** `panel` is the standalone block; `inline` is a lighter end-of-article strip. */
   tone?: 'panel' | 'inline';
 }) {
@@ -83,7 +86,7 @@ export function OwnedServiceCta({
   // Cross-property attribution. Without it every owned-service order looks
   // like direct traffic and the channel cannot be measured at all.
   const href = quoteUrlFor({
-    sourcePage: material ? `/library/${material.slug}` : variant,
+    sourcePage: sourcePage ?? (material ? `/library/${material.slug}` : variant),
     placement: `owned-service-${variant}`,
     material: name,
   });

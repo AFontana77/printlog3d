@@ -335,7 +335,7 @@ export default function HowToDryFilamentPage() {
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Keep the drying numbers by the machine.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              Every material on this page is on our one-page settings sheet, including the drying temperature and time each one needs. Print it, keep it by the machine, and note the date you opened each spool on it. A logging app is in development and we will say so here when it ships.
+              Every material on this page is on our printable settings guide, including the drying temperature and time each one needs. Print it, keep it by the machine, and note the date you opened each spool on it. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

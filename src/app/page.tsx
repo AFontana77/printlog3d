@@ -303,7 +303,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <OwnedServiceCta variant="guide-thanks" />
+        <OwnedServiceCta variant="guide-thanks" sourcePage="/" />
       </main>
       <SiteFooter />
     </>

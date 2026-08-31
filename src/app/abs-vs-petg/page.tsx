@@ -211,7 +211,7 @@ export default function AbsVsPetgPage() {
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Both materials, one reference sheet.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              ABS needs enclosure temperatures. PETG needs retraction dialled in per brand. Our one-page settings sheet covers both, alongside every other material we document. A logging app is in development and we will say so here when it ships.
+              ABS needs enclosure temperatures. PETG needs retraction dialled in per brand. Our printable settings guide covers both, alongside every other material we document. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"
