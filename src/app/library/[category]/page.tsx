@@ -278,7 +278,7 @@ export default async function MaterialPage({
     publisher: {
       '@type': 'Organization',
       name: 'PrintLog3D',
-      logo: { '@type': 'ImageObject', url: `${BASE}/favicon.svg` },
+      logo: { '@type': 'ImageObject', url: `${BASE}/brand/favicon-512.png` },
     },
   };
 

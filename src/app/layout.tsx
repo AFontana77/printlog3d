@@ -51,11 +51,18 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: SITE_URL },
   icons: {
+    // No SVG entry. The old /favicon.svg was a purple "PR" scaffold
+    // placeholder, and because browsers PREFER an SVG icon when one is
+    // offered, it was outranking these PNGs in the tab. The brand mark is
+    // raster artwork, so the PNG set is the honest declaration.
     icon: [
+      { url: "/brand/favicon-16.png", sizes: "16x16", type: "image/png" },
       { url: "/brand/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/favicon-48.png", sizes: "48x48", type: "image/png" },
       { url: "/brand/favicon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/brand/favicon-512.png", sizes: "512x512", type: "image/png" },
     ],
+    shortcut: [{ url: "/favicon.ico" }],
     apple: [{ url: "/brand/favicon-180.png", sizes: "180x180" }],
   },
 };
