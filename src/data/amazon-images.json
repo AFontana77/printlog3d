@@ -1,11 +1,11 @@
 {
  "_note": "Amazon product image LINKS only. No image bytes are stored. Entries expire 24h after fetched_at per the Associates Operating Agreement; the render component falls back to a branded placeholder once stale.",
- "fetched_at": "2026-09-12T09:17:46+00:00",
+ "fetched_at": "2026-09-12T21:17:45+00:00",
  "ttl_hours": 24,
  "partner_tag": "printlog3d-20",
  "items": {
   "B000GTMZHG": {
-   "title": "Klein Tools D275-5 Diagonal Flush Cutters, Made in USA, Micro Wire and Compact Zip Tie Cutter, Ultra-Slim Precision for Work in Confined Areas, 5-Inch",
+   "title": "Klein Tools D275-5 Diagonal Flush Cutting Pliers, 5-Inch",
    "primary": {
     "url": "https://m.media-amazon.com/images/I/31isYtaDdML._SL500_.jpg",
     "width": 500,
