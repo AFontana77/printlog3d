@@ -29,6 +29,7 @@ export function SiteFooter() {
         </div>
         <div>&copy; {new Date().getFullYear()} Anvil Road LLC</div>
       </div>
+      <p className="mt-2 text-xs">As an Amazon Associate we earn from qualifying purchases.</p>
     </footer>
   );
 }
