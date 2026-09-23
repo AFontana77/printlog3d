@@ -26,6 +26,7 @@ const BASE = 'https://www.printlog3d.com';
 const STATIC_ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
   { path: '', priority: 1, changeFrequency: 'weekly' },
   { path: '/library', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/3d-printing-cost-calculator', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/3d-printing-filament-guide', priority: 0.85, changeFrequency: 'monthly' },
   { path: '/pla-vs-petg', priority: 0.85, changeFrequency: 'monthly' },
   { path: '/abs-vs-petg', priority: 0.8, changeFrequency: 'monthly' },

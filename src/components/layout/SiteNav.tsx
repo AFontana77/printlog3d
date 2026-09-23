@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 
 const links = [
   { href: '/library', label: 'Materials' },
+  { href: '/3d-printing-cost-calculator', label: 'Cost Calculator' },
   { href: '/3d-printing-filament-guide', label: 'Guides' },
   { href: '/workshop', label: 'Workshop' },
   { href: '/recommended-gear', label: 'Gear' },
