@@ -5,6 +5,7 @@ import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: 'About',
   description: `The story behind PrintLog3D, a ${MATERIAL_PROFILES.length}-material filament reference with a print log app in development. Dial in your print settings.`,
 };

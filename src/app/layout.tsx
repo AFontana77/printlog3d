@@ -49,7 +49,9 @@ export const metadata: Metadata = {
     title: "PrintLog3D: filament print settings by material",
     description: `Nozzle and bed temperatures, enclosure needs and drying guidance for ${MATERIAL_PROFILES.length} filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.`,
   },
-  alternates: { canonical: SITE_URL },
+  // Removed: a canonical here is inherited by every page that does not
+  // override it, which told search engines each page was a duplicate of
+  // the homepage. Each route now declares its own.
   icons: {
     // No SVG entry. The old /favicon.svg was a purple "PR" scaffold
     // placeholder, and because browsers PREFER an SVG icon when one is

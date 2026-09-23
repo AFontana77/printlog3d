@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/3d-printing-filament-guide" },
   title: '3D Printing Filament Guide: PLA, PETG, ABS, ASA, Nylon, TPU, Resin',
   description: 'The complete 3D printing filament guide: every material type explained with print settings, strengths, weaknesses, and which to use for your project. From PLA for beginners to Nylon for engineering parts.',
 };

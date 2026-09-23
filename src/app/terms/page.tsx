@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms" },
   title: 'Terms of Service',
   description: 'Terms of service for the printlog3d.com website and the PrintLog3D mobile app, once it is released.',
 };

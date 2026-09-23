@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/support" },
   title: 'Support',
   description: 'Get help with the PrintLog3D website. Contact support or browse common questions.',
 };

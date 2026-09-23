@@ -7,6 +7,7 @@ import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/3d-print-stringing" },
   title: '3D Print Stringing: Causes, Fixes & Settings by Material',
   description: 'Fix 3D print stringing with this step-by-step guide: retraction distance by extruder type, temperature reduction, combing, travel speed, and why PETG strings more than PLA (and what to do about it).',
 };

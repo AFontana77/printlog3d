@@ -7,6 +7,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/how-to-dry-filament" },
   title: 'How to Dry Filament: Signs of Wet Filament & 3 Drying Methods',
   description: 'Learn to spot wet filament (popping sounds, rough surface, stringing) and how to dry it with a filament dryer, food dehydrator, or oven. Includes drying temps and times for PLA, PETG, Nylon, and TPU.',
 };
