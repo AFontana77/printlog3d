@@ -53,6 +53,7 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
 const FIXES = [
   {
     n: '01',
+    anchor: 'retraction-by-extruder',
     title: 'Check retraction distance',
     body: 'Retraction pulls plastic back into the nozzle before a travel move. Too little and plastic leaks. Too much and you risk grinding the filament or pulling molten plastic into the cold zone.',
     table: [
@@ -165,7 +166,9 @@ export default function StringingPage() {
               {FIXES.map((fix) => (
                 <div
                   key={fix.n}
+                  id={fix.anchor}
                   style={{
+                    scrollMarginTop: '6rem',
                     background: 'var(--surface-0)',
                     border: '1px solid var(--border)',
                     borderRadius: '0.25rem',
@@ -361,7 +364,7 @@ export default function StringingPage() {
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Write down the settings that fixed it.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              The retraction distance that fixed your stringing is worth keeping. Our printable settings guide has the temperature and retraction starting points for every material we document, with room to write in what actually worked. A logging app is in development and we will say so here when it ships.
+              The retraction distance that fixed your stringing is worth keeping. Our printable settings guide has the temperature starting points for every material we document, with room to write in what actually worked. A logging app is in development and we will say so here when it ships.
             </p>
             <Link
               href="/free-download"

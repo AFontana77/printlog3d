@@ -349,13 +349,23 @@ export default async function MaterialPage({
               <SpecCard icon={<Thermometer size={12} aria-hidden="true" />} label="Bed" value={`${m.bedTempC}°C`} />
               <SpecCard icon={<Box size={12} aria-hidden="true" />} label="Enclosure" value={m.enclosure} />
               <SpecCard icon={<Wind size={12} aria-hidden="true" />} label="Part cooling" value={m.coolingFan} />
-              <SpecCard icon={<Thermometer size={12} aria-hidden="true" />} label="Retraction" value={m.retraction} />
               <SpecCard icon={<Droplets size={12} aria-hidden="true" />} label="Typical price" value={`${m.priceBandUsd} / kg`} />
             </div>
             <p className="mt-4 text-xs text-gray-500">
               Ranges are typical manufacturer-published figures for this material class, not measurements we
               took. Always start with your filament maker&rsquo;s own numbers where they differ. The price is an
               indicative street price for a 1 kg spool, not a live quote.
+            </p>
+            {/* No per-material retraction figure. It depends on the extruder,
+                and the old card named none, so it could not be checked against
+                the by-extruder table it now points to. */}
+            <p className="mt-2 text-xs text-gray-500">
+              Retraction is not listed here. It depends on your extruder more than on the material.
+              See the{' '}
+              <Link href="/3d-print-stringing#retraction-by-extruder" className="underline underline-offset-4 text-brand hover:text-brand-dark">
+                retraction table by extruder type
+              </Link>
+              .
             </p>
           </div>
         </section>

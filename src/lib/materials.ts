@@ -38,6 +38,13 @@ export type MaterialProfile = {
   bedTempC: string;
   enclosure: 'Required' | 'Recommended' | 'Not needed';
   coolingFan: string;
+  /**
+   * NOT RENDERED on the site since 2026-10-04. These figures name no extruder
+   * and disagree with the by-extruder table on /3d-print-stringing (direct
+   * drive 0.5-2mm, Bowden 4-7mm), so a reader cannot check them. Do not show
+   * them again unless each one is traced to a named manufacturer profile with
+   * the extruder type stated.
+   */
   retraction: string;
   /** Indicative street price for a 1 kg spool. A band, never a live price. */
   priceBandUsd: string;
