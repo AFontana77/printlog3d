@@ -358,7 +358,12 @@ export default async function MaterialPage({
             <p className="mt-4 text-xs text-gray-500">
               Ranges are typical manufacturer-published figures for this material class, not measurements we
               took. Always start with your filament maker&rsquo;s own numbers where they differ. The price is an
-              indicative street price for a 1 kg spool, not a live quote.
+              indicative street price for a 1 kg spool, not a live quote. To see what one print costs
+              you, use the{' '}
+              <Link href="/3d-printing-cost-calculator" className="underline underline-offset-4 text-brand hover:text-brand-dark">
+                3D printing cost calculator
+              </Link>
+              .
             </p>
             {/* No per-material retraction figure. It depends on the extruder,
                 and the old card named none, so it could not be checked against

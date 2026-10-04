@@ -36,7 +36,7 @@ const LEVELS = [
 ] as const;
 
 /**
- * The four jobs people arrive with. Ordered by how many of them arrive with it,
+ * The five jobs people arrive with. Ordered by how many of them arrive with it,
  * which puts the material lookup first because that is what this site is for.
  * Buying gear sits third rather than first on purpose.
  */
@@ -60,6 +60,11 @@ const INTENTS = [
     href: '/get-it-printed',
     label: 'Get a part printed',
     line: 'Decide whether to print it yourself, and where to send it if not.',
+  },
+  {
+    href: '/3d-printing-cost-calculator',
+    label: 'Price a print',
+    line: 'What one print costs in filament, power and failed prints.',
   },
 ];
 
@@ -122,17 +127,17 @@ export default function HomePage() {
         </section>
 
         {/*
-          Intent gateway. Four things people arrive wanting to do, named as the
+          Intent gateway. Five things people arrive wanting to do, named as the
           job rather than as a section.
 
-          Deliberately a compact typographic band, not four icon-heading-body
+          Deliberately a compact typographic band, not five icon-heading-body
           cards: the material index directly below is already a card grid, and a
           second grid of the same shape above it would make the page read as two
           menus and bury the index that is the actual product.
         */}
         <section className="px-6 pb-2" style={{ background: 'var(--surface-1)' }} aria-label="Start here">
           <div className="max-w-5xl mx-auto pb-10">
-            <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4 border-t pt-8" style={{ borderColor: 'var(--border)' }}>
+            <ul className="grid sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-4 border-t pt-8" style={{ borderColor: 'var(--border)' }}>
               {INTENTS.map((it, i) => (
                 <li key={it.href}>
                   <Link href={it.href} className="group block">

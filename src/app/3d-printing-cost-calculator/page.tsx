@@ -2,7 +2,9 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
-import { CostCalculator } from '@/components/CostCalculator';
+import { CostCalculator, type SpoolLink } from '@/components/CostCalculator';
+import { amazonSearchUrl, filamentSearchTerms } from '@/lib/commerce';
+import { getMaterialBySlug } from '@/lib/materials';
 import { Faq, type FaqItem } from '@/components/Faq';
 import { bodyStyle, h2Style, linkStyle } from '@/components/comparison/shared';
 
@@ -14,6 +16,18 @@ export const metadata: Metadata = {
     'Work out what a 3D print costs you. Filament, electricity, printer wear and failed prints, using your own numbers. Shows the arithmetic so you can check it.',
   alternates: { canonical: '/3d-printing-cost-calculator' },
 };
+
+/**
+ * The same tagged filament searches the PLA and PETG pages carry, shown beside
+ * the spool price field for a reader who has no spool yet. Built here on the
+ * server and passed down, so the calculator itself stays free of commerce
+ * config. Empty until the Amazon tag exists, and then nothing renders.
+ */
+const SPOOL_LINKS: SpoolLink[] = ['pla', 'petg'].flatMap((slug) => {
+  const m = getMaterialBySlug(slug);
+  const href = m ? amazonSearchUrl(filamentSearchTerms(m)) : null;
+  return m && href ? [{ label: m.category, href }] : [];
+});
 
 /**
  * Answer-shaped opening, then the tool.
@@ -105,7 +119,7 @@ export default function CostCalculatorPage() {
           </p>
 
           <div style={{ margin: '2rem 0' }}>
-            <CostCalculator />
+            <CostCalculator spoolLinks={SPOOL_LINKS} />
           </div>
 
           <h2 style={h2Style}>Which number surprises people</h2>

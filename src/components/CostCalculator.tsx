@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 
 /**
  * 3D printing cost calculator.
@@ -17,11 +17,14 @@ import { useMemo, useState } from 'react';
 
 type Row = { label: string; value: number; note?: string };
 
+/** A tagged Amazon filament search, built on the server by the page. */
+export type SpoolLink = { label: string; href: string };
+
 const money = (n: number) =>
   n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
 function Field({
-  id, label, value, onChange, suffix, step = '0.01', min = '0', hint,
+  id, label, value, onChange, suffix, step = '0.01', min = '0', hint, children,
 }: {
   id: string;
   label: string;
@@ -31,6 +34,7 @@ function Field({
   step?: string;
   min?: string;
   hint?: string;
+  children?: React.ReactNode;
 }) {
   return (
     <div style={{ marginBottom: '1rem' }}>
@@ -59,11 +63,12 @@ function Field({
           {hint}
         </p>
       ) : null}
+      {children}
     </div>
   );
 }
 
-export function CostCalculator() {
+export function CostCalculator({ spoolLinks = [] }: { spoolLinks?: SpoolLink[] }) {
   const [spoolPrice, setSpoolPrice] = useState(24);
   const [spoolGrams, setSpoolGrams] = useState(1000);
   const [gramsUsed, setGramsUsed] = useState(85);
@@ -111,7 +116,30 @@ export function CostCalculator() {
           them with what you actually paid.
         </p>
 
-        <Field id="spool-price" label="Spool price" value={spoolPrice} onChange={setSpoolPrice} suffix="$" />
+        <Field id="spool-price" label="Spool price" value={spoolPrice} onChange={setSpoolPrice} suffix="$">
+          {spoolLinks.length > 0 ? (
+            <p style={{ fontSize: '0.8rem', color: 'var(--muted, #52525b)', marginTop: '0.3rem' }}>
+              No spool yet? Check the price of{' '}
+              {spoolLinks.map((l, i) => (
+                <Fragment key={l.href}>
+                  {i > 0 ? ' or ' : ''}
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer sponsored"
+                    data-affiliate-brand="amazon"
+                    data-affiliate-network="amazon"
+                    data-affiliate-material={l.label}
+                    style={{ color: 'var(--brand-primary)', textDecoration: 'underline', textUnderlineOffset: '4px' }}
+                  >
+                    {l.label} filament on Amazon
+                  </a>
+                </Fragment>
+              ))}
+              . These are paid links. As an Amazon Associate we earn from qualifying purchases.
+            </p>
+          ) : null}
+        </Field>
         <Field id="spool-grams" label="Spool weight" value={spoolGrams} onChange={setSpoolGrams} suffix="g" step="1" />
         <Field
           id="grams-used" label="Filament used by this print" value={gramsUsed}

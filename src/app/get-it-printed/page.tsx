@@ -137,6 +137,17 @@ export default function GetItPrintedPage() {
                 ))}
               </ul>
             </div>
+            <p className="md:col-span-2 text-sm leading-relaxed max-w-[62ch]" style={{ color: 'var(--body-text)' }}>
+              Not sure which is cheaper? The{' '}
+              <Link
+                href="/3d-printing-cost-calculator"
+                className="font-semibold text-brand hover:text-brand-dark underline underline-offset-4"
+              >
+                3D printing cost calculator
+              </Link>{' '}
+              adds up filament, power, printer wear and failed prints, so you can set your own cost
+              beside a quote.
+            </p>
           </div>
         </section>
 

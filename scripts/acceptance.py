@@ -161,7 +161,7 @@ STATIC_PAGES = [
     "/disclosure", "/editorial-policy", "/get-it-printed", "/workshop", "/recommended-gear",
     "/pla-vs-petg", "/pla-vs-abs", "/abs-vs-petg",
     "/3d-printing-filament-guide", "/how-to-dry-filament", "/3d-print-stringing",
-    "/3d-printer-troubleshooting", "/asa-vs-abs",
+    "/3d-printer-troubleshooting", "/asa-vs-abs", "/3d-printing-cost-calculator",
 ]
 def _material_categories_from_source() -> list[str]:
     """Canonical category names, read from the same file the pages render from."""
