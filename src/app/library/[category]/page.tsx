@@ -43,7 +43,11 @@ export async function generateMetadata({
   const m = getMaterialBySlug(category);
   if (!m) return {};
   return {
-    title: `${m.category} print settings: ${m.printTempC}C nozzle, ${m.bedTempC}C bed`,
+    // Absolute, so the site suffix does not push the temperatures out of
+    // view. People search "<material> print temperature", so the title says it.
+    title: {
+      absolute: `${m.category} print temperature and settings: ${m.printTempC}C nozzle, ${m.bedTempC}C bed`,
+    },
     description: `${m.category} (${m.fullName}) print temperature, bed temperature, enclosure and drying requirements. ${m.summary}`,
     alternates: { canonical: `${BASE}/library/${m.slug}` },
   };
@@ -343,7 +347,7 @@ export default async function MaterialPage({
 
         <section className="py-10 px-4 bg-gray-50 border-b border-gray-100">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-xl font-bold text-gray-900 mb-5">Settings at a glance</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-5">{m.category} print and bed temperature at a glance</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <SpecCard icon={<Thermometer size={12} aria-hidden="true" />} label="Nozzle" value={`${m.printTempC}°C`} />
               <SpecCard icon={<Thermometer size={12} aria-hidden="true" />} label="Bed" value={`${m.bedTempC}°C`} />
