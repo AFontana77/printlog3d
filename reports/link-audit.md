@@ -1,16 +1,16 @@
 # PrintLog3D link and affiliate audit
 
-**https://www.printlog3d.com** · 2026-08-31T09:43:23.848Z
+**https://www.printlog3d.com** · 2026-10-04T12:00:45.277Z
 
 | Metric | Value |
 |---|---|
-| pages crawled | 63 |
-| links examined | 2708 |
-| internal | 2422 |
-| external | 286 |
-| commercial | 209 |
-| amazon links | 173 |
-| amazon tagged correctly | 173 |
+| pages crawled | 64 |
+| links examined | 2955 |
+| internal | 2667 |
+| external | 288 |
+| commercial | 211 |
+| amazon links | 175 |
+| amazon tagged correctly | 175 |
 | amazon bot blocked | 0 |
 | blocking findings | 0 |
 | advisory findings | 0 |
