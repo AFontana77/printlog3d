@@ -36,8 +36,10 @@ export type CapabilityState = 'SUPPORTED' | 'CONDITIONAL' | 'NOT_SUPPORTED' | 'U
 export const OWNED_SERVICE = {
   name: '3DPrinterOnDemand',
   domain: '3dprinterondemand.com',
-  url: 'https://www.3dprinterondemand.com/',
-  quoteUrl: 'https://www.3dprinterondemand.com/instant-quote',
+  // The apex is that site's canonical host. The www form answers with a 308,
+  // so linking to it cost every reader a redirect hop.
+  url: 'https://3dprinterondemand.com/',
+  quoteUrl: 'https://3dprinterondemand.com/instant-quote',
   /** Stated plainly wherever the service is linked. */
   relationship: 'Another Anvil Road property, so we have a commercial interest in it.',
   maxDimensionMm: 220,
