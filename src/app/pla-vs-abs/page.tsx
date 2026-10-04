@@ -65,6 +65,7 @@ const PLA_STRENGTHS = [
 const RELATED = [
   { href: '/pla-vs-petg', title: 'PLA vs PETG', desc: 'The most common comparison. When to step up.' },
   { href: '/abs-vs-petg', title: 'ABS vs PETG', desc: 'Which is better for functional parts?' },
+  { href: '/asa-vs-abs', title: 'ASA vs ABS', desc: 'The outdoor pick, and when ABS is still fine.' },
   { href: '/library', title: `All ${MATERIAL_PROFILES.length} Materials`, desc: 'Print settings, enclosure and drying for every material.' },
   { href: '/3d-print-stringing', title: 'Fix Stringing', desc: 'Retraction, temp, and combing explained.' },
 ];

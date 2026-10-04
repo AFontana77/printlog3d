@@ -189,8 +189,11 @@ export default function FilamentGuidePage() {
           <div className="max-w-5xl mx-auto">
             <Eyebrow>ASA</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Use ASA for anything that lives outdoors.</h2>
-            <p style={{ ...bodyStyle, maxWidth: '60ch' }}>
+            <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-3">
               ASA is ABS modified for UV resistance. It does not yellow in sunlight and handles the same temperature range as ABS (~100°C). For almost every outdoor application, ASA is the better call over ABS. It needs slightly higher temps than ABS but prints similarly. An enclosure is recommended to prevent warping, though it tolerates slightly more draft than ABS.
+            </p>
+            <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
+              Picking between the two: <Link href="/asa-vs-abs" style={linkStyle} className="underline hover:no-underline">ASA vs ABS</Link>
             </p>
           </div>
         </section>
@@ -258,7 +261,7 @@ export default function FilamentGuidePage() {
               ))}
             </div>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="mt-8 text-sm">
-              Need side-by-side detail? See <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link>, <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link>, or <Link href="/pla-vs-abs" style={linkStyle} className="underline hover:no-underline">PLA vs ABS</Link>. If your prints have problems, start with our guides on <Link href="/3d-print-stringing" style={linkStyle} className="underline hover:no-underline">stringing</Link> and <Link href="/how-to-dry-filament" style={linkStyle} className="underline hover:no-underline">drying filament</Link>.
+              Need side-by-side detail? See <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link>, <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link>, <Link href="/pla-vs-abs" style={linkStyle} className="underline hover:no-underline">PLA vs ABS</Link>, or <Link href="/asa-vs-abs" style={linkStyle} className="underline hover:no-underline">ASA vs ABS</Link>. If your prints have problems, start with our guides on <Link href="/3d-print-stringing" style={linkStyle} className="underline hover:no-underline">stringing</Link> and <Link href="/how-to-dry-filament" style={linkStyle} className="underline hover:no-underline">drying filament</Link>.
             </p>
           </div>
         </section>

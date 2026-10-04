@@ -62,6 +62,9 @@ function relatedGuides(m: MaterialProfile): { href: string; label: string }[] {
     out.push({ href: '/abs-vs-petg', label: 'ABS vs PETG: picking the tougher part' });
     out.push({ href: '/3d-print-stringing', label: 'How to stop stringing' });
   }
+  if (cat === 'ABS' || cat === 'ASA' || cat === 'ASA-CF' || cat === 'HIPS') {
+    out.push({ href: '/asa-vs-abs', label: 'ASA vs ABS: which one survives outdoors?' });
+  }
   if (cat === 'ABS' || cat === 'ASA' || cat === 'HIPS') {
     out.push({ href: '/pla-vs-abs', label: 'PLA vs ABS: strength and heat compared' });
     out.push({ href: '/abs-vs-petg', label: 'ABS vs PETG: picking the tougher part' });

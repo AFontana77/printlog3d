@@ -180,9 +180,12 @@ export default function AbsVsPetgPage() {
           <div className="max-w-5xl mx-auto">
             <Eyebrow>OUTDOOR · USE ASA INSTEAD</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">Outdoor part? Skip ABS. Use ASA.</h2>
-            <p style={{ ...bodyStyle, maxWidth: '60ch' }}>
+            <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-6">
               If you are considering ABS because you need UV resistance outdoors, do not. Use ASA. ASA is ABS modified specifically for UV resistance. It does not yellow in sunlight, handles the same heat range as ABS (~100°C), and is actually easier to print than ABS on most setups. ASA has almost entirely replaced ABS for outdoor applications. The only reason to pick ABS over ASA outdoors is if you specifically need acetone vapor smoothing.
             </p>
+            <Link href="/asa-vs-abs" style={linkStyle} className="underline underline-offset-4 font-semibold">
+              Compare ASA against ABS
+            </Link>
           </div>
         </section>
 
@@ -200,6 +203,7 @@ export default function AbsVsPetgPage() {
             <div className="flex flex-wrap gap-x-6 gap-y-2">
               <Link href="/pla-vs-petg" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">PLA vs PETG</Link>
               <Link href="/pla-vs-abs" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">PLA vs ABS</Link>
+              <Link href="/asa-vs-abs" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">ASA vs ABS</Link>
               <Link href="/library" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">All {MATERIAL_PROFILES.length} materials</Link>
               <Link href="/how-to-dry-filament" style={linkStyle} className="text-sm font-semibold underline hover:no-underline">Dry your filament</Link>
             </div>
