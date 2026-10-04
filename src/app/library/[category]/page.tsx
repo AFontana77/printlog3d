@@ -8,7 +8,14 @@ import { needsServiceRoute } from '@/lib/commerce';
 import { workshopForMaterial } from '@/lib/workshop';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import { canOfferOwnedService } from '@/lib/ownedService';
-import { MATERIAL_PROFILES, getMaterialBySlug, iconFor, type MaterialProfile, iconSrc } from '@/lib/materials';
+import {
+  MATERIAL_DATA_REVIEWED,
+  MATERIAL_PROFILES,
+  getMaterialBySlug,
+  iconFor,
+  type MaterialProfile,
+  iconSrc,
+} from '@/lib/materials';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -35,6 +42,22 @@ export async function generateStaticParams() {
   return MATERIAL_PROFILES.map((m) => ({ category: m.slug }));
 }
 
+/**
+ * Search snippet text. The numbers come first because they are the answer, and
+ * the whole line stays near 150 characters so it is not cut off. The longest of
+ * the 31 is 152.
+ */
+function metaDescription(m: MaterialProfile): string {
+  const enclosure =
+    m.enclosure === 'Required'
+      ? 'It needs an enclosure.'
+      : m.enclosure === 'Recommended'
+        ? 'An enclosure helps.'
+        : 'No enclosure needed.';
+  const drying = m.needsDrying ? 'Dry the spool first.' : 'Drying is rarely needed.';
+  return `${m.category} prints at ${m.printTempC}C nozzle, ${m.bedTempC}C bed. ${enclosure} ${drying} About ${m.priceBandUsd} per kg. Typical maker-published ranges.`;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -49,7 +72,7 @@ export async function generateMetadata({
     title: {
       absolute: `${m.category} print temperature and settings: ${m.printTempC}C nozzle, ${m.bedTempC}C bed`,
     },
-    description: `${m.category} (${m.fullName}) print temperature, bed temperature, enclosure and drying requirements. ${m.summary}`,
+    description: metaDescription(m),
     alternates: { canonical: `${BASE}/library/${m.slug}` },
     openGraph: ogFor(`/library/${m.slug}`),
   };
@@ -241,9 +264,6 @@ function SpecCard({
   );
 }
 
-/** One review date for the material set: it is generated from one source. */
-const MATERIAL_DATA_REVIEWED = '2026-08-31';
-
 export default async function MaterialPage({
   params,
 }: {
@@ -283,6 +303,8 @@ export default async function MaterialPage({
     headline: `${m.category} print settings and material guide`,
     description: m.summary,
     url: pageUrl,
+    // The same date the page prints as "Last reviewed". Not the deploy date.
+    dateModified: MATERIAL_DATA_REVIEWED,
     author: { '@type': 'Organization', name: 'Anvil Road LLC' },
     publisher: {
       '@type': 'Organization',

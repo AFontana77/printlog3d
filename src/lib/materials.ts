@@ -767,6 +767,16 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
   },
 ];
 
+/**
+ * The date the material figures were last reviewed, as a set. They are
+ * generated from this one file, so they are reviewed together.
+ *
+ * Printed on every material page and used as `dateModified` in its structured
+ * data. Change it only when the figures are actually re-checked against their
+ * sources. A deploy, a layout change or a copy edit is not a review.
+ */
+export const MATERIAL_DATA_REVIEWED = '2026-08-31';
+
 const BY_SLUG = new Map(MATERIAL_PROFILES.map((m) => [m.slug, m]));
 const BY_CATEGORY = new Map(MATERIAL_PROFILES.map((m) => [m.category, m]));
 
