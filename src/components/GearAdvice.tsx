@@ -1,5 +1,6 @@
 import { AMAZON, amazonSearchUrl, amazonTag } from '@/lib/commerce';
-import { productFor, productUrl } from '@/lib/products';
+import Link from 'next/link';
+import { clusterForCategory, productFor, productUrl } from '@/lib/products';
 import { AmazonProductImage } from '@/components/AmazonProductImage';
 import { ExternalLink } from 'lucide-react';
 
@@ -43,13 +44,27 @@ export function GearAdvice({
   items,
   heading,
   intro,
+  hubLinks = false,
 }: {
   items: GearSpec[];
   heading: string;
   intro: string;
+  /** Point on to the matching sections of /recommended-gear. */
+  hubLinks?: boolean;
 }) {
   if (items.length === 0) return null;
   const enrolled = AMAZON.status === 'enrolled';
+  // One link per section, however many items on this page fall inside it.
+  const sections = hubLinks
+    ? [
+        ...new Map(
+          items.flatMap((item) => {
+            const c = clusterForCategory(item.category);
+            return c ? [[c.id, c] as const] : [];
+          }),
+        ).values(),
+      ]
+    : [];
 
   return (
     <section
@@ -123,6 +138,24 @@ export function GearAdvice({
             </div>
           ))}
         </div>
+
+        {sections.length > 0 && (
+          <p className="mt-5 text-sm text-gray-600 leading-relaxed">
+            The picks for this, with the reason for each:{' '}
+            {sections.map((c, i) => (
+              <span key={c.id}>
+                {i > 0 ? ', ' : ''}
+                <Link
+                  href={`/recommended-gear#${c.id}`}
+                  className="font-semibold text-brand hover:text-brand-dark underline underline-offset-4"
+                >
+                  {c.title}
+                </Link>
+              </span>
+            ))}
+            .
+          </p>
+        )}
 
         {enrolled && (
           <p className="mt-4 text-xs text-gray-500">

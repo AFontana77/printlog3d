@@ -437,6 +437,7 @@ export default async function MaterialPage({
           heading={`What you need to print ${m.category}`}
           intro={`Gear that ${m.category} genuinely requires, with the specification that decides whether a given unit will actually work.`}
           items={gear}
+          hubLinks
         />
 
         <Faq items={faq} heading={`${m.category} questions`} />

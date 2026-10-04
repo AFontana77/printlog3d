@@ -5,6 +5,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { Faq } from '@/components/Faq';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import { MATERIAL_PROFILES, iconSrc } from '@/lib/materials';
+import { CLUSTERS, type GearCluster } from '@/lib/products';
 import type { Metadata } from 'next';
 
 /**
@@ -44,6 +45,8 @@ type Symptom = {
   href: string;
   linkLabel: string;
   icon: string;
+  /** Set only where the first check names a tool. Links to that gear section. */
+  gear?: GearCluster;
 };
 
 /** Ordered by how often it is the thing that has actually gone wrong. */
@@ -74,6 +77,7 @@ const WHEN_PRINTING: Symptom[] = [
     href: '/3d-print-stringing',
     linkLabel: 'How to stop stringing',
     icon: 'stringing',
+    gear: 'drying-storage',
   },
   {
     symptom: 'Nothing is coming out',
@@ -83,6 +87,7 @@ const WHEN_PRINTING: Symptom[] = [
     href: '/workshop/nozzle-maintenance',
     linkLabel: 'Nozzle cleaning and clogs',
     icon: 'nozzle-temperature',
+    gear: 'nozzles-hotends',
   },
   {
     symptom: 'Gaps and thin walls',
@@ -113,6 +118,7 @@ const AFTER_PRINTING: Symptom[] = [
     href: '/workshop/3d-print-tolerance',
     linkLabel: 'Tolerance and clearance',
     icon: 'search',
+    gear: 'measuring',
   },
   {
     symptom: 'The base is flared',
@@ -140,6 +146,7 @@ const AFTER_PRINTING: Symptom[] = [
     href: '/workshop/removing-supports-and-deburring',
     linkLabel: 'Removing supports without damage',
     icon: 'support-removal',
+    gear: 'finishing',
   },
   {
     symptom: 'The surface is rough or blobby',
@@ -149,6 +156,7 @@ const AFTER_PRINTING: Symptom[] = [
     href: '/workshop/sanding-and-finishing-3d-prints',
     linkLabel: 'Sanding and finishing',
     icon: 'layer-adhesion',
+    gear: 'finishing',
   },
 ];
 
@@ -204,11 +212,10 @@ function SymptomList({ items }: { items: Symptom[] }) {
   return (
     <ul className="space-y-3">
       {items.map((s) => (
-        <li key={s.symptom}>
+        <li key={s.symptom} className="rounded-xl border" style={{ borderColor: 'var(--border)' }}>
           <Link
             href={s.href}
-            className="group flex gap-4 p-4 rounded-xl border transition-colors hover:bg-brand-tint"
-            style={{ borderColor: 'var(--border)' }}
+            className="group flex gap-4 p-4 rounded-xl transition-colors hover:bg-brand-tint"
           >
             <Image
               src={iconSrc(s.icon)}
@@ -239,6 +246,19 @@ function SymptomList({ items }: { items: Symptom[] }) {
               </span>
             </span>
           </Link>
+          {s.gear && (
+            // Outside the card link on purpose: a link cannot sit inside a link.
+            <p className="px-4 pb-4 text-sm" style={{ color: 'var(--muted-foreground)', paddingLeft: '5rem' }}>
+              Gear for this job:{' '}
+              <Link
+                href={`/recommended-gear#${s.gear}`}
+                className="font-semibold underline underline-offset-4"
+                style={{ color: 'var(--brand-primary)' }}
+              >
+                {CLUSTERS.find((c) => c.id === s.gear)?.title}
+              </Link>
+            </p>
+          )}
         </li>
       ))}
     </ul>

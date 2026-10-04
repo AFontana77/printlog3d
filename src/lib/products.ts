@@ -280,6 +280,23 @@ export function productFor(category: string): Product | undefined {
   return BY_CATEGORY.get(category);
 }
 
+/**
+ * Gear categories the material pages name that have no product of their own
+ * here, mapped to the /recommended-gear section that covers the same job.
+ */
+const CLUSTER_FALLBACK: Record<string, GearCluster> = {
+  'Filament dryer': 'drying-storage',
+  'Airtight storage with desiccant': 'drying-storage',
+  'Bed adhesion': 'build-surfaces',
+  'Heat-set threaded inserts': 'assembly',
+};
+
+/** The /recommended-gear section a gear category belongs to, if any. */
+export function clusterForCategory(category: string): (typeof CLUSTERS)[number] | undefined {
+  const id = BY_CATEGORY.get(category)?.cluster ?? CLUSTER_FALLBACK[category];
+  return id ? CLUSTERS.find((c) => c.id === id) : undefined;
+}
+
 /** Amazon detail-page URL carrying this property's own tag. */
 export function productUrl(p: Product, tag: string): string {
   return `https://www.amazon.com/dp/${p.asin}?tag=${encodeURIComponent(tag)}`;

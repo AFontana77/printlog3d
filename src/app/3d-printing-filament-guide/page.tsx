@@ -151,7 +151,7 @@ export default function FilamentGuidePage() {
               PLA is the most beginner-friendly filament. It prints at low temps, produces no harsh fumes, and warps very little. It is made from plant starch rather than petroleum, which is a real difference in feedstock. It is not, however, something that breaks down in a garden or in the sea: PLA needs the sustained heat and humidity of an industrial composting facility, and most kerbside schemes do not accept it. The weak point: PLA deforms around 60°C. Leave a PLA print in a hot car and it warps. PLA+ versions add impact resistance and some flexibility. For most indoor uses, PLA is still the right answer even for experienced printers.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
-              Compare options: <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link> or <Link href="/pla-vs-abs" style={linkStyle} className="underline hover:no-underline">PLA vs ABS</Link>
+              Full settings: <Link href="/library/pla" style={linkStyle} className="underline hover:no-underline">PLA print temperature and settings</Link>. Compare options: <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link> or <Link href="/pla-vs-abs" style={linkStyle} className="underline hover:no-underline">PLA vs ABS</Link>
             </p>
           </div>
         </section>
@@ -165,7 +165,7 @@ export default function FilamentGuidePage() {
               PETG is the natural step up from PLA. It is stronger and handles more heat, to around 80°C. Some specific grades carry food-contact certification, which is a property of that manufacturer's resin and not of PETG as a class. The trade-off: it strings more than PLA, and it bonds aggressively to bare glass beds. Use a PEI sheet or glue stick. No enclosure needed.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
-              Read the full breakdown: <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link> or <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link>
+              Full settings: <Link href="/library/petg" style={linkStyle} className="underline hover:no-underline">PETG print temperature and settings</Link>. Read the full breakdown: <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link> or <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link>
             </p>
           </div>
         </section>
@@ -179,7 +179,7 @@ export default function FilamentGuidePage() {
               ABS is the classic workhorse, the same plastic used in LEGO bricks. It holds up to ~100°C and can be smoothed with acetone vapor for a near-injection-mold finish. The downside: it emits styrene fumes during printing (ventilate) and warps badly without an enclosed build volume. Most people do not actually need ABS anymore. PETG covers 90% of functional part needs, and ASA is a better outdoor choice than ABS.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
-              See: <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link> and <Link href="/pla-vs-abs" style={linkStyle} className="underline hover:no-underline">PLA vs ABS</Link>
+              Full settings: <Link href="/library/abs" style={linkStyle} className="underline hover:no-underline">ABS print temperature and settings</Link>. See: <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link> and <Link href="/pla-vs-abs" style={linkStyle} className="underline hover:no-underline">PLA vs ABS</Link>
             </p>
           </div>
         </section>
@@ -193,7 +193,7 @@ export default function FilamentGuidePage() {
               ASA is ABS modified for UV resistance. It does not yellow in sunlight and handles the same temperature range as ABS (~100°C). For almost every outdoor application, ASA is the better call over ABS. It needs slightly higher temps than ABS but prints similarly. An enclosure is recommended to prevent warping, though it tolerates slightly more draft than ABS.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
-              Picking between the two: <Link href="/asa-vs-abs" style={linkStyle} className="underline hover:no-underline">ASA vs ABS</Link>
+              Full settings: <Link href="/library/asa" style={linkStyle} className="underline hover:no-underline">ASA print temperature and settings</Link>. Picking between the two: <Link href="/asa-vs-abs" style={linkStyle} className="underline hover:no-underline">ASA vs ABS</Link>
             </p>
           </div>
         </section>
@@ -207,7 +207,7 @@ export default function FilamentGuidePage() {
               Nylon has the highest strength of any common FDM filament. It is also self-lubricating, which makes it ideal for gears, bearings, and moving parts. The major catch: Nylon is hygroscopic. It absorbs moisture from open air in as little as 1 to 2 hours and prints terribly when wet. You must store Nylon in an airtight container and dry it before every print run.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
-              Read: <Link href="/how-to-dry-filament" style={linkStyle} className="underline hover:no-underline">How to dry filament</Link>
+              Full settings: <Link href="/library/nylon-pa6" style={linkStyle} className="underline hover:no-underline">Nylon PA6</Link> and <Link href="/library/nylon-pa12" style={linkStyle} className="underline hover:no-underline">Nylon PA12</Link>. Read: <Link href="/how-to-dry-filament" style={linkStyle} className="underline hover:no-underline">How to dry filament</Link>
             </p>
           </div>
         </section>
@@ -217,8 +217,11 @@ export default function FilamentGuidePage() {
           <div className="max-w-5xl mx-auto">
             <Eyebrow>TPU</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">TPU: the only filament that bends without breaking.</h2>
-            <p style={{ ...bodyStyle, maxWidth: '60ch' }}>
+            <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-3">
               TPU is flexible and rubber-like. Shore hardness varies by brand. 95A is common and feels similar to a shoe sole. Print slow (30 to 40 mm/s) and use a direct drive extruder if possible. Bowden setups can print TPU but require very low retraction and slower speeds to avoid jamming. Good for phone cases, grips, gaskets, and any part that needs to flex and return.
+            </p>
+            <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
+              Full settings: <Link href="/library/tpu" style={linkStyle} className="underline hover:no-underline">TPU print temperature and settings</Link>
             </p>
           </div>
         </section>

@@ -155,8 +155,9 @@ export default function RecommendedGearPage() {
           return (
             <section
               key={cluster.id}
+              id={cluster.id}
               className="py-12 px-6"
-              style={{ background: ci % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)' }}
+              style={{ background: ci % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)', scrollMarginTop: '5rem' }}
               aria-label={cluster.title}
               data-placement={`gear-${cluster.id}`}
             >
