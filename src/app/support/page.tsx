@@ -10,10 +10,6 @@ export const metadata: Metadata = {
 
 const FAQS = [
   {
-    q: 'Is there a PrintLog3D app?',
-    a: 'Not yet. The PrintLog3D app is in development. This website is live now with a filament material reference and a free printable settings sheet. We will announce the app here when it ships.',
-  },
-  {
     q: 'Do I need to pay for anything?',
     a: 'No. The website and the settings sheet are both free. There is no purchase or subscription on printlog3d.com today.',
   },

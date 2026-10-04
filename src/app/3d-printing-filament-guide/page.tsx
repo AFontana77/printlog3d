@@ -272,7 +272,7 @@ export default function FilamentGuidePage() {
             <Eyebrow>FREE SETTINGS SHEET</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Every material, on one page.</h2>
             <p style={{ ...bodyStyle, maxWidth: '52ch' }} className="mb-8">
-              Every material has its own quirks. Our printable settings guide puts the print temperature, bed temperature, enclosure and drying requirement for all of them on a single page you can keep by the printer. A logging app is in development and we will say so here when it ships.
+              Every material has its own quirks. Our printable settings guide puts the print temperature, bed temperature, enclosure and drying requirement for all of them on a single page you can keep by the printer.
             </p>
             <Link
               href="/free-download"

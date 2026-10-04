@@ -2,13 +2,51 @@ import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import Link from 'next/link';
 import { MATERIAL_PROFILES } from '@/lib/materials';
+import { OWNED_SERVICE } from '@/lib/ownedService';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: 'About',
-  description: `The story behind PrintLog3D, a ${MATERIAL_PROFILES.length}-material filament reference with a print log app in development. Dial in your print settings.`,
+  description: `PrintLog3D is a free filament settings reference. ${MATERIAL_PROFILES.length} materials, one page each, built from ranges the filament makers publish. Who runs it and how it earns.`,
 };
+
+const eyebrowStyle: React.CSSProperties = {
+  fontFamily: 'var(--font-display)',
+  color: 'var(--brand-primary)',
+  letterSpacing: '0.15em',
+  fontSize: '0.7rem',
+};
+const h2Style: React.CSSProperties = {
+  fontFamily: 'var(--font-display)',
+  color: 'var(--foreground)',
+  lineHeight: 1.1,
+};
+const bodyStyle: React.CSSProperties = {
+  color: 'var(--body-text)',
+  fontFamily: 'var(--font-body)',
+  maxWidth: '60ch',
+  lineHeight: 1.65,
+};
+const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
+
+const Eyebrow = ({ children }: { children: React.ReactNode }) => (
+  <div style={eyebrowStyle} className="uppercase font-semibold mb-6 flex items-center gap-3">
+    <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
+    {children}
+  </div>
+);
+
+/** What a reader can actually do here today. Every entry is a live route. */
+const ON_THE_SITE = [
+  { href: '/library', label: 'The material library', line: `${MATERIAL_PROFILES.length} filament materials, one page each.` },
+  { href: '/3d-printing-filament-guide', label: 'The filament guide', line: 'How the main material families differ.' },
+  { href: '/3d-printer-troubleshooting', label: 'Troubleshooting', line: 'Start from what the print is doing wrong.' },
+  { href: '/workshop', label: 'The workshop', line: 'Measuring, sanding, gluing and other jobs around the print.' },
+  { href: '/3d-printing-cost-calculator', label: 'The cost calculator', line: 'What one print costs, using your own numbers.' },
+  { href: '/recommended-gear', label: 'Recommended gear', line: 'Tools that fix a named problem, with the reason for each.' },
+  { href: '/free-download', label: 'The free field guide', line: 'Every material on a printable PDF.' },
+];
 
 export default function AboutPage() {
   return (
@@ -18,15 +56,7 @@ export default function AboutPage() {
         {/* Hero */}
         <section className="pt-20 pb-16 px-6" style={{ background: 'var(--surface-1)' }}>
           <div className="max-w-5xl mx-auto">
-            <div
-              style={{
-                fontFamily: 'var(--font-display)',
-                color: 'var(--brand-primary)',
-                letterSpacing: '0.15em',
-                fontSize: '0.7rem',
-              }}
-              className="uppercase font-semibold mb-8 flex items-center gap-3"
-            >
+            <div style={eyebrowStyle} className="uppercase font-semibold mb-8 flex items-center gap-3">
               <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
               ABOUT · ANVIL ROAD LLC
             </div>
@@ -38,29 +68,17 @@ export default function AboutPage() {
               }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
             >
-              Built for printers who log <span style={{ color: 'var(--brand-primary)' }}>everything.</span>
+              A plain reference for <span style={{ color: 'var(--brand-primary)' }}>filament settings.</span>
             </h1>
-            <p
-              style={{
-                color: 'var(--body-text)',
-                fontFamily: 'var(--font-body)',
-                maxWidth: '60ch',
-                lineHeight: 1.65,
-              }}
-              className="text-base mb-6"
-            >
-              PrintLog3D was built for 3D printing enthusiasts who have wasted spools learning the hard way. Every printer is different. Every brand of PLA prints differently. The settings that work for Hatchbox PLA on a Bambu P1S are not the same as eSUN PLA on an Ender 3. PrintLog3D pairs a filament material reference with a personal print log, so you can search before you slice and record what worked before you forget. The print log lives in a companion app for iPhone and Android, in development now. Stop printing from memory. Start printing from data.
+            <p style={bodyStyle} className="text-base mb-6">
+              PrintLog3D is a free reference site for 3D printing filament. It covers{' '}
+              {MATERIAL_PROFILES.length} materials, one page each. Each page gives the nozzle and bed
+              temperature, says if you need an enclosure, tells you how to dry the spool, and names the
+              fault that material most often hits.
             </p>
-            <p
-              style={{
-                color: 'var(--body-text)',
-                fontFamily: 'var(--font-body)',
-                maxWidth: '60ch',
-                lineHeight: 1.65,
-              }}
-              className="text-base mb-8"
-            >
-              PrintLog3D is published by Anvil Road LLC, a small product studio building practical apps and reference tools for hobbyists, professionals, and makers. Every product in the portfolio follows the same principle: a searchable reference paired with a personal log. Search what the datasheets say. Record what you discover.
+            <p style={bodyStyle} className="text-base mb-8">
+              It is a website and a printable guide. There is no app and no account. You can read
+              every page and download the guide for free.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
@@ -95,41 +113,98 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Anvil Road */}
+        {/* Sources */}
         <section className="py-16 px-6" style={{ background: 'var(--surface-0)' }}>
           <div className="max-w-5xl mx-auto">
-            <div
-              style={{
-                fontFamily: 'var(--font-display)',
-                color: 'var(--brand-primary)',
-                letterSpacing: '0.15em',
-                fontSize: '0.7rem',
-              }}
-              className="uppercase font-semibold mb-6 flex items-center gap-3"
-            >
-              <span style={{ display: 'inline-block', width: '24px', height: '1px', background: 'var(--brand-primary)', flexShrink: 0 }} />
-              PUBLISHER
-            </div>
-            <h2
-              style={{
-                fontFamily: 'var(--font-display)',
-                color: 'var(--foreground)',
-                lineHeight: 1.1,
-              }}
-              className="text-3xl sm:text-4xl font-bold mb-4"
-            >
-              Built by Anvil Road LLC
+            <Eyebrow>WHERE THE NUMBERS COME FROM</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">
+              Published ranges, not our own results
             </h2>
-            <p
-              style={{
-                color: 'var(--body-text)',
-                fontFamily: 'var(--font-body)',
-                maxWidth: '60ch',
-                lineHeight: 1.65,
-              }}
-              className="text-base"
-            >
-              Anvil Road is an independent publisher and app studio based in New Jersey. We build reference tools, log apps, KDP books, and companion print products across a range of hobby and professional categories. PrintLog3D is one of 20+ products in the Anvil Road portfolio. The PrintLog3D app is in development and will follow the same model as our other apps: free to start, with a one-time unlock for unlimited features, no subscriptions.
+            <p style={bodyStyle} className="text-base mb-4">
+              The temperatures, drying times and price bands on this site are typical ranges that
+              filament makers publish. They are not measurements we took. We have not done our
+              own testing, and each material page says so.
+            </p>
+            <p style={bodyStyle} className="text-base">
+              Use a range as a safe place to start. Your spool and your printer have the last word.
+              The{' '}
+              <Link href="/editorial-policy" style={linkStyle} className="underline underline-offset-4">
+                editorial policy
+              </Link>{' '}
+              names the makers we draw from and explains how to send a correction.
+            </p>
+          </div>
+        </section>
+
+        {/* What is here */}
+        <section className="py-16 px-6" style={{ background: 'var(--surface-1)' }}>
+          <div className="max-w-5xl mx-auto">
+            <Eyebrow>WHAT IS ON THE SITE</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-8">
+              Seven places to start
+            </h2>
+            <ul style={{ border: '1px solid var(--border)', borderRadius: '0.25rem', overflow: 'hidden' }}>
+              {ON_THE_SITE.map((item, i) => (
+                <li
+                  key={item.href}
+                  style={{
+                    padding: '1rem 1.25rem',
+                    borderTop: i === 0 ? 'none' : '1px solid var(--border)',
+                    background: i % 2 === 0 ? 'var(--surface-0)' : 'var(--surface-1)',
+                  }}
+                >
+                  <Link
+                    href={item.href}
+                    style={{ fontFamily: 'var(--font-display)', color: 'var(--brand-primary)' }}
+                    className="text-sm font-semibold underline underline-offset-4"
+                  >
+                    {item.label}
+                  </Link>
+                  <p style={{ color: 'var(--body-text)', fontFamily: 'var(--font-body)' }} className="text-sm mt-1">
+                    {item.line}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Money */}
+        <section className="py-16 px-6" style={{ background: 'var(--surface-0)' }}>
+          <div className="max-w-5xl mx-auto">
+            <Eyebrow>HOW THE SITE EARNS</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">
+              Amazon links, and one service we own
+            </h2>
+            <p style={bodyStyle} className="text-base mb-4">
+              Some links on this site go to Amazon. As an Amazon Associate we earn from qualifying
+              purchases. That costs you nothing extra.
+            </p>
+            <p style={bodyStyle} className="text-base">
+              We also own {OWNED_SERVICE.name}, a print service. We say so each time we link to it.
+              The{' '}
+              <Link href="/disclosure" style={linkStyle} className="underline underline-offset-4">
+                disclosure page
+              </Link>{' '}
+              says which links are paid and which are not.
+            </p>
+          </div>
+        </section>
+
+        {/* Anvil Road */}
+        <section className="py-16 px-6" style={{ background: 'var(--surface-1)' }}>
+          <div className="max-w-5xl mx-auto">
+            <Eyebrow>PUBLISHER</Eyebrow>
+            <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">
+              Run by Anvil Road LLC
+            </h2>
+            <p style={bodyStyle} className="text-base">
+              PrintLog3D is published by Anvil Road LLC, a small independent publisher based in New
+              Jersey. If a number here looks wrong, or you have a question, write to us through the{' '}
+              <Link href="/support" style={linkStyle} className="underline underline-offset-4">
+                support page
+              </Link>
+              .
             </p>
           </div>
         </section>
