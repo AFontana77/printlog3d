@@ -56,10 +56,10 @@ function Field({
             fontSize: '1rem', minHeight: '44px',
           }}
         />
-        {suffix ? <span style={{ color: 'var(--muted, #52525b)' }}>{suffix}</span> : null}
+        {suffix ? <span style={{ color: 'var(--muted-foreground, #52525b)' }}>{suffix}</span> : null}
       </div>
       {hint ? (
-        <p style={{ fontSize: '0.8rem', color: 'var(--muted, #52525b)', marginTop: '0.3rem' }}>
+        <p style={{ fontSize: '0.8rem', color: 'var(--muted-foreground, #52525b)', marginTop: '0.3rem' }}>
           {hint}
         </p>
       ) : null}
@@ -111,14 +111,14 @@ export function CostCalculator({ spoolLinks = [] }: { spoolLinks?: SpoolLink[] }
         }}
       >
         <h2 style={{ fontSize: '1.15rem', fontWeight: 700, marginTop: 0 }}>Your numbers</h2>
-        <p style={{ fontSize: '0.9rem', color: 'var(--muted, #52525b)', marginTop: 0 }}>
+        <p style={{ fontSize: '0.9rem', color: 'var(--muted-foreground, #52525b)', marginTop: 0 }}>
           The values below are starting points, not our recommendations. Replace
           them with what you actually paid.
         </p>
 
         <Field id="spool-price" label="Spool price" value={spoolPrice} onChange={setSpoolPrice} suffix="$">
           {spoolLinks.length > 0 ? (
-            <p style={{ fontSize: '0.8rem', color: 'var(--muted, #52525b)', marginTop: '0.3rem' }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--muted-foreground, #52525b)', marginTop: '0.3rem' }}>
               No spool yet? Check the price of{' '}
               {spoolLinks.map((l, i) => (
                 <Fragment key={l.href}>
@@ -182,7 +182,7 @@ export function CostCalculator({ spoolLinks = [] }: { spoolLinks?: SpoolLink[] }
         ) : (
           <>
             <p style={{ fontSize: '2rem', fontWeight: 800, margin: '0.25rem 0' }}>{money(r.cost)}</p>
-            <p style={{ color: 'var(--muted, #52525b)', marginTop: 0 }}>
+            <p style={{ color: 'var(--muted-foreground, #52525b)', marginTop: 0 }}>
               cost to you for one successful print
             </p>
             <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1rem 0', fontSize: '0.95rem' }}>
@@ -192,7 +192,7 @@ export function CostCalculator({ spoolLinks = [] }: { spoolLinks?: SpoolLink[] }
                     <th scope="row" style={{ textAlign: 'left', padding: '0.5rem 0', fontWeight: 600 }}>
                       {row.label}
                       {row.note ? (
-                        <span style={{ display: 'block', fontWeight: 400, fontSize: '0.8rem', color: 'var(--muted, #52525b)' }}>
+                        <span style={{ display: 'block', fontWeight: 400, fontSize: '0.8rem', color: 'var(--muted-foreground, #52525b)' }}>
                           {row.note}
                         </span>
                       ) : null}
@@ -220,7 +220,7 @@ export function CostCalculator({ spoolLinks = [] }: { spoolLinks?: SpoolLink[] }
                 ) : null}
               </tbody>
             </table>
-            <p style={{ fontSize: '0.85rem', color: 'var(--muted, #52525b)' }}>
+            <p style={{ fontSize: '0.85rem', color: 'var(--muted-foreground, #52525b)' }}>
               Filament cost is spool price divided by spool weight, times the grams
               your slicer reported. Electricity is watts divided by 1,000, times
               hours, times your rate. The failure share is added on top of the
