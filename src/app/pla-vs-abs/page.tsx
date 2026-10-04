@@ -16,9 +16,11 @@ import {
 } from '@/components/comparison/shared';
 import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 export const metadata: Metadata = {
   alternates: { canonical: "/pla-vs-abs" },
+  openGraph: ogFor('/pla-vs-abs'),
   title: 'PLA vs ABS: When to Upgrade and When to Stick with PLA',
   description: "PLA vs ABS compared: why most beginners don't need ABS, when ABS's heat resistance and machinability are worth the hassle, and the better upgrade path (PLA to PETG to ASA).",
 };

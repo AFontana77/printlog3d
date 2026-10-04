@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { CostCalculator, type SpoolLink } from '@/components/CostCalculator';
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
   description:
     'Work out what a 3D print costs you. Filament, electricity, printer wear and failed prints, using your own numbers. Shows the arithmetic so you can check it.',
   alternates: { canonical: '/3d-printing-cost-calculator' },
+  openGraph: ogFor('/3d-printing-cost-calculator'),
 };
 
 /**

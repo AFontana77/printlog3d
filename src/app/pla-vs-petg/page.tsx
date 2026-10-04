@@ -15,9 +15,11 @@ import {
   linkStyle,
 } from '@/components/comparison/shared';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 export const metadata: Metadata = {
   alternates: { canonical: "/pla-vs-petg" },
+  openGraph: ogFor('/pla-vs-petg'),
   title: 'PLA vs PETG: Which Filament Should You Use?',
   description: 'PLA vs PETG compared side by side: print temperature, heat resistance, flexibility, bed adhesion, and which to use for functional parts, outdoor prints, and food-contact items.',
 };

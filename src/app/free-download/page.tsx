@@ -5,6 +5,7 @@ import { MATERIAL_PROFILES } from '@/lib/materials';
 import { FIELD_GUIDE_COUNT } from '@/lib/fieldGuide';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * The settings sheet.
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
   title: 'Free filament settings cheat sheet (PDF)',
   description: `A printable reference with nozzle and bed temperatures, enclosure and drying requirements for ${FIELD_GUIDE_COUNT} filament materials. Direct download, no signup required.`,
   alternates: { canonical: `${BASE}/free-download` },
+  openGraph: ogFor('/free-download'),
 };
 
 const CONTENTS = [

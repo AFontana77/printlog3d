@@ -5,6 +5,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { MATERIAL_PROFILES, iconFor, iconSrc } from '@/lib/materials';
 import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * Homepage.
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
   title: 'Filament settings for every material',
   description: `Nozzle and bed temperatures, enclosure and drying requirements, and the fault each material actually fails with. ${MATERIAL_PROFILES.length} materials, one page each, from PLA to PEEK.`,
   alternates: { canonical: BASE },
+  openGraph: ogFor(''),
 };
 
 

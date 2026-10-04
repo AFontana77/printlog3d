@@ -2,6 +2,7 @@ import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 import {
   AMAZON,
   PRINT_SERVICES,
@@ -33,6 +34,7 @@ export const metadata: Metadata = {
   description:
     'How printlog3d.com makes money, which links are commercial, and which are not. Written to reflect the relationships that actually exist.',
   alternates: { canonical: `${BASE}/disclosure` },
+  openGraph: ogFor('/disclosure'),
 };
 
 export default function DisclosurePage() {

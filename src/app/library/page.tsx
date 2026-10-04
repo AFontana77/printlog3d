@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/layout/SiteFooter';
 import { MATERIAL_PROFILES } from '@/lib/materials';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * Materials index.
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
   description:
     'Nozzle and bed temperatures, enclosure requirements and drying for PLA, PETG, ABS, ASA, nylon, polycarbonate, PEEK and more. Typical manufacturer-published ranges, set out per material.',
   alternates: { canonical: `${BASE}/library` },
+  openGraph: ogFor('/library'),
 };
 
 const DIFFICULTY_ORDER = ['Beginner', 'Intermediate', 'Advanced', 'Expert'] as const;

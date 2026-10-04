@@ -4,6 +4,7 @@ import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { STAGES, WORKSHOP, resourcesForStage } from '@/lib/workshop';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 import { iconSrc } from '@/lib/materials';
 
 /**
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
   description:
     'What you need before, during and after the print: measuring parts, removing supports, sanding, heat-set inserts, filament storage and nozzle maintenance.',
   alternates: { canonical: `${BASE}/workshop` },
+  openGraph: ogFor('/workshop'),
 };
 
 export default function WorkshopHubPage() {

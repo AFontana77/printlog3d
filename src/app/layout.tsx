@@ -36,18 +36,17 @@ export const metadata: Metadata = {
   creator: "Anvil Road LLC",
   publisher: "Anvil Road LLC",
   robots: { index: true, follow: true },
+  // No url, title or description here. Anything set at the root is inherited
+  // by every page, which made a shared link to any page preview as the
+  // homepage. Each route sets its own url through ogFor(), and Next fills the
+  // title and description from that page's own metadata.
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
     siteName: "PrintLog3D",
-    title: "PrintLog3D: filament print settings by material",
-    description: `Nozzle and bed temperatures, enclosure needs and drying guidance for ${MATERIAL_PROFILES.length} filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "PrintLog3D: filament print settings by material",
-    description: `Nozzle and bed temperatures, enclosure needs and drying guidance for ${MATERIAL_PROFILES.length} filament materials, from PLA to PEEK. Typical manufacturer-published ranges, one page per material.`,
   },
   // Removed: a canonical here is inherited by every page that does not
   // override it, which told search engines each page was a duplicate of

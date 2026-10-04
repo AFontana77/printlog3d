@@ -5,6 +5,7 @@ import { MATERIAL_PROFILES } from '@/lib/materials';
 import { PRODUCTS } from '@/lib/products';
 import { PROGRAMS, isMonetised } from '@/lib/merchants';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * Editorial policy, methodology and corrections.
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: URL },
+  openGraph: ogFor('/editorial-policy'),
 };
 
 const jsonLd = {

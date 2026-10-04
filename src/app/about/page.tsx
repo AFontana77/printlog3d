@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { MATERIAL_PROFILES } from '@/lib/materials';
 import { OWNED_SERVICE } from '@/lib/ownedService';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
+  openGraph: ogFor('/about'),
   title: 'About',
   description: `PrintLog3D is a free filament settings reference. ${MATERIAL_PROFILES.length} materials, one page each, built from ranges the filament makers publish. Who runs it and how it earns.`,
 };

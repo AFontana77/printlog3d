@@ -1,9 +1,11 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 export const metadata: Metadata = {
   alternates: { canonical: "/support" },
+  openGraph: ogFor('/support'),
   title: 'Support',
   description: 'Get help with the PrintLog3D website. Contact support or browse common questions.',
 };

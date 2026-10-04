@@ -7,6 +7,7 @@ import { OwnedServiceCta } from '@/components/OwnedServiceCta';
 import { MATERIAL_PROFILES, iconSrc } from '@/lib/materials';
 import { CLUSTERS, type GearCluster } from '@/lib/products';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * The troubleshooting router.
@@ -36,6 +37,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: URL },
+  openGraph: ogFor('/3d-printer-troubleshooting'),
 };
 
 type Symptom = {

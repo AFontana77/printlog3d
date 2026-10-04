@@ -10,6 +10,7 @@ import { WORKSHOP, STAGES, resourceBySlug } from '@/lib/workshop';
 import { ProcessDiagram, SEQUENCES } from '@/components/ProcessDiagram';
 import { getMaterialBySlug, iconFor, iconSrc } from '@/lib/materials';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * Workshop resource template.
@@ -38,6 +39,7 @@ export async function generateMetadata({
     title: r.metaTitle,
     description: r.metaDescription,
     alternates: { canonical: `${BASE}/workshop/${r.slug}` },
+    openGraph: ogFor(`/workshop/${r.slug}`),
   };
 }
 

@@ -16,9 +16,11 @@ import {
 } from '@/components/comparison/shared';
 import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 export const metadata: Metadata = {
   alternates: { canonical: "/abs-vs-petg" },
+  openGraph: ogFor('/abs-vs-petg'),
   title: 'ABS vs PETG: Which Is Better for Functional Parts?',
   description: "ABS vs PETG compared: heat resistance, warp risk, fumes, ease of print, and why PETG wins for most functional parts unless you specifically need ABS's higher temperature tolerance.",
 };

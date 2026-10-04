@@ -8,6 +8,7 @@ import { MATERIAL_PROFILES, iconFor, type MaterialProfile, iconSrc } from '@/lib
 import { servicesFor } from '@/lib/commerce';
 import { OWNED_SERVICE, capabilityFor, quoteUrlFor } from '@/lib/ownedService';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * The outsourcing hub.
@@ -31,6 +32,7 @@ export const metadata: Metadata = {
   description:
     'Which materials a desktop printer realistically cannot handle, what a print service needs from you, what it costs in time, and who can actually print each material.',
   alternates: { canonical: `${BASE}/get-it-printed` },
+  openGraph: ogFor('/get-it-printed'),
 };
 
 const WORTH_IT = [

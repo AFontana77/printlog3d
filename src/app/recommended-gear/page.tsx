@@ -9,6 +9,7 @@ import { PRODUCTS, CLUSTERS, productUrl } from '@/lib/products';
 import { AMAZON, amazonTag } from '@/lib/commerce';
 import { DISCLOSURE_TEXT } from '@/lib/merchants';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * The gear hub.
@@ -37,6 +38,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: URL },
+  openGraph: ogFor('/recommended-gear'),
 };
 
 const FAQ = [

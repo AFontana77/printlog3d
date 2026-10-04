@@ -15,6 +15,7 @@ import {
   linkStyle,
 } from '@/components/comparison/shared';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 /**
  * ASA vs ABS.
@@ -36,6 +37,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESC,
   alternates: { canonical: URL },
+  openGraph: ogFor('/asa-vs-abs'),
 };
 
 const FAQ = [

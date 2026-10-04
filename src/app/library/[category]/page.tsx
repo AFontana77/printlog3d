@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 import { Thermometer, Box, Wind, Droplets, CheckCircle2, XCircle, AlertTriangle } from 'lucide-react';
 
 /**
@@ -50,6 +51,7 @@ export async function generateMetadata({
     },
     description: `${m.category} (${m.fullName}) print temperature, bed temperature, enclosure and drying requirements. ${m.summary}`,
     alternates: { canonical: `${BASE}/library/${m.slug}` },
+    openGraph: ogFor(`/library/${m.slug}`),
   };
 }
 
