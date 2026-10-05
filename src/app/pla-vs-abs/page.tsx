@@ -12,7 +12,6 @@ import {
   bodyStyle,
   h2Style,
   h3Style,
-  linkStyle,
 } from '@/components/comparison/shared';
 import { MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';

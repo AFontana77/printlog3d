@@ -101,11 +101,6 @@ const bodyStyle: React.CSSProperties = {
   lineHeight: 1.65,
 };
 
-const h3Style: React.CSSProperties = {
-  fontFamily: 'var(--font-display)',
-  color: 'var(--foreground)',
-};
-
 const linkStyle: React.CSSProperties = { color: 'var(--brand-primary)' };
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
@@ -195,7 +190,7 @@ export default function FilamentGuidePage() {
             <Eyebrow>PETG</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Move to PETG when the part needs to hold up.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-3">
-              PETG is the natural step up from PLA. It is stronger and handles more heat, to around 80°C. Some specific grades carry food-contact certification, which is a property of that manufacturer's resin and not of PETG as a class. The trade-off: it strings more than PLA, and it bonds aggressively to bare glass beds. Use a PEI sheet or glue stick. No enclosure needed.
+              PETG is the natural step up from PLA. It is stronger and handles more heat, to around 80°C. Some specific grades carry food-contact certification, which is a property of that manufacturer&apos;s resin and not of PETG as a class. The trade-off: it strings more than PLA, and it bonds aggressively to bare glass beds. Use a PEI sheet or glue stick. No enclosure needed.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
               Full settings: <Link href="/library/petg" style={linkStyle} className="underline hover:no-underline">PETG print temperature and settings</Link>. Read the full breakdown: <Link href="/pla-vs-petg" style={linkStyle} className="underline hover:no-underline">PLA vs PETG</Link> or <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link>
