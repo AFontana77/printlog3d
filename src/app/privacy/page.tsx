@@ -1,11 +1,13 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import type { Metadata } from 'next';
+import { ogFor } from '@/lib/seo';
 
 export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
+  openGraph: ogFor('/privacy'),
   title: 'Privacy Policy',
-  description: 'Privacy policy for the printlog3d.com website and the PrintLog3D mobile app, once it is released.',
+  description: 'Privacy policy for the printlog3d.com website.',
 };
 
 const headingStyle = {
@@ -45,12 +47,12 @@ export default function PrivacyPage() {
               Privacy Policy
             </h1>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm mb-10">
-              Last updated: April 17, 2026
+              Last updated: October 5, 2026
             </p>
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">1. Who We Are</h2>
             <p style={bodyStyle} className="leading-relaxed mb-4">
-              Anvil Road LLC operates printlog3d.com. A PrintLog3D mobile app is in development and is not yet released. This policy will be updated to cover the app before it launches.
+              Anvil Road LLC operates printlog3d.com.
               Contact: <a href="mailto:support@printlog3d.com" style={linkStyle} className="hover:underline">support@printlog3d.com</a>
             </p>
 
@@ -60,7 +62,7 @@ export default function PrivacyPage() {
               <li><strong style={{ color: 'var(--foreground)' }}>Email address.</strong> If you sign up for the free settings sheet or another form on this site, we collect your email address. See section 8 for details.</li>
               <li><strong style={{ color: 'var(--foreground)' }}>Basic site analytics.</strong> We use Google Tag Manager to see which pages are visited and which outbound links are clicked. This does not include your name or email unless you separately submit a form.</li>
             </ul>
-            <p style={bodyStyle} className="mb-4">The website does not have a print log feature. That is planned for the PrintLog3D mobile app, which is in development. When the app is released, we will update this policy to explain what it collects before it collects anything.</p>
+            <p style={bodyStyle} className="mb-4">The website does not have user accounts or a print log feature.</p>
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">3. How We Use Your Information</h2>
             <ul style={bodyStyle} className="list-disc pl-6 mb-4 space-y-1">
@@ -76,7 +78,6 @@ export default function PrivacyPage() {
               <li><strong style={{ color: 'var(--foreground)' }}>Google Tag Manager.</strong> Measures site traffic and outbound clicks. See section 2.</li>
               <li><strong style={{ color: 'var(--foreground)' }}>Resend.</strong> Sends the settings sheet and any email updates you sign up for.</li>
             </ul>
-            <p style={bodyStyle} className="mb-4">When the PrintLog3D app is released, we will update this section to list any additional services it uses, such as purchase processing.</p>
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">5. Data Deletion</h2>
             <p style={bodyStyle} className="leading-relaxed mb-4">
@@ -90,7 +91,7 @@ export default function PrivacyPage() {
 
             <h2 style={headingStyle} className="text-xl font-semibold mt-10 mb-3">7. Changes to This Policy</h2>
             <p style={bodyStyle} className="leading-relaxed mb-4">
-              We may update this policy, including when the PrintLog3D app is released. We will post the revised policy at this URL with a new last updated date.
+              We may update this policy. We will post the revised policy at this URL with a new last updated date.
               Continued use of the website after changes constitutes acceptance of the updated policy.
             </p>
 

@@ -58,8 +58,8 @@ const STATIC_ROUTES: {
   { path: '/about', priority: 0.5, changeFrequency: 'yearly', lastModified: '2026-10-04' },
   { path: '/support', priority: 0.4, changeFrequency: 'yearly', lastModified: '2026-10-04' },
   // These two match the "Last updated" date each page prints.
-  { path: '/privacy', priority: 0.3, changeFrequency: 'yearly', lastModified: '2026-04-17' },
-  { path: '/terms', priority: 0.3, changeFrequency: 'yearly', lastModified: '2026-04-18' },
+  { path: '/privacy', priority: 0.3, changeFrequency: 'yearly', lastModified: '2026-10-05' },
+  { path: '/terms', priority: 0.3, changeFrequency: 'yearly', lastModified: '2026-10-05' },
 ];
 
 /**
