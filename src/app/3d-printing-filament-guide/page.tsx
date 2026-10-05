@@ -1,6 +1,7 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import Link from 'next/link';
+import { getMaterialByCategory } from '@/lib/materials';
 import type { Metadata } from 'next';
 import { ogFor } from '@/lib/seo';
 
@@ -31,14 +32,44 @@ const jsonLd = {
   ],
 };
 
+/**
+ * One row of the "at a glance" table, read from the material's own profile.
+ *
+ * This table used to be typed by hand, and it drifted: it gave PLA as
+ * 190-220°C where the PLA page says 180-220°C, called the ASA enclosure
+ * "recommended" where the ASA page says required, and rated ABS Advanced where
+ * every other page says Intermediate. The comparison pages hit the same
+ * problem and solved it the same way (see ComparisonSpecs).
+ *
+ * Temperatures, enclosure and difficulty come from materials.ts. Only "Best
+ * for" is written here, because the profile has no one-line field for it.
+ */
+function row(category: string, bestFor: string) {
+  const m = getMaterialByCategory(category);
+  if (!m) throw new Error(`filament guide: no material profile for "${category}"`);
+  return {
+    name: m.category,
+    printTemp: `${m.printTempC}°C`,
+    bedTemp: `${m.bedTempC}°C`,
+    enclosure: m.enclosure as string,
+    difficulty: m.difficulty as string,
+    bestFor,
+  };
+}
+
 const materials = [
-  { name: 'PLA', printTemp: '190-220°C', bedTemp: '45-60°C (optional)', enclosure: 'No', difficulty: 'Beginner', bestFor: 'General printing, models, prototypes' },
-  { name: 'PETG', printTemp: '230-250°C', bedTemp: '70-85°C', enclosure: 'No', difficulty: 'Intermediate', bestFor: 'Functional parts, mild heat' },
-  { name: 'ABS', printTemp: '230-250°C', bedTemp: '100-110°C', enclosure: 'Yes (required)', difficulty: 'Advanced', bestFor: 'High-heat parts, chemical resistance' },
-  { name: 'ASA', printTemp: '240-260°C', bedTemp: '90-100°C', enclosure: 'Yes (recommended)', difficulty: 'Advanced', bestFor: 'Outdoor, UV-resistant' },
-  { name: 'Nylon', printTemp: '240-280°C', bedTemp: '70-90°C', enclosure: 'Yes', difficulty: 'Advanced', bestFor: 'High strength, self-lubricating' },
-  { name: 'TPU', printTemp: '220-240°C', bedTemp: '30-60°C', enclosure: 'No', difficulty: 'Intermediate', bestFor: 'Flexible parts, gaskets, grips' },
-  { name: 'Resin (SLA/DLP)', printTemp: 'N/A (UV cure)', bedTemp: 'N/A', enclosure: 'No', difficulty: 'Intermediate', bestFor: 'Ultra-fine detail, jewelry, miniatures' },
+  row('PLA', 'General printing, models, prototypes'),
+  row('PETG', 'Functional parts, mild heat'),
+  row('ABS', 'High-heat parts, chemical resistance'),
+  row('ASA', 'Outdoor, UV-resistant'),
+  // There is no single "nylon" profile. PA6 and PA12 print at different
+  // temperatures, so each gets its own row rather than one blended range.
+  row('Nylon PA6', 'High strength, self-lubricating'),
+  row('Nylon PA12', 'High strength, self-lubricating'),
+  row('TPU', 'Flexible parts, gaskets, grips'),
+  // Resin is not a filament and has no profile in materials.ts, so this one
+  // row is typed.
+  { name: 'Resin (SLA/DLP)', printTemp: 'N/A (UV cure)', bedTemp: 'N/A', enclosure: 'Not needed', difficulty: 'Intermediate', bestFor: 'Ultra-fine detail, jewelry, miniatures' },
 ];
 
 const decisionRows = [
@@ -192,7 +223,7 @@ export default function FilamentGuidePage() {
             <Eyebrow>ASA</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Use ASA for anything that lives outdoors.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-3">
-              ASA is ABS modified for UV resistance. It does not yellow in sunlight and handles the same temperature range as ABS (~100°C). For almost every outdoor application, ASA is the better call over ABS. It needs slightly higher temps than ABS but prints similarly. An enclosure is recommended to prevent warping, though it tolerates slightly more draft than ABS.
+              ASA is ABS modified for UV resistance. It does not yellow in sunlight and handles the same temperature range as ABS (~100°C). For almost every outdoor application, ASA is the better call over ABS. It needs slightly higher temps than ABS but prints similarly. It needs an enclosure to prevent warping, the same as ABS.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
               Full settings: <Link href="/library/asa" style={linkStyle} className="underline hover:no-underline">ASA print temperature and settings</Link>. Picking between the two: <Link href="/asa-vs-abs" style={linkStyle} className="underline hover:no-underline">ASA vs ABS</Link>

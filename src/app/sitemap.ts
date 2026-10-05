@@ -41,7 +41,7 @@ const STATIC_ROUTES: {
   { path: '', priority: 1, changeFrequency: 'weekly', lastModified: '2026-10-04' },
   { path: '/library', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-08-30' },
   { path: '/3d-printing-cost-calculator', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-10-04' },
-  { path: '/3d-printing-filament-guide', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-10-04' },
+  { path: '/3d-printing-filament-guide', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-10-05' },
   { path: '/pla-vs-petg', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-10-04' },
   { path: '/abs-vs-petg', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-04' },
   { path: '/pla-vs-abs', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-04' },
