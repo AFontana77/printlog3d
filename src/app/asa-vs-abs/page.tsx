@@ -8,12 +8,14 @@ import Link from 'next/link';
 import {
   Eyebrow,
   SpecGrid,
+  AbsHeatNote,
   comparisonJsonLd,
   bodyStyle,
   h2Style,
   h3Style,
   linkStyle,
 } from '@/components/comparison/shared';
+import { ABS_HEAT } from '@/lib/materials';
 import type { Metadata } from 'next';
 import { ogFor } from '@/lib/seo';
 
@@ -81,7 +83,7 @@ const jsonLd = comparisonJsonLd({
 // Only the editorial rows, which have no canonical field, are literal.
 const SPECS: SpecRow[] = specRows('ASA', 'ABS', [
   ['UV resistance', 'Holds colour and strength outdoors', 'Yellows, chalks, turns brittle'],
-  ['Heat resistance', 'Comparable to ABS', '~100°C deformation'],
+  ['Heat resistance', 'Comparable to ABS', `Softens at ${ABS_HEAT.rangeC}°C (heat deflection)`],
   ['Fumes', 'Styrene, ventilate', 'Styrene, ventilate'],
   ['Acetone smoothing', 'Yes', 'Yes'],
   ['Warping risk', 'High without enclosure', 'High without enclosure'],
@@ -126,6 +128,7 @@ export default function AsaVsAbsPage() {
             <Eyebrow>SIDE BY SIDE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">Nearly the same spool, until you take it outdoors.</h2>
             <SpecGrid rows={SPECS} />
+            <AbsHeatNote />
             <p style={bodyStyle} className="text-sm mt-4">
               Temperatures, enclosure, drying, difficulty and price come from the{' '}
               <Link href="/library/asa" style={linkStyle} className="underline underline-offset-4">ASA</Link>{' '}

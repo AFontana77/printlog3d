@@ -8,12 +8,13 @@ import { specRows, type SpecRow } from '@/components/ComparisonSpecs';
 import {
   Eyebrow,
   SpecGrid,
+  AbsHeatNote,
   comparisonJsonLd,
   bodyStyle,
   h2Style,
   h3Style,
 } from '@/components/comparison/shared';
-import { MATERIAL_PROFILES } from '@/lib/materials';
+import { ABS_HEAT, MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
 import { ogFor } from '@/lib/seo';
 
@@ -36,7 +37,7 @@ const jsonLd = comparisonJsonLd({
 // Derived from materials.ts so this table cannot contradict the material
 // pages. Only the editorial rows, which have no canonical field, are literal.
 const SPECS: SpecRow[] = specRows('PLA', 'ABS', [
-  ['Heat resistance', '~60°C deformation', '~100°C deformation'],
+  ['Heat resistance', '~60°C deformation', `Softens at ${ABS_HEAT.rangeC}°C (heat deflection)`],
   ['Strength', 'Moderate', 'High'],
   ['Post-processing', 'Limited', 'Sandable, acetone-smoothable'],
   ['Fumes', 'None', 'Styrene (ventilate)'],
@@ -80,7 +81,7 @@ const FAQ = [
   {
     question: 'Is ABS stronger than PLA?',
     answer:
-      'Tougher rather than stronger. PLA is stiffer and resists bending more, but it fails suddenly. ABS absorbs impact and survives being dropped, and it holds its shape to about 100C where PLA sags near 60C.',
+      `Tougher rather than stronger. PLA is stiffer and resists bending more, but it fails suddenly. ABS absorbs impact and survives being dropped, and it holds its shape to about ${ABS_HEAT.rangeC}C where PLA sags near 60C.`,
   },
   {
     question: 'Do I need to ventilate when printing ABS?',
@@ -128,6 +129,7 @@ export default function PlaVsAbsPage() {
             <Eyebrow>SIDE BY SIDE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">PLA vs ABS: know the gap before you switch.</h2>
             <SpecGrid rows={SPECS} />
+            <AbsHeatNote />
           </div>
         </section>
 

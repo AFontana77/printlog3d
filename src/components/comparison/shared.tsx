@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import type { SpecRow } from '@/components/ComparisonSpecs';
+import { ABS_HEAT } from '@/lib/materials';
 
 /**
  * Shared scaffolding for the material comparison pages.
@@ -59,6 +61,25 @@ export const Eyebrow = ({ children }: { children: React.ReactNode }) => (
  * look, and it looks the same on all four pages because it always did -- it was
  * just written out four times.
  */
+/**
+ * Names the source of the ABS heat figure under any spec grid that shows it.
+ * Reads ABS_HEAT, so the maker figures here cannot drift from materials.ts.
+ */
+export function AbsHeatNote() {
+  const figures = ABS_HEAT.sources.map((s) => `${s.maker} ${s.hdtC}°C`).join(', ');
+  return (
+    <p className="mt-4 text-xs" style={{ color: 'var(--muted-foreground)', lineHeight: 1.6 }}>
+      Where the ABS heat figure comes from: it is the heat deflection temperature at 0.45 MPa on
+      each maker&rsquo;s ABS data sheet ({figures}). These are the makers&rsquo; figures, not tests
+      we ran. Links to each sheet are on our{' '}
+      <Link href="/editorial-policy#abs-heat" style={linkStyle} className="underline underline-offset-4">
+        editorial policy
+      </Link>
+      .
+    </p>
+  );
+}
+
 export function SpecGrid({ rows }: { rows: SpecRow[] }) {
   return (
     <div

@@ -39,21 +39,21 @@ const STATIC_ROUTES: {
   lastModified: string;
 }[] = [
   { path: '', priority: 1, changeFrequency: 'weekly', lastModified: '2026-10-04' },
-  { path: '/library', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-08-30' },
+  { path: '/library', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-10-06' },
   { path: '/3d-printing-cost-calculator', priority: 0.9, changeFrequency: 'monthly', lastModified: '2026-10-04' },
-  { path: '/3d-printing-filament-guide', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-10-05' },
+  { path: '/3d-printing-filament-guide', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-10-06' },
   { path: '/pla-vs-petg', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-10-04' },
-  { path: '/abs-vs-petg', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-04' },
-  { path: '/pla-vs-abs', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-04' },
+  { path: '/abs-vs-petg', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-06' },
+  { path: '/pla-vs-abs', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-06' },
   { path: '/how-to-dry-filament', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-04' },
   { path: '/3d-print-stringing', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-04' },
   { path: '/3d-printer-troubleshooting', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-10-04' },
-  { path: '/asa-vs-abs', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-08-30' },
+  { path: '/asa-vs-abs', priority: 0.8, changeFrequency: 'monthly', lastModified: '2026-10-06' },
   { path: '/free-download', priority: 0.7, changeFrequency: 'monthly', lastModified: '2026-08-30' },
   { path: '/get-it-printed', priority: 0.75, changeFrequency: 'monthly', lastModified: '2026-10-04' },
   { path: '/workshop', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-08-30' },
   { path: '/recommended-gear', priority: 0.85, changeFrequency: 'monthly', lastModified: '2026-08-31' },
-  { path: '/editorial-policy', priority: 0.55, changeFrequency: 'yearly', lastModified: '2026-08-31' },
+  { path: '/editorial-policy', priority: 0.55, changeFrequency: 'yearly', lastModified: '2026-10-06' },
   { path: '/disclosure', priority: 0.4, changeFrequency: 'yearly', lastModified: '2026-08-30' },
   { path: '/about', priority: 0.5, changeFrequency: 'yearly', lastModified: '2026-10-04' },
   { path: '/support', priority: 0.4, changeFrequency: 'yearly', lastModified: '2026-10-04' },
@@ -77,6 +77,23 @@ const MATERIAL_LAST_MODIFIED =
     ? MATERIAL_DATA_REVIEWED
     : MATERIAL_TEMPLATE_CHANGED;
 
+/**
+ * A material whose own text changed after the template date. A material page
+ * also prints the summary of the material it is compared with, so a change
+ * here moves that page's date too.
+ */
+const MATERIAL_TEXT_CHANGED: Record<string, string> = {
+  ABS: '2026-10-06', // heat figure sourced to maker data sheets
+};
+
+function materialLastModified(category: string, comparedWith: string): string {
+  // ISO dates compare correctly as strings, so the latest one wins.
+  return [MATERIAL_TEXT_CHANGED[category], MATERIAL_TEXT_CHANGED[comparedWith]].reduce<string>(
+    (latest, d) => (d && d > latest ? d : latest),
+    MATERIAL_LAST_MODIFIED,
+  );
+}
+
 /** The day the workshop resources in src/lib/workshop.ts last changed. */
 const WORKSHOP_LAST_MODIFIED = '2026-08-30';
 
@@ -90,7 +107,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...MATERIAL_PROFILES.map((m) => ({
       url: `${BASE}/library/${m.slug}`,
-      lastModified: MATERIAL_LAST_MODIFIED,
+      lastModified: materialLastModified(m.category, m.comparedWith),
       changeFrequency: 'monthly' as const,
       priority: 0.9,
     })),

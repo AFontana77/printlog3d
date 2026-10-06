@@ -1,7 +1,7 @@
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import Link from 'next/link';
-import { getMaterialByCategory } from '@/lib/materials';
+import { ABS_HEAT, getMaterialByCategory } from '@/lib/materials';
 import type { Metadata } from 'next';
 import { ogFor } from '@/lib/seo';
 
@@ -204,7 +204,7 @@ export default function FilamentGuidePage() {
             <Eyebrow>ABS</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">ABS: high heat and acetone finishing, with real trade-offs.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-3">
-              ABS is the classic workhorse, the same plastic used in LEGO bricks. It holds up to ~100°C and can be smoothed with acetone vapor for a near-injection-mold finish. The downside: it emits styrene fumes during printing (ventilate) and warps badly without an enclosed build volume. Most people do not actually need ABS anymore. PETG covers 90% of functional part needs, and ASA is a better outdoor choice than ABS.
+              ABS is the classic workhorse, the same plastic used in LEGO bricks. It starts to soften at about {ABS_HEAT.rangeC}°C. That is the heat deflection figure on the ABS data sheets from {ABS_HEAT.makers} (<Link href="/editorial-policy#abs-heat" style={linkStyle} className="underline hover:no-underline">sources</Link>). It can be smoothed with acetone vapor for a near-injection-mold finish. The downside: it emits styrene fumes during printing (ventilate) and warps badly without an enclosed build volume. Most people do not actually need ABS anymore. PETG covers 90% of functional part needs, and ASA is a better outdoor choice than ABS.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
               Full settings: <Link href="/library/abs" style={linkStyle} className="underline hover:no-underline">ABS print temperature and settings</Link>. See: <Link href="/abs-vs-petg" style={linkStyle} className="underline hover:no-underline">ABS vs PETG</Link> and <Link href="/pla-vs-abs" style={linkStyle} className="underline hover:no-underline">PLA vs ABS</Link>
@@ -218,7 +218,7 @@ export default function FilamentGuidePage() {
             <Eyebrow>ASA</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-4">Use ASA for anything that lives outdoors.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-3">
-              ASA is ABS modified for UV resistance. It does not yellow in sunlight and handles the same temperature range as ABS (~100°C). For almost every outdoor application, ASA is the better call over ABS. It needs slightly higher temps than ABS but prints similarly. It needs an enclosure to prevent warping, the same as ABS.
+              ASA is ABS modified for UV resistance. It does not yellow in sunlight and handles the same temperature range as ABS. For almost every outdoor application, ASA is the better call over ABS. It needs slightly higher temps than ABS but prints similarly. It needs an enclosure to prevent warping, the same as ABS.
             </p>
             <p style={{ color: 'var(--muted-foreground)', fontFamily: 'var(--font-body)' }} className="text-sm">
               Full settings: <Link href="/library/asa" style={linkStyle} className="underline hover:no-underline">ASA print temperature and settings</Link>. Picking between the two: <Link href="/asa-vs-abs" style={linkStyle} className="underline hover:no-underline">ASA vs ABS</Link>

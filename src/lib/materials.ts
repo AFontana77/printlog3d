@@ -68,6 +68,69 @@ export type MaterialProfile = {
   availability: 'widely' | 'common' | 'specialist' | 'limited' | 'industrial';
 };
 
+/**
+ * ABS HEAT FIGURE, AND WHERE IT COMES FROM (checked 2026-10-06)
+ * --------------------------------------------------------------
+ * The ABS page used to say "around 80C" and the guide and three comparison
+ * pages said "about 100C". Neither named a measure or a source. This is the one
+ * figure every page now reads, so they cannot drift apart again.
+ *
+ * Measure: heat deflection temperature (HDT) at 0.45 MPa, read from each maker's
+ * own technical data sheet. All four test printed specimens.
+ *
+ *   Polymaker PolyLite ABS  100C  ISO 75 0.45MPa (98C at 1.8MPa; Vicat 104C)  TDS V5.4
+ *   Bambu Lab ABS            87C  ISO 75 0.45 MPa (84C at 1.8 MPa; Vicat 94C)  TDS V3.0
+ *   3DXTech 3DXMAX ABS       95C  ISO 75 0.45 MPa                              TDS Rev 3.0
+ *   AON3D ABS Prime          85C  ASTM D648 0.45 MPa                           2025 data sheet
+ *
+ * The sheets span 85-100C. That is a real spread between grades, so the site
+ * states the range rather than an average no maker publishes.
+ *
+ * Left out: FormFutura (TitanX and EasyFil ABS sheets give 85C, ASTM D648, but
+ * name no load) and Prusa (sells ABS but publishes no data sheet for it).
+ * URLs are in ABS_HEAT.sources and on /editorial-policy#abs-heat.
+ */
+export const ABS_HEAT = {
+  rangeC: '85-100',
+  measure: 'heat deflection temperature at 0.45 MPa',
+  checked: '2026-10-06',
+  makers: 'Polymaker, Bambu Lab, 3DXTech and AON3D',
+  sources: [
+    {
+      maker: 'Polymaker',
+      grade: 'PolyLite ABS',
+      hdtC: 100,
+      standard: 'ISO 75',
+      doc: 'technical data sheet V5.4',
+      url: 'https://cdn.shopify.com/s/files/1/0548/7299/7945/files/PolyLite_ABS_TDS_EN_V5.4.pdf',
+    },
+    {
+      maker: 'Bambu Lab',
+      grade: 'ABS',
+      hdtC: 87,
+      standard: 'ISO 75',
+      doc: 'technical data sheet V3.0',
+      url: 'https://wiki.bambulab.com/filament-acc/abs-asa-pc/bambu_abs_technical_data_sheet_v3.pdf',
+    },
+    {
+      maker: '3DXTech',
+      grade: '3DXMAX ABS',
+      hdtC: 95,
+      standard: 'ISO 75',
+      doc: 'technical data sheet Rev 3.0',
+      url: 'https://cdn.shopify.com/s/files/1/0625/4185/6821/files/ABS-TDS-v03.pdf',
+    },
+    {
+      maker: 'AON3D',
+      grade: 'ABS Prime',
+      hdtC: 85,
+      standard: 'ASTM D648',
+      doc: '2025 material data sheet',
+      url: 'https://www.aon3d.com/wp-content/uploads/2025/05/AON3D-ABS-Prime-TDS.pdf',
+    },
+  ],
+} as const;
+
 export const MATERIAL_PROFILES: MaterialProfile[] = [
   {
     category: 'PLA',
@@ -120,8 +183,10 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
     availability: 'widely',
     slug: 'abs',
     fullName: 'Acrylonitrile Butadiene Styrene',
+    // Heat figure and makers must match ABS_HEAT above. Kept as a plain quoted
+    // string because scripts/field_guide_data.py parses this field as one.
     summary:
-      'The classic engineering thermoplastic. Handles heat to around 80C and can be vapour smoothed with acetone. It warps hard without an enclosure.',
+      'The classic engineering thermoplastic. It starts to soften at about 85-100C. That is the heat deflection figure on the ABS data sheets from Polymaker, Bambu Lab, 3DXTech and AON3D. It can be vapour smoothed with acetone and warps hard without an enclosure.',
     printTempC: '220-250',
     bedTempC: '100-110',
     enclosure: 'Required',
@@ -776,6 +841,12 @@ export const MATERIAL_PROFILES: MaterialProfile[] = [
  * sources. A deploy, a layout change or a copy edit is not a review.
  */
 export const MATERIAL_DATA_REVIEWED = '2026-08-31';
+
+// The ABS summary types the heat range out (see the note on that field). Fail
+// the build rather than let it drift from ABS_HEAT.
+if (!MATERIAL_PROFILES.find((m) => m.category === 'ABS')?.summary.includes(`${ABS_HEAT.rangeC}C`)) {
+  throw new Error('materials.ts: the ABS summary no longer matches ABS_HEAT.rangeC');
+}
 
 const BY_SLUG = new Map(MATERIAL_PROFILES.map((m) => [m.slug, m]));
 const BY_CATEGORY = new Map(MATERIAL_PROFILES.map((m) => [m.category, m]));

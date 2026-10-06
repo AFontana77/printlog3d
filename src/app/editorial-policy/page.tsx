@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
-import { MATERIAL_PROFILES } from '@/lib/materials';
+import { ABS_HEAT, MATERIAL_PROFILES } from '@/lib/materials';
 import { PRODUCTS } from '@/lib/products';
 import { PROGRAMS, isMonetised } from '@/lib/merchants';
 import type { Metadata } from 'next';
@@ -20,7 +20,7 @@ const TITLE = 'Editorial policy, sources and corrections';
 const DESC =
   'How PrintLog3D sources its numbers, the difference between manufacturer-published specifications and first-party testing, how products are selected, and how commission does and does not affect what appears here.';
 const URL = 'https://www.printlog3d.com/editorial-policy';
-const LAST_REVIEWED = '2026-08-31';
+const LAST_REVIEWED = '2026-10-06';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -123,6 +123,38 @@ export default function EditorialPolicyPage() {
                 Prusa, Polymaker, Bambu Lab, 3DXTech, FormFutura and AON3D, cross-checked between
                 grades. Where published grades genuinely disagree, the range on this site is wide on
                 purpose rather than averaged into a single number no manufacturer states.
+              </p>
+            </section>
+
+            <section id="abs-heat">
+              <h2 className="text-2xl font-bold mb-3" style={h2}>
+                One example in full: how hot ABS can get
+              </h2>
+              <p className="mb-3" style={body}>
+                This site says ABS starts to soften at about {ABS_HEAT.rangeC}&deg;C. That number is
+                the heat deflection temperature at 0.45 MPa. It is the point where a test bar starts
+                to bend under a light load as it warms up. Each maker below prints the figure on its
+                own ABS data sheet:
+              </p>
+              <ul className="space-y-2 mb-3" style={body}>
+                {ABS_HEAT.sources.map((s) => (
+                  <li key={s.maker}>
+                    {s.maker} {s.grade}: <strong>{s.hdtC}&deg;C</strong> ({s.standard},{' '}
+                    <a href={s.url} style={link} className="underline underline-offset-4" rel="noopener noreferrer">
+                      {s.doc}
+                    </a>
+                    )
+                  </li>
+                ))}
+              </ul>
+              <p className="mb-3" style={body}>
+                The four sheets do not agree, so the site gives the whole range. Two makers are left
+                out. FormFutura lists 85&deg;C but does not say what load it used. Prusa sells ABS
+                but does not post a data sheet for it.
+              </p>
+              <p style={body}>
+                Until {ABS_HEAT.checked}, the ABS page said about 80&deg;C and four other pages said
+                about 100&deg;C, with no source for either. Both are now this one range.
               </p>
             </section>
 

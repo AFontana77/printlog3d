@@ -8,13 +8,14 @@ import { specRows, type SpecRow } from '@/components/ComparisonSpecs';
 import {
   Eyebrow,
   SpecGrid,
+  AbsHeatNote,
   comparisonJsonLd,
   bodyStyle,
   h2Style,
   h3Style,
   linkStyle,
 } from '@/components/comparison/shared';
-import { MATERIAL_PROFILES } from '@/lib/materials';
+import { ABS_HEAT, MATERIAL_PROFILES } from '@/lib/materials';
 import type { Metadata } from 'next';
 import { ogFor } from '@/lib/seo';
 
@@ -37,7 +38,7 @@ const jsonLd = comparisonJsonLd({
 // Derived from materials.ts so this table cannot contradict the material
 // pages. Only the editorial rows, which have no canonical field, are literal.
 const SPECS: SpecRow[] = specRows('ABS', 'PETG', [
-  ['Heat resistance', '~100°C deformation', '~80°C deformation'],
+  ['Heat resistance', `Softens at ${ABS_HEAT.rangeC}°C (heat deflection)`, '~80°C deformation'],
   ['Chemical resistance', 'Good', 'Moderate'],
   ['Fumes', 'Yes (styrene)', 'Minimal'],
   ['Warping risk', 'High without enclosure', 'Low'],
@@ -45,7 +46,7 @@ const SPECS: SpecRow[] = specRows('ABS', 'PETG', [
 ]);
 
 const ABS_WINS = [
-  { n: '01', title: 'Parts that need to survive above 80°C', body: 'PETG deforms around 80°C. ABS holds to ~100°C. If your part lives near a heat source, engine bay, oven-adjacent, under-hood, ABS has the edge.' },
+  { n: '01', title: 'Parts that need to survive above 80°C', body: `PETG deforms around 80°C. ABS starts to soften at about ${ABS_HEAT.rangeC}°C. If your part lives near a heat source, engine bay, oven-adjacent, under-hood, ABS has the edge.` },
   { n: '02', title: 'Acetone vapor smoothing', body: 'Acetone dissolves ABS surface to create a near-injection-mold finish. No layer lines visible. PETG does not respond to acetone. If surface finish matters, ABS gives you a finishing option that PETG simply does not have.' },
   { n: '03', title: 'Solvent bonding', body: 'ABS parts can be bonded with acetone or MEK to create joints stronger than adhesive bonding. This is useful for multi-piece assemblies where super glue will not hold the load.' },
   { n: '04', title: 'Chemical resistance', body: 'ABS resists many oils and organic solvents better than PETG. For parts that contact lubricants, fuels, or cleaning chemicals, ABS holds up better.' },
@@ -62,7 +63,7 @@ const FAQ = [
   {
     question: 'Is PETG as strong as ABS?',
     answer:
-      "For most parts, near enough, and it is far easier to print. ABS wins on heat, holding shape to roughly 100C against PETG's 80C. Below that, PETG usually does the job without an enclosure or fumes.",
+      `For most parts, near enough, and it is far easier to print. ABS wins on heat. It starts to soften at about ${ABS_HEAT.rangeC}C against PETG's 80C. Below that, PETG usually does the job without an enclosure or fumes.`,
   },
   {
     question: 'Do I need an enclosure for PETG?',
@@ -115,6 +116,7 @@ export default function AbsVsPetgPage() {
             <Eyebrow>SIDE BY SIDE</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-10">See the key differences before you load the spool.</h2>
             <SpecGrid rows={SPECS} />
+            <AbsHeatNote />
           </div>
         </section>
 
@@ -183,7 +185,7 @@ export default function AbsVsPetgPage() {
             <Eyebrow>OUTDOOR · USE ASA INSTEAD</Eyebrow>
             <h2 style={h2Style} className="text-3xl sm:text-4xl font-bold mb-6">Outdoor part? Skip ABS. Use ASA.</h2>
             <p style={{ ...bodyStyle, maxWidth: '60ch' }} className="mb-6">
-              If you are considering ABS because you need UV resistance outdoors, do not. Use ASA. ASA is ABS modified specifically for UV resistance. It does not yellow in sunlight, handles the same heat range as ABS (~100°C), and is actually easier to print than ABS on most setups. ASA has almost entirely replaced ABS for outdoor applications. The only reason to pick ABS over ASA outdoors is if you specifically need acetone vapor smoothing.
+              If you are considering ABS because you need UV resistance outdoors, do not. Use ASA. ASA is ABS modified specifically for UV resistance. It does not yellow in sunlight, handles the same heat range as ABS, and is actually easier to print than ABS on most setups. ASA has almost entirely replaced ABS for outdoor applications. The only reason to pick ABS over ASA outdoors is if you specifically need acetone vapor smoothing.
             </p>
             <Link href="/asa-vs-abs" style={linkStyle} className="underline underline-offset-4 font-semibold">
               Compare ASA against ABS
