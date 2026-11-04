@@ -1,11 +1,11 @@
 {
  "_note": "Amazon product image LINKS only. No image bytes are stored. Entries expire 24h after fetched_at per the Associates Operating Agreement; the render component falls back to a branded placeholder once stale.",
- "fetched_at": "2026-10-09T21:18:14+00:00",
+ "fetched_at": "2026-11-04T21:17:42+00:00",
  "ttl_hours": 24,
  "partner_tag": "printlog3d-20",
  "items": {
   "B000GTMZHG": {
-   "title": "Klein Tools D275-5 Diagonal Flush Cutting Pliers, 5-Inch",
+   "title": "Klein Tools D275-5 Diagonal Flush Cutting Pliers, 5-Inch | Made in USA, Diagonal Flush Cutters for Micro Wire and Compact Zip Tie Cutting Ultra-Slim Precision, Work in Confined Areas",
    "primary": {
     "url": "https://m.media-amazon.com/images/I/31isYtaDdML._SL500_.jpg",
     "width": 500,
@@ -97,11 +97,22 @@
   "B0166FFCHS": {
    "title": "Bob Smith Industries BSI-157H Maxi Cure/Insta-Set Combo Pack (3 oz. Combined),Clear",
    "primary": {
-    "url": "https://m.media-amazon.com/images/I/411ZzyEod3L._SL500_.jpg",
-    "width": 500,
+    "url": "https://m.media-amazon.com/images/I/518SROKxXOL._SL500_.jpg",
+    "width": 329,
     "height": 500
    },
-   "variants": []
+   "variants": [
+    {
+     "url": "https://m.media-amazon.com/images/I/31LQIytV1jL._SL500_.jpg",
+     "width": 500,
+     "height": 357
+    },
+    {
+     "url": "https://m.media-amazon.com/images/I/31ch53dgNOL._SL500_.jpg",
+     "width": 500,
+     "height": 357
+    }
+   ]
   },
   "B01HBJ8Y00": {
    "title": "28 Pcs 120 to 3000 Grit Wet Dry Sandpaper Assortment 9 * 3.6 Inches for Automotive Sanding",
@@ -164,7 +175,7 @@
    ]
   },
   "B01L2XR4P2": {
-   "title": "AFA Tooling Deburring Tool, 11 M2 HSS Blades, CNC Anodized Aluminum Handle",
+   "title": "AFA Tooling Deburring Tool, 11 M2 HSS Blades, CNC Anodized Aluminum Handle | Built for 3D printing, metal, PVC, copper, resin and plastic; 360-degree rotation reaches edges, cross bores and recesses",
    "primary": {
     "url": "https://m.media-amazon.com/images/I/41-aPqPxE-L._SL500_.jpg",
     "width": 500,
@@ -224,7 +235,7 @@
    ]
   },
   "B07VDP2S3P": {
-   "title": "OVERTURE TPU 95A Flexible 3D Printer Filament 1.75mm, 1kg Black",
+   "title": "OVERTURE TPU 95A Flexible 3D Printer Filament 1.75mm, 1kg Black | High Elasticity & Durability Filament, 1kg Spool (2.2lbs), Fit Most FDM Printer (Black)",
    "primary": {
     "url": "https://m.media-amazon.com/images/I/415hQ79ETVL._SL500_.jpg",
     "width": 417,
@@ -254,7 +265,7 @@
    ]
   },
   "B07WCR5Y4B": {
-   "title": "TempPro TempAir Digital Hygrometer Indoor Thermometer",
+   "title": "TempPro TempAir Digital Hygrometer Indoor Thermometer | Humidity Meter Room Thermometer with Temperature and Humidity Monitor Mini Hygrometer",
    "primary": {
     "url": "https://m.media-amazon.com/images/I/41IgyHRV0DL._SL500_.jpg",
     "width": 500,
@@ -284,20 +295,20 @@
    ]
   },
   "B089GRX246": {
-   "title": "Hi-Spec Metal Hand & Needle File Tool Kit Half-Round Round & Triangle Files",
+   "title": "Hi-Spec Metal Hand & Needle File Tool Kit Half-Round Round & Triangle Files | 17pc, 8in/200mm, everyday fixes made easier, organized portable storage, beginner-friendly selection, neat layout, quick prep",
    "primary": {
-    "url": "https://m.media-amazon.com/images/I/51GbVYKfeSL._SL500_.jpg",
+    "url": "https://m.media-amazon.com/images/I/51JBtucUGPL._SL500_.jpg",
     "width": 500,
     "height": 500
    },
    "variants": [
     {
-     "url": "https://m.media-amazon.com/images/I/51r0kz-QvzL._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/51hYsuzvJHL._SL500_.jpg",
      "width": 500,
      "height": 500
     },
     {
-     "url": "https://m.media-amazon.com/images/I/51iEroy5XNL._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/51MhMFIk+EL._SL500_.jpg",
      "width": 500,
      "height": 500
     },
@@ -374,7 +385,7 @@
    ]
   },
   "B0969LK4ZT": {
-   "title": "XIFOWE MK8 Nozzles 24 pcs Assorted Sizes 3D Printer Extruders Brass Nozzles",
+   "title": "XIFOWE MK8 Nozzles 24 pcs Assorted Sizes 3D Printer Extruders Brass Nozzles | 0.2mm, 0.4mm,0.6mm, 0.8mm, 1.0mm CR-10 Nozzle, With Storage Box for CR-8 / CR-10 / Ender 3 / Ender 3S / 5/6 and so on\u2026",
    "primary": {
     "url": "https://m.media-amazon.com/images/I/41BC+B-rURL._SL500_.jpg",
     "width": 500,
@@ -404,7 +415,7 @@
    ]
   },
   "B09SG855M9": {
-   "title": "8Pcs 3D Printer Upgraded Hardened Steel MK8 Nozzles w/DIY Tool Storage Box",
+   "title": "8Pcs 3D Printer Upgraded Hardened Steel MK8 Nozzles w/DIY Tool Storage Box | 0.2mm, 0.4mm, 0.6mm, 0.8mm, 1.0mm Nozzle for Creality Ender 3 Ender 5 CR-10 Sovol SV06",
    "primary": {
     "url": "https://m.media-amazon.com/images/I/41H7B3UJs8L._SL500_.jpg",
     "width": 500,
@@ -464,7 +475,7 @@
    ]
   },
   "B0D8HMR1HT": {
-   "title": "90W Digital Soldering Iron for Heat Set Inserts with M2-M8 Tips 3D Printing",
+   "title": "90W Digital Soldering Iron for Heat Set Inserts with M2-M8 Tips 3D Printing | Digital Temperature Control, Fast Heating & Multiple Tips for Precise Heat Insert Installation",
    "primary": {
     "url": "https://m.media-amazon.com/images/I/410M+yX3W0L._SL500_.jpg",
     "width": 500,
