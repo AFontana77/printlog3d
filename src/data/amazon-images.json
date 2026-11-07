@@ -1,6 +1,6 @@
 {
  "_note": "Amazon product image LINKS only. No image bytes are stored. Entries expire 24h after fetched_at per the Associates Operating Agreement; the render component falls back to a branded placeholder once stale.",
- "fetched_at": "2026-11-06T21:17:39+00:00",
+ "fetched_at": "2026-11-07T09:17:38+00:00",
  "ttl_hours": 24,
  "partner_tag": "printlog3d-20",
  "items": {
@@ -177,28 +177,28 @@
   "B01L2XR4P2": {
    "title": "AFA Tooling Deburring Tool, 11 M2 HSS Blades, CNC Anodized Aluminum Handle | Built for 3D printing, metal, PVC, copper, resin and plastic; 360-degree rotation reaches edges, cross bores and recesses",
    "primary": {
-    "url": "https://m.media-amazon.com/images/I/41-aPqPxE-L._SL500_.jpg",
+    "url": "https://m.media-amazon.com/images/I/41GZFi3DOjL._SL500_.jpg",
     "width": 500,
     "height": 500
    },
    "variants": [
     {
-     "url": "https://m.media-amazon.com/images/I/41DjCU1Zx5L._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/41LSbruhdYL._SL500_.jpg",
      "width": 500,
      "height": 500
     },
     {
-     "url": "https://m.media-amazon.com/images/I/41-0zizyU2L._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/41+YCPuCyKL._SL500_.jpg",
      "width": 500,
      "height": 500
     },
     {
-     "url": "https://m.media-amazon.com/images/I/41O2zYQThLL._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/41Cal618ZUL._SL500_.jpg",
      "width": 500,
      "height": 500
     },
     {
-     "url": "https://m.media-amazon.com/images/I/41pDTPcNgkL._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/417+vFjC9TL._SL500_.jpg",
      "width": 500,
      "height": 500
     }
