@@ -1,6 +1,6 @@
 {
  "_note": "Amazon product image LINKS only. No image bytes are stored. Entries expire 24h after fetched_at per the Associates Operating Agreement; the render component falls back to a branded placeholder once stale.",
- "fetched_at": "2026-11-20T09:17:37+00:00",
+ "fetched_at": "2026-11-20T21:17:39+00:00",
  "ttl_hours": 24,
  "partner_tag": "printlog3d-20",
  "items": {
@@ -537,28 +537,28 @@
   "B0G6ZWQSVY": {
    "title": "YOOPAI Pro Filament Storage Box with Temperature & Humidity Monitor, Airtight Filament Storage Container with Desiccant for 1KG 1.75mm PLA ABS PETG TPU, Single Spool 3D Printer Filament Storage Box(6)",
    "primary": {
-    "url": "https://m.media-amazon.com/images/I/417C0c3dL3L._SL500_.jpg",
+    "url": "https://m.media-amazon.com/images/I/410ERT9xWdL._SL500_.jpg",
     "width": 500,
     "height": 500
    },
    "variants": [
     {
-     "url": "https://m.media-amazon.com/images/I/41M9TlAZqPL._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/41eIIZb5mUL._SL500_.jpg",
      "width": 400,
      "height": 500
     },
     {
-     "url": "https://m.media-amazon.com/images/I/51fu-fudgHL._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/51IZ0wo+zrL._SL500_.jpg",
      "width": 400,
      "height": 500
     },
     {
-     "url": "https://m.media-amazon.com/images/I/41+gEd0HL5L._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/51aHdHiEaVL._SL500_.jpg",
      "width": 400,
      "height": 500
     },
     {
-     "url": "https://m.media-amazon.com/images/I/41TXKv6YnpL._SL500_.jpg",
+     "url": "https://m.media-amazon.com/images/I/41r8ssF6lGL._SL500_.jpg",
      "width": 400,
      "height": 500
     }
